@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Game {
 
 	static char[][] map = {{'X','X','X','X','X','X','X','X','X','X'},
-					{'X',' ',' ',' ','I',' ','X',' ','G','X'},
+					{'X',' ',' ',' ','I',' ','X',' ',' ','X'},
 					{'X','X','X',' ','X','X','X',' ',' ','X'},
 					{'X',' ','I',' ','I',' ','X',' ',' ','X'},
 					{'X','X','X',' ','X','X','X',' ',' ','X'},
@@ -13,13 +13,20 @@ public class Game {
 					{'X',' ','I',' ','I',' ','X','k',' ','X'},
 					{'X','X','X','X','X','X','X','X','X','X'}};
 	
+	static char[] guard = {'a','s','s','s','s','a','a','a','a','a','a','s','d','d','d','d','d','d','d','w','w','w','w','w'};
+	
 	static int hero_x = 1;
 	static int hero_y = 1;
+	static int guard_x = 1;
+	static int guard_y = 8;
+	static int it = 0;
+	
 	static boolean lose = false;
 	
 	public static void printMap() {
 		
 		map[hero_x][hero_y] = 'H';
+		map[guard_x][guard_y] = 'G';
 		
 		for(int i = 0; i<map.length; i++) {
 			System.out.print("|");
@@ -30,6 +37,7 @@ public class Game {
 		}
 		
 		map[hero_x][hero_y] = ' ';
+		map[guard_x][guard_y] = ' ';
 	}
 	
 	public static void readInput() {
@@ -41,28 +49,36 @@ public class Game {
 		switch(option) {
 		case 'w': 
 			checkKey(hero_x-1,hero_y);
-			moveHero(hero_x-1,hero_y);
+			if(moveHero(hero_x-1,hero_y)) {
+				moveGuard();
+			}
 			if(checkGuard()) {
 				lose = true;
 			}
 			break;
 		case 'a':
 			checkKey(hero_x,hero_y-1);
-			moveHero(hero_x,hero_y-1);
+			if(moveHero(hero_x,hero_y-1)) {
+				moveGuard();
+			}
 			if(checkGuard()) {
 				lose = true;
 			}
 			break;
 		case 's':
 			checkKey(hero_x+1,hero_y);
-			moveHero(hero_x+1,hero_y);
+			if(moveHero(hero_x+1,hero_y)) {
+				moveGuard();
+			}
 			if(checkGuard()) {
 				lose = true;
 			}
 			break;
 		case 'd':
 			checkKey(hero_x,hero_y+1);
-			moveHero(hero_x,hero_y+1);
+			if(moveHero(hero_x,hero_y+1)) {
+				moveGuard();
+			}
 			if(checkGuard()) {
 				lose = true;
 			}
@@ -86,6 +102,28 @@ public class Game {
 		}
 	}
 	
+	public static void moveGuard() {
+		switch(guard[it]) {
+		case 'w': 
+			guard_x -= 1;
+			break;
+		case 'a':
+			guard_y -= 1;
+			break;
+		case 's':
+			guard_x += 1;
+			break;
+		case 'd':
+			guard_y += 1;
+			break;
+		default:
+			break;	
+		}
+		it++;
+		if (it == guard.length)
+			it = 0;
+	}
+	
 	public static boolean checkKey(int x, int y) {
 		char ch = map[x][y];
 		if(ch == 'k') {
@@ -95,8 +133,7 @@ public class Game {
 						map[i][j] = 'S';
 					}
 				}
-			}
-			
+			}	
 			return true;
 		}
 		else {
@@ -104,13 +141,11 @@ public class Game {
 		}
 	}
 	
-	public static boolean checkGuard() {
-		char up = map[hero_x-1][hero_y];
-		char down = map[hero_x+1][hero_y];
-		char left = map[hero_x][hero_y-1];
-		char right = map[hero_x][hero_y+1];
-		
-		if(up == 'G' || down == 'G' || left == 'G' || right == 'G') {
+	public static boolean checkGuard() {		
+		if(((guard_x == hero_x +1) && (guard_y == hero_y)) || 
+				((guard_x == hero_x -1)&& (guard_y == hero_y)) ||
+				((guard_x == hero_x)&& (guard_y == hero_y -1)) ||
+				((guard_x == hero_x)&& (guard_y == hero_y +1))) {
 			return true;
 		}
 		else
