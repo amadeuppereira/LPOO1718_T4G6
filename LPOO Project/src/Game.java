@@ -15,6 +15,7 @@ public class Game {
 	
 	static int hero_x = 1;
 	static int hero_y = 1;
+	static boolean lose = false;
 	
 	public static void printMap() {
 		
@@ -39,16 +40,32 @@ public class Game {
 		
 		switch(option) {
 		case 'w': 
+			checkKey(hero_x-1,hero_y);
 			moveHero(hero_x-1,hero_y);
+			if(checkGuard()) {
+				lose = true;
+			}
 			break;
 		case 'a':
+			checkKey(hero_x,hero_y-1);
 			moveHero(hero_x,hero_y-1);
+			if(checkGuard()) {
+				lose = true;
+			}
 			break;
 		case 's':
+			checkKey(hero_x+1,hero_y);
 			moveHero(hero_x+1,hero_y);
+			if(checkGuard()) {
+				lose = true;
+			}
 			break;
 		case 'd':
+			checkKey(hero_x,hero_y+1);
 			moveHero(hero_x,hero_y+1);
+			if(checkGuard()) {
+				lose = true;
+			}
 			break;
 		default:
 			break;
@@ -59,7 +76,7 @@ public class Game {
 	public static boolean moveHero(int x, int y) {
 		
 		char ch = map[x][y];
-		if(ch == ' ') {
+		if(ch == ' '|| ch == 'k' || ch == 'S') {
 			hero_x = x;
 			hero_y = y;
 			return true;
@@ -69,17 +86,52 @@ public class Game {
 		}
 	}
 	
+	public static boolean checkKey(int x, int y) {
+		char ch = map[x][y];
+		if(ch == 'k') {
+			for(int i = 0; i<map.length; i++) {
+				for(int j = 0; j< map[i].length; j++) {
+					if(map[i][j] == 'I') {
+						map[i][j] = 'S';
+					}
+				}
+			}
+			
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public static boolean checkGuard() {
+		char up = map[hero_x-1][hero_y];
+		char down = map[hero_x+1][hero_y];
+		char left = map[hero_x][hero_y-1];
+		char right = map[hero_x][hero_y+1];
+		
+		if(up == 'G' || down == 'G' || left == 'G' || right == 'G') {
+			return true;
+		}
+		else
+			return false;
+	}
+	
 	public static void main(String[] args) {
 		
 		printMap();
 		
-		while(true) {
+		while(hero_x > 0 && hero_y > 0 && !lose) {
 			readInput();
 			printMap();
 		}
 		
+		if(lose) {
+			System.out.println("\nPerdeu o jogo.");
+		}
+		else
+			System.out.println("\nParabéns! Ganhou o jogo.");
 		
-
 	}
 	
 }
