@@ -1,8 +1,9 @@
 import java.util.Scanner;
+import java.util.Random;
 
 public class Game {
 
-	static char[][] map = {{'X','X','X','X','X','X','X','X','X','X'},
+	static char[][] map1 = {{'X','X','X','X','X','X','X','X','X','X'},
 					{'X',' ',' ',' ','I',' ','X',' ',' ','X'},
 					{'X','X','X',' ','X','X','X',' ',' ','X'},
 					{'X',' ','I',' ','I',' ','X',' ',' ','X'},
@@ -13,20 +14,62 @@ public class Game {
 					{'X',' ','I',' ','I',' ','X','k',' ','X'},
 					{'X','X','X','X','X','X','X','X','X','X'}};
 	
+	static char[][] map2 = {{'X','X','X','X','X','X','X','X','X'},
+			{'I',' ',' ',' ',' ',' ',' ','k','X'},
+			{'X',' ',' ',' ',' ',' ',' ',' ','X'},
+			{'X',' ',' ',' ',' ',' ',' ',' ','X'},
+			{'X',' ',' ',' ',' ',' ',' ',' ','X'},
+			{'X',' ',' ',' ',' ',' ',' ',' ','X'},
+			{'X',' ',' ',' ',' ',' ',' ',' ','X'},
+			{'X',' ',' ',' ',' ',' ',' ',' ','X'},
+			{'X',' ',' ',' ',' ',' ',' ',' ','X'},
+			{'X','X','X','X','X','X','X','X','X'}};
+	
 	static char[] guard = {'a','s','s','s','s','a','a','a','a','a','a','s','d','d','d','d','d','d','d','w','w','w','w','w'};
 	
 	static int hero_x = 1;
 	static int hero_y = 1;
 	static int guard_x = 1;
 	static int guard_y = 8;
+	static int ogre_x = 1;
+	static int ogre_y = 4;
 	static int it = 0;
+	static int level = 1;
 	
+	static boolean hasKey = false; //true if the hero has the key
+	static boolean ogreOnKey = false; //true if the Ogre is above the key
 	static boolean lose = false;
 	
-	public static void printMap() {
+	public static char[][] getMap() {
+		switch(level) {
+		case 1:
+			return map1;
+		case 2:
+			return map2;
+		}
+		return map2; //this needs to be here or else it won't work, even though it doesn't make sense
+	}
+	
+	public static void printMap(char[][] map) {
 		
-		map[hero_x][hero_y] = 'H';
-		map[guard_x][guard_y] = 'G';
+		if(hasKey == false) {
+			map[hero_x][hero_y] = 'H';
+		}
+		else {
+			map[hero_x][hero_y] = 'K';
+		}
+		
+		if(level == 1) {
+			map[guard_x][guard_y] = 'G';
+		}
+		else if (level == 2) {
+			if(ogreOnKey) {
+				map[ogre_x][ogre_y] = '$';
+			}
+			else {
+				map[ogre_x][ogre_y] = 'O';
+			}
+		}
 		
 		for(int i = 0; i<map.length; i++) {
 			System.out.print("|");
@@ -37,7 +80,18 @@ public class Game {
 		}
 		
 		map[hero_x][hero_y] = ' ';
-		map[guard_x][guard_y] = ' ';
+		if(level == 1) {
+			map[guard_x][guard_y] = ' ';
+		}
+		else if (level == 2) {
+			if(ogreOnKey) {
+				map[ogre_x][ogre_y] = 'k';
+				ogreOnKey = false;
+			}
+			else {
+				map[ogre_x][ogre_y] = ' ';
+			}
+		}
 	}
 	
 	public static void readInput() {
@@ -48,38 +102,34 @@ public class Game {
 		
 		switch(option) {
 		case 'w': 
-			checkKey(hero_x-1,hero_y);
-			if(moveHero(hero_x-1,hero_y)) {
-				moveGuard();
+			if(moveHero(hero_x-1,hero_y,getMap())) {
+				moveGuardOgre(getMap());
 			}
-			if(checkGuard()) {
+			if(checkGuardOgre()) {
 				lose = true;
 			}
 			break;
 		case 'a':
-			checkKey(hero_x,hero_y-1);
-			if(moveHero(hero_x,hero_y-1)) {
-				moveGuard();
+			if(moveHero(hero_x,hero_y-1,getMap())) {
+				moveGuardOgre(getMap());
 			}
-			if(checkGuard()) {
+			if(checkGuardOgre()) {
 				lose = true;
 			}
 			break;
 		case 's':
-			checkKey(hero_x+1,hero_y);
-			if(moveHero(hero_x+1,hero_y)) {
-				moveGuard();
+			if(moveHero(hero_x+1,hero_y,getMap())) {
+				moveGuardOgre(getMap());
 			}
-			if(checkGuard()) {
+			if(checkGuardOgre()) {
 				lose = true;
 			}
 			break;
 		case 'd':
-			checkKey(hero_x,hero_y+1);
-			if(moveHero(hero_x,hero_y+1)) {
-				moveGuard();
+			if(moveHero(hero_x,hero_y+1,getMap())) {
+				moveGuardOgre(getMap());
 			}
-			if(checkGuard()) {
+			if(checkGuardOgre()) {
 				lose = true;
 			}
 			break;
@@ -89,10 +139,34 @@ public class Game {
 		}
 	}
 	
-	public static boolean moveHero(int x, int y) {
+	public static boolean moveHero(int x, int y, char[][] map) {
 		
 		char ch = map[x][y];
-		if(ch == ' '|| ch == 'k' || ch == 'S') {
+		if(ch == ' ') {
+			hero_x = x;
+			hero_y = y;
+			return true;
+		}
+		else if(ch == 'k') {
+			hero_x = x;
+			hero_y = y;
+			hasKey = true;
+			return true;
+		}
+		else if(ch == 'I' && hasKey) {
+			map[x][y] = 'S';
+			hasKey = false;
+			return true;
+		}
+		else if(ch == 'S' && (x == 0 || y == 0)) {
+			level++;
+			if (level == 2) {
+				hero_x = 8;
+				hero_y = 1;
+			}
+			return true;
+		}
+		else if(ch == 'S') { //to move the hero through the doors even though it won't lvl up
 			hero_x = x;
 			hero_y = y;
 			return true;
@@ -102,66 +176,122 @@ public class Game {
 		}
 	}
 	
-	public static void moveGuard() {
-		switch(guard[it]) {
-		case 'w': 
-			guard_x -= 1;
-			break;
-		case 'a':
-			guard_y -= 1;
-			break;
-		case 's':
-			guard_x += 1;
-			break;
-		case 'd':
-			guard_y += 1;
-			break;
-		default:
-			break;	
+	public static void moveGuardOgre(char[][] map) {
+		//moving guard
+		if(level == 1) {
+			switch(guard[it]) {
+			case 'w': 
+				guard_x -= 1;
+				break;
+			case 'a':
+				guard_y -= 1;
+				break;
+			case 's':
+				guard_x += 1;
+				break;
+			case 'd':
+				guard_y += 1;
+				break;
+			default:
+				break;	
+			}
+			it++;
+			if (it == guard.length)
+				it = 0;
 		}
-		it++;
-		if (it == guard.length)
-			it = 0;
-	}
-	
-	public static boolean checkKey(int x, int y) {
-		char ch = map[x][y];
-		if(ch == 'k') {
-			for(int i = 0; i<map.length; i++) {
-				for(int j = 0; j< map[i].length; j++) {
-					if(map[i][j] == 'I') {
-						map[i][j] = 'S';
+		//moving ogre
+		else if(level == 2) {
+			boolean moved = false;
+			Random randomGenerator = new Random();
+			int option;
+			
+			while(moved == false) {
+				option = randomGenerator.nextInt(4); //generating a random number between 0 and 3;
+				switch(option) {
+				case 0: //w
+					if(map[ogre_x-1][ogre_y] == ' ') {
+						ogre_x -= 1;
+						moved = true;
 					}
+					else if(map[ogre_x-1][ogre_y] == 'k') {
+						ogreOnKey = true;
+						ogre_x -= 1;
+						moved = true;
+					}
+					break;
+				case 1: //a
+					if(map[ogre_x][ogre_y-1] == ' ') {
+						ogre_y -= 1;
+						moved = true;
+					}
+					else if(map[ogre_x][ogre_y-1] == 'k') {
+						ogreOnKey = true;
+						ogre_y -= 1;
+						moved = true;
+					}
+					break;
+				case 2: //s
+					if(map[ogre_x+1][ogre_y] == ' ') {
+						ogre_x += 1;
+						moved = true;
+					}
+					else if(map[ogre_x+1][ogre_y] == 'k') {
+						ogreOnKey = true;
+						ogre_x += 1;
+						moved = true;
+					}
+					break;
+				case 3: //d
+					if(map[ogre_x][ogre_y+1] == ' ') {
+						ogre_y += 1;
+						moved = true;
+					}
+					else if(map[ogre_x][ogre_y+1] == 'k') {
+						ogreOnKey = true;
+						ogre_y += 1;
+						moved = true;
+					}
+					break;
 				}
-			}	
-			return true;
-		}
-		else {
-			return false;
+			}
 		}
 	}
 	
-	public static boolean checkGuard() {		
-		if(((guard_x == hero_x +1) && (guard_y == hero_y)) || 
-				((guard_x == hero_x -1)&& (guard_y == hero_y)) ||
-				((guard_x == hero_x)&& (guard_y == hero_y -1)) ||
-				((guard_x == hero_x)&& (guard_y == hero_y +1))) {
-			return true;
+	public static boolean checkGuardOgre() {
+		//checking guard
+		if(level == 1) {
+			if(((guard_x == hero_x +1) && (guard_y == hero_y)) || 
+					((guard_x == hero_x -1)&& (guard_y == hero_y)) ||
+					((guard_x == hero_x)&& (guard_y == hero_y -1)) ||
+					((guard_x == hero_x)&& (guard_y == hero_y +1))) {
+				return true;
+			}
+			else
+				return false;
 		}
-		else
-			return false;
+		//checking ogre
+		else if (level == 2) {
+			if(((ogre_x == hero_x +1) && (ogre_y == hero_y)) || 
+					((ogre_x == hero_x -1)&& (ogre_y == hero_y)) ||
+					((ogre_x == hero_x)&& (ogre_y == hero_y -1)) ||
+					((ogre_x == hero_x)&& (ogre_y == hero_y +1))) {
+				return true;
+			}
+			else
+				return false;
+		}
+		return false;
 	}
 	
 	public static void main(String[] args) {
-		
-		printMap();
-		
-		while(hero_x > 0 && hero_y > 0 && !lose) {
+			
+		while(level < 3 && !lose) { //for now reaching lvl 3 is winning the game
+			printMap(getMap());
 			readInput();
-			printMap();
 		}
 		
 		if(lose) {
+			printMap(getMap());
 			System.out.println("\nPerdeu o jogo.");
 		}
 		else
