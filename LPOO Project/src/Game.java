@@ -33,11 +33,14 @@ public class Game {
 	static int guard_y = 8;
 	static int ogre_x = 1;
 	static int ogre_y = 4;
+	static int club_x = 2;
+	static int club_y = 4;
 	static int it = 0;
 	static int level = 1;
 	
 	static boolean hasKey = false; //true if the hero has the key
 	static boolean ogreOnKey = false; //true if the Ogre is above the key
+	static boolean clubOnKey = false; //true if the club is above the key
 	static boolean lose = false;
 	
 	public static char[][] getMap() {
@@ -69,6 +72,14 @@ public class Game {
 			else {
 				map[ogre_x][ogre_y] = 'O';
 			}
+			
+			if(clubOnKey) {
+				map[club_x][club_y] = '$';
+			}
+			else {
+				map[club_x][club_y] = '*';
+			}
+			
 		}
 		
 		for(int i = 0; i<map.length; i++) {
@@ -90,6 +101,14 @@ public class Game {
 			}
 			else {
 				map[ogre_x][ogre_y] = ' ';
+			}
+			
+			if(clubOnKey) {
+				map[club_x][club_y] = 'k';
+				clubOnKey = false;
+			}
+			else {
+				map[club_x][club_y] = ' ';
 			}
 		}
 	}
@@ -254,6 +273,66 @@ public class Game {
 					break;
 				}
 			}
+			
+			moved = false;
+			while(moved == false) {
+				option = randomGenerator.nextInt(4); //generating a random number between 0 and 3;
+				switch(option) {
+				case 0: //w
+					if(map[ogre_x-1][ogre_y] == ' ') {
+						club_x = ogre_x - 1;
+						club_y = ogre_y;
+						moved = true;
+					}
+					else if(map[ogre_x-1][ogre_y] == 'k') {
+						clubOnKey = true;
+						club_x = ogre_x - 1;
+						club_y = ogre_y;
+						moved = true;
+					}
+					break;
+				case 1: //a
+					if(map[ogre_x][ogre_y-1] == ' ') {
+						club_x = ogre_x;
+						club_y = ogre_y - 1;
+						moved = true;
+					}
+					else if(map[ogre_x][ogre_y-1] == 'k') {
+						clubOnKey = true;
+						club_x = ogre_x;
+						club_y = ogre_y - 1;
+						moved = true;
+					}
+					break;
+				case 2: //s
+					if(map[ogre_x+1][ogre_y] == ' ') {
+						club_x = ogre_x + 1;
+						club_y = ogre_y;
+						moved = true;
+					}
+					else if(map[ogre_x+1][ogre_y] == 'k') {
+						clubOnKey = true;
+						club_x = ogre_x + 1;
+						club_y = ogre_y;
+						moved = true;
+					}
+					break;
+				case 3: //d
+					if(map[ogre_x][ogre_y+1] == ' ') {
+						club_x = ogre_x;
+						club_y = ogre_y + 1;
+						moved = true;
+					}
+					else if(map[ogre_x][ogre_y+1] == 'k') {
+						clubOnKey = true;
+						club_x = ogre_x;
+						club_y = ogre_y + 1;
+						moved = true;
+					}
+					break;
+				}
+			}
+			
 		}
 	}
 	
@@ -276,6 +355,13 @@ public class Game {
 					((ogre_x == hero_x)&& (ogre_y == hero_y -1)) ||
 					((ogre_x == hero_x)&& (ogre_y == hero_y +1))) {
 				return true;
+			}
+			else if (((club_x == hero_x +1) && (club_y == hero_y)) || 
+					((club_x == hero_x -1)&& (club_y == hero_y)) ||
+					((club_x == hero_x)&& (club_y == hero_y -1)) ||
+					((club_x == hero_x)&& (club_y == hero_y +1))) {
+				return true;
+				
 			}
 			else
 				return false;
