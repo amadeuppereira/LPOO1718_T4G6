@@ -1,10 +1,14 @@
 package dkeep.cli;
-
 import java.util.Scanner;
+import dkeep.logic.Game_State;
 
 public class User_Input {
 
-	public static void readInput() {
+	public User_Input() {
+		
+	}
+	
+	public void readInput(Game_State game) {
 		System.out.print("\nEnter direction: ");
 		
 		Scanner s = new Scanner(System.in);
@@ -12,36 +16,16 @@ public class User_Input {
 		
 		switch(option) {
 		case 'w': 
-			if(moveHero(hero_x-1,hero_y,getMap())) {
-				moveGuardOgre(getMap());
-			}
-			if(checkGuardOgre()) {
-				lose = true;
-			}
+			game.nextMove("up");
 			break;
 		case 'a':
-			if(moveHero(hero_x,hero_y-1,getMap())) {
-				moveGuardOgre(getMap());
-			}
-			if(checkGuardOgre()) {
-				lose = true;
-			}
+			game.nextMove("left");
 			break;
 		case 's':
-			if(moveHero(hero_x+1,hero_y,getMap())) {
-				moveGuardOgre(getMap());
-			}
-			if(checkGuardOgre()) {
-				lose = true;
-			}
+			game.nextMove("down");
 			break;
 		case 'd':
-			if(moveHero(hero_x,hero_y+1,getMap())) {
-				moveGuardOgre(getMap());
-			}
-			if(checkGuardOgre()) {
-				lose = true;
-			}
+			game.nextMove("right");
 			break;
 		default:
 			break;

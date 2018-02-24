@@ -1,7 +1,8 @@
-package dkeep.cli;
+
 import java.util.Scanner;
 import java.util.Random;
 import dkeep.logic.Game_State;
+import dkeep.cli.*;
 
 public class Game {
 
@@ -370,28 +371,29 @@ public class Game {
 //		}
 //		return false;
 //	}
-//	
+	
 	public static void main(String[] args) {
 			
 		Game_State game = new Game_State();
+		User_Output user_output = new User_Output();
+		User_Input user_input = new User_Input();
 		
 		while (game.get_status() == 0) {
-			game.printMap();
-			game.readInput();
+			user_output.printMap(game.getMapString());
+			user_input.readInput(game);
 		}
 		
-		while(level < 3 && !lose) { //for now reaching lvl 3 is winning the game
-			printMap(getMap());
-			readInput();
+		while(!game.win && !game.lose) { //for now reaching lvl 3 is winning the game
+			user_output.printMap(game.getMapString());
+			user_input.readInput(game);
 		}
 		
-		if(lose) {
-			printMap(getMap());
-			System.out.println("\nPerdeu o jogo.");
+		if(game.lose) {
+			user_output.printMap(game.getMapString());
+			user_output.perdeu();
 		}
 		else
-			System.out.println("\nParabéns! Ganhou o jogo.");
+			user_output.ganhou();
 		
 	}
-	
 }

@@ -1,6 +1,5 @@
 package dkeep.logic;
 import java.util.Random;
-
 import dkeep.logic.*;
 
 public class Game_State {
@@ -10,13 +9,13 @@ public class Game_State {
 	Guard guard;
 	Ogre ogre;
 	
-	boolean win;
-	boolean lose;
+	public boolean win;
+	public boolean lose;
 	
 	public Game_State() {
 		win = false;
 		lose = false;
-		create_Level(1);		
+		create_Level(1);
 	}
 	
 	public int get_status() {
@@ -89,7 +88,7 @@ public class Game_State {
 		return false;
 	}
 	
-	public void move_Ogre(int x, int y) {
+	public void move_Ogre() {
 		boolean moved = false;
 		Random randomGenerator = new Random();
 		int option;
@@ -197,8 +196,16 @@ public class Game_State {
 	
 	}
 	
+	public void move_GuardOgre() {
+		if(game_level.level == 1) {
+			guard.move();
+		}
+		if(game_level.level > 1) {
+			move_Ogre();
+		}
+	}
+	
 	public void check_gameover() {
-
 		// checking guard
 		if (game_level.level == 1) {
 			if (((guard.x == hero.x + 1) && (guard.y == hero.y)) 
@@ -221,13 +228,117 @@ public class Game_State {
 					|| ((ogre.club_x == hero.x) && (ogre.club_y == hero.y + 1))) {
 				lose = true;
 			}
-
 		}
-		
 	}
 	
-	public void printMap() {
+	public int getLevel() {
+		return game_level.level;
+	}
+	
+	public String getMapString() {
+		String ret = "";
+		if(hero.hasKey == false) {
+			game_level.setChar(hero.x, hero.y, 'H');
+		}
+		else {
+			game_level.setChar(hero.x, hero.y, 'K');
+		}
 		
+		if(game_level.level == 1) {
+			game_level.setChar(guard.x, guard.y, 'G');
+		}
+		else if (game_level.level == 2) {
+			if(ogre.ogreOnKey) {
+				game_level.setChar(ogre.ogre_x, ogre.ogre_y, '$');
+			}
+			else {
+				game_level.setChar(ogre.ogre_x, ogre.ogre_y, 'O');
+			}
+			
+			if(ogre.clubOnKey) {
+				game_level.setChar(ogre.club_x, ogre.club_y, '$');
+			}
+			else {
+				game_level.setChar(ogre.club_x, ogre.club_y, '*');
+			}
+			
+		}
+		
+		for(int i = 0; i<game_level.map.length; i++) {
+			System.out.print("|");
+			for(int j = 0; j< game_level.map[i].length; j++) {
+				System.out.print(game_level.map[i][j]+"|");
+				//ret += game_level.map[i][j] + '|';
+			}
+			System.out.println();
+			//ret += "\n";
+		}
+		
+		game_level.setChar(hero.x, hero.y, ' ');
+		if(game_level.level == 1) {
+			game_level.setChar(guard.x, guard.y, ' ');
+		}
+		else if (game_level.level == 2) {
+			if(ogre.ogreOnKey) {
+				game_level.setChar(ogre.ogre_x, ogre.ogre_y, 'k');
+				ogre.ogreOnKey = false;
+			}
+			else {
+				game_level.setChar(ogre.ogre_x, ogre.ogre_y, ' ');
+			}
+			
+			if(ogre.clubOnKey) {
+				game_level.setChar(ogre.club_x, ogre.club_y, 'k');
+				ogre.clubOnKey = false;
+			}
+			else {
+				game_level.setChar(ogre.club_x, ogre.club_y, ' ');
+			}
+		}
+		return ret;
+	}
+	
+	public void nextMove(String option) {
+		switch(option) {
+		case "up": 
+			if(move_Hero(hero.x-1,hero.y)) {
+				move_GuardOgre();
+				if(check_Level_End()) {
+					create_Level(game_level.level + 1);
+				}
+			}
+			check_gameover();
+			break;
+		case "left":
+			if(move_Hero(hero.x,hero.y-1)) {
+				move_GuardOgre();
+				if(check_Level_End()) {
+					create_Level(game_level.level + 1);
+				}
+			}
+			check_gameover();
+			break;
+		case "down":
+			if(move_Hero(hero.x+1,hero.y)) {
+				move_GuardOgre();
+				if(check_Level_End()) {
+					create_Level(game_level.level + 1);
+				}
+			}
+			check_gameover();
+			break;
+		case "right":
+			if(move_Hero(hero.x,hero.y+1)) {
+				move_GuardOgre();
+				if(check_Level_End()) {
+					create_Level(game_level.level + 1);
+				}
+			}
+			check_gameover();
+			break;
+		default:
+			break;	
+		}
 	}
 	
 }
