@@ -7,6 +7,9 @@ public class Ogre {
 	int club_x;
 	int club_y;
 	
+	char ch;
+	char ch_club;
+	
 	boolean ogreOnKey; //true if the Ogre is above the key
 	boolean clubOnKey; //true if the club is above the key
 	
@@ -14,10 +17,12 @@ public class Ogre {
 	public Ogre(int x, int y, int x1, int x2) {
 		ogre_x = x;
 		ogre_y = y;
+		ch = 'O';
 		ogreOnKey = false;
 		
 		club_x = x1;
 		club_y = x2;
+		ch_club = '*';
 		clubOnKey = false;
 	}
 	
@@ -66,10 +71,24 @@ public class Ogre {
 	
 	public void ogre_set_key(boolean b) {
 		ogreOnKey = b;
+		
+		if(b) {
+			ch = '$';
+		}
+		else {
+			ch = 'O';
+		}
 	}
 	
 	public void club_set_key(boolean b) {
 		clubOnKey = b;
+		
+		if(b) {
+			ch_club = '$';
+		}
+		else {
+			ch_club = '*';
+		}
 	}
 	
 }

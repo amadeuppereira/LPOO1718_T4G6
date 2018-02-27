@@ -64,6 +64,7 @@ public class Game_State {
 		else if(ch == 'k') {
 			hero.move(x, y);
 			hero.set_key(true);
+			game_level.setChar(x, y, ' ');
 			return true;
 		}
 		else if(ch == 'I' && hero.check_key()) {
@@ -98,6 +99,7 @@ public class Game_State {
 			switch(option) {
 			case 0: //w
 				if(game_level.getChar(ogre.ogre_x - 1, ogre.ogre_y) == ' ') {
+					ogre.ogre_set_key(false);
 					ogre.ogre_up();
 					moved = true;
 				}
@@ -109,6 +111,7 @@ public class Game_State {
 				break;
 			case 1: //a
 				if(game_level.getChar(ogre.ogre_x, ogre.ogre_y - 1) == ' ') {
+					ogre.ogre_set_key(false);
 					ogre.ogre_left();
 					moved = true;
 				}
@@ -120,6 +123,7 @@ public class Game_State {
 				break;
 			case 2: //s
 				if(game_level.getChar(ogre.ogre_x+1, ogre.ogre_y) == ' ') {
+					ogre.ogre_set_key(false);
 					ogre.ogre_down();
 					moved = true;
 				}
@@ -131,6 +135,7 @@ public class Game_State {
 				break;
 			case 3: //d
 				if(game_level.getChar(ogre.ogre_x, ogre.ogre_y + 1) == ' ') {
+					ogre.ogre_set_key(false);
 					ogre.ogre_right();
 					moved = true;
 				}
@@ -149,6 +154,7 @@ public class Game_State {
 			switch(option) {
 			case 0: //w
 				if(game_level.getChar(ogre.ogre_x - 1, ogre.ogre_y) == ' ') {
+					ogre.club_set_key(false);
 					ogre.club_up();
 					moved = true;
 				}
@@ -160,6 +166,7 @@ public class Game_State {
 				break;
 			case 1: //a
 				if(game_level.getChar(ogre.ogre_x, ogre.ogre_y - 1) == ' ') {
+					ogre.club_set_key(false);
 					ogre.club_left();
 					moved = true;
 				}
@@ -171,6 +178,7 @@ public class Game_State {
 				break;
 			case 2: //s
 				if(game_level.getChar(ogre.ogre_x + 1, ogre.ogre_y) == ' ') {
+					ogre.club_set_key(false);
 					ogre.club_down();
 					moved = true;
 				}
@@ -182,6 +190,7 @@ public class Game_State {
 				break;
 			case 3: //d
 				if(game_level.getChar(ogre.ogre_x, ogre.ogre_y + 1) == ' ') {
+					ogre.club_set_key(false);
 					ogre.club_right();
 					moved = true;
 				}
@@ -200,7 +209,7 @@ public class Game_State {
 		if(game_level.level == 1) {
 			guard.move();
 		}
-		if(game_level.level > 1) {
+		if(game_level.level == 2) {
 			move_Ogre();
 		}
 	}
@@ -235,68 +244,106 @@ public class Game_State {
 		return game_level.level;
 	}
 	
-	public String getMapString() {
-		String ret = "";
-		if(hero.hasKey == false) {
-			game_level.setChar(hero.x, hero.y, 'H');
-		}
-		else {
-			game_level.setChar(hero.x, hero.y, 'K');
-		}
-		
-		if(game_level.level == 1) {
-			game_level.setChar(guard.x, guard.y, 'G');
-		}
-		else if (game_level.level == 2) {
-			if(ogre.ogreOnKey) {
-				game_level.setChar(ogre.ogre_x, ogre.ogre_y, '$');
-			}
-			else {
-				game_level.setChar(ogre.ogre_x, ogre.ogre_y, 'O');
-			}
-			
-			if(ogre.clubOnKey) {
-				game_level.setChar(ogre.club_x, ogre.club_y, '$');
-			}
-			else {
-				game_level.setChar(ogre.club_x, ogre.club_y, '*');
-			}
-			
-		}
-		
-		for(int i = 0; i<game_level.map.length; i++) {
-			System.out.print("|");
-			for(int j = 0; j< game_level.map[i].length; j++) {
-				System.out.print(game_level.map[i][j]+"|");
-				//ret += game_level.map[i][j] + '|';
-			}
-			System.out.println();
-			//ret += "\n";
-		}
-		
-		game_level.setChar(hero.x, hero.y, ' ');
-		if(game_level.level == 1) {
-			game_level.setChar(guard.x, guard.y, ' ');
-		}
-		else if (game_level.level == 2) {
-			if(ogre.ogreOnKey) {
-				game_level.setChar(ogre.ogre_x, ogre.ogre_y, 'k');
-				ogre.ogreOnKey = false;
-			}
-			else {
-				game_level.setChar(ogre.ogre_x, ogre.ogre_y, ' ');
-			}
-			
-			if(ogre.clubOnKey) {
-				game_level.setChar(ogre.club_x, ogre.club_y, 'k');
-				ogre.clubOnKey = false;
-			}
-			else {
-				game_level.setChar(ogre.club_x, ogre.club_y, ' ');
-			}
-		}
-		return ret;
+	public char[][] getMap() {
+		return game_level.map;
 	}
+	
+	public boolean check_hero(int x, int y) {
+		return hero.x == x && hero.y == y;
+	}
+	
+	public boolean check_guard(int x, int y) {
+		return guard.x == x && guard.y == y;
+	}
+	
+	public boolean check_ogre(int x, int y) {
+		return ogre.ogre_x == x && ogre.ogre_y == y;
+	}
+	
+	public boolean check_ogre_club(int x, int y) {
+		return ogre.club_x == x && ogre.club_y == y;
+	}
+	
+	public char get_hero_char() {
+		return hero.ch;
+	}
+	
+	public char get_guard_char() {
+		return guard.ch;
+	}
+	
+	public char get_ogre_char() {
+		return ogre.ch;
+	}
+	
+	public char get_ogre_club_char() {
+		return ogre.ch_club;
+	}
+	
+//	public String getMapString() {
+		
+//		String ret = "";
+//		if(hero.hasKey == false) {
+//			game_level.setChar(hero.x, hero.y, 'H');
+//		}
+//		else {
+//			game_level.setChar(hero.x, hero.y, 'K');
+//		}
+//		
+//		if(game_level.level == 1) {
+//			game_level.setChar(guard.x, guard.y, 'G');
+//		}
+//		else if (game_level.level == 2) {
+//			if(ogre.ogreOnKey) {
+//				game_level.setChar(ogre.ogre_x, ogre.ogre_y, '$');
+//			}
+//			else {
+//				game_level.setChar(ogre.ogre_x, ogre.ogre_y, 'O');
+//			}
+//			
+//			if(ogre.clubOnKey) {
+//				game_level.setChar(ogre.club_x, ogre.club_y, '$');
+//			}
+//			else {
+//				game_level.setChar(ogre.club_x, ogre.club_y, '*');
+//			}
+//			
+//		}
+//		
+//		for(int i = 0; i<game_level.map.length; i++) {
+//			System.out.print("|");
+//			for(int j = 0; j< game_level.map[i].length; j++) {
+//				System.out.print(game_level.map[i][j]+"|");
+//				//ret += game_level.map[i][j] + '|';
+//			}
+//			System.out.println();
+//			//ret += "\n";
+//		}
+//		
+//		game_level.setChar(hero.x, hero.y, ' ');
+//		if(game_level.level == 1) {
+//			game_level.setChar(guard.x, guard.y, ' ');
+//		}
+//		else if (game_level.level == 2) {
+//			if(ogre.ogreOnKey) {
+//				game_level.setChar(ogre.ogre_x, ogre.ogre_y, 'k');
+//				ogre.ogreOnKey = false;
+//			}
+//			else {
+//				game_level.setChar(ogre.ogre_x, ogre.ogre_y, ' ');
+//			}
+//			
+//			if(ogre.clubOnKey) {
+//				game_level.setChar(ogre.club_x, ogre.club_y, 'k');
+//				ogre.clubOnKey = false;
+//			}
+//			else {
+//				game_level.setChar(ogre.club_x, ogre.club_y, ' ');
+//			}
+//		}
+//		return ret;
+//	}
+	
 	
 	public void nextMove(String option) {
 		switch(option) {

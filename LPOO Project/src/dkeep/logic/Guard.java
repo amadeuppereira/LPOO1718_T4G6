@@ -4,6 +4,7 @@ public class Guard {
 
 	char[] movement;
 	int it;
+	char ch;
 	
 	int x;
 	int y;
@@ -11,6 +12,7 @@ public class Guard {
 	public Guard(int x, int y, char[] mov) {
 		movement = mov;
 		it = 0;
+		ch = 'G';
 		
 		this.x = x;
 		this.y = y;
