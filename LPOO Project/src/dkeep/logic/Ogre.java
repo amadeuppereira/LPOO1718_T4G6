@@ -43,22 +43,22 @@ public class Ogre {
 	}
 	
 	public void club_up() {
-		club_x = ogre_x--;
+		club_x = ogre_x - 1;
 		club_y = ogre_y;
 	}
 
 	public void club_down() {
-		club_x = ogre_x++;
+		club_x = ogre_x + 1;
 		club_y = ogre_y;
 	}
 
 	public void club_left() {
-		club_y = ogre_y--;
+		club_y = ogre_y - 1;
 		club_x = ogre_x;
 	}
 
 	public void club_right() {
-		club_y = ogre_y++;
+		club_y = ogre_y + 1;
 		club_x = ogre_x;
 	}
 	

@@ -279,71 +279,7 @@ public class Game_State {
 	public char get_ogre_club_char() {
 		return ogre.ch_club;
 	}
-	
-//	public String getMapString() {
 		
-//		String ret = "";
-//		if(hero.hasKey == false) {
-//			game_level.setChar(hero.x, hero.y, 'H');
-//		}
-//		else {
-//			game_level.setChar(hero.x, hero.y, 'K');
-//		}
-//		
-//		if(game_level.level == 1) {
-//			game_level.setChar(guard.x, guard.y, 'G');
-//		}
-//		else if (game_level.level == 2) {
-//			if(ogre.ogreOnKey) {
-//				game_level.setChar(ogre.ogre_x, ogre.ogre_y, '$');
-//			}
-//			else {
-//				game_level.setChar(ogre.ogre_x, ogre.ogre_y, 'O');
-//			}
-//			
-//			if(ogre.clubOnKey) {
-//				game_level.setChar(ogre.club_x, ogre.club_y, '$');
-//			}
-//			else {
-//				game_level.setChar(ogre.club_x, ogre.club_y, '*');
-//			}
-//			
-//		}
-//		
-//		for(int i = 0; i<game_level.map.length; i++) {
-//			System.out.print("|");
-//			for(int j = 0; j< game_level.map[i].length; j++) {
-//				System.out.print(game_level.map[i][j]+"|");
-//				//ret += game_level.map[i][j] + '|';
-//			}
-//			System.out.println();
-//			//ret += "\n";
-//		}
-//		
-//		game_level.setChar(hero.x, hero.y, ' ');
-//		if(game_level.level == 1) {
-//			game_level.setChar(guard.x, guard.y, ' ');
-//		}
-//		else if (game_level.level == 2) {
-//			if(ogre.ogreOnKey) {
-//				game_level.setChar(ogre.ogre_x, ogre.ogre_y, 'k');
-//				ogre.ogreOnKey = false;
-//			}
-//			else {
-//				game_level.setChar(ogre.ogre_x, ogre.ogre_y, ' ');
-//			}
-//			
-//			if(ogre.clubOnKey) {
-//				game_level.setChar(ogre.club_x, ogre.club_y, 'k');
-//				ogre.clubOnKey = false;
-//			}
-//			else {
-//				game_level.setChar(ogre.club_x, ogre.club_y, ' ');
-//			}
-//		}
-//		return ret;
-//	}
-	
 	
 	public void nextMove(String option) {
 		switch(option) {
