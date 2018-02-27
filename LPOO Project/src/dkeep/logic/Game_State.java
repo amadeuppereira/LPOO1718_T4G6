@@ -37,7 +37,9 @@ public class Game_State {
 			game_level = new Game_Level(1);
 			
 			char[] guard_mov = {'a','s','s','s','s','a','a','a','a','a','a','s','d','d','d','d','d','d','d','w','w','w','w','w'};
-			guard = new Guard(1, 8, guard_mov);
+			String[] guard_type = {"Rookie","Drunken","Suspicious"};
+			Random randomGenerator = new Random();
+			guard = new Guard(1, 8, guard_mov, guard_type[randomGenerator.nextInt(3)]);
 			break;
 		
 		case 2:
@@ -216,7 +218,7 @@ public class Game_State {
 	
 	public void check_gameover() {
 		// checking guard
-		if (game_level.level == 1) {
+		if (game_level.level == 1 && !guard.asleep) {
 			if (((guard.x == hero.x + 1) && (guard.y == hero.y)) 
 					|| ((guard.x == hero.x - 1) && (guard.y == hero.y))
 					|| ((guard.x == hero.x) && (guard.y == hero.y - 1))
