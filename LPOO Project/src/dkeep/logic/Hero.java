@@ -1,24 +1,13 @@
 package dkeep.logic;
+import dkeep.logic.Characters;
 
-public class Hero {
-
-	int x;
-	int y;
-	char ch;
+public class Hero extends Characters{
 	
 	boolean hasKey; //true if the hero has the key
 	
 	public Hero(int x, int y) {
-		this.x = x;
-		this.y = y;
-		this.ch = 'H';
+		super(x, y, 'H');
 		hasKey = false;
-	}
-	
-	public void move(int x, int y) {
-		this.x = x;
-		this.y = y;
-		
 	}
 	
 	public void set_key(boolean b) {

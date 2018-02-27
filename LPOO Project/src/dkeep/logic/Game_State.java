@@ -98,50 +98,50 @@ public class Game_State {
 			option = randomGenerator.nextInt(4); //generating a random number between 0 and 3;
 			switch(option) {
 			case 0: //w
-				if(game_level.getChar(ogre.ogre_x - 1, ogre.ogre_y) == ' ') {
+				if(game_level.getChar(ogre.x - 1, ogre.y) == ' ') {
 					ogre.ogre_set_key(false);
-					ogre.ogre_up();
+					ogre.move_up();
 					moved = true;
 				}
-				else if(game_level.getChar(ogre.ogre_x-1, ogre.ogre_y) == 'k') {
+				else if(game_level.getChar(ogre.x-1, ogre.y) == 'k') {
 					ogre.ogre_set_key(true);
-					ogre.ogre_up();
+					ogre.move_up();
 					moved = true;
 				}
 				break;
 			case 1: //a
-				if(game_level.getChar(ogre.ogre_x, ogre.ogre_y - 1) == ' ') {
+				if(game_level.getChar(ogre.x, ogre.y - 1) == ' ') {
 					ogre.ogre_set_key(false);
-					ogre.ogre_left();
+					ogre.move_left();
 					moved = true;
 				}
-				else if(game_level.getChar(ogre.ogre_x, ogre.ogre_y - 1) == 'k') {
+				else if(game_level.getChar(ogre.x, ogre.y - 1) == 'k') {
 					ogre.ogre_set_key(true);
-					ogre.ogre_left();
+					ogre.move_left();
 					moved = true;
 				}
 				break;
 			case 2: //s
-				if(game_level.getChar(ogre.ogre_x+1, ogre.ogre_y) == ' ') {
+				if(game_level.getChar(ogre.x+1, ogre.y) == ' ') {
 					ogre.ogre_set_key(false);
-					ogre.ogre_down();
+					ogre.move_down();
 					moved = true;
 				}
-				else if(game_level.getChar(ogre.ogre_x+1, ogre.ogre_y) == 'k') {
+				else if(game_level.getChar(ogre.x+1, ogre.y) == 'k') {
 					ogre.ogre_set_key(true);
-					ogre.ogre_down();
+					ogre.move_down();
 					moved = true;
 				}
 				break;
 			case 3: //d
-				if(game_level.getChar(ogre.ogre_x, ogre.ogre_y + 1) == ' ') {
+				if(game_level.getChar(ogre.x, ogre.y + 1) == ' ') {
 					ogre.ogre_set_key(false);
-					ogre.ogre_right();
+					ogre.move_right();
 					moved = true;
 				}
-				else if(game_level.getChar(ogre.ogre_x, ogre.ogre_y + 1) == 'k') {
+				else if(game_level.getChar(ogre.x, ogre.y + 1) == 'k') {
 					ogre.ogre_set_key(true);
-					ogre.ogre_right();
+					ogre.move_right();
 					moved = true;
 				}
 				break;
@@ -153,48 +153,48 @@ public class Game_State {
 			option = randomGenerator.nextInt(4); //generating a random number between 0 and 3;
 			switch(option) {
 			case 0: //w
-				if(game_level.getChar(ogre.ogre_x - 1, ogre.ogre_y) == ' ') {
+				if(game_level.getChar(ogre.x - 1, ogre.y) == ' ') {
 					ogre.club_set_key(false);
 					ogre.club_up();
 					moved = true;
 				}
-				else if(game_level.getChar(ogre.ogre_x - 1, ogre.ogre_y) == 'k') {
+				else if(game_level.getChar(ogre.x - 1, ogre.y) == 'k') {
 					ogre.club_set_key(true);
 					ogre.club_up();
 					moved = true;
 				}
 				break;
 			case 1: //a
-				if(game_level.getChar(ogre.ogre_x, ogre.ogre_y - 1) == ' ') {
+				if(game_level.getChar(ogre.x, ogre.y - 1) == ' ') {
 					ogre.club_set_key(false);
 					ogre.club_left();
 					moved = true;
 				}
-				else if(game_level.getChar(ogre.ogre_x, ogre.ogre_y - 1) == 'k') {
+				else if(game_level.getChar(ogre.x, ogre.y - 1) == 'k') {
 					ogre.club_set_key(true);
 					ogre.club_left();
 					moved = true;
 				}
 				break;
 			case 2: //s
-				if(game_level.getChar(ogre.ogre_x + 1, ogre.ogre_y) == ' ') {
+				if(game_level.getChar(ogre.x + 1, ogre.y) == ' ') {
 					ogre.club_set_key(false);
 					ogre.club_down();
 					moved = true;
 				}
-				else if(game_level.getChar(ogre.ogre_x + 1, ogre.ogre_y) == 'k') {
+				else if(game_level.getChar(ogre.x + 1, ogre.y) == 'k') {
 					ogre.club_set_key(true);
 					ogre.club_down();
 					moved = true;
 				}
 				break;
 			case 3: //d
-				if(game_level.getChar(ogre.ogre_x, ogre.ogre_y + 1) == ' ') {
+				if(game_level.getChar(ogre.x, ogre.y + 1) == ' ') {
 					ogre.club_set_key(false);
 					ogre.club_right();
 					moved = true;
 				}
-				else if(game_level.getChar(ogre.ogre_x, ogre.ogre_y + 1) == 'k') {
+				else if(game_level.getChar(ogre.x, ogre.y + 1) == 'k') {
 					ogre.club_set_key(true);
 					ogre.club_right();
 					moved = true;
@@ -226,10 +226,10 @@ public class Game_State {
 		}
 		// checking ogre
 		else if (game_level.level == 2) {
-			if (((ogre.ogre_x == hero.x + 1) && (ogre.ogre_y == hero.y))
-					|| ((ogre.ogre_x == hero.x - 1) && (ogre.ogre_y == hero.y))
-					|| ((ogre.ogre_x == hero.x) && (ogre.ogre_y == hero.y - 1))
-					|| ((ogre.ogre_x == hero.x) && (ogre.ogre_y == hero.y + 1))) {
+			if (((ogre.x == hero.x + 1) && (ogre.y == hero.y))
+					|| ((ogre.x == hero.x - 1) && (ogre.y == hero.y))
+					|| ((ogre.x == hero.x) && (ogre.y == hero.y - 1))
+					|| ((ogre.x == hero.x) && (ogre.y == hero.y + 1))) {
 				lose = true;
 			} else if (((ogre.club_x == hero.x + 1) && (ogre.club_y == hero.y))
 					|| ((ogre.club_x == hero.x - 1) && (ogre.club_y == hero.y))
@@ -257,7 +257,7 @@ public class Game_State {
 	}
 	
 	public boolean check_ogre(int x, int y) {
-		return ogre.ogre_x == x && ogre.ogre_y == y;
+		return ogre.x == x && ogre.y == y;
 	}
 	
 	public boolean check_ogre_club(int x, int y) {

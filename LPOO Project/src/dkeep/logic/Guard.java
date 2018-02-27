@@ -1,22 +1,17 @@
 package dkeep.logic;
+import dkeep.logic.Characters;
 
-public class Guard {
+public class Guard extends Characters {
 
 	char[] movement;
 	int it;
-	char ch;
 	
-	int x;
-	int y;
 	
 	public Guard(int x, int y, char[] mov) {
+		super(x, y, 'G');
 		movement = mov;
 		it = 0;
-		ch = 'G';
-		
-		this.x = x;
-		this.y = y;
-		
+			
 	}
 	
 	
@@ -24,16 +19,16 @@ public class Guard {
 
 		switch (movement[it]) {
 		case 'w':
-			x -= 1;
+			move_up();
 			break;
 		case 'a':
-			y -= 1;
+			move_left();
 			break;
 		case 's':
-			x += 1;
+			move_down();
 			break;
 		case 'd':
-			y += 1;
+			move_right();
 			break;
 		default:
 			break;
