@@ -84,8 +84,8 @@ public class Guard extends Characters {
 			}
 			else {
 				set_char('G');
-				option = randomGenerator.nextInt(2);
-				if(asleep == true && option == 0) {
+				option = randomGenerator.nextInt(11);
+				if(asleep == true && option < 3) {
 					if(reverse == false)
 						reverse = true;
 					else
@@ -100,7 +100,7 @@ public class Guard extends Characters {
 			break;
 			
 		case "Suspicious":
-			option = randomGenerator.nextInt(11);
+			option = randomGenerator.nextInt(15);
 			if(option < 3) {
 				if(reverse == false) {
 					reverse = true;

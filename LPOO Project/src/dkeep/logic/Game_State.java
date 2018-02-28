@@ -1,5 +1,6 @@
 package dkeep.logic;
 import java.util.Random;
+import java.util.ArrayList;
 import dkeep.logic.*;
 
 public class Game_State {
@@ -7,7 +8,7 @@ public class Game_State {
 	Hero hero;
 	Game_Level game_level;
 	Guard guard;
-	Ogre ogre;
+	public ArrayList<Ogre> ogres = new ArrayList<Ogre>();
 	
 	public boolean win;
 	public boolean lose;
@@ -44,9 +45,14 @@ public class Game_State {
 		
 		case 2:
 			hero = new Hero(8, 1);
+			hero.hero_armed(true);
 			game_level = new Game_Level(2);
 			
-			ogre = new Ogre(1, 4, 2, 4);
+			Random random = new Random();
+			int nOgres = random.nextInt(3) + 1;
+			for(int i = 0; i < nOgres; i++) {
+				ogres.add(new Ogre(1 + 2*i, 4, 2+2*i, 4));
+			}
 			break;
 		
 		default:
@@ -91,57 +97,60 @@ public class Game_State {
 		return false;
 	}
 	
-	public void move_Ogre() {
-		boolean moved = false;
+	public void move_Ogre(Ogre ogre) {
+		boolean moved;
+		if(ogre.stun) {
+			moved = true;
+			ogre.reduce_stun();
+		}
+		else {
+			moved = false;
+		}
 		Random randomGenerator = new Random();
 		int option;
-		
-		while(moved == false) {
-			option = randomGenerator.nextInt(4); //generating a random number between 0 and 3;
-			switch(option) {
-			case 0: //w
-				if(game_level.getChar(ogre.x - 1, ogre.y) == ' ') {
+			
+		while (moved == false) {
+			option = randomGenerator.nextInt(4); // generating a random number between 0 and 3;
+			switch (option) {
+			case 0: // w
+				if (game_level.getChar(ogre.x - 1, ogre.y) == ' ') {
 					ogre.ogre_set_key(false);
 					ogre.move_up();
 					moved = true;
-				}
-				else if(game_level.getChar(ogre.x-1, ogre.y) == 'k') {
+				} else if (game_level.getChar(ogre.x - 1, ogre.y) == 'k') {
 					ogre.ogre_set_key(true);
 					ogre.move_up();
 					moved = true;
 				}
 				break;
-			case 1: //a
-				if(game_level.getChar(ogre.x, ogre.y - 1) == ' ') {
+			case 1: // a
+				if (game_level.getChar(ogre.x, ogre.y - 1) == ' ') {
 					ogre.ogre_set_key(false);
 					ogre.move_left();
 					moved = true;
-				}
-				else if(game_level.getChar(ogre.x, ogre.y - 1) == 'k') {
+				} else if (game_level.getChar(ogre.x, ogre.y - 1) == 'k') {
 					ogre.ogre_set_key(true);
 					ogre.move_left();
 					moved = true;
 				}
 				break;
-			case 2: //s
-				if(game_level.getChar(ogre.x+1, ogre.y) == ' ') {
+			case 2: // s
+				if (game_level.getChar(ogre.x + 1, ogre.y) == ' ') {
 					ogre.ogre_set_key(false);
 					ogre.move_down();
 					moved = true;
-				}
-				else if(game_level.getChar(ogre.x+1, ogre.y) == 'k') {
+				} else if (game_level.getChar(ogre.x + 1, ogre.y) == 'k') {
 					ogre.ogre_set_key(true);
 					ogre.move_down();
 					moved = true;
 				}
 				break;
-			case 3: //d
-				if(game_level.getChar(ogre.x, ogre.y + 1) == ' ') {
+			case 3: // d
+				if (game_level.getChar(ogre.x, ogre.y + 1) == ' ') {
 					ogre.ogre_set_key(false);
 					ogre.move_right();
 					moved = true;
-				}
-				else if(game_level.getChar(ogre.x, ogre.y + 1) == 'k') {
+				} else if (game_level.getChar(ogre.x, ogre.y + 1) == 'k') {
 					ogre.ogre_set_key(true);
 					ogre.move_right();
 					moved = true;
@@ -149,54 +158,50 @@ public class Game_State {
 				break;
 			}
 		}
-		
+
 		moved = false;
-		while(moved == false) {
-			option = randomGenerator.nextInt(4); //generating a random number between 0 and 3;
-			switch(option) {
-			case 0: //w
-				if(game_level.getChar(ogre.x - 1, ogre.y) == ' ') {
+		while (moved == false) {
+			option = randomGenerator.nextInt(4); // generating a random number between 0 and 3;
+			switch (option) {
+			case 0: // w
+				if (game_level.getChar(ogre.x - 1, ogre.y) == ' ') {
 					ogre.club_set_key(false);
 					ogre.club_up();
 					moved = true;
-				}
-				else if(game_level.getChar(ogre.x - 1, ogre.y) == 'k') {
+				} else if (game_level.getChar(ogre.x - 1, ogre.y) == 'k') {
 					ogre.club_set_key(true);
 					ogre.club_up();
 					moved = true;
 				}
 				break;
-			case 1: //a
-				if(game_level.getChar(ogre.x, ogre.y - 1) == ' ') {
+			case 1: // a
+				if (game_level.getChar(ogre.x, ogre.y - 1) == ' ') {
 					ogre.club_set_key(false);
 					ogre.club_left();
 					moved = true;
-				}
-				else if(game_level.getChar(ogre.x, ogre.y - 1) == 'k') {
+				} else if (game_level.getChar(ogre.x, ogre.y - 1) == 'k') {
 					ogre.club_set_key(true);
 					ogre.club_left();
 					moved = true;
 				}
 				break;
-			case 2: //s
-				if(game_level.getChar(ogre.x + 1, ogre.y) == ' ') {
+			case 2: // s
+				if (game_level.getChar(ogre.x + 1, ogre.y) == ' ') {
 					ogre.club_set_key(false);
 					ogre.club_down();
 					moved = true;
-				}
-				else if(game_level.getChar(ogre.x + 1, ogre.y) == 'k') {
+				} else if (game_level.getChar(ogre.x + 1, ogre.y) == 'k') {
 					ogre.club_set_key(true);
 					ogre.club_down();
 					moved = true;
 				}
 				break;
-			case 3: //d
-				if(game_level.getChar(ogre.x, ogre.y + 1) == ' ') {
+			case 3: // d
+				if (game_level.getChar(ogre.x, ogre.y + 1) == ' ') {
 					ogre.club_set_key(false);
 					ogre.club_right();
 					moved = true;
-				}
-				else if(game_level.getChar(ogre.x, ogre.y + 1) == 'k') {
+				} else if (game_level.getChar(ogre.x, ogre.y + 1) == 'k') {
 					ogre.club_set_key(true);
 					ogre.club_right();
 					moved = true;
@@ -207,38 +212,57 @@ public class Game_State {
 	
 	}
 	
-	public void move_GuardOgre() {
+	public void move_Enemy() {
 		if(game_level.level == 1) {
 			guard.move();
 		}
 		if(game_level.level == 2) {
-			move_Ogre();
+			for(Ogre ogre : ogres) {
+				move_Ogre(ogre);
+			}
 		}
 	}
 	
-	public void check_gameover() {
-		// checking guard
-		if (game_level.level == 1 && !guard.asleep) {
-			if (((guard.x == hero.x + 1) && (guard.y == hero.y)) 
-					|| ((guard.x == hero.x - 1) && (guard.y == hero.y))
-					|| ((guard.x == hero.x) && (guard.y == hero.y - 1))
-					|| ((guard.x == hero.x) && (guard.y == hero.y + 1))) {
-				lose = true;
+	public void check_Enemy() {
+		switch (game_level.level) {
+		case 1:
+			// checking guard
+			if (!guard.asleep) {
+				if (((guard.x == hero.x + 1) && (guard.y == hero.y))
+						|| ((guard.x == hero.x - 1) && (guard.y == hero.y))
+						|| ((guard.x == hero.x) && (guard.y == hero.y - 1))
+						|| ((guard.x == hero.x) && (guard.y == hero.y + 1))) {
+					lose = true;
+				}
 			}
-		}
-		// checking ogre
-		else if (game_level.level == 2) {
-			if (((ogre.x == hero.x + 1) && (ogre.y == hero.y))
-					|| ((ogre.x == hero.x - 1) && (ogre.y == hero.y))
-					|| ((ogre.x == hero.x) && (ogre.y == hero.y - 1))
-					|| ((ogre.x == hero.x) && (ogre.y == hero.y + 1))) {
-				lose = true;
-			} else if (((ogre.club_x == hero.x + 1) && (ogre.club_y == hero.y))
-					|| ((ogre.club_x == hero.x - 1) && (ogre.club_y == hero.y))
-					|| ((ogre.club_x == hero.x) && (ogre.club_y == hero.y - 1))
-					|| ((ogre.club_x == hero.x) && (ogre.club_y == hero.y + 1))) {
-				lose = true;
+			break;
+
+		case 2:
+			// checking ogres
+			for (Ogre ogre : ogres) {
+				if (!ogre.stun) {
+					if (((ogre.x == hero.x + 1) && (ogre.y == hero.y)) 
+							|| ((ogre.x == hero.x - 1) && (ogre.y == hero.y))
+							|| ((ogre.x == hero.x) && (ogre.y == hero.y - 1))
+							|| ((ogre.x == hero.x) && (ogre.y == hero.y + 1))) {
+						if(hero.has_arm()) {
+							ogre.stunned(true);
+						}
+						else {
+							lose = true;
+						}
+					} else if (((ogre.club_x == hero.x + 1) && (ogre.club_y == hero.y))
+							|| ((ogre.club_x == hero.x - 1) && (ogre.club_y == hero.y))
+							|| ((ogre.club_x == hero.x) && (ogre.club_y == hero.y - 1))
+							|| ((ogre.club_x == hero.x) && (ogre.club_y == hero.y + 1))) {
+						lose = true;
+					}
+				}
 			}
+			break;
+
+		default:
+			break;
 		}
 	}
 	
@@ -258,11 +282,11 @@ public class Game_State {
 		return guard.x == x && guard.y == y;
 	}
 	
-	public boolean check_ogre(int x, int y) {
+	public boolean check_ogre(int x, int y, Ogre ogre) {
 		return ogre.x == x && ogre.y == y;
 	}
 	
-	public boolean check_ogre_club(int x, int y) {
+	public boolean check_ogre_club(int x, int y, Ogre ogre) {
 		return ogre.club_x == x && ogre.club_y == y;
 	}
 	
@@ -274,11 +298,11 @@ public class Game_State {
 		return guard.ch;
 	}
 	
-	public char get_ogre_char() {
+	public char get_ogre_char(Ogre ogre) {
 		return ogre.ch;
 	}
 	
-	public char get_ogre_club_char() {
+	public char get_ogre_club_char(Ogre ogre) {
 		return ogre.ch_club;
 	}
 		
@@ -287,39 +311,43 @@ public class Game_State {
 		switch(option) {
 		case "up": 
 			if(move_Hero(hero.x-1,hero.y)) {
-				move_GuardOgre();
+				check_Enemy();
+				move_Enemy();
 				if(check_Level_End()) {
 					create_Level(game_level.level + 1);
 				}
 			}
-			check_gameover();
+			check_Enemy();
 			break;
 		case "left":
 			if(move_Hero(hero.x,hero.y-1)) {
-				move_GuardOgre();
+				check_Enemy();
+				move_Enemy();
 				if(check_Level_End()) {
 					create_Level(game_level.level + 1);
 				}
 			}
-			check_gameover();
+			check_Enemy();
 			break;
 		case "down":
 			if(move_Hero(hero.x+1,hero.y)) {
-				move_GuardOgre();
+				check_Enemy();
+				move_Enemy();
 				if(check_Level_End()) {
 					create_Level(game_level.level + 1);
 				}
 			}
-			check_gameover();
+			check_Enemy();
 			break;
 		case "right":
 			if(move_Hero(hero.x,hero.y+1)) {
-				move_GuardOgre();
+				check_Enemy();
+				move_Enemy();
 				if(check_Level_End()) {
 					create_Level(game_level.level + 1);
 				}
 			}
-			check_gameover();
+			check_Enemy();
 			break;
 		default:
 			break;	

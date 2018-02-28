@@ -10,12 +10,16 @@ public class Ogre extends Characters {
 	
 	boolean ogreOnKey; //true if the Ogre is above the key
 	boolean clubOnKey; //true if the club is above the key
+	boolean stun;
+	int stun_timer;
 	
 	
 	public Ogre(int x, int y, int x1, int x2) {
 		
 		super(x, y, 'O');
 		ogreOnKey = false;
+		stun = false;
+		stun_timer = 0;
 		
 		club_x = x1;
 		club_y = x2;
@@ -65,5 +69,25 @@ public class Ogre extends Characters {
 			ch_club = '*';
 		}
 	}
+	
+	public void stunned(boolean b) {
+		stun = b;
+		stun_timer = 3;
+		
+		if(b) {
+			ch = '8';
+		}
+		else {
+			ch = 'O';
+		}
+	}
+	
+	public void reduce_stun() {
+		stun_timer--;
+		if(stun_timer == 0) {
+			stunned(false);
+		}
+	}
+	
 	
 }
