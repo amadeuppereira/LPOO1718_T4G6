@@ -1,10 +1,10 @@
 package dkeep.cli;
-import dkeep.logic.Game_State;
+import dkeep.logic.GameState;
 import dkeep.logic.Ogre;
 
-public class User_Output {
+public class UserOutput {
 
-	public User_Output() {
+	public UserOutput() {
 		
 	}
 	
@@ -16,7 +16,7 @@ public class User_Output {
 		System.out.println("\nParabéns! Ganhou o jogo.");
 	}
 	
-	public void printGame(Game_State g) {
+	public void printGame(GameState g) {
 		char[][] map = g.getMap();
 		boolean flag = true;
 		
@@ -31,27 +31,18 @@ public class User_Output {
 					flag = false;
 				}
 				
-				switch(g.getLevel()) {
-				case 1:
-					if(g.getLevel() == 1 && g.check_guard(i, j)) {
-						System.out.print(g.get_guard_char() + "|");
+				if(g.check_guard(i, j)) {
+					System.out.print(g.get_guard_char() + "|");
+					flag = false;
+				}
+				for (Ogre ogre : g.ogres) {
+					if (g.check_ogre(i, j, ogre) && flag) {
+						System.out.print(g.get_ogre_char(ogre) + "|");
+						flag = false;
+					} else if (g.check_ogre_club(i, j, ogre) && flag) {
+						System.out.print(g.get_ogre_club_char(ogre) + "|");
 						flag = false;
 					}
-					break;
-				case 2:
-					for(Ogre ogre : g.ogres) {
-						if(g.check_ogre(i, j, ogre) && flag) {
-							System.out.print(g.get_ogre_char(ogre) + "|");
-							flag = false;
-						}
-						else if (g.check_ogre_club(i, j, ogre) && flag) {
-							System.out.print(g.get_ogre_club_char(ogre) + "|");
-							flag = false;
-						}
-					}
-					break;
-				default:
-					break;
 				}
 				
 				if(flag) {

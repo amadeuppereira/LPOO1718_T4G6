@@ -1,15 +1,14 @@
 package dkeep.cli;
-import dkeep.logic.Game_State;
-import dkeep.cli.*;
+import dkeep.logic.GameState;
 
 public class Game {
 
 	
 	public static void main(String[] args) {
 			
-		Game_State game = new Game_State();
-		User_Output user_output = new User_Output();
-		User_Input user_input = new User_Input();
+		GameState game = new GameState();
+		UserOutput user_output = new UserOutput();
+		UserInput user_input = new UserInput();
 		
 		while (game.get_status() == 0) {
 			user_output.printGame(game);
@@ -28,5 +27,6 @@ public class Game {
 		else
 			user_output.ganhou();
 		
+		user_input.close_scanner();
 	}
 }

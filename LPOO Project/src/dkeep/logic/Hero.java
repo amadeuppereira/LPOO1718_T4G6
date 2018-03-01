@@ -31,7 +31,7 @@ public class Hero extends Characters{
 		return hasKey;
 	}
 	
-	public void hero_armed(boolean b) {
+	public void armed(boolean b) {
 		armed = b;
 		if(b) {
 			ch = 'A';

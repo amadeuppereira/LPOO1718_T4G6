@@ -1,17 +1,23 @@
 package dkeep.cli;
 import java.util.Scanner;
-import dkeep.logic.Game_State;
 
-public class User_Input {
+import dkeep.logic.GameState;
 
-	public User_Input() {
-		
+public class UserInput {
+
+	private Scanner s;
+	
+	public UserInput() {
+		s = new Scanner(System.in);
 	}
 	
-	public void readInput(Game_State game) {
+	public UserInput(Scanner scan) {
+		s = scan;
+	}
+	
+	public void readInput(GameState game) {
 		System.out.print("\nEnter direction: ");
 		
-		Scanner s = new Scanner(System.in);
 		char option = s.next().charAt(0);
 		
 		switch(option) {
@@ -31,5 +37,9 @@ public class User_Input {
 			break;
 				
 		}
+	}
+	
+	public void close_scanner() {
+		s.close();
 	}
 }

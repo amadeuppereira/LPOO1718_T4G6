@@ -11,10 +11,13 @@ public class Guard extends Characters {
 	boolean reverse;
 	
 	
-	public Guard(int x, int y, char[] mov, String type) {
+	public Guard(int x, int y) {
 		super(x, y, 'G');
-		movement = mov;
-		this.type = type;
+		char[] guard_mov = {'a','s','s','s','s','a','a','a','a','a','a','s','d','d','d','d','d','d','d','w','w','w','w','w'};
+		movement = guard_mov;
+		String[] guard_type = {"Rookie","Drunken","Suspicious"};
+		Random randomGenerator = new Random();
+		this.type = guard_type[randomGenerator.nextInt(3)];
 		it = 0;
 		asleep = false;
 		reverse = false;

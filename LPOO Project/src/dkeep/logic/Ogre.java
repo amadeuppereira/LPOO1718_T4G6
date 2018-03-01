@@ -6,6 +6,7 @@ public class Ogre extends Characters {
 
 	int club_x;
 	int club_y;
+	CellPosition club_position;
 	char ch_club;
 	
 	boolean ogreOnKey; //true if the Ogre is above the key
@@ -14,38 +15,37 @@ public class Ogre extends Characters {
 	int stun_timer;
 	
 	
-	public Ogre(int x, int y, int x1, int x2) {
+	public Ogre(int x, int y) {
 		
 		super(x, y, 'O');
 		ogreOnKey = false;
 		stun = false;
 		stun_timer = 0;
 		
-		club_x = x1;
-		club_y = x2;
+		club_position = new CellPosition(x + 1,y);
 		ch_club = '*';
 		clubOnKey = false;
 	}
 	
 	
 	public void club_up() {
-		club_x = x - 1;
-		club_y = y;
+		club_position.set_positionX(cell_position.get_positionX() - 1);
+		club_position.set_positionY(cell_position.get_positionY());
 	}
 
 	public void club_down() {
-		club_x = x + 1;
-		club_y = y;
+		club_position.set_positionX(cell_position.get_positionX() + 1);
+		club_position.set_positionY(cell_position.get_positionY());
 	}
 
 	public void club_left() {
-		club_y = y - 1;
-		club_x = x;
+		club_position.set_positionX(cell_position.get_positionX());
+		club_position.set_positionY(cell_position.get_positionY() - 1);
 	}
 
 	public void club_right() {
-		club_y = y + 1;
-		club_x = x;
+		club_position.set_positionX(cell_position.get_positionX());
+		club_position.set_positionY(cell_position.get_positionY() + 1);
 	}
 	
 	public void ogre_set_key(boolean b) {
@@ -72,7 +72,7 @@ public class Ogre extends Characters {
 	
 	public void stunned(boolean b) {
 		stun = b;
-		stun_timer = 3;
+		stun_timer = 2;
 		
 		if(b) {
 			ch = '8';

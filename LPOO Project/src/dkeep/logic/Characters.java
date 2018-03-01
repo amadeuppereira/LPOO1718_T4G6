@@ -2,35 +2,33 @@ package dkeep.logic;
 
 public class Characters {
 
-	int x;
-	int y;
-	char ch;
+	protected CellPosition cell_position;
+	protected char ch;
 	
 	public Characters(int x, int y, char ch) {
-		this.x = x;
-		this.y = y;
+		cell_position = new CellPosition(x,y);
 		this.ch = ch;
 	}
 	
 	public void move(int x, int y) {
-		this.x = x;
-		this.y = y;
+		cell_position.set_positionX(x);
+		cell_position.set_positionX(y);
 	}
 	
 	public void move_up() {
-		x--;
+		cell_position.set_positionX(cell_position.get_positionX() - 1);
 	}
 	
 	public void move_down() {
-		x++;
+		cell_position.set_positionX(cell_position.get_positionX() + 1);
 	}
 	
 	public void move_left() {
-		y--;
+		cell_position.set_positionY(cell_position.get_positionY() - 1);
 	}
 	
 	public void move_right() {
-		y++;
+		cell_position.set_positionY(cell_position.get_positionY() + 1);
 	}
 	
 	public void set_char(char ch) {
@@ -39,6 +37,26 @@ public class Characters {
 	
 	public char get_char() {
 		return ch;
+	}
+	
+	public int get_X() {
+		return cell_position.get_positionX();
+	}
+	
+	public int get_Y() {
+		return cell_position.get_positionY();
+	}
+	
+	public void set_X(int x) {
+		cell_position.set_positionX(x);
+	}
+	
+	public void set_Y(int y) {
+		cell_position.set_positionY(y);
+	}
+	
+	public CellPosition getPosition() {
+		return cell_position;
 	}
 
 }
