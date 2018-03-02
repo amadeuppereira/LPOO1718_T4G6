@@ -257,11 +257,11 @@ public class GameState {
 					} else {
 						lose = true;
 					}
-				} else if (((ogre.club_x == hero.get_X() + 1) && (ogre.club_y == hero.get_Y()))
-						|| ((ogre.club_x == hero.get_X() - 1) && (ogre.club_y == hero.get_Y()))
-						|| ((ogre.club_x == hero.get_X()) && (ogre.club_y == hero.get_Y() - 1))
-						|| ((ogre.club_x == hero.get_X()) && (ogre.club_y == hero.get_Y() + 1))
-						|| ((ogre.club_x == hero.get_X()) && (ogre.club_y == hero.get_Y()))) {
+				} else if (((ogre.get_club_X() == hero.get_X() + 1) && (ogre.get_club_Y() == hero.get_Y()))
+						|| ((ogre.get_club_X() == hero.get_X() - 1) && (ogre.get_club_Y() == hero.get_Y()))
+						|| ((ogre.get_club_X() == hero.get_X()) && (ogre.get_club_Y() == hero.get_Y() - 1))
+						|| ((ogre.get_club_X() == hero.get_X()) && (ogre.get_club_Y() == hero.get_Y() + 1))
+						|| ((ogre.get_club_X() == hero.get_X()) && (ogre.get_club_Y() == hero.get_Y()))) {
 					lose = true;
 				}
 			}
@@ -288,7 +288,7 @@ public class GameState {
 	}
 	
 	public boolean check_ogre_club(int x, int y, Ogre ogre) {
-		return ogre.club_x == x && ogre.club_y == y;
+		return ogre.get_club_X() == x && ogre.get_club_Y() == y;
 	}
 	
 	public char get_hero_char() {

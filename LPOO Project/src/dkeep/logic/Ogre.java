@@ -3,9 +3,6 @@ import dkeep.logic.Characters;
 
 public class Ogre extends Characters {
 
-
-	int club_x;
-	int club_y;
 	CellPosition club_position;
 	char ch_club;
 	
@@ -89,5 +86,11 @@ public class Ogre extends Characters {
 		}
 	}
 	
+	public int get_club_X() {
+		return club_position.get_positionX();
+	}
 	
+	public int get_club_Y() {
+		return club_position.get_positionY();
+	}
 }

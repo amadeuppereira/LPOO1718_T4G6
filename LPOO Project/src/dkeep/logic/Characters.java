@@ -12,7 +12,7 @@ public class Characters {
 	
 	public void move(int x, int y) {
 		cell_position.set_positionX(x);
-		cell_position.set_positionX(y);
+		cell_position.set_positionY(y);
 	}
 	
 	public void move_up() {
