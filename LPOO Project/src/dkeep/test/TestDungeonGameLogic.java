@@ -17,9 +17,11 @@ public class TestDungeonGameLogic {
 					{'I','k',' ',' ','X'},
 					{'X','X','X','X','X'}};
 
+	boolean lever = true;
+	
 	@Test
 	public void testMoveHeroIntoFreeCell() {
-		GameLevel game_level = new GameLevel(map);
+		GameLevel game_level = new GameLevel(map, lever);
 		GameState game = new GameState(game_level);
 		assertTrue(game.check_hero(1, 1));
 //		Scanner s = new Scanner("s");
@@ -31,8 +33,8 @@ public class TestDungeonGameLogic {
 	
 	@Test
 	public void testMoveHeroIntoWall() {
-		GameLevel game_level = new GameLevel(map);
-		GameState game = new GameState(game_level);
+		GameLevel game_level = new GameLevel(map, lever);
+		GameState game = new GameState(game_level); 
 		assertTrue(game.check_hero(1, 1));
 //		Scanner s = new Scanner("a");
 //		UserInput user_input = new UserInput(s);
@@ -43,7 +45,7 @@ public class TestDungeonGameLogic {
 	
 	@Test
 	public void testHeroIsCaptureByGuard() {
-		GameLevel game_level = new GameLevel(map);
+		GameLevel game_level = new GameLevel(map, lever);
 		GameState game = new GameState(game_level);
 		assertFalse(game.isGameover());
 //		Scanner s = new Scanner("d");
@@ -56,7 +58,7 @@ public class TestDungeonGameLogic {
 	
 	@Test
 	public void testHeroFailsToLeave() {
-		GameLevel game_level = new GameLevel(map);
+		GameLevel game_level = new GameLevel(map, lever);
 		GameState game = new GameState(game_level);
 		game.move_Hero("down");
 		assertTrue(game.check_hero(2, 1));
@@ -66,7 +68,7 @@ public class TestDungeonGameLogic {
 	
 	@Test
 	public void testHeroMovesIntoLeverCell() {
-		GameLevel game_level = new GameLevel(map);
+		GameLevel game_level = new GameLevel(map, lever);
 		GameState game = new GameState(game_level);
 		game.move_Hero("down");
 		assertTrue(game.check_hero(2, 1));
@@ -78,7 +80,7 @@ public class TestDungeonGameLogic {
 	
 	@Test
 	public void testHeroSuccessToLeave() {
-		GameLevel game_level = new GameLevel(map);
+		GameLevel game_level = new GameLevel(map, lever);
 		GameState game = new GameState(game_level);
 		game.move_Hero("down");
 		assertTrue(game.check_hero(2, 1));
@@ -90,4 +92,5 @@ public class TestDungeonGameLogic {
 		assertTrue(game.check_hero(3, 0));
 		assertTrue(game.isLevelEnd());
 	}
+	
 }

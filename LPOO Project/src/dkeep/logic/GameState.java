@@ -44,21 +44,21 @@ public class GameState {
 		guard = null;
 		ogres.clear();
 		
-		char[][] mapa = game_level.getMap();
-		for(int i = 0; i < mapa.length; i++) {
-			for(int j  = 0; j < mapa[i].length; j++) {
-				if(mapa[i][j] == 'H') {
+		char[][] map = game_level.getMap();
+		for(int i = 0; i < map.length; i++) {
+			for(int j  = 0; j < map[i].length; j++) {
+				if(map[i][j] == 'H') {
 					hero = new Hero(i, j);
 					if (lvl == 2) {
 						hero.armed(true);;
 					}
 					game_level.setChar(i, j, ' ');
 				}
-				if(mapa[i][j] == 'G') {
+				if(map[i][j] == 'G') {
 					guard = new Guard(i, j, guard_mov);
 					game_level.setChar(i, j, ' ');
 				}
-				if(mapa[i][j] == 'O') {
+				if(map[i][j] == 'O') {
 					Random r = new Random();
 					for (int n = 0; n < (r.nextInt(3) + 1); n++) {
 						ogres.add(new Ogre(i, j));
@@ -70,8 +70,8 @@ public class GameState {
 	}
 	
 	public boolean move_Hero(String m) {
-		int x = -1;
-		int y = -1;
+		int x = hero.get_X();
+		int y = hero.get_Y();
 		
 		switch(m) {
 		case "up":
@@ -294,6 +294,10 @@ public class GameState {
 	
 	public char[][] getMap(){
 		return game_level.getMap();
+	}
+	
+	public int getLvl(){
+		return lvl;
 	}
 	
 	public boolean check_hero(int x, int y) {

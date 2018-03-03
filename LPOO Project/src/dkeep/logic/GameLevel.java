@@ -43,8 +43,8 @@ public class GameLevel {
 		}		
 	}
 	
-	public GameLevel(char[][] m) {
-		lever = true;
+	public GameLevel(char[][] m, boolean l) {
+		lever = l;
 		map = m.clone();
 	}
 	

@@ -21,7 +21,7 @@ public class Guard extends Characters {
 		it = 0;
 		asleep = false;
 		reverse = false;
-	}
+	} 
 	
 	public void reverse_movement() {
 		if(it == 0)
