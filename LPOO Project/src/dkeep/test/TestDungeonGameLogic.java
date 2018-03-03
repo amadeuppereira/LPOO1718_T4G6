@@ -25,7 +25,7 @@ public class TestDungeonGameLogic {
 //		Scanner s = new Scanner("s");
 //		UserInput user_input = new UserInput(s);
 //		user_input.readInput(game);
-		game.nextMove("down");
+		game.move_Hero("down");
 		assertTrue(game.check_hero(2, 1));
 	}
 	
@@ -37,7 +37,7 @@ public class TestDungeonGameLogic {
 //		Scanner s = new Scanner("a");
 //		UserInput user_input = new UserInput(s);
 //		user_input.readInput(game);
-		game.nextMove("left");
+		game.move_Hero("left");
 		assertTrue(game.check_hero(1, 1));
 	}
 	
