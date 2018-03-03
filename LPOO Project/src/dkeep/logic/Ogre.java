@@ -24,7 +24,7 @@ public class Ogre extends Characters {
 		clubOnKey = false;
 	}
 	
-	
+
 	public void club_up() {
 		club_position.set_positionX(cell_position.get_positionX() - 1);
 		club_position.set_positionY(cell_position.get_positionY());
@@ -69,7 +69,7 @@ public class Ogre extends Characters {
 	
 	public void stunned(boolean b) {
 		stun = b;
-		stun_timer = 2;
+		stun_timer = 3;
 		
 		if(b) {
 			ch = '8';

@@ -2,7 +2,7 @@ package dkeep.logic;
 
 public class GameLevel {
 
-	static char[][] map1 = {{'X','X','X','X','X','X','X','X','X','X'},
+	private static char[][] map1 = {{'X','X','X','X','X','X','X','X','X','X'},
 					{'X','H',' ',' ','I',' ','X',' ','G','X'},
 					{'X','X','X',' ','X','X','X',' ',' ','X'},
 					{'X',' ','I',' ','I',' ','X',' ',' ','X'},
@@ -13,7 +13,7 @@ public class GameLevel {
 					{'X',' ','I',' ','I',' ','X','k',' ','X'},
 					{'X','X','X','X','X','X','X','X','X','X'}};
 
-	static char[][] map2 = {{'X','X','X','X','X','X','X','X','X'},
+	private static char[][] map2 = {{'X','X','X','X','X','X','X','X','X'},
 					{'I',' ',' ',' ','O',' ',' ','k','X'},
 					{'X',' ',' ',' ',' ',' ',' ',' ','X'},
 					{'X',' ',' ',' ',' ',' ',' ',' ','X'},
@@ -24,16 +24,19 @@ public class GameLevel {
 					{'X','H',' ',' ',' ',' ',' ',' ','X'},
 					{'X','X','X','X','X','X','X','X','X'}};
 	
-	char[][] map;
+	private char[][] map;
+	private boolean lever;
 	
 	public GameLevel(int n) {
 		
 		switch(n) {
 		case 1:
 			map = map1.clone();
+			lever = true;
 			break;
 		case 2:
 			map = map2.clone();
+			lever = false;
 			break;
 		default:
 			break;
@@ -41,6 +44,7 @@ public class GameLevel {
 	}
 	
 	public GameLevel(char[][] m) {
+		lever = true;
 		map = m.clone();
 	}
 	
@@ -54,6 +58,22 @@ public class GameLevel {
 	
 	public char[][] getMap(){
 		return map;
+	}
+	
+	public boolean lever() {
+		if(!lever) {
+			return false;
+		}
+		
+		for(int i = 0; i < map.length; i++) {
+			for(int j = 0; j < map[i].length; j++) {
+				if(map[i][j] == 'I') {
+					map[i][j] = 'S';
+				}
+			}
+		}
+			
+		return true;
 	}
 	
 }

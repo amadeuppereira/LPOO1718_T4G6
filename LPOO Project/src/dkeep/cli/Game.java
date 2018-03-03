@@ -1,5 +1,7 @@
 package dkeep.cli;
 import dkeep.logic.GameState;
+import dkeep.logic.GameState.State;;
+
 
 public class Game {
 
@@ -10,17 +12,13 @@ public class Game {
 		UserOutput user_output = new UserOutput();
 		UserInput user_input = new UserInput();
 		
-		while (game.get_status() == 0) {
+		while (game.get_status() == State.PLAYING) {
 			user_output.printGame(game);
 			user_input.readInput(game);
 		}
+	
 		
-		while(!game.win && !game.lose) { //for now reaching lvl 3 is winning the game
-			user_output.printGame(game);
-			user_input.readInput(game);
-		}
-		
-		if(game.lose) {
+		if(game.get_status() == State.DEFEAT) {
 			user_output.printGame(game);
 			user_output.perdeu();
 		}

@@ -26,7 +26,7 @@ public class CellPosition {
 		this.y = y; 
 	}
 	
-	public boolean equals (CellPosition obj) {
+	public boolean equals(CellPosition obj) {
 		return (this.x == obj.get_positionX() && this.y == obj.get_positionY());
 	}
 	

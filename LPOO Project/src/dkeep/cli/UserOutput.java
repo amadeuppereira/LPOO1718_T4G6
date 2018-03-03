@@ -15,7 +15,7 @@ public class UserOutput {
 	public void ganhou() {
 		System.out.println("\nParabéns! Ganhou o jogo.");
 	}
-	
+
 	public void printGame(GameState g) {
 		char[][] map = g.getMap();
 		boolean flag = true;
@@ -35,7 +35,7 @@ public class UserOutput {
 					System.out.print(g.get_guard_char() + "|");
 					flag = false;
 				}
-				for (Ogre ogre : g.ogres) {
+				for (Ogre ogre : g.get_ogres()) {
 					if (g.check_ogre(i, j, ogre) && flag) {
 						System.out.print(g.get_ogre_char(ogre) + "|");
 						flag = false;
