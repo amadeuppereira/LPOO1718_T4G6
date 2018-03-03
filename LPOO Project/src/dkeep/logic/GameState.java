@@ -13,6 +13,7 @@ public class GameState {
 	private Guard guard;
 	private char[] guard_mov = {'a','s','s','s','s','a','a','a','a','a','a','s','d','d','d','d','d','d','d','w','w','w','w','w'};
 	private ArrayList<Ogre> ogres = new ArrayList<Ogre>();
+	private int maxOgres;
 
 	
 	private int lvl;
@@ -20,6 +21,7 @@ public class GameState {
 	
 	public GameState() {
 		lvl = 1;
+		maxOgres = 3;
 		game_level = new GameLevel(lvl);
 		state = State.PLAYING;
 		create_Level();
@@ -27,6 +29,7 @@ public class GameState {
 	
 	public GameState(GameLevel g) {
 		guard_mov = new char[1];
+		maxOgres = 1;
 		game_level = g;
 		state = State.PLAYING;
 		create_Level();
@@ -60,7 +63,7 @@ public class GameState {
 				}
 				if(map[i][j] == 'O') {
 					Random r = new Random();
-					for (int n = 0; n < (r.nextInt(3) + 1); n++) {
+					for (int n = 0; n < (r.nextInt(maxOgres) + 1); n++) {
 						ogres.add(new Ogre(i, j));
 					}
 					game_level.setChar(i, j, ' ');

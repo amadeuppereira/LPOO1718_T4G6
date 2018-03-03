@@ -15,7 +15,7 @@ public class UserInput {
 		s = scan;
 	}
 	
-	public void readInput(GameState game) {
+	public boolean readInput(GameState game) {
 		System.out.print("\nEnter direction: ");
 		
 		char option = s.next().charAt(0);
@@ -23,19 +23,18 @@ public class UserInput {
 		switch(option) {
 		case 'w': 
 			game.nextMove("up");
-			break;
+			return true;
 		case 'a':
 			game.nextMove("left");
-			break;
+			return true;
 		case 's':
 			game.nextMove("down");
-			break;
+			return true;
 		case 'd':
 			game.nextMove("right");
-			break;
+			return true;
 		default:
-			break;
-				
+			return false;				
 		}
 	}
 	
