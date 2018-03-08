@@ -11,27 +11,40 @@ public class GameState {
 	private Hero hero;
 	private GameLevel game_level;
 	private Guard guard;
+	private String guard_type;
 	private char[] guard_mov = {'a','s','s','s','s','a','a','a','a','a','a','s','d','d','d','d','d','d','d','w','w','w','w','w'};
 	private ArrayList<Ogre> ogres = new ArrayList<Ogre>();
-	private int maxOgres;
+	private int numOgres;
 
 	
 	private int lvl;
 
 	
 	public GameState() {
+		Random r = new Random();
 		lvl = 1;
-		maxOgres = 3;
+		numOgres = r.nextInt(3) + 1;
 		game_level = new GameLevel(lvl);
+		guard_type = "";
 		state = State.PLAYING;
 		create_Level();
 	}
 	
 	public GameState(GameLevel g) {
 		guard_mov = new char[1];
-		maxOgres = 1;
+		numOgres = 1;
 		game_level = g;
+		guard_type = "";
 		state = State.PLAYING;
+		create_Level();
+	}
+	
+	public GameState(int numOgres, String guardtype) {
+		lvl = 1;
+		this.numOgres = numOgres;
+		game_level = new GameLevel(lvl);
+		state = State.PLAYING;
+		guard_type = guardtype;
 		create_Level();
 	}
 	
@@ -58,12 +71,16 @@ public class GameState {
 					game_level.setChar(i, j, ' ');
 				}
 				if(map[i][j] == 'G') {
-					guard = new Guard(i, j, guard_mov);
+					if(guard_type == "") {
+						guard = new Guard(i, j, guard_mov);
+					}
+					else {
+						guard = new Guard(i, j, guard_mov, guard_type);
+					}
 					game_level.setChar(i, j, ' ');
 				}
 				if(map[i][j] == 'O') {
-					Random r = new Random();
-					for (int n = 0; n < (r.nextInt(maxOgres) + 1); n++) {
+					for (int n = 0; n < numOgres; n++) {
 						ogres.add(new Ogre(i, j));
 					}
 					game_level.setChar(i, j, ' ');
@@ -389,4 +406,43 @@ public class GameState {
 			break;	
 		}
 	}	
+	
+	public String printGameString() {
+		String ret = "";
+		char[][] map = this.getMap();
+		boolean flag = true;
+		
+		
+		for(int i = 0; i<map.length; i++) {
+			ret += "|";
+			for(int j = 0; j< map[i].length; j++) {
+				flag = true;
+				
+				if(this.check_hero(i, j)) {
+					ret += this.get_hero_char() + "|";
+					flag = false;
+				}
+				
+				if(this.check_guard(i, j)) {
+					ret += this.get_guard_char() + "|";
+					flag = false;
+				}
+				for (Ogre ogre : this.get_ogres()) {
+					if (this.check_ogre(i, j, ogre) && flag) {
+						ret += this.get_ogre_char(ogre) + "|";
+						flag = false;
+					} else if (this.check_ogre_club(i, j, ogre) && flag) {
+						ret += this.get_ogre_club_char(ogre) + "|";
+						flag = false;
+					}
+				}
+				
+				if(flag) {
+					ret += map[i][j]+"|";
+				}
+			}
+			ret += "\n";
+		}
+		return ret;
+	}
 }

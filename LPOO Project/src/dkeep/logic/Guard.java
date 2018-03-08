@@ -23,6 +23,16 @@ public class Guard extends Characters {
 		reverse = false;
 	} 
 	
+	public Guard(int x, int y, char[] mov, String guardtype) {
+		super(x, y, 'G');
+		
+		movement = mov;
+		this.type = guardtype;
+		it = 0;
+		asleep = false;
+		reverse = false;
+	} 
+	
 	public void reverse_movement() {
 		if(it == 0)
 			it = movement.length - 1;

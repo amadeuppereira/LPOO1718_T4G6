@@ -13,13 +13,13 @@ public class Game {
 		UserInput user_input = new UserInput();
 		
 		while (game.get_status() == State.PLAYING) {
-			user_output.printGame(game);
+			user_output.printGame(game.printGameString());
 			user_input.readInput(game);
 		}
 	
 		
 		if(game.get_status() == State.DEFEAT) {
-			user_output.printGame(game);
+			user_output.printGame(game.printGameString());
 			user_output.perdeu();
 		}
 		else
