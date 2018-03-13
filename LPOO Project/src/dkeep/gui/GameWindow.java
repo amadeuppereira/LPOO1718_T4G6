@@ -2,6 +2,7 @@ package dkeep.gui;
 
 import java.awt.EventQueue;
 import dkeep.logic.GameState;
+import dkeep.logic.GameState.Movement;
 import dkeep.logic.GameState.State;
 
 import javax.swing.JFrame;
@@ -180,22 +181,22 @@ public class GameWindow {
 	}
 	
 	private void rightButtonHandler() {
-		game.nextMove("right");
+		game.nextMove(Movement.RIGHT);
 		updateGame();
 	}
 	
 	private void leftButtonHandler() {
-		game.nextMove("left");
+		game.nextMove(Movement.LEFT);
 		updateGame();
 	}
 	
 	private void upButtonHandler() {
-		game.nextMove("up");
+		game.nextMove(Movement.UP);
 		updateGame();
 	}
 	
 	private void downButtonHandler() {
-		game.nextMove("down");
+		game.nextMove(Movement.DOWN);
 		updateGame();
 	}
 	
@@ -251,10 +252,10 @@ public class GameWindow {
 		if(game.get_status() == State.DEFEAT || game.get_status() == State.WIN) {
 			updateMovementButtons(false);
 			if(game.get_status() == State.DEFEAT )
-				textAreaGame.setText(game.printGameString());
+				textAreaGame.setText(game.getGameString());
 		}
 		else {
-			textAreaGame.setText(game.printGameString());
+			textAreaGame.setText(game.getGameString());
 		}
 	}
 }

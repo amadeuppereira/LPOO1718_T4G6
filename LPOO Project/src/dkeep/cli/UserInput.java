@@ -2,6 +2,7 @@ package dkeep.cli;
 import java.util.Scanner;
 
 import dkeep.logic.GameState;
+import dkeep.logic.GameState.Movement;
 
 public class UserInput {
 
@@ -22,16 +23,16 @@ public class UserInput {
 		
 		switch(option) {
 		case 'w': 
-			game.nextMove("up");
+			game.nextMove(Movement.UP);
 			return true;
 		case 'a':
-			game.nextMove("left");
+			game.nextMove(Movement.LEFT);
 			return true;
 		case 's':
-			game.nextMove("down");
+			game.nextMove(Movement.DOWN);
 			return true;
 		case 'd':
-			game.nextMove("right");
+			game.nextMove(Movement.RIGHT);
 			return true;
 		default:
 			return false;				

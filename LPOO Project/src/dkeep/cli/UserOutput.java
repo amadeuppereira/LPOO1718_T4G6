@@ -1,6 +1,4 @@
 package dkeep.cli;
-import dkeep.logic.GameState;
-import dkeep.logic.Ogre;
 
 public class UserOutput {
 
@@ -13,7 +11,7 @@ public class UserOutput {
 	}
 	
 	public void ganhou() {
-		System.out.println("\nParabéns! Ganhou o jogo.");
+		System.out.println("\nParabens! Ganhou o jogo.");
 	}
 
 	public void printGame(String gamestring) {

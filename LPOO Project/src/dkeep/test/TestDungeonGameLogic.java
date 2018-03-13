@@ -4,10 +4,9 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import dkeep.logic.GameState;
+import dkeep.logic.GameState.Movement;
 import dkeep.logic.GameState.State;
 import dkeep.logic.GameLevel;
-import dkeep.cli.UserInput;
-import java.util.Scanner;
 
 public class TestDungeonGameLogic {
 	
@@ -24,10 +23,7 @@ public class TestDungeonGameLogic {
 		GameLevel game_level = new GameLevel(map, lever);
 		GameState game = new GameState(game_level);
 		assertTrue(game.check_hero(1, 1));
-//		Scanner s = new Scanner("s");
-//		UserInput user_input = new UserInput(s);
-//		user_input.readInput(game);
-		game.move_Hero("down");
+		game.move_Hero(Movement.DOWN);
 		assertTrue(game.check_hero(2, 1));
 	}
 	
@@ -36,10 +32,7 @@ public class TestDungeonGameLogic {
 		GameLevel game_level = new GameLevel(map, lever);
 		GameState game = new GameState(game_level); 
 		assertTrue(game.check_hero(1, 1));
-//		Scanner s = new Scanner("a");
-//		UserInput user_input = new UserInput(s);
-//		user_input.readInput(game);
-		game.move_Hero("left");
+		game.move_Hero(Movement.LEFT);
 		assertTrue(game.check_hero(1, 1));
 	}
 	
@@ -48,10 +41,7 @@ public class TestDungeonGameLogic {
 		GameLevel game_level = new GameLevel(map, lever);
 		GameState game = new GameState(game_level);
 		assertFalse(game.isGameover());
-//		Scanner s = new Scanner("d");
-//		UserInput user_input = new UserInput(s);
-//		user_input.readInput(game);
-		game.move_Hero("right");
+		game.move_Hero(Movement.RIGHT);
 		assertTrue(game.isGameover());
 		assertEquals(State.DEFEAT, game.get_status());
 	}
@@ -60,9 +50,9 @@ public class TestDungeonGameLogic {
 	public void testHeroFailsToLeave() {
 		GameLevel game_level = new GameLevel(map, lever);
 		GameState game = new GameState(game_level);
-		game.move_Hero("down");
+		game.move_Hero(Movement.DOWN);
 		assertTrue(game.check_hero(2, 1));
-		game.move_Hero("left");
+		game.move_Hero(Movement.LEFT);
 		assertTrue(game.check_hero(2, 1));
 	}
 	
@@ -70,9 +60,9 @@ public class TestDungeonGameLogic {
 	public void testHeroMovesIntoLeverCell() {
 		GameLevel game_level = new GameLevel(map, lever);
 		GameState game = new GameState(game_level);
-		game.move_Hero("down");
+		game.move_Hero(Movement.DOWN);
 		assertTrue(game.check_hero(2, 1));
-		game.move_Hero("down");
+		game.move_Hero(Movement.DOWN);
 		assertTrue(game.check_hero(3, 1));
 		assertEquals('S', game_level.getChar(2, 0));
 		assertEquals('S', game_level.getChar(3, 0));
@@ -82,13 +72,13 @@ public class TestDungeonGameLogic {
 	public void testHeroSuccessToLeave() {
 		GameLevel game_level = new GameLevel(map, lever);
 		GameState game = new GameState(game_level);
-		game.move_Hero("down");
+		game.move_Hero(Movement.DOWN);
 		assertTrue(game.check_hero(2, 1));
-		game.move_Hero("down");
+		game.move_Hero(Movement.DOWN);
 		assertTrue(game.check_hero(3, 1));
 		assertEquals('S', game_level.getChar(2, 0));
 		assertEquals('S', game_level.getChar(3, 0));
-		game.move_Hero("left");
+		game.move_Hero(Movement.LEFT);
 		assertTrue(game.check_hero(3, 0));
 		assertTrue(game.isLevelEnd());
 	}

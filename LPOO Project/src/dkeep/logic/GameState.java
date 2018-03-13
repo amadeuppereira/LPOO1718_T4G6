@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class GameState {
 	
 	public enum State {WIN, DEFEAT, PLAYING}
+	public enum Movement {UP, DOWN, LEFT, RIGHT}
 	private State state;
 	
 	private Hero hero;
@@ -52,6 +53,45 @@ public class GameState {
 		return state;
 	}
 	
+	public Movement getRandomAdjancentPos(int x, int y) {
+		Movement m = null;
+		boolean available = false;
+		Random randomGenerator = new Random();
+		int option;
+
+		while (available == false) {
+			option = randomGenerator.nextInt(4); // generating a random number between 0 and 3;
+			switch (option) {
+			case 0: // w
+				if (game_level.getChar(x - 1, y) == ' ' || game_level.getChar(x - 1, y) == 'k') {
+					m = Movement.UP;
+					available = true;
+				}
+				break;
+			case 1: // a
+				if (game_level.getChar(x, y - 1) == ' ' || game_level.getChar(x, y - 1) == 'k') {
+					m = Movement.LEFT;
+					available = true;
+				}
+				break;
+			case 2: // s
+				if (game_level.getChar(x + 1, y) == ' ' || game_level.getChar(x + 1, y) == 'k') {
+					m = Movement.DOWN;
+					available = true;
+				}
+				break;
+			case 3: // d
+				if (game_level.getChar(x, y + 1) == ' ' || game_level.getChar(x, y + 1) == 'k') {
+					m = Movement.RIGHT;
+					available = true;
+				}
+				break;
+			}
+		}
+		
+		return m;
+	}
+	
 	public void create_Level() {
 		if(lvl > 2 ) {
 			state = State.WIN;
@@ -89,24 +129,24 @@ public class GameState {
 		}	
 	}
 	
-	public boolean move_Hero(String m) {
+	public boolean move_Hero(Movement m) {
 		int x = hero.get_X();
 		int y = hero.get_Y();
 		
 		switch(m) {
-		case "up":
+		case UP:
 			x = hero.get_X()-1;
 			y = hero.get_Y();
 			break;
-		case "down":
+		case DOWN:
 			x = hero.get_X()+1;
 			y = hero.get_Y();
 			break;
-		case "left":
+		case LEFT:
 			x = hero.get_X();
 			y = hero.get_Y()-1;
 			break;
-		case "right":
+		case RIGHT:
 			x = hero.get_X();
 			y = hero.get_Y()+1;
 			break;
@@ -150,119 +190,75 @@ public class GameState {
 		return false;
 	}
 	
-	public void move_Ogre(Ogre ogre) {
-		boolean moved;
-		if(ogre.stun) {
-			moved = true;
-			ogre.reduce_stun();
+	public void checkOgreAtKey(Ogre ogre) {
+		if(game_level.getChar(ogre.get_X(), ogre.get_Y()) == 'k') {
+			ogre.ogre_set_key(true);
 		}
 		else {
-			moved = false;
+			ogre.ogre_set_key(false);
 		}
-		Random randomGenerator = new Random();
-		int option;
-			
-		while (moved == false) {
-			option = randomGenerator.nextInt(4); // generating a random number between 0 and 3;
-			switch (option) {
-			case 0: // w
-				if (game_level.getChar(ogre.get_X() - 1, ogre.get_Y()) == ' ') {
-					ogre.ogre_set_key(false);
-					ogre.move_up();
-					moved = true;
-				} else if (game_level.getChar(ogre.get_X() - 1, ogre.get_Y()) == 'k') {
-					ogre.ogre_set_key(true);
-					ogre.move_up();
-					moved = true;
-				}
-				break;
-			case 1: // a
-				if (game_level.getChar(ogre.get_X(), ogre.get_Y() - 1) == ' ') {
-					ogre.ogre_set_key(false);
-					ogre.move_left();
-					moved = true;
-				} else if (game_level.getChar(ogre.get_X(), ogre.get_Y() - 1) == 'k') {
-					ogre.ogre_set_key(true);
-					ogre.move_left();
-					moved = true;
-				}
-				break;
-			case 2: // s
-				if (game_level.getChar(ogre.get_X() + 1, ogre.get_Y()) == ' ') {
-					ogre.ogre_set_key(false);
-					ogre.move_down();
-					moved = true;
-				} else if (game_level.getChar(ogre.get_X() + 1, ogre.get_Y()) == 'k') {
-					ogre.ogre_set_key(true);
-					ogre.move_down();
-					moved = true;
-				}
-				break;
-			case 3: // d
-				if (game_level.getChar(ogre.get_X(), ogre.get_Y() + 1) == ' ') {
-					ogre.ogre_set_key(false);
-					ogre.move_right();
-					moved = true;
-				} else if (game_level.getChar(ogre.get_X(), ogre.get_Y() + 1) == 'k') {
-					ogre.ogre_set_key(true);
-					ogre.move_right();
-					moved = true;
-				}
-				break;
-			}
-		}
-
-		moved = false;
-		while (moved == false) {
-			option = randomGenerator.nextInt(4); // generating a random number between 0 and 3;
-			switch (option) {
-			case 0: // w
-				if (game_level.getChar(ogre.get_X() - 1, ogre.get_Y()) == ' ') {
-					ogre.club_set_key(false);
-					ogre.club_up();
-					moved = true;
-				} else if (game_level.getChar(ogre.get_X() - 1, ogre.get_Y()) == 'k') {
-					ogre.club_set_key(true);
-					ogre.club_up();
-					moved = true;
-				}
-				break;
-			case 1: // a
-				if (game_level.getChar(ogre.get_X(), ogre.get_Y() - 1) == ' ') {
-					ogre.club_set_key(false);
-					ogre.club_left();
-					moved = true;
-				} else if (game_level.getChar(ogre.get_X(), ogre.get_Y() - 1) == 'k') {
-					ogre.club_set_key(true);
-					ogre.club_left();
-					moved = true;
-				}
-				break;
-			case 2: // s
-				if (game_level.getChar(ogre.get_X() + 1, ogre.get_Y()) == ' ') {
-					ogre.club_set_key(false);
-					ogre.club_down();
-					moved = true;
-				} else if (game_level.getChar(ogre.get_X() + 1, ogre.get_Y()) == 'k') {
-					ogre.club_set_key(true);
-					ogre.club_down();
-					moved = true;
-				}
-				break;
-			case 3: // d
-				if (game_level.getChar(ogre.get_X(), ogre.get_Y() + 1) == ' ') {
-					ogre.club_set_key(false);
-					ogre.club_right();
-					moved = true;
-				} else if (game_level.getChar(ogre.get_X(), ogre.get_Y() + 1) == 'k') {
-					ogre.club_set_key(true);
-					ogre.club_right();
-					moved = true;
-				}
-				break;
-			}
-		}
+	}
 	
+	public void checkOgreClubAtKey(Ogre ogre) {
+		if(game_level.getChar(ogre.get_club_X(), ogre.get_club_Y()) == 'k') {
+			ogre.club_set_key(true);
+		}
+		else {
+			ogre.club_set_key(false);
+		}
+	}
+	
+	public void move_Ogre(Ogre ogre) {
+		
+		if(ogre.stun) {
+			ogre.reduce_stun();
+			return;
+		}
+		
+		Movement move = getRandomAdjancentPos(ogre.get_X(), ogre.get_Y());
+		
+		switch(move) {
+		case UP:
+			ogre.move_up();
+			checkOgreAtKey(ogre);
+			break;
+		case DOWN:
+			ogre.move_down();
+			checkOgreAtKey(ogre);
+			break;
+		case RIGHT:
+			ogre.move_right();
+			checkOgreAtKey(ogre);
+			break;
+		case LEFT:
+			ogre.move_left();
+			checkOgreAtKey(ogre);
+			break;
+		}
+	}
+
+	public void move_OgreClub(Ogre ogre) {
+		
+		Movement move = getRandomAdjancentPos(ogre.get_X(), ogre.get_Y());
+		
+		switch(move) {
+		case UP:
+			ogre.club_up();
+			checkOgreClubAtKey(ogre);
+			break;
+		case DOWN:
+			ogre.club_down();
+			checkOgreClubAtKey(ogre);
+			break;
+		case RIGHT:
+			ogre.club_right();
+			checkOgreClubAtKey(ogre);
+			break;
+		case LEFT:
+			ogre.club_left();
+			checkOgreClubAtKey(ogre);
+			break;
+		}
 	}
 	
 	public void move_Enemy() {
@@ -271,6 +267,7 @@ public class GameState {
 		}
 		for (Ogre ogre : ogres) {
 			move_Ogre(ogre);
+			move_OgreClub(ogre);
 		}
 	}
 	
@@ -358,11 +355,10 @@ public class GameState {
 	public char get_ogre_club_char(Ogre ogre) {
 		return ogre.ch_club;
 	}
-		
-	
-	public void nextMove(String option) {
+			
+	public void nextMove(Movement option) {
 		switch(option) {
-		case "up": 
+		case UP: 
 			if(move_Hero(option)) {
 				move_Enemy();
 				if(isLevelEnd()) {
@@ -372,7 +368,7 @@ public class GameState {
 			}
 			isGameover();
 			break;
-		case "left":
+		case LEFT:
 			if(move_Hero(option)) {
 				move_Enemy();
 				if(isLevelEnd()) {
@@ -382,7 +378,7 @@ public class GameState {
 			}
 			isGameover();
 			break;
-		case "down":
+		case DOWN:
 			if(move_Hero(option)) {
 				move_Enemy();
 				if(isLevelEnd()) {
@@ -392,7 +388,7 @@ public class GameState {
 			}
 			isGameover();
 			break;
-		case "right":
+		case RIGHT:
 			if(move_Hero(option)) {
 				move_Enemy();
 				if(isLevelEnd()) {
@@ -407,7 +403,7 @@ public class GameState {
 		}
 	}	
 	
-	public String printGameString() {
+	public String getGameString() {
 		String ret = "";
 		char[][] map = this.getMap();
 		boolean flag = true;
