@@ -357,50 +357,14 @@ public class GameState {
 	}
 			
 	public void nextMove(Movement option) {
-		switch(option) {
-		case UP: 
-			if(move_Hero(option)) {
-				move_Enemy();
-				if(isLevelEnd()) {
-					game_level = new GameLevel(++lvl);
-					create_Level();
-				}
+		if(move_Hero(option)) {
+			move_Enemy();
+			if(isLevelEnd()) {
+				game_level = new GameLevel(++lvl);
+				create_Level();
 			}
-			isGameover();
-			break;
-		case LEFT:
-			if(move_Hero(option)) {
-				move_Enemy();
-				if(isLevelEnd()) {
-					game_level = new GameLevel(++lvl);
-					create_Level();
-				}
-			}
-			isGameover();
-			break;
-		case DOWN:
-			if(move_Hero(option)) {
-				move_Enemy();
-				if(isLevelEnd()) {
-					game_level = new GameLevel(++lvl);
-					create_Level();
-				}
-			}
-			isGameover();
-			break;
-		case RIGHT:
-			if(move_Hero(option)) {
-				move_Enemy();
-				if(isLevelEnd()) {
-					game_level = new GameLevel(++lvl);
-					create_Level();
-				}
-			}
-			isGameover();
-			break;
-		default:
-			break;	
 		}
+		isGameover();
 	}	
 	
 	public String getGameString() {
@@ -414,12 +378,12 @@ public class GameState {
 			for(int j = 0; j< map[i].length; j++) {
 				flag = true;
 				
-				if(this.check_hero(i, j)) {
+				if(this.check_hero(i, j) && flag) {
 					ret += this.get_hero_char() + "|";
 					flag = false;
 				}
 				
-				if(this.check_guard(i, j)) {
+				if(this.check_guard(i, j) && flag) {
 					ret += this.get_guard_char() + "|";
 					flag = false;
 				}
