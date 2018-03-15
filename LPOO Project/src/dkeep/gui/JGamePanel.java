@@ -57,6 +57,8 @@ public class JGamePanel extends JPanel {
 					g.setColor(Color.BLACK);
 				else if(map[i][j] == 'S')
 					g.setColor(Color.MAGENTA);
+				else if(map[i][j] == '$')
+					g.setColor(Color.LIGHT_GRAY);
 				g.fillRect(x, y, addx -1, addy -1);
 				x += addx;
 			}

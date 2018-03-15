@@ -7,29 +7,20 @@ import dkeep.logic.GameState.State;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-//import java.awt.BorderLayout;
-//import java.awt.Dimension;
-//import java.awt.FlowLayout;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
-import javax.swing.JTextArea;
-import java.awt.Font;
-//import java.awt.Toolkit;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import javax.swing.JPanel;
 
 public class GameWindow {
 
 	private JFrame frame;
 	private JTextField textFieldOgresNumber;
 	GameState game;
-	JComboBox comboBoxGuardType;
+	JComboBox<?> comboBoxGuardType;
 	JLabel lblGameStatus;
 	JButton btnUp;
 	JButton btnDown;
@@ -61,16 +52,39 @@ public class GameWindow {
 	 */
 	public GameWindow() {
 		initialize();
+		
+		frame.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(game.get_status() == State.PLAYING) {
+					switch (e.getKeyCode()) {
+					case KeyEvent.VK_UP:
+						upButtonHandler();
+						break;
+					case KeyEvent.VK_LEFT:
+						leftButtonHandler();
+						break;
+					case KeyEvent.VK_RIGHT:
+						rightButtonHandler();
+						break;
+					case KeyEvent.VK_DOWN:
+						downButtonHandler();
+						break;
+					default:
+						break;
+					}
+				}
+				super.keyPressed(e);
+			}
+		});
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	@SuppressWarnings("unchecked")
 	private void initialize() {
 		frame = new JFrame();
-		//Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-		//frame.setBounds(0, 0,screen.width,screen.height - 30);
-		//frame.setExtendedState(frame.MAXIMIZED_BOTH);
 		frame.setBounds(100, 100, 600, 450);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -168,6 +182,7 @@ public class GameWindow {
 		btnNewGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				newGameButtonHandler();
+				frame.requestFocusInWindow();
 			}
 		});
 		btnNewGame.setBounds(439, 92, 108, 27);
@@ -208,35 +223,34 @@ public class GameWindow {
 	}
 	
 	private void updateStatusText() {
-		if(game == null) {
-			int numOgres = 0;
-			if (!textFieldOgresNumber.getText().equals("")) {
-				try {
-					numOgres = Integer.parseInt(textFieldOgresNumber.getText());
-				} catch (NumberFormatException e) {
-					numOgres = 0;
-				}
-			}
-
-			if (textFieldOgresNumber.getText().equals("") && (String) comboBoxGuardType.getSelectedItem() == "") {
-				lblGameStatus.setText("Introduce number of Ogres and Guard personality.");
-				if (btnNewGame.isEnabled())
-					btnNewGame.setEnabled(false);
-			} else if ((numOgres > 5 || numOgres <= 0) && (String) comboBoxGuardType.getSelectedItem() == "") {
-				lblGameStatus.setText("Introduce a valid number of Ogres (1-5) and Guard personality.");
-				btnNewGame.setEnabled(false);
-			} else if (numOgres <= 5 && numOgres > 0 && (String) comboBoxGuardType.getSelectedItem() == "") {
-				lblGameStatus.setText("Introduce a Guard personality.");
-				btnNewGame.setEnabled(false);
-			} else if ((numOgres > 5 || numOgres <= 0) && (String) comboBoxGuardType.getSelectedItem() != "") {
-				lblGameStatus.setText("Introduce a valid number of Ogres (1-5).");
-				btnNewGame.setEnabled(false);
-			} else if (numOgres <= 5 && numOgres > 0 && (String) comboBoxGuardType.getSelectedItem() != "") {
-				lblGameStatus.setText("You can start a new game.");
-				btnNewGame.setEnabled(true);
+		int numOgres = 0;
+		if (!textFieldOgresNumber.getText().equals("")) {
+			try {
+				numOgres = Integer.parseInt(textFieldOgresNumber.getText());
+			} catch (NumberFormatException e) {
+				numOgres = 0;
 			}
 		}
-		else {
+
+		if (textFieldOgresNumber.getText().equals("") && (String) comboBoxGuardType.getSelectedItem() == "") {
+			lblGameStatus.setText("Introduce number of Ogres and Guard personality.");
+			if (btnNewGame.isEnabled())
+				btnNewGame.setEnabled(false);
+		} else if ((numOgres > 5 || numOgres <= 0) && (String) comboBoxGuardType.getSelectedItem() == "") {
+			lblGameStatus.setText("Introduce a valid number of Ogres (1-5) and Guard personality.");
+			btnNewGame.setEnabled(false);
+		} else if (numOgres <= 5 && numOgres > 0 && (String) comboBoxGuardType.getSelectedItem() == "") {
+			lblGameStatus.setText("Introduce a Guard personality.");
+			btnNewGame.setEnabled(false);
+		} else if ((numOgres > 5 || numOgres <= 0) && (String) comboBoxGuardType.getSelectedItem() != "") {
+			lblGameStatus.setText("Introduce a valid number of Ogres (1-5).");
+			btnNewGame.setEnabled(false);
+		} else if (numOgres <= 5 && numOgres > 0 && (String) comboBoxGuardType.getSelectedItem() != "") {
+			lblGameStatus.setText("You can start a new game.");
+			btnNewGame.setEnabled(true);
+		}
+
+		if(game != null) {
 			if (game.get_status() == State.DEFEAT) {
 				lblGameStatus.setText("Better luck next time, you lost the game!");
 			} else if (game.get_status() == State.WIN) {
@@ -245,6 +259,7 @@ public class GameWindow {
 				lblGameStatus.setText("You can play now.");
 			}
 		}
+		frame.requestFocusInWindow();
 	}
 	
 	private void updateGame() {
