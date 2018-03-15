@@ -25,6 +25,11 @@ public class Ogre extends Characters {
 	}
 	
 
+	public char getClubChar() {
+		return ch_club;
+	}
+
+
 	public void club_up() {
 		club_position.set_positionX(cell_position.get_positionX() - 1);
 		club_position.set_positionY(cell_position.get_positionY());

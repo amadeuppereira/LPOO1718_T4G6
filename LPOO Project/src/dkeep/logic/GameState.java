@@ -405,4 +405,25 @@ public class GameState {
 		}
 		return ret;
 	}
+	
+	public char[][]  mapclone(char [][] map){
+		char[][] newmap = new char[map.length][];
+		for(int i = 0; i < map.length; i++) {
+			newmap[i] = map[i].clone();
+		}
+		return newmap;
+	}
+	
+	public char[][] getGameMap(){
+		char[][] ret = mapclone(this.game_level.getMap());
+		ret[this.hero.get_X()][this.hero.get_Y()] = hero.get_char();
+		if(this.guard != null) {
+			ret[this.guard.get_X()][this.guard.get_Y()] = guard.get_char();
+		}
+		for(Ogre ogre : ogres) {	
+			ret[ogre.get_club_X()][ogre.get_club_Y()] = ogre.getClubChar();
+			ret[ogre.get_X()][ogre.get_Y()] = ogre.get_char();
+		}
+		return ret;
+	}
 }

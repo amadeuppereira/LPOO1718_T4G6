@@ -22,6 +22,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.JPanel;
 
 public class GameWindow {
 
@@ -29,13 +30,13 @@ public class GameWindow {
 	private JTextField textFieldOgresNumber;
 	GameState game;
 	JComboBox comboBoxGuardType;
-	JTextArea textAreaGame;
 	JLabel lblGameStatus;
 	JButton btnUp;
 	JButton btnDown;
 	JButton btnLeft;
 	JButton btnRight;
 	JButton btnNewGame;
+	JGamePanel gamePanel;
 
 	/**
 	 * Launch the application.
@@ -73,6 +74,7 @@ public class GameWindow {
 		frame.setBounds(100, 100, 600, 450);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.setResizable(false);
 		
 		JLabel lblNewLabel = new JLabel("Number of Ogres");
 		lblNewLabel.setBounds(22, 25, 108, 16);
@@ -103,11 +105,9 @@ public class GameWindow {
 			}
 		});
 		
-		textAreaGame = new JTextArea();
-		textAreaGame.setFont(new Font("Courier New", textAreaGame.getFont().getStyle() | Font.BOLD, textAreaGame.getFont().getSize()));
-		textAreaGame.setEditable(false);
-		textAreaGame.setBounds(22, 92, 376, 276);
-		frame.getContentPane().add(textAreaGame);
+		gamePanel = new JGamePanel();
+		gamePanel.setBounds(22, 92, 389, 283);
+		frame.getContentPane().add(gamePanel);
 		
 		JButton btnExit = new JButton("Exit");
 		btnExit.addActionListener(new ActionListener() {
@@ -251,11 +251,12 @@ public class GameWindow {
 		updateStatusText();
 		if(game.get_status() == State.DEFEAT || game.get_status() == State.WIN) {
 			updateMovementButtons(false);
-			if(game.get_status() == State.DEFEAT )
-				textAreaGame.setText(game.getGameString());
+			if(game.get_status() == State.DEFEAT ) {
+				gamePanel.setMap(game.getGameMap());
+			}
 		}
 		else {
-			textAreaGame.setText(game.getGameString());
+			gamePanel.setMap(game.getGameMap());
 		}
 	}
 }
