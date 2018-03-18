@@ -1,97 +1,61 @@
 package dkeep.gui;
 
 import java.awt.EventQueue;
-import dkeep.logic.GameState;
-import dkeep.logic.GameState.Movement;
-import dkeep.logic.GameState.State;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.JComboBox;
+
+import java.awt.BorderLayout;
+import javax.swing.GroupLayout;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import javax.swing.JComboBox;
+import javax.swing.GroupLayout.Alignment;
+
+import dkeep.logic.GameState;
+import dkeep.logic.GameState.State;
+
+import javax.swing.BoxLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JTextPane;
+import java.awt.Font;
 
 public class GameConfigurations {
 
-	private JFrame frame;
+	private JFrame frameConfig;
 	private JTextField textFieldOgresNumber;
-	GameState game;
 	JComboBox<?> comboBoxGuardType;
-	JLabel lblGameStatus;
-	JButton btnUp;
-	JButton btnDown;
-	JButton btnLeft;
-	JButton btnRight;
-	JButton btnNewGame;
-	JGamePanel gamePanel;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GameConfigurations window = new GameConfigurations();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	JTextPane txtGameStatus;
+	JButton btnNewGame;	
 	
+	GameState game;
+	GameWindow windowGame;
 	
-	/**
-	 * Create the application.
-	 */
 	public GameConfigurations() {
 		initialize();
-		
-		frame.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if(game != null && game.get_status() == State.PLAYING) {
-					switch (e.getKeyCode()) {
-					case KeyEvent.VK_UP:
-						upButtonHandler();
-						break;
-					case KeyEvent.VK_LEFT:
-						leftButtonHandler();
-						break;
-					case KeyEvent.VK_RIGHT:
-						rightButtonHandler();
-						break;
-					case KeyEvent.VK_DOWN:
-						downButtonHandler();
-						break;
-					default:
-						break;
-					}
-				}
-			}
-		});
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	@SuppressWarnings("unchecked")
 	private void initialize() {
-		frame = new JFrame("Dungeon Keep");
-		frame.setBounds(100, 100, 600, 450);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-		frame.setResizable(false);
+		frameConfig = new JFrame("Game Configurations");
+		frameConfig.setBounds(100, 100, 400, 364);
+		frameConfig.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		String[] options = { "","Rookie", "Drunken", "Suspicious" };
 		
 		JLabel lblNewLabel = new JLabel("Number of Ogres");
-		lblNewLabel.setBounds(22, 25, 108, 16);
-		frame.getContentPane().add(lblNewLabel);
+		
+		JButton btnExit = new JButton("Exit Game");
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		
 		textFieldOgresNumber = new JTextField();
 		textFieldOgresNumber.addActionListener(new ActionListener() {
@@ -99,126 +63,84 @@ public class GameConfigurations {
 				updateStatusText();
 			}
 		});
-		
-		textFieldOgresNumber.setBounds(159, 20, 64, 26);
-		frame.getContentPane().add(textFieldOgresNumber);
 		textFieldOgresNumber.setColumns(10);
 		
-		JLabel lblNewLabel_1 = new JLabel("Guard personality");
-		lblNewLabel_1.setBounds(22, 57, 125, 16);
-		frame.getContentPane().add(lblNewLabel_1);
-		
-		String[] options = { "","Rookie", "Drunken", "Suspicious" };
 		comboBoxGuardType = new JComboBox(options);
-		comboBoxGuardType.setBounds(159, 53, 124, 27);
-		frame.getContentPane().add(comboBoxGuardType);
 		comboBoxGuardType.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				updateStatusText();
 			}
 		});
 		
-		gamePanel = new JGamePanel();
-		gamePanel.setBounds(22, 92, 389, 283);
-		frame.getContentPane().add(gamePanel);
-		
-		JButton btnExit = new JButton("Exit");
-		btnExit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
-		});
-		btnExit.setBounds(439, 341, 102, 27);
-		frame.getContentPane().add(btnExit);
-		
-		btnUp = new JButton("Up");
-		btnUp.setEnabled(false);
-		btnUp.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				upButtonHandler();
-			}
-		});
-		btnUp.setBounds(461, 171, 75, 29);
-		frame.getContentPane().add(btnUp);
-		
-		btnDown = new JButton("Down");
-		btnDown.setEnabled(false);
-		btnDown.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				downButtonHandler();
-			}
-		});
-		btnDown.setBounds(461, 234, 80, 29);
-		frame.getContentPane().add(btnDown);
-		
-		btnLeft = new JButton("Left");
-		btnLeft.setEnabled(false);
-		btnLeft.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				leftButtonHandler();
-			}
-		});
-		btnLeft.setBounds(423, 203, 75, 29);
-		frame.getContentPane().add(btnLeft);
-		
-		btnRight = new JButton("Right");
-		btnRight.setEnabled(false);
-		btnRight.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				rightButtonHandler();
-			}
-		});
-		btnRight.setBounds(497, 203, 77, 29);
-		frame.getContentPane().add(btnRight);
-		
-		lblGameStatus = new JLabel();
-		lblGameStatus.setText("Introduce number of Ogres and Guard personality.");
-		lblGameStatus.setBounds(22, 390, 552, 15);
-		frame.getContentPane().add(lblGameStatus);
-		
 		btnNewGame = new JButton("New Game");
 		btnNewGame.setEnabled(false);
 		btnNewGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				newGameButtonHandler();
-				frame.requestFocusInWindow();
+				windowGame.getFrame().requestFocusInWindow();
 			}
 		});
-		btnNewGame.setBounds(439, 92, 108, 27);
-		frame.getContentPane().add(btnNewGame);
+		
+		JLabel lblNewLabel_1 = new JLabel("Guard personality");
+		
+		txtGameStatus = new JTextPane();
+		txtGameStatus.setEditable(false);
+		txtGameStatus.setFont(new Font("Courier New", txtGameStatus.getFont().getStyle(), txtGameStatus.getFont().getSize()));
+		txtGameStatus.setText("Introduce number of Ogres and Guard personality.");
+		
+		
+		GroupLayout groupLayout = new GroupLayout(frameConfig.getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(11)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(txtGameStatus, GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(12)
+									.addComponent(textFieldOgresNumber, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(12)
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addComponent(btnNewGame, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(comboBoxGuardType, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE))))
+							.addGap(120)))
+					.addGap(15))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(145)
+					.addComponent(btnExit, GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+					.addGap(138))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(26)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblNewLabel)
+						.addComponent(textFieldOgresNumber, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(15)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblNewLabel_1)
+						.addComponent(comboBoxGuardType, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
+					.addComponent(btnNewGame)
+					.addGap(30)
+					.addComponent(txtGameStatus, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
+					.addGap(34)
+					.addComponent(btnExit)
+					.addGap(49))
+		);
+		frameConfig.getContentPane().setLayout(groupLayout);
 	}
 	
-	private void newGameButtonHandler() {
-		game = new GameState(Integer.parseInt(textFieldOgresNumber.getText()),(String)comboBoxGuardType.getSelectedItem());
-		updateMovementButtons(true);
-		updateGame();
-	}
-	
-	private void rightButtonHandler() {
-		game.nextMove(Movement.RIGHT);
-		updateGame();
-	}
-	
-	private void leftButtonHandler() {
-		game.nextMove(Movement.LEFT);
-		updateGame();
-	}
-	
-	private void upButtonHandler() {
-		game.nextMove(Movement.UP);
-		updateGame();
-	}
-	
-	private void downButtonHandler() {
-		game.nextMove(Movement.DOWN);
-		updateGame();
-	}
-	
-	private void updateMovementButtons(boolean act) {
-		btnRight.setEnabled(act);
-		btnLeft.setEnabled(act);
-		btnUp.setEnabled(act);
-		btnDown.setEnabled(act);
+	public JFrame getFrameConfig() {
+		return frameConfig;
 	}
 	
 	private void updateStatusText() {
@@ -232,45 +154,45 @@ public class GameConfigurations {
 		}
 
 		if (textFieldOgresNumber.getText().equals("") && (String) comboBoxGuardType.getSelectedItem() == "") {
-			lblGameStatus.setText("Introduce number of Ogres and Guard personality.");
+			txtGameStatus.setText("Introduce number of Ogres and Guard personality.");
 			if (btnNewGame.isEnabled())
 				btnNewGame.setEnabled(false);
 		} else if ((numOgres > 5 || numOgres <= 0) && (String) comboBoxGuardType.getSelectedItem() == "") {
-			lblGameStatus.setText("Introduce a valid number of Ogres (1-5) and Guard personality.");
+			txtGameStatus.setText("Introduce a valid number of Ogres (1-5) and Guard personality.");
 			btnNewGame.setEnabled(false);
 		} else if (numOgres <= 5 && numOgres > 0 && (String) comboBoxGuardType.getSelectedItem() == "") {
-			lblGameStatus.setText("Introduce a Guard personality.");
+			txtGameStatus.setText("Introduce a Guard personality.");
 			btnNewGame.setEnabled(false);
 		} else if ((numOgres > 5 || numOgres <= 0) && (String) comboBoxGuardType.getSelectedItem() != "") {
-			lblGameStatus.setText("Introduce a valid number of Ogres (1-5).");
+			txtGameStatus.setText("Introduce a valid number of Ogres (1-5).");
 			btnNewGame.setEnabled(false);
 		} else if (numOgres <= 5 && numOgres > 0 && (String) comboBoxGuardType.getSelectedItem() != "") {
-			lblGameStatus.setText("You can start a new game.");
-			btnNewGame.setEnabled(true);
-		}
-
-		if(game != null) {
-			if (game.get_status() == State.DEFEAT) {
-				lblGameStatus.setText("Better luck next time, you lost the game!");
-			} else if (game.get_status() == State.WIN) {
-				lblGameStatus.setText("Congratulations, you won the game!");
-			} else if (game.get_status() == State.PLAYING) {
-				lblGameStatus.setText("You can play now.");
+			if(windowGame !=  null) { 
+				if(windowGame.getFrame().isVisible() == true) {
+					txtGameStatus.setText("A game is already running, finish or close it before starting a new game.");
+					btnNewGame.setEnabled(false);
+				}
+				else {
+					txtGameStatus.setText("You can start a new game.");
+					btnNewGame.setEnabled(true);
+				}
+			}
+			else {
+				txtGameStatus.setText("You can start a new game.");
+				btnNewGame.setEnabled(true);
 			}
 		}
-		frame.requestFocusInWindow();
 	}
 	
-	private void updateGame() {
+	private void newGameButtonHandler() {
+		game = new GameState(Integer.parseInt(textFieldOgresNumber.getText()),(String)comboBoxGuardType.getSelectedItem());		
+		btnNewGame.setEnabled(false);
+		windowGame = new GameWindow(game);
+		windowGame.getFrame().setVisible(true);
+		windowGame.updateMovementButtons(true);
+		windowGame.updateGame();	
 		updateStatusText();
-		if(game.get_status() == State.DEFEAT || game.get_status() == State.WIN) {
-			updateMovementButtons(false);
-			if(game.get_status() == State.DEFEAT ) {
-				gamePanel.setMap(game.getGameMap());
-			}
-		}
-		else {
-			gamePanel.setMap(game.getGameMap());
-		}
+		textFieldOgresNumber.setText("");
+		comboBoxGuardType.setSelectedItem((String)"");
 	}
 }

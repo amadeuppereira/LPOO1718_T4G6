@@ -2,13 +2,26 @@ package dkeep.gui;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.LayoutManager;
-
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public class JGamePanel extends JPanel {
 	
 	private char[][] map;
+	Image hero = new ImageIcon("hero.png").getImage();
+	Image herokey = new ImageIcon("herokey.png").getImage();
+	Image heroarmed = new ImageIcon("heroarmed.png").getImage();
+	Image ogre = new ImageIcon("ogre.png").getImage();
+	Image ogrestuned = new ImageIcon("ogrestuned.png").getImage();
+	Image ogreonkey = new ImageIcon("ogreonkey.png").getImage();
+	Image ogreclub = new ImageIcon("ogreclub.png").getImage();
+	Image guard = new ImageIcon("guard.png").getImage();
+	Image guardsleep = new ImageIcon("guardsleep.png").getImage();
+	Image key = new ImageIcon("key.png").getImage();
+	Image dooropen = new ImageIcon("dooropen.png").getImage();
+	Image doorclose = new ImageIcon("doorclose.png").getImage();
+	
 
 
 	public JGamePanel() {
@@ -31,35 +44,50 @@ public class JGamePanel extends JPanel {
 		
 		for(int i = 0; i<map.length; i++) {
 			for(int j = 0; j < map[i].length; j++) {
-				if(map[i][j] == 'X')
+				if(map[i][j] == 'X') {
 					g.setColor(Color.BLACK);
-				else if(map[i][j] == ' ')
+					g.fillRect(x, y, addx -1, addy -1);
+				}
+				else if(map[i][j] == ' ') {
 					g.setColor(Color.WHITE);
-				else if(map[i][j] == 'H')
-					g.setColor(Color.RED);
-				else if(map[i][j] == 'K')
-					g.setColor(Color.ORANGE);
-				else if(map[i][j] == 'A')
-					g.setColor(Color.PINK);
-				else if(map[i][j] == 'G')
-					g.setColor(Color.GRAY);
-				else if(map[i][j] == 'g')
-					g.setColor(Color.DARK_GRAY);
-				else if(map[i][j] == 'O')
-					g.setColor(Color.GREEN);
-				else if(map[i][j] == '8')
-					g.setColor(Color.BLUE);
-				else if(map[i][j] == '*')
-					g.setColor(Color.CYAN);
-				else if(map[i][j] == 'k')
-					g.setColor(Color.YELLOW);
-				else if(map[i][j] == 'I')
-					g.setColor(Color.BLACK);
-				else if(map[i][j] == 'S')
-					g.setColor(Color.MAGENTA);
-				else if(map[i][j] == '$')
-					g.setColor(Color.LIGHT_GRAY);
-				g.fillRect(x, y, addx -1, addy -1);
+					g.fillRect(x, y, addx -1, addy -1);
+				}
+				else if(map[i][j] == 'H') {
+					g.drawImage(hero, x, y, addx-1, addy-1, this);
+				}
+				else if(map[i][j] == 'K') {
+					g.drawImage(herokey, x, y, addx-1, addy-1, this);
+				}
+				else if(map[i][j] == 'A') {
+					g.drawImage(heroarmed, x, y, addx-1, addy-1, this);
+				}
+				else if(map[i][j] == 'G') {
+					g.drawImage(guard, x, y, addx-1, addy-1, this);
+				}
+				else if(map[i][j] == 'g') {
+					g.drawImage(guardsleep, x, y, addx-1, addy-1, this);
+				}
+				else if(map[i][j] == 'O') {
+					g.drawImage(ogre, x, y, addx-1, addy-1, this);
+				}
+				else if(map[i][j] == '8') {
+					g.drawImage(ogrestuned, x, y, addx-1, addy-1, this);
+				}
+				else if(map[i][j] == '*') {
+					g.drawImage(ogreclub, x, y, addx-1, addy-1, this);
+				}
+				else if(map[i][j] == 'k') {
+					g.drawImage(key, x, y, addx-1, addy-1, this);
+				}
+				else if(map[i][j] == 'I') {
+					g.drawImage(doorclose, x, y, addx-1, addy-1, this);
+				}
+				else if(map[i][j] == 'S') {
+					g.drawImage(dooropen, x, y, addx-1, addy-1, this);
+				}
+				else if(map[i][j] == '$') {
+					g.drawImage(ogreonkey, x, y, addx-1, addy-1, this);
+				}
 				x += addx;
 			}
 			x = 0;
