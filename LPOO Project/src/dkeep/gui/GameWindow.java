@@ -16,6 +16,7 @@ import dkeep.logic.GameState.Movement;
 import dkeep.logic.GameState.State;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class GameWindow {
 
@@ -25,8 +26,8 @@ public class GameWindow {
 	JButton btnLeft;
 	JButton btnRight;
 	JGamePanel gamePanel;
-	ImageIcon minionhappyicon = new ImageIcon("happyminion.png");
-	ImageIcon minionsadicon = new ImageIcon("sadminion.png");
+	ImageIcon minionhappyicon = new ImageIcon("resources/happyminion.png");
+	ImageIcon minionsadicon = new ImageIcon("resources/sadminion.png");
 	
 	public GameState game;
 
@@ -108,19 +109,20 @@ public class GameWindow {
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(21)
-					.addComponent(gamePanel, GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
+					.addComponent(gamePanel, GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
 					.addGap(12)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(38)
-							.addComponent(btnUp))
-						.addComponent(btnLeft)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(74)
+							.addGap(6)
+							.addComponent(btnLeft)
+							.addGap(17)
 							.addComponent(btnRight))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(38)
-							.addComponent(btnDown)))
+							.addComponent(btnDown))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(38)
+							.addComponent(btnUp, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)))
 					.addGap(27))
 		);
 		groupLayout.setVerticalGroup(
@@ -131,15 +133,15 @@ public class GameWindow {
 							.addGap(99)
 							.addComponent(btnUp)
 							.addGap(3)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(btnLeft)
-								.addComponent(btnRight))
+							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(btnRight)
+								.addComponent(btnLeft))
 							.addGap(2)
 							.addComponent(btnDown)
 							.addGap(118))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(26)
-							.addComponent(gamePanel, GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)))
+							.addComponent(gamePanel, GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)))
 					.addGap(37))
 		);
 		frameWindow.getContentPane().setLayout(groupLayout);

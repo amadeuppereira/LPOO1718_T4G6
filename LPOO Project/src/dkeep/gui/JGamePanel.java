@@ -9,18 +9,18 @@ import javax.swing.JPanel;
 public class JGamePanel extends JPanel {
 	
 	private char[][] map;
-	Image hero = new ImageIcon("hero.png").getImage();
-	Image herokey = new ImageIcon("herokey.png").getImage();
-	Image heroarmed = new ImageIcon("heroarmed.png").getImage();
-	Image ogre = new ImageIcon("ogre.png").getImage();
-	Image ogrestuned = new ImageIcon("ogrestuned.png").getImage();
-	Image ogreonkey = new ImageIcon("ogreonkey.png").getImage();
-	Image ogreclub = new ImageIcon("ogreclub.png").getImage();
-	Image guard = new ImageIcon("guard.png").getImage();
-	Image guardsleep = new ImageIcon("guardsleep.png").getImage();
-	Image key = new ImageIcon("key.png").getImage();
-	Image dooropen = new ImageIcon("dooropen.png").getImage();
-	Image doorclose = new ImageIcon("doorclose.png").getImage();
+	Image hero = new ImageIcon("resources/hero.png").getImage();
+	Image herokey = new ImageIcon("resources/herokey.png").getImage();
+	Image heroarmed = new ImageIcon("resources/heroarmed.png").getImage();
+	Image ogre = new ImageIcon("resources/ogre.png").getImage();
+	Image ogrestuned = new ImageIcon("resources/ogrestuned.png").getImage();
+	Image ogreonkey = new ImageIcon("resources/ogreonkey.png").getImage();
+	Image ogreclub = new ImageIcon("resources/ogreclub.png").getImage();
+	Image guard = new ImageIcon("resources/guard.png").getImage();
+	Image guardsleep = new ImageIcon("resources/guardsleep.png").getImage();
+	Image key = new ImageIcon("resources/key.png").getImage();
+	Image dooropen = new ImageIcon("resources/dooropen.png").getImage();
+	Image doorclose = new ImageIcon("resources/doorclose.png").getImage();
 	
 
 
@@ -31,6 +31,24 @@ public class JGamePanel extends JPanel {
 	public void setMap(char[][] map) {
 		this.map = map;
 		repaint();
+	}
+	
+	public char[][] getMap() {
+		return map;
+	}
+	
+	public void createMap(int x, int y) {
+		this.map = new char[y][x];
+		for(int i = 0; i < map.length; i++) {
+			for(int j = 0; j < map[i].length; j++) {
+				if(i == 0 || i == map.length - 1) {
+					map[i][j] = 'X';
+				}
+				else if(j == 0 || j == map[i].length - 1) {
+					map[i][j] = 'X';
+				}
+			}
+		}
 	}
 
 	@Override
