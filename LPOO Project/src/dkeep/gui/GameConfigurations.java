@@ -32,28 +32,31 @@ public class GameConfigurations {
 	private JTextField textFieldOgresNumber;
 	JComboBox<?> comboBoxGuardType;
 	JTextPane txtGameStatus;
-	JButton btnNewGame;	
+	JButton btnNewGame;
+	private JFrame frameMenu;
 	
 	GameState game;
 	GameWindow windowGame;
 	
-	public GameConfigurations() {
+	public GameConfigurations(JFrame frameMenu) {
+		this.frameMenu = frameMenu;
 		initialize();
 	}
 
 	private void initialize() {
 		frameConfig = new JFrame("Game Configurations");
-		frameConfig.setBounds(100, 100, 400, 364);
+		frameConfig.setBounds(100, 100, 384, 333);
 		frameConfig.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		String[] options = { "","Rookie", "Drunken", "Suspicious" };
 		
 		JLabel lblNewLabel = new JLabel("Number of Ogres");
 		
-		JButton btnExit = new JButton("Exit Game");
-		btnExit.addActionListener(new ActionListener() {
+		JButton btnReturn = new JButton("Return to Menu");
+		btnReturn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				frameConfig.dispose();
+				frameMenu.setVisible(true);
 			}
 		});
 		
@@ -92,27 +95,29 @@ public class GameConfigurations {
 		GroupLayout groupLayout = new GroupLayout(frameConfig.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(145)
-					.addComponent(btnExit, GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
-					.addGap(138))
 				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
 					.addGap(11)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(txtGameStatus, GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(txtGameStatus, GroupLayout.PREFERRED_SIZE, 364, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap())
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE))
-							.addGap(12)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(textFieldOgresNumber, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)
-								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-									.addComponent(btnNewGame, GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
-									.addComponent(comboBoxGuardType, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)))
-							.addGap(135))))
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(108)
+									.addComponent(btnNewGame, GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
+								.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
+										.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE))
+									.addGap(12)
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+										.addComponent(textFieldOgresNumber, GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+										.addComponent(comboBoxGuardType, 0, 122, Short.MAX_VALUE))))
+							.addGap(109)))
+					.addGap(10))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(125)
+					.addComponent(btnReturn, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addGap(119))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -125,13 +130,13 @@ public class GameConfigurations {
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblNewLabel_1)
 						.addComponent(comboBoxGuardType, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addComponent(btnNewGame)
 					.addGap(30)
+					.addComponent(btnNewGame)
+					.addGap(18)
 					.addComponent(txtGameStatus, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
-					.addGap(34)
-					.addComponent(btnExit)
-					.addGap(49))
+					.addGap(18)
+					.addComponent(btnReturn)
+					.addGap(34))
 		);
 		frameConfig.getContentPane().setLayout(groupLayout);
 	}

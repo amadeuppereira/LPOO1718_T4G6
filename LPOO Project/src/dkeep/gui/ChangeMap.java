@@ -152,6 +152,7 @@ public class ChangeMap {
 		btnDone.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setMapSize();
+				mapPanel.repaint();
 			}
 		});
 		GroupLayout gl_newMapConfig = new GroupLayout(newMapConfig);
