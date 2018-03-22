@@ -106,11 +106,11 @@ public class ChangeMap {
 		optionsPanel.setToolTipText("");
 		GroupLayout groupLayout = new GroupLayout(frameChangeMap.getContentPane());
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addGroup(groupLayout.createSequentialGroup()
+						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
 							.addComponent(newMapConfig, GroupLayout.PREFERRED_SIZE, 288, GroupLayout.PREFERRED_SIZE)
 							.addGap(433))
 						.addGroup(groupLayout.createSequentialGroup()
@@ -143,7 +143,6 @@ public class ChangeMap {
 			public void mouseClicked(MouseEvent e) {
 				op = Option.WALL;
 				setOptionsEnabled();
-				mapPanel.requestFocus();
 			}
 		});
 		
@@ -154,7 +153,6 @@ public class ChangeMap {
 			public void mouseClicked(MouseEvent e) {
 				op = Option.PATH;
 				setOptionsEnabled();
-				mapPanel.requestFocus();
 			}
 		});
 		
@@ -165,7 +163,6 @@ public class ChangeMap {
 			public void mouseClicked(MouseEvent e) {
 				op = Option.KEY;
 				setOptionsEnabled();
-				mapPanel.requestFocus();
 			}
 		});
 		
@@ -176,7 +173,6 @@ public class ChangeMap {
 			public void mouseClicked(MouseEvent e) {
 				op = Option.HERO;
 				setOptionsEnabled();
-				mapPanel.requestFocus();
 			}
 		});
 		
@@ -187,7 +183,6 @@ public class ChangeMap {
 			public void mouseClicked(MouseEvent e) {
 				op = Option.OGRE;
 				setOptionsEnabled();
-				mapPanel.requestFocus();
 			}
 		});
 		
@@ -198,7 +193,6 @@ public class ChangeMap {
 			public void mouseClicked(MouseEvent e) {
 				op = Option.DOOR;
 				setOptionsEnabled();
-				mapPanel.requestFocus();
 			}
 		});
 		GroupLayout gl_optionsPanel = new GroupLayout(optionsPanel);
@@ -300,10 +294,10 @@ public class ChangeMap {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lblX)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(textSizeY, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(textSizeY, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+					.addGap(26)
 					.addComponent(btnDone)
-					.addContainerGap(53, Short.MAX_VALUE))
+					.addContainerGap(12, Short.MAX_VALUE))
 		);
 		gl_newMapConfig.setVerticalGroup(
 			gl_newMapConfig.createParallelGroup(Alignment.LEADING)
@@ -382,7 +376,7 @@ public class ChangeMap {
 			textSizeY.setEditable(false);
 		}
 		else {
-			System.out.println("Erro no tamanho!\n");
+			JOptionPane.showMessageDialog(frameChangeMap,"Erro no tamanho!","Error",JOptionPane.INFORMATION_MESSAGE,minionsadicon);
 		}
 		
 	}
@@ -423,6 +417,7 @@ public class ChangeMap {
 		default:
 			break;
 		}
+		mapPanel.requestFocus();
 	}
 	
 	private void gamePanelHandler(MouseEvent arg0) {
