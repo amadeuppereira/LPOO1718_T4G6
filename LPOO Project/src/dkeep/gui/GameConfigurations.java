@@ -53,6 +53,9 @@ public class GameConfigurations {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				frameMenu.setVisible(true);
+				if(windowGame != null) {
+					windowGame.getFrame().dispose();
+				}
 				super.windowClosing(e);
 			}
 		});

@@ -183,7 +183,7 @@ public class GameState {
 	}
 	
 	public boolean isLevelEnd() {
-		if (hero.get_X() == 0 || hero.get_Y() == 0) {
+		if (hero.get_X() == 0 || hero.get_Y() == 0 || hero.get_X() == game_level.getMap().length - 1 || hero.get_Y() == game_level.getMap()[0].length - 1) {
 			return true;
 		}
 		
