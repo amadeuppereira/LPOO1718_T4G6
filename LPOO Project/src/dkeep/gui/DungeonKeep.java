@@ -92,7 +92,7 @@ public class DungeonKeep {
 		btnChangeMap.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frameMenu.setVisible(false);
-				ChangeMap windowConfig = new ChangeMap();
+				ChangeMap windowConfig = new ChangeMap(frameMenu);
 				windowConfig.getFrame().setVisible(true);
 			}
 		});

@@ -3,6 +3,9 @@ package dkeep.gui;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
@@ -37,6 +40,10 @@ public class JGamePanel extends JPanel {
 		return map;
 	}
 	
+	public void setChar(int x, int y, char ch) {
+		map[y][x] = ch;
+	}
+	
 	public void createMap(int x, int y) {
 		this.map = new char[y][x];
 		for(int i = 0; i < map.length; i++) {
@@ -47,8 +54,66 @@ public class JGamePanel extends JPanel {
 				else if(j == 0 || j == map[i].length - 1) {
 					map[i][j] = 'X';
 				}
+				else {
+					map[i][j] = ' ';
+				}
 			}
 		}
+	}
+	
+	public Set<Integer> acceptable() {
+		Set<Integer> ret = new HashSet<Integer>();
+		
+		boolean hero = false, ogre = false, door = false, key = false;
+		
+		for(int i = 0; i < map.length; i++) {
+			for(int j = 0; j < map[i].length; j++) {
+				switch(map[i][j]) {
+				case 'I':
+					if(i == 0 || j == 0 || i == map.length - 1 || j == map[i].length - 1) {
+						door = true;
+					}
+					break;
+				case 'H':
+					if(hero) {
+						ret.add(1); // invalid number of heros
+					} else {
+						hero = true;
+					}
+					break;
+				case 'O':
+					if(ogre) {
+						ret.add(2); // invalid number of ogres
+					} else {
+						ogre = true;
+					}
+					break;
+				case 'k':
+					key = true;
+					break;
+				default:
+					break;
+				}
+					
+			}
+			
+		}
+		
+		if(!hero) {
+			ret.add(1);
+		}
+		if(!ogre) {
+			ret.add(2);
+		}
+		if(!key) {
+			ret.add(3); // no keys
+		}
+		if(!door) {
+			ret.add(4); // no valid door
+		}
+		
+		
+		return ret;
 	}
 
 	@Override

@@ -13,7 +13,7 @@ public class GameLevel {
 					{'X',' ','I',' ','I',' ','X','k',' ','X'},
 					{'X','X','X','X','X','X','X','X','X','X'}};
 
-	private final static char[][] map2 = {{'X','X','X','X','X','X','X','X','X'},
+	private static char[][] map2 = {{'X','X','X','X','X','X','X','X','X'},
 					{'I',' ',' ',' ','O',' ',' ','k','X'},
 					{'X',' ',' ',' ',' ',' ',' ',' ','X'},
 					{'X',' ',' ',' ',' ',' ',' ',' ','X'},
@@ -82,6 +82,10 @@ public class GameLevel {
 		}
 			
 		return true;
+	}
+	
+	public void setMap2(char[][] m) {
+		map2 = m;
 	}
 	
 }
