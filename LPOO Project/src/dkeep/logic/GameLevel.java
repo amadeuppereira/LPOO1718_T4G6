@@ -1,46 +1,64 @@
 package dkeep.logic;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 
 public class GameLevel {
 
-	private final static char[][] map1 = {{'X','X','X','X','X','X','X','X','X','X'},
-					{'X','H',' ',' ','I',' ','X',' ','G','X'},
-					{'X','X','X',' ','X','X','X',' ',' ','X'},
-					{'X',' ','I',' ','I',' ','X',' ',' ','X'},
-					{'X','X','X',' ','X','X','X',' ',' ','X'},
-					{'I',' ',' ',' ',' ',' ',' ',' ',' ','X'},
-					{'I',' ',' ',' ',' ',' ',' ',' ',' ','X'},
-					{'X','X','X',' ','X','X','X','X',' ','X'},
-					{'X',' ','I',' ','I',' ','X','k',' ','X'},
-					{'X','X','X','X','X','X','X','X','X','X'}};
-
-	private static char[][] map2 = {{'X','X','X','X','X','X','X','X','X'},
-					{'I',' ',' ',' ','O',' ',' ','k','X'},
-					{'X',' ',' ',' ',' ',' ',' ',' ','X'},
-					{'X',' ',' ',' ',' ',' ',' ',' ','X'},
-					{'X',' ',' ',' ',' ',' ',' ',' ','X'},
-					{'X',' ',' ',' ',' ',' ',' ',' ','X'},
-					{'X',' ',' ',' ',' ',' ',' ',' ','X'},
-					{'X',' ',' ',' ',' ',' ',' ',' ','X'},
-					{'X','H',' ',' ',' ',' ',' ',' ','X'},
-					{'X','X','X','X','X','X','X','X','X'}};
+//	private final static char[][] map1 = {{'X','X','X','X','X','X','X','X','X','X'},
+//					{'X','H',' ',' ','I',' ','X',' ','G','X'},
+//					{'X','X','X',' ','X','X','X',' ',' ','X'},
+//					{'X',' ','I',' ','I',' ','X',' ',' ','X'},
+//					{'X','X','X',' ','X','X','X',' ',' ','X'},
+//					{'I',' ',' ',' ',' ',' ',' ',' ',' ','X'},
+//					{'I',' ',' ',' ',' ',' ',' ',' ',' ','X'},
+//					{'X','X','X',' ','X','X','X','X',' ','X'},
+//					{'X',' ','I',' ','I',' ','X','k',' ','X'},
+//					{'X','X','X','X','X','X','X','X','X','X'}};
+//
+//	private static char[][] map2 = {{'X','X','X','X','X','X','X','X','X'},
+//					{'I',' ',' ',' ','O',' ',' ','k','X'},
+//					{'X',' ',' ',' ',' ',' ',' ',' ','X'},
+//					{'X',' ',' ',' ',' ',' ',' ',' ','X'},
+//					{'X',' ',' ',' ',' ',' ',' ',' ','X'},
+//					{'X',' ',' ',' ',' ',' ',' ',' ','X'},
+//					{'X',' ',' ',' ',' ',' ',' ',' ','X'},
+//					{'X',' ',' ',' ',' ',' ',' ',' ','X'},
+//					{'X','H',' ',' ',' ',' ',' ',' ','X'},
+//					{'X','X','X','X','X','X','X','X','X'}};
 	
 	private char[][] map;
 	private boolean lever;
+	private ArrayList<char[][]> maps;
 	
 	public GameLevel(int n) {
+		maps = new ArrayList<char[][]> ();
+		readFile();
+		if(n == 0) return;
+		if(n <= maps.size()) {
+			map = mapclone(maps.get(n - 1));
+			if(n == 1)
+				lever = true;
+			else
+				lever = false;
+		}
 		
-		switch(n) {
-		case 1:
-			map = mapclone(map1);
-			lever = true;
-			break;
-		case 2:
-			map = mapclone(map2);
-			lever = false;
-			break;
-		default:
-			break;
-		}		
+//		switch(n) {
+//		case 1:
+//			map = mapclone(map1);
+//			lever = true;
+//			break;
+//		case 2:
+//			map = mapclone(map2);
+//			lever = false;
+//			break;
+//		default:
+//			break;
+//		}		
 	}
 	
 	public char[][]  mapclone(char [][] map){
@@ -84,8 +102,79 @@ public class GameLevel {
 		return true;
 	}
 	
-	public void setMap2(char[][] m) {
-		map2 = m;
+	public void setMap(int n, char[][] m) {
+		//map2 = m;
+		if(n <= maps.size())
+			maps.set(n - 1, m);
+		else
+			maps.add(m);
+		saveFile();
+	}
+	
+	public ArrayList<char[][]> getMaps() {
+		return maps;
+	}
+	
+	public void readFile() {
+		FileReader fr = null;
+		BufferedReader br = null;
+		String line = "";
+		char[][] newmap;
+		int sizex = 0, sizey = 0;
+		
+		try {
+			fr = new FileReader("maps.txt");
+			br = new BufferedReader(fr);
+			
+			line = br.readLine();
+			while(line != null) {
+				sizex = Integer.parseInt(line);
+				line = br.readLine();
+				sizey = Integer.parseInt(line);
+				newmap = new char[sizex][sizey];
+				for(int i = 0; i < sizex; i++) {
+					for(int j = 0; j < sizey; j++) {
+						line = br.readLine();
+						newmap[i][j] = line.charAt(0);
+					}
+				}
+				maps.add(newmap);
+				line = br.readLine();
+			}
+			br.close();
+			fr.close();
+		}
+		catch(IOException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public void saveFile() {
+		BufferedWriter writer = null;
+		try {
+		    writer = new BufferedWriter(new OutputStreamWriter(
+		          new FileOutputStream("maps.txt"), "utf-8"));
+		    
+		    for(int n = 0; n < maps.size(); n++) {
+		    	writer.write(new Integer(maps.get(n).length).toString());
+		    writer.newLine();
+		    writer.write(new Integer(maps.get(n)[0].length).toString());
+		    writer.newLine();
+				for(int i = 0; i < maps.get(n).length; i++) {
+					for(int j = 0; j < maps.get(n)[0].length; j++) {
+						writer.write(maps.get(n)[i][j]);
+						if(!(i == maps.get(n).length-1 && j == maps.get(n)[0].length-1 && n == maps.size()-1)) {
+							writer.newLine();
+						}
+					}
+				}
+		    }
+		    
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		} finally {
+		   try {writer.close();} catch (Exception ex) {}
+		}
 	}
 	
 }

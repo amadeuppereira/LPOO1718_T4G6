@@ -52,6 +52,8 @@ public class ChangeMap {
 	private JButton btnDone;
 	JButton btnCreateMap;
 	private JFrame frameMenu;
+	JComboBox LvlcomboBox;
+	GameLevel a;
 	ImageIcon minionhappyicon = new ImageIcon("resources/happyminion.png");
 	ImageIcon minionsadicon = new ImageIcon("resources/sadminion.png");
 	ImageIcon hero = new ImageIcon(new ImageIcon("resources/hero.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT));
@@ -72,7 +74,8 @@ public class ChangeMap {
 	 * Create the application.
 	 */
 	public ChangeMap(JFrame frameMenu) {
-		this.frameMenu = frameMenu;	
+		this.frameMenu = frameMenu;
+		a = new GameLevel(0);
 		initialize();
 	}
 
@@ -106,13 +109,11 @@ public class ChangeMap {
 		optionsPanel.setToolTipText("");
 		GroupLayout groupLayout = new GroupLayout(frameChangeMap.getContentPane());
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
+			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
-							.addComponent(newMapConfig, GroupLayout.PREFERRED_SIZE, 288, GroupLayout.PREFERRED_SIZE)
-							.addGap(433))
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(newMapConfig, GroupLayout.PREFERRED_SIZE, 513, GroupLayout.PREFERRED_SIZE)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(mapPanel, GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
 							.addGap(18)
@@ -283,11 +284,19 @@ public class ChangeMap {
 				setSizeHandler();
 			}
 		});
+		
+		JLabel lblSelectLevel = new JLabel("Select Level:");
+		
+		LvlcomboBox = new JComboBox(getLevelsString());
 		GroupLayout gl_newMapConfig = new GroupLayout(newMapConfig);
 		gl_newMapConfig.setHorizontalGroup(
-			gl_newMapConfig.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_newMapConfig.createSequentialGroup()
+			gl_newMapConfig.createParallelGroup(Alignment.TRAILING)
+				.addGroup(Alignment.LEADING, gl_newMapConfig.createSequentialGroup()
 					.addContainerGap()
+					.addComponent(lblSelectLevel)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(LvlcomboBox, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE)
+					.addGap(28)
 					.addComponent(lblSize)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(textSizeX, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
@@ -295,15 +304,17 @@ public class ChangeMap {
 					.addComponent(lblX)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(textSizeY, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-					.addGap(26)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnDone)
-					.addContainerGap(12, Short.MAX_VALUE))
+					.addContainerGap(109, Short.MAX_VALUE))
 		);
 		gl_newMapConfig.setVerticalGroup(
 			gl_newMapConfig.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_newMapConfig.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_newMapConfig.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblSelectLevel)
+						.addComponent(LvlcomboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblSize)
 						.addComponent(textSizeX, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblX)
@@ -320,9 +331,15 @@ public class ChangeMap {
 	void createMapHandler() {
 		Set<Integer> errors = mapPanel.acceptable();
 		if(errors.size() == 0) {
-			GameLevel a = new GameLevel(0);
-			a.setMap2(mapPanel.getMap());
-			JOptionPane.showMessageDialog(frameChangeMap, "Map number 2 changed!","Map Changed",JOptionPane.INFORMATION_MESSAGE,minionhappyicon);
+			String option = (String) LvlcomboBox.getSelectedItem();
+			if(option.equals("New Level")) {
+				a.setMap(a.getMaps().size() + 1,mapPanel.getMap());
+				JOptionPane.showMessageDialog(frameChangeMap, "New Map created!","Map Changed",JOptionPane.INFORMATION_MESSAGE,minionhappyicon);
+			}
+			else {
+				a.setMap(Integer.parseInt(option),mapPanel.getMap());
+				JOptionPane.showMessageDialog(frameChangeMap, "Map number " + Integer.parseInt(option) + " changed!","Map Changed",JOptionPane.INFORMATION_MESSAGE,minionhappyicon);
+			}
 			frameChangeMap.dispose();
 			frameMenu.setVisible(true);
 		}
@@ -459,4 +476,12 @@ public class ChangeMap {
 		return frameChangeMap;
 	}
 	
+	public String[] getLevelsString() {
+		String[] ret = new String[a.getMaps().size()];
+		for(int i = 0; i < a.getMaps().size() - 1; i++) {
+			ret[i] = Integer.toString(i + 2);
+		}
+		ret[a.getMaps().size() - 1]= "New Level";
+		return ret;
+	}
 }

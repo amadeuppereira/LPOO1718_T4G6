@@ -93,7 +93,7 @@ public class GameState {
 	}
 	
 	public void create_Level() {
-		if(lvl > 2 ) {
+		if(lvl > game_level.getMaps().size()) {
 			state = State.WIN;
 			return;
 		}

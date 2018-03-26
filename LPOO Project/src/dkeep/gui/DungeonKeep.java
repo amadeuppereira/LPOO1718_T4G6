@@ -87,7 +87,7 @@ public class DungeonKeep {
 			}
 		});
 		
-		JButton btnChangeMap = new JButton("Change Map");
+		JButton btnChangeMap = new JButton("Create/Change Map");
 		btnChangeMap.setFont(new Font("Courier New", Font.BOLD, 16));
 		btnChangeMap.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
