@@ -191,8 +191,6 @@ X
 X
 X
 X
-<<<<<<< HEAD
-=======
 X
 15
 15
@@ -420,5 +418,4 @@ X
 X
 X
 X
->>>>>>> branch 'master' of https://github.com/amadeuppereira/LPOO1718_T4G6.git
 X
