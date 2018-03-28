@@ -25,6 +25,11 @@ public class Ogre extends Characters {
 	}
 	
 
+	public CellPosition getClub_position() {
+		return club_position;
+	}
+
+
 	public char getClubChar() {
 		return ch_club;
 	}

@@ -29,10 +29,4 @@ public class CellPosition {
 	public boolean equals(CellPosition obj) {
 		return (this.x == obj.get_positionX() && this.y == obj.get_positionY());
 	}
-	
-	@Override
-	public boolean equals(Object obj) {
-		// TODO Auto-generated method stub
-		return super.equals(obj);
-	}
 }

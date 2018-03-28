@@ -20,7 +20,6 @@ public class GameState {
 	
 	private int lvl;
 
-	
 	public GameState() {
 		Random r = new Random();
 		lvl = 1;
@@ -93,9 +92,11 @@ public class GameState {
 	}
 	
 	public void create_Level() {
-		if(lvl > game_level.getMaps().size()) {
-			state = State.WIN;
-			return;
+		if(game_level.getMaps() != null) {
+			if(lvl > game_level.getMaps().size()) {
+				state = State.WIN;
+				return;
+			}
 		}
 		guard = null;
 		ogres.clear();
@@ -425,5 +426,9 @@ public class GameState {
 			ret[ogre.get_X()][ogre.get_Y()] = ogre.get_char();
 		}
 		return ret;
+	}
+	
+	public void setLvl(int lvl) {
+		this.lvl = lvl;
 	}
 }

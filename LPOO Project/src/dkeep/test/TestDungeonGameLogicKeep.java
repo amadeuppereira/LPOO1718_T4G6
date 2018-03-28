@@ -78,6 +78,17 @@ public class TestDungeonGameLogicKeep {
 		assertTrue(game.isLevelEnd());
 	}
 	
+	@Test
+	public void testHeroStunesOgre() {
+		GameLevel game_level = new GameLevel(map, lever);
+		GameState game = new GameState(game_level);
+		assertFalse(game.isGameover());
+		game.setLvl(2);
+		game.create_Level();
+		game.move_Hero(Movement.RIGHT);
+		assertFalse(game.isGameover());
+		assertEquals(State.PLAYING, game.get_status());
+	}
 	
 
 }

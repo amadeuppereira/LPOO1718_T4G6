@@ -102,4 +102,39 @@ public class TestDungeonGameLogicOgre {
 		}
 		
 	}
+	
+	@Test
+	public void testOgresClubMovement() {
+		Ogre ogre = new Ogre(0,0);
+		assertEquals(1,ogre.getClub_position().get_positionX());
+		assertEquals(0,ogre.getClub_position().get_positionY());
+		ogre.club_down();
+		assertEquals(1,ogre.getClub_position().get_positionX());
+		assertEquals(0,ogre.getClub_position().get_positionY());
+		ogre.club_right();
+		assertEquals(0,ogre.getClub_position().get_positionX());
+		assertEquals(1,ogre.getClub_position().get_positionY());
+		ogre.club_left();
+		assertEquals(0,ogre.getClub_position().get_positionX());
+		assertEquals(-1,ogre.getClub_position().get_positionY());
+		ogre.club_up();
+		assertEquals(-1,ogre.getClub_position().get_positionX());
+		assertEquals(0,ogre.getClub_position().get_positionY());
+	}
+	
+	@Test
+	public void testOgresAndClubChar() {
+		Ogre ogre = new Ogre(1,1);
+		assertEquals('O',ogre.get_char());
+		ogre.stunned(true);
+		assertEquals('8',ogre.get_char());
+		ogre.reduce_stun();
+		assertEquals('8',ogre.get_char());
+		ogre.reduce_stun();
+		ogre.reduce_stun();
+		assertEquals('O',ogre.get_char());
+		assertEquals('*',ogre.getClubChar());
+		ogre.club_set_key(true);
+		assertEquals('$',ogre.getClubChar());
+	}
 }

@@ -8,28 +8,6 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 public class GameLevel {
-
-//	private final static char[][] map1 = {{'X','X','X','X','X','X','X','X','X','X'},
-//					{'X','H',' ',' ','I',' ','X',' ','G','X'},
-//					{'X','X','X',' ','X','X','X',' ',' ','X'},
-//					{'X',' ','I',' ','I',' ','X',' ',' ','X'},
-//					{'X','X','X',' ','X','X','X',' ',' ','X'},
-//					{'I',' ',' ',' ',' ',' ',' ',' ',' ','X'},
-//					{'I',' ',' ',' ',' ',' ',' ',' ',' ','X'},
-//					{'X','X','X',' ','X','X','X','X',' ','X'},
-//					{'X',' ','I',' ','I',' ','X','k',' ','X'},
-//					{'X','X','X','X','X','X','X','X','X','X'}};
-//
-//	private static char[][] map2 = {{'X','X','X','X','X','X','X','X','X'},
-//					{'I',' ',' ',' ','O',' ',' ','k','X'},
-//					{'X',' ',' ',' ',' ',' ',' ',' ','X'},
-//					{'X',' ',' ',' ',' ',' ',' ',' ','X'},
-//					{'X',' ',' ',' ',' ',' ',' ',' ','X'},
-//					{'X',' ',' ',' ',' ',' ',' ',' ','X'},
-//					{'X',' ',' ',' ',' ',' ',' ',' ','X'},
-//					{'X',' ',' ',' ',' ',' ',' ',' ','X'},
-//					{'X','H',' ',' ',' ',' ',' ',' ','X'},
-//					{'X','X','X','X','X','X','X','X','X'}};
 	
 	private char[][] map;
 	private boolean lever;
@@ -45,20 +23,7 @@ public class GameLevel {
 				lever = true;
 			else
 				lever = false;
-		}
-		
-//		switch(n) {
-//		case 1:
-//			map = mapclone(map1);
-//			lever = true;
-//			break;
-//		case 2:
-//			map = mapclone(map2);
-//			lever = false;
-//			break;
-//		default:
-//			break;
-//		}		
+		}	
 	}
 	
 	public char[][]  mapclone(char [][] map){
@@ -103,7 +68,6 @@ public class GameLevel {
 	}
 	
 	public void setMap(int n, char[][] m) {
-		//map2 = m;
 		if(n <= maps.size())
 			maps.set(n - 1, m);
 		else
