@@ -370,18 +370,12 @@ public class ChangeMap {
 	
 	void setMapSize() {
 		int x = -1, y = -1;
-		if (!textSizeX.getText().equals("")) {
+		if (!textSizeX.getText().equals("") && !textSizeY.getText().equals("")) {
 			try {
 				x = Integer.parseInt(textSizeX.getText());
-			} catch (NumberFormatException e) {
-				x = -1;
-			}
-		}
-		
-		if (!textSizeY.getText().equals("")) {
-			try {
 				y = Integer.parseInt(textSizeY.getText());
 			} catch (NumberFormatException e) {
+				x = -1;
 				y = -1;
 			}
 		}

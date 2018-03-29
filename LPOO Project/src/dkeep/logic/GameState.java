@@ -221,21 +221,18 @@ public class GameState {
 		switch(move) {
 		case UP:
 			ogre.move_up();
-			checkOgreAtKey(ogre);
 			break;
 		case DOWN:
 			ogre.move_down();
-			checkOgreAtKey(ogre);
 			break;
 		case RIGHT:
 			ogre.move_right();
-			checkOgreAtKey(ogre);
 			break;
 		case LEFT:
 			ogre.move_left();
-			checkOgreAtKey(ogre);
 			break;
 		}
+		checkOgreAtKey(ogre);
 	}
 
 	public void move_OgreClub(Ogre ogre) {

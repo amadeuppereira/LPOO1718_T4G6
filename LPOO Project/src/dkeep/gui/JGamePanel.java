@@ -48,10 +48,7 @@ public class JGamePanel extends JPanel {
 		this.map = new char[y][x];
 		for(int i = 0; i < map.length; i++) {
 			for(int j = 0; j < map[i].length; j++) {
-				if(i == 0 || i == map.length - 1) {
-					map[i][j] = 'X';
-				}
-				else if(j == 0 || j == map[i].length - 1) {
+				if((i == 0 || i == map.length - 1) || (j == 0 || j == map[i].length - 1)) {
 					map[i][j] = 'X';
 				}
 				else {
