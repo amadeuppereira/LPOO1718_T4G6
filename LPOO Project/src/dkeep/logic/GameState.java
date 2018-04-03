@@ -41,10 +41,9 @@ public class GameState {
 	}
 	
 	public GameState(int numOgres, String guardtype) {
-		lvl = 1;
-		this.numOgres = numOgres;
-		game_level = new GameLevel(lvl);
+		game_level = new GameLevel(lvl = 1);
 		state = State.PLAYING;
+		this.numOgres = numOgres;
 		switch(guardtype) {
 		case "Rookie":
 			guard_type = Guard_Type.ROOKIE;
@@ -59,7 +58,6 @@ public class GameState {
 			guard_type = Guard_Type.RANDOM;
 			break;
 		}
-		
 		create_Level();
 	}
 	
@@ -67,46 +65,29 @@ public class GameState {
 		return state;
 	}
 	
-	public Movement getRandomAdjancentPos(int x, int y) {
-		Movement m = null;
+	public CellPosition getRandomAvailableAdjacentPos(CellPosition pos) {
+		CellPosition newPos = null;
 		boolean available = false;
-		Random randomGenerator = new Random();
-		int option;
-
-		while (available == false) {
-			option = randomGenerator.nextInt(4); // generating a random number between 0 and 3;
-			switch (option) {
-			case 0: // w
-				if (game_level.getChar(x - 1, y) == ' ' || game_level.getChar(x - 1, y) == 'k') {
-					m = Movement.UP;
-					available = true;
-				}
-				break;
-			case 1: // a
-				if (game_level.getChar(x, y - 1) == ' ' || game_level.getChar(x, y - 1) == 'k') {
-					m = Movement.LEFT;
-					available = true;
-				}
-				break;
-			case 2: // s
-				if (game_level.getChar(x + 1, y) == ' ' || game_level.getChar(x + 1, y) == 'k') {
-					m = Movement.DOWN;
-					available = true;
-				}
-				break;
-			case 3: // d
-				if (game_level.getChar(x, y + 1) == ' ' || game_level.getChar(x, y + 1) == 'k') {
-					m = Movement.RIGHT;
-					available = true;
-				}
-				break;
-			}
+		while(!available) {
+			newPos = pos.getRandomAdjPos();
+			available = isPossiblePos(newPos.get_positionX(), newPos.get_positionY());
 		}
-		
-		return m;
+		return newPos;
 	}
 	
-	public void createGuard(int x, int y) {
+	//the flag indicates if it is possible to go to coordinates 0 (x or y)
+	public Movement getRandomPossibleMove(int x, int y, boolean flag) {
+		CellPosition pos = new CellPosition(x, y);
+		CellPosition newPos;
+		while(true) {
+			newPos = getRandomAvailableAdjacentPos(pos);
+			if(!flag && (newPos.get_positionX() == 0 || newPos.get_positionY() == 0)) continue;
+			break;
+		}
+		return pos.analyseMovement(newPos);	
+	}
+	
+	public void updateGuardType() {
 		if(guard_type == Guard_Type.RANDOM) {
 			Random r = new Random();
 			int o = r.nextInt(3);
@@ -124,7 +105,10 @@ public class GameState {
 				break;
 			}
 		}
-		
+	}
+	
+	public void createGuard(int x, int y) {
+		updateGuardType();
 		switch(guard_type) {
 		case ROOKIE:
 			guard = new Rookie(x, y, guard_mov);
@@ -173,7 +157,6 @@ public class GameState {
 				}
 			}
 		}
-		
 		if(ogres.size() > 0) hero.armed(true);
 	}
 	
@@ -190,21 +173,22 @@ public class GameState {
 		char ch = game_level.getChar(x, y);
 		
 		if(ch == 'I') {
+			game_level.setChar(x, y, 'S');
+			return; 
+		}
+		if(ch == 'k') {
 			if(!game_level.lever()) {
 				hero.set_key(true);
 				game_level.setChar(x, y, ' ');
 			}
 		}
-		else {
-			hero.move(x, y);
-		}
+		hero.move(x, y);
 	}
 	
 	public boolean move_Hero(Movement m) {
 		int x = hero.get_X();
 		int y = hero.get_Y();
 		boolean possible = false;
-		
 		switch(m) {
 		case UP:
 			possible = isPossiblePos(--x, y);
@@ -221,9 +205,7 @@ public class GameState {
 		default:
 			break;
 		}
-		
 		if(!possible) return false;
-		
 		updateHero(x, y);
 		return true;
 	}
@@ -255,14 +237,8 @@ public class GameState {
 	}
 	
 	public void move_Ogre(Ogre ogre) {
-		
-		if(ogre.stun) {
-			ogre.reduce_stun();
-			return;
-		}
-		
-		Movement move = getRandomAdjancentPos(ogre.get_X(), ogre.get_Y());
-		
+		if(ogre.updateStunTime()) return;
+		Movement move = getRandomPossibleMove(ogre.get_X(), ogre.get_Y(), false);
 		switch(move) {
 		case UP:
 			ogre.move_up();
@@ -281,9 +257,7 @@ public class GameState {
 	}
 
 	public void move_OgreClub(Ogre ogre) {
-		
-		Movement move = getRandomAdjancentPos(ogre.get_X(), ogre.get_Y());
-		
+		Movement move = getRandomPossibleMove(ogre.get_X(), ogre.get_Y(), true);
 		switch(move) {
 		case UP:
 			ogre.club_up();
@@ -311,28 +285,42 @@ public class GameState {
 		}
 	}
 	
-	public boolean isGameover() {
+	private boolean isGameoverGuard() {
 		if(guard != null) {
 			if (!guard.asleep) {
-				if (guard.checkNear(guard.getPosition())) {
-					state = State.DEFEAT;
+				if (guard.checkNear(hero.getPosition())) {
+					return true;
 				}
 			}
 		}
+		return false;
+	}
+	
+	private boolean updateOgreState(Ogre ogre) {
+		if (hero.has_arm()) {
+			ogre.stunned(true);
+		} else {
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean isGameoverOgres() {
 		for (Ogre ogre : ogres) {
 			if (!ogre.stun) {
-				if (ogre.checkNear(guard.getPosition())) {
-					if (hero.has_arm()) {
-						ogre.stunned(true);
-					} else {
-						state = State.DEFEAT;
-					}
-				} else if (ogre.getClub_position().checkNear(guard.getPosition())) {
-					state = State.DEFEAT;
+				if (ogre.checkNear(hero.getPosition())) {
+					return updateOgreState(ogre);
+				} else if (ogre.getClub_position().checkNear(hero.getPosition())) {
+					return true;
 				}
 			}
 		}
-		
+		return false;
+	}
+	
+	public boolean isGameover() {
+		if(isGameoverGuard()) state = State.DEFEAT;
+		if(isGameoverOgres()) state = State.DEFEAT;
 		if (state == State.DEFEAT) return true;
 		else return false;
 	}
@@ -399,7 +387,6 @@ public class GameState {
 		String ret = "";
 		char[][] map = this.getMap();
 		boolean flag = true;
-		
 		
 		for(int i = 0; i<map.length; i++) {
 			ret += "|";

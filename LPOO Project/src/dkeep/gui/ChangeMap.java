@@ -423,28 +423,32 @@ public class ChangeMap {
 			frameMenu.setVisible(true);
 		}
 		else {
-			String errormessage = "";
-			for(Integer i: errors) {
-				switch(i) {
-				case 1:
-					errormessage += "-Invalid number of Heroes. There can only be one hero!\n";
-					break;
-				case 2:
-					errormessage += "-Invalid number of Ogres. There can only be one start position for the Ogres!\n";
-					break;
-				case 3:
-					errormessage += "-Missing key. You need to have at least one key\n";
-					break;
-				case 4:
-					errormessage += "-No door in a valid position. You need to have at least one door in the borders of the map!\n";
-					break;
-				default:
-					break;
-				}
-			}
+			String errormessage = getErrorMessage(errors);
 			JOptionPane.showMessageDialog(frameChangeMap,errormessage,"Map Error",JOptionPane.INFORMATION_MESSAGE,minionsadicon);
 		}
-		
+	}
+	
+	private String getErrorMessage(Set<Integer> errors) {
+		String errormessage = "";
+		for(Integer i: errors) {
+			switch(i) {
+			case 1:
+				errormessage += "-Invalid number of Heroes. There can only be one hero!\n";
+				break;
+			case 2:
+				errormessage += "-Invalid number of Ogres. There can only be one start position for the Ogres!\n";
+				break;
+			case 3:
+				errormessage += "-Missing key. You need to have at least one key\n";
+				break;
+			case 4:
+				errormessage += "-No door in a valid position. You need to have at least one door in the borders of the map!\n";
+				break;
+			default:
+				break;
+			}
+		}
+		return errormessage;
 	}
 	
 	private void setMapSize() {
@@ -478,13 +482,17 @@ public class ChangeMap {
 		
 	}
 	
+	private void enableAllOptions(boolean b) {
+		lblWall.setEnabled(b);
+		lblPath.setEnabled(b);
+		lblDoor.setEnabled(b);
+		lblKey.setEnabled(b);
+		lblHero.setEnabled(b);
+		lblOgre.setEnabled(b);
+	}
+	
 	private void setOptionsEnabled() {
-		lblWall.setEnabled(true);
-		lblPath.setEnabled(true);
-		lblDoor.setEnabled(true);
-		lblKey.setEnabled(true);
-		lblHero.setEnabled(true);
-		lblOgre.setEnabled(true);
+		enableAllOptions(true);
 		switch(op) {
 		case WALL:
 			lblWall.setEnabled(false);
@@ -510,14 +518,7 @@ public class ChangeMap {
 		mapPanel.requestFocus();
 	}
 	
-	private void gamePanelHandler(MouseEvent arg0) {
-		if(mapPanel.getMap() == null) return;
-		int tempx = mapPanel.getWidth()/mapPanel.getMap()[0].length;
-		int tempy = mapPanel.getHeight()/mapPanel.getMap().length;
-		
-		int x = arg0.getX()/tempx;
-		int y = arg0.getY()/tempy;
-	
+	private void changeMapChar(int x, int y) {
 		switch(op) {
 		case WALL:
 			mapPanel.setChar(x, y, 'X');
@@ -540,7 +541,15 @@ public class ChangeMap {
 		default:
 			break;
 		}
-		
+	}
+	
+	private void gamePanelHandler(MouseEvent arg0) {
+		if(mapPanel.getMap() == null) return;
+		int tempx = mapPanel.getWidth()/mapPanel.getMap()[0].length;
+		int tempy = mapPanel.getHeight()/mapPanel.getMap().length;
+		int x = arg0.getX()/tempx;
+		int y = arg0.getY()/tempy;
+		changeMapChar(x, y);
 		mapPanel.repaint();
 		
 	}

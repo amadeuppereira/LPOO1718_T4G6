@@ -58,6 +58,7 @@ public class JGamePanel extends JPanel {
 		}
 	}
 	
+		
 	public Set<Integer> acceptable() {
 		Set<Integer> ret = new HashSet<Integer>();
 		
@@ -67,23 +68,15 @@ public class JGamePanel extends JPanel {
 			for(int j = 0; j < map[i].length; j++) {
 				switch(map[i][j]) {
 				case 'I':
-					if(i == 0 || j == 0 || i == map.length - 1 || j == map[i].length - 1) {
-						door = true;
-					}
+					door = (i == 0 || j == 0 || i == (map[i].length - 1) || j == (map[i].length-1));
 					break;
 				case 'H':
-					if(hero) {
-						ret.add(1); // invalid number of heros
-					} else {
-						hero = true;
-					}
+					if(hero) ret.add(1); // invalid number of heroes
+					else hero = true;
 					break;
 				case 'O':
-					if(ogre) {
-						ret.add(2); // invalid number of ogres
-					} else {
-						ogre = true;
-					}
+					if(ogre) ret.add(2); // invalid number of ogres
+					else ogre = true;
 					break;
 				case 'k':
 					key = true;
@@ -91,25 +84,12 @@ public class JGamePanel extends JPanel {
 				default:
 					break;
 				}
-					
 			}
-			
-		}
-		
-		if(!hero) {
-			ret.add(1);
-		}
-		if(!ogre) {
-			ret.add(2);
-		}
-		if(!key) {
-			ret.add(3); // no keys
-		}
-		if(!door) {
-			ret.add(4); // no valid door
-		}
-		
-		
+		}		
+		if(!hero) ret.add(1);
+		if(!ogre) ret.add(2);
+		if(!key) ret.add(3); // no keys
+		if(!door) ret.add(4); // no valid door	
 		return ret;
 	}
 

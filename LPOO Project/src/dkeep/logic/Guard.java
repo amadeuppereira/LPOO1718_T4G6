@@ -24,10 +24,8 @@ public abstract class Guard extends Characters {
 	}
 
 	public void reverse_movement() {
-		if(it == 0)
-			it = movement.length - 1;
-		else
-			it--;
+		if(it == 0) it = movement.length - 1;
+		else it--;
 		switch (movement[it]) {
 		case 'w':
 			move_down();
@@ -64,8 +62,7 @@ public abstract class Guard extends Characters {
 			break;
 		}
 		it++;
-		if (it == movement.length)
-			it = 0;
+		if (it == movement.length) it = 0;
 	}
 	
 	

@@ -107,4 +107,12 @@ public class Ogre extends Characters {
 	public CellPosition clubPos() {
 		return club_position;
 	}
+	
+	public boolean updateStunTime() {
+		if(stun) {
+			reduce_stun();
+			return true;
+		}
+		return false;
+	}
 }
