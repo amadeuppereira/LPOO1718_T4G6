@@ -28,8 +28,13 @@ import java.awt.Dimension;
 public class DungeonKeep {
 
 	private JFrame frameMenu;
-	ImageIcon dungeon = new ImageIcon("resources/dungeon.png");
-	ImageIcon keep = new ImageIcon("resources/keep.png");
+	private ImageIcon dungeon = new ImageIcon("resources/dungeon.png");
+	private ImageIcon keep = new ImageIcon("resources/keep.png");
+	private JButton btnChangeMap;
+	private JButton btnExitGame;
+	private JButton btnStartGame;
+	private JLabel keeplbl;
+	private JLabel dungeonlbl;
 
 	/**
 	 * Launch the application.
@@ -64,11 +69,11 @@ public class DungeonKeep {
 		frameMenu.setBounds((screen.width-631)/2, (screen.height-460)/2, 631, 460);
 		frameMenu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	
-		JLabel dungeonlbl = new JLabel(dungeon);
+		dungeonlbl = new JLabel(dungeon);
 		
-		JLabel keeplbl = new JLabel(keep);
+		keeplbl = new JLabel(keep);
 		
-		JButton btnStartGame = new JButton("Start Game");
+		btnStartGame = new JButton("Start Game");
 		btnStartGame.setForeground(Color.BLACK);
 		btnStartGame.setFont(new Font("Courier New", Font.BOLD, 16));
 		btnStartGame.addActionListener(new ActionListener() {
@@ -79,7 +84,7 @@ public class DungeonKeep {
 			}
 		});
 		
-		JButton btnExitGame = new JButton("Exit Game");
+		btnExitGame = new JButton("Exit Game");
 		btnExitGame.setFont(new Font("Courier New", Font.BOLD, 16));
 		btnExitGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -87,7 +92,7 @@ public class DungeonKeep {
 			}
 		});
 		
-		JButton btnChangeMap = new JButton("Create/Change Map");
+		btnChangeMap = new JButton("Create/Change Map");
 		btnChangeMap.setFont(new Font("Courier New", Font.BOLD, 16));
 		btnChangeMap.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -96,6 +101,11 @@ public class DungeonKeep {
 				windowConfig.getFrame().setVisible(true);
 			}
 		});
+		
+		layout();
+	}
+	
+	private void layout() {
 		GroupLayout groupLayout = new GroupLayout(frameMenu.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)

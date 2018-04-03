@@ -33,13 +33,15 @@ public class GameConfigurations {
 
 	private JFrame frameConfig;
 	private JTextField textFieldOgresNumber;
-	JComboBox<?> comboBoxGuardType;
-	JTextPane txtGameStatus;
-	JButton btnNewGame;
+	private JComboBox<?> comboBoxGuardType;
+	private JTextPane txtGameStatus;
+	private JButton btnNewGame;
 	private JFrame frameMenu;
-	
-	GameState game;
-	GameWindow windowGame;
+	private JLabel lblNewLabel_1;
+	private JLabel lblNewLabel;
+	private JButton btnReturn;
+	private GameState game;
+	private GameWindow windowGame;
 	
 	public GameConfigurations(JFrame frameMenu) {
 		this.frameMenu = frameMenu;
@@ -62,9 +64,9 @@ public class GameConfigurations {
 		
 		String[] options = { "","Rookie", "Drunken", "Suspicious" };
 		
-		JLabel lblNewLabel = new JLabel("Number of Ogres");
+		lblNewLabel = new JLabel("Number of Ogres");
 		
-		JButton btnReturn = new JButton("Return to Menu");
+		btnReturn = new JButton("Return to Menu");
 		btnReturn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frameConfig.dispose();
@@ -96,14 +98,17 @@ public class GameConfigurations {
 			}
 		});
 		
-		JLabel lblNewLabel_1 = new JLabel("Guard personality");
+		lblNewLabel_1 = new JLabel("Guard personality");
 		
 		txtGameStatus = new JTextPane();
 		txtGameStatus.setEditable(false);
 		txtGameStatus.setFont(new Font("Courier New", txtGameStatus.getFont().getStyle(), txtGameStatus.getFont().getSize()));
 		txtGameStatus.setText("Introduce number of Ogres and Guard personality.");
 		
-		
+		layout();
+	}
+	
+	private void layout() {
 		GroupLayout groupLayout = new GroupLayout(frameConfig.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)

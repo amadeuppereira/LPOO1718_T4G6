@@ -21,13 +21,13 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 public class GameWindow {
 
 	private JFrame frameWindow;
-	JButton btnUp;
-	JButton btnDown;
-	JButton btnLeft;
-	JButton btnRight;
-	JGamePanel gamePanel;
-	ImageIcon minionhappyicon = new ImageIcon("resources/happyminion.png");
-	ImageIcon minionsadicon = new ImageIcon("resources/sadminion.png");
+	private JButton btnUp;
+	private JButton btnDown;
+	private JButton btnLeft;
+	private JButton btnRight;
+	private JGamePanel gamePanel;
+	private ImageIcon minionhappyicon = new ImageIcon("resources/happyminion.png");
+	private ImageIcon minionsadicon = new ImageIcon("resources/sadminion.png");
 	
 	public GameState game;
 
@@ -104,6 +104,10 @@ public class GameWindow {
 				rightButtonHandler();
 			}
 		});
+		layout();
+	}
+	
+	private void layout() {
 		GroupLayout groupLayout = new GroupLayout(frameWindow.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)

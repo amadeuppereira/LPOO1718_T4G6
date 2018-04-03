@@ -42,33 +42,40 @@ import javax.swing.ImageIcon;
 public class ChangeMap {
 	
 	private enum Option {NONE, WALL, PATH, HERO, OGRE, KEY, DOOR};
-	Option op = Option.NONE;
+	private Option op = Option.NONE;
 	
-
 	private JFrame frameChangeMap;
 	private JTextField textSizeX;
 	private JTextField textSizeY;
 	private JGamePanel mapPanel;
 	private JButton btnDone;
-	JButton btnCreateMap;
+	private JButton btnCreateMap;
+	private JButton btnCancel;
 	private JFrame frameMenu;
-	JComboBox LvlcomboBox;
-	GameLevel a;
-	ImageIcon minionhappyicon = new ImageIcon("resources/happyminion.png");
-	ImageIcon minionsadicon = new ImageIcon("resources/sadminion.png");
-	ImageIcon hero = new ImageIcon(new ImageIcon("resources/hero.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT));
-	ImageIcon ogre = new ImageIcon(new ImageIcon("resources/ogre.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT));
-	ImageIcon key = new ImageIcon(new ImageIcon("resources/key.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT));
-	ImageIcon door = new ImageIcon(new ImageIcon("resources/doorclose.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT));
-    BufferedImage wall = new BufferedImage(50,50,BufferedImage.TYPE_INT_RGB);
-    ImageIcon path = new ImageIcon(new ImageIcon("resources/white.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT));
+	private JLabel lblSize;
+	private JLabel lblX;
+	private JLabel lblSelectLevel;
+	private JComboBox LvlcomboBox;
+	private GameLevel a;
+	private ImageIcon minionhappyicon = new ImageIcon("resources/happyminion.png");
+	private ImageIcon minionsadicon = new ImageIcon("resources/sadminion.png");
+	private ImageIcon hero = new ImageIcon(new ImageIcon("resources/hero.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT));
+	private ImageIcon ogre = new ImageIcon(new ImageIcon("resources/ogre.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT));
+	private ImageIcon key = new ImageIcon(new ImageIcon("resources/key.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT));
+	private ImageIcon door = new ImageIcon(new ImageIcon("resources/doorclose.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT));
+	private  BufferedImage wall = new BufferedImage(50,50,BufferedImage.TYPE_INT_RGB);
+	private  ImageIcon path = new ImageIcon(new ImageIcon("resources/white.png").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT));
 
-	JLabel lblWall;
-	JLabel lblPath;
-	JLabel lblKey;
-	JLabel lblOgre;
-	JLabel lblHero;
-	JLabel lblDoor;
+	private JPanel newMapConfig;
+	private JPanel buttonsPanel;
+	private JPanel optionsPanel;
+	
+	private JLabel lblWall;
+	private JLabel lblPath;
+	private JLabel lblKey;
+	private JLabel lblOgre;
+	private JLabel lblHero;
+	private JLabel lblDoor;
 
 	/**
 	 * Create the application.
@@ -93,8 +100,6 @@ public class ChangeMap {
 			}
 		});
 		
-		JPanel newMapConfig = new JPanel();
-		
 		mapPanel = new JGamePanel();
 		mapPanel.addMouseListener(new MouseAdapter() {
 			@Override
@@ -102,40 +107,6 @@ public class ChangeMap {
 				gamePanelHandler(arg0);
 			}
 		});
-		
-		JPanel buttonsPanel = new JPanel();
-		
-		JPanel optionsPanel = new JPanel();
-		optionsPanel.setToolTipText("");
-		GroupLayout groupLayout = new GroupLayout(frameChangeMap.getContentPane());
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(newMapConfig, GroupLayout.PREFERRED_SIZE, 513, GroupLayout.PREFERRED_SIZE)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(mapPanel, GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
-							.addGap(18)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(optionsPanel, GroupLayout.PREFERRED_SIZE, 249, GroupLayout.PREFERRED_SIZE)
-								.addComponent(buttonsPanel, GroupLayout.PREFERRED_SIZE, 249, GroupLayout.PREFERRED_SIZE))))
-					.addContainerGap())
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(newMapConfig, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(optionsPanel, GroupLayout.PREFERRED_SIZE, 301, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
-							.addComponent(buttonsPanel, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE))
-						.addComponent(mapPanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE))
-					.addContainerGap())
-		);
 		
 		lblWall = new JLabel("Wall");
 		lblWall.setIcon(new ImageIcon(wall));
@@ -196,6 +167,93 @@ public class ChangeMap {
 				setOptionsEnabled();
 			}
 		});
+		
+		btnCreateMap = new JButton("Create Map");
+		btnCreateMap.setEnabled(false);
+		btnCreateMap.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				createMapHandler();
+			}
+		});
+		
+		btnCancel = new JButton("Return to Menu");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frameChangeMap.dispose();
+				frameMenu.setVisible(true);
+			}
+		});
+		
+		lblSize = new JLabel("Size:");
+		
+		textSizeX = new JTextField();
+		textSizeX.setColumns(10);
+		
+		lblX = new JLabel("x");
+		
+		textSizeY = new JTextField();
+		textSizeY.setColumns(10);
+		
+		btnDone = new JButton("Set Size");
+		btnDone.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setSizeHandler();
+			}
+		});
+		
+		lblSelectLevel = new JLabel("Select Level:");	
+		LvlcomboBox = new JComboBox(getLevelsString());
+		panelHandler();
+	}
+	
+	private void panelHandler() {
+		newMapConfig = new JPanel();
+		buttonsPanel = new JPanel();
+		optionsPanel = new JPanel();
+		optionsPanel.setToolTipText("");
+		
+		newMapConfigLayoutHandler();
+		gl_optionsLayoutHandler();
+		gl_buttonsLayoutHandler();
+		gl_newMapConfigLayoutHandler();
+	}
+	
+	private void newMapConfigLayoutHandler(){
+		GroupLayout groupLayout = new GroupLayout(frameChangeMap.getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(newMapConfig, GroupLayout.PREFERRED_SIZE, 513, GroupLayout.PREFERRED_SIZE)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(mapPanel, GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
+							.addGap(18)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(optionsPanel, GroupLayout.PREFERRED_SIZE, 249, GroupLayout.PREFERRED_SIZE)
+								.addComponent(buttonsPanel, GroupLayout.PREFERRED_SIZE, 249, GroupLayout.PREFERRED_SIZE))))
+					.addContainerGap())
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(newMapConfig, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(optionsPanel, GroupLayout.PREFERRED_SIZE, 301, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
+							.addComponent(buttonsPanel, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE))
+						.addComponent(mapPanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE))
+					.addContainerGap())
+		);
+		frameChangeMap.getContentPane().setLayout(groupLayout);
+		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+		frameChangeMap.setBounds((screen.width-733)/2, (screen.height-550)/2, 733, 550);	
+	}
+	
+	private void gl_optionsLayoutHandler() {
 		GroupLayout gl_optionsPanel = new GroupLayout(optionsPanel);
 		gl_optionsPanel.setHorizontalGroup(
 			gl_optionsPanel.createParallelGroup(Alignment.LEADING)
@@ -231,22 +289,9 @@ public class ChangeMap {
 					.addGap(33))
 		);
 		optionsPanel.setLayout(gl_optionsPanel);
-		
-		btnCreateMap = new JButton("Create Map");
-		btnCreateMap.setEnabled(false);
-		btnCreateMap.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				createMapHandler();
-			}
-		});
-		
-		JButton btnCancel = new JButton("Return to Menu");
-		btnCancel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frameChangeMap.dispose();
-				frameMenu.setVisible(true);
-			}
-		});
+	}
+	
+	private void gl_buttonsLayoutHandler() {
 		GroupLayout gl_buttonsPanel = new GroupLayout(buttonsPanel);
 		gl_buttonsPanel.setHorizontalGroup(
 			gl_buttonsPanel.createParallelGroup(Alignment.LEADING)
@@ -267,27 +312,9 @@ public class ChangeMap {
 					.addContainerGap())
 		);
 		buttonsPanel.setLayout(gl_buttonsPanel);
-		
-		JLabel lblSize = new JLabel("Size:");
-		
-		textSizeX = new JTextField();
-		textSizeX.setColumns(10);
-		
-		JLabel lblX = new JLabel("x");
-		
-		textSizeY = new JTextField();
-		textSizeY.setColumns(10);
-		
-		btnDone = new JButton("Set Size");
-		btnDone.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setSizeHandler();
-			}
-		});
-		
-		JLabel lblSelectLevel = new JLabel("Select Level:");
-		
-		LvlcomboBox = new JComboBox(getLevelsString());
+	}
+
+	private void gl_newMapConfigLayoutHandler() {
 		GroupLayout gl_newMapConfig = new GroupLayout(newMapConfig);
 		gl_newMapConfig.setHorizontalGroup(
 			gl_newMapConfig.createParallelGroup(Alignment.TRAILING)
@@ -323,12 +350,9 @@ public class ChangeMap {
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		newMapConfig.setLayout(gl_newMapConfig);
-		frameChangeMap.getContentPane().setLayout(groupLayout);
-		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-		frameChangeMap.setBounds((screen.width-733)/2, (screen.height-550)/2, 733, 550);	
 	}
 	
-	void createMapHandler() {
+	private void createMapHandler() {
 		Set<Integer> errors = mapPanel.acceptable();
 		if(errors.size() == 0) {
 			String option = (String) LvlcomboBox.getSelectedItem();
@@ -368,7 +392,7 @@ public class ChangeMap {
 		
 	}
 	
-	void setMapSize() {
+	private void setMapSize() {
 		int x = -1, y = -1;
 		if (!textSizeX.getText().equals("") && !textSizeY.getText().equals("")) {
 			try {
@@ -470,7 +494,7 @@ public class ChangeMap {
 		return frameChangeMap;
 	}
 	
-	public String[] getLevelsString() {
+	private String[] getLevelsString() {
 		String[] ret = new String[a.getMaps().size()];
 		for(int i = 0; i < a.getMaps().size() - 1; i++) {
 			ret[i] = Integer.toString(i + 2);
