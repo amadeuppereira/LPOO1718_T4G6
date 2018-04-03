@@ -11,7 +11,10 @@ import dkeep.logic.GameState.Movement;
 import dkeep.logic.GameState.State;
 import dkeep.logic.Guard;
 import dkeep.logic.Hero;
+import dkeep.logic.Rookie;
+import dkeep.logic.Suspicious;
 import dkeep.logic.CellPosition;
+import dkeep.logic.Drunken;
 import dkeep.logic.GameLevel;
 
 public class TestDungeonGameLogic {
@@ -132,7 +135,7 @@ public class TestDungeonGameLogic {
 	@Test
 	public void testGuardMovement() {
 		char[] mov = {'a','s','d','w'};
-		Guard guard = new Guard(10,10,mov);
+		Guard guard = new Rookie(10,10,mov);
 		assertEquals(10,guard.get_X());
 		assertEquals(10,guard.get_Y());
 		guard.normal_movement();
@@ -164,7 +167,7 @@ public class TestDungeonGameLogic {
 	@Test
 	public void testGuardTypeMovement() {
 		char[] mov = {'a','s','d','w'};
-		Guard guard = new Guard(10,10,mov,"Rookie");
+		Guard guard = new Rookie(10,10,mov);
 		assertEquals(10,guard.get_X());
 		assertEquals(10,guard.get_Y());
 		guard.move();
@@ -173,11 +176,11 @@ public class TestDungeonGameLogic {
 		guard.move();
 		assertEquals(11,guard.get_X());
 		assertEquals(9,guard.get_Y());
-		guard = new Guard(10,10,mov,"Drunken");
+		guard = new Drunken(10,10,mov);
 		guard.move();
 		if(!(guard.get_X() == 10 && guard.get_Y() == 9) && !(guard.get_X() == 9 && guard.get_Y() == 10) && !(guard.get_X() == 10 && guard.get_Y() == 10))
 			fail("Error moving Drunken!");
-		guard = new Guard(10,10,mov,"Suspicious");
+		guard = new Suspicious(10,10,mov);
 		guard.move();
 		if(!(guard.get_X() == 10 && guard.get_Y() == 9) && !(guard.get_X() == 11 && guard.get_Y() == 10))
 			fail("Error moving Suspicious!");

@@ -29,4 +29,15 @@ public class CellPosition {
 	public boolean equals(CellPosition obj) {
 		return (this.x == obj.get_positionX() && this.y == obj.get_positionY());
 	}
+	
+	public boolean checkNear(CellPosition obj) {
+		int dx = Math.abs(this.x - obj.get_positionX());
+		int dy = Math.abs(this.y - obj.get_positionY());
+		
+		if((dy != 0 && dy != 1) || (dx != 0 && dy != 1)) return false;
+		
+		if(dy != dx) return true;
+		
+		return false;
+	}
 }

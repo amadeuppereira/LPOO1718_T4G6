@@ -7,12 +7,13 @@ public class GameState {
 	
 	public enum State {WIN, DEFEAT, PLAYING}
 	public enum Movement {UP, DOWN, LEFT, RIGHT}
+	public enum Guard_Type {RANDOM, ROOKIE, DRUNKEN, SUSPICIOUS}
 	private State state;
 	
 	private Hero hero;
 	private GameLevel game_level;
 	private Guard guard;
-	private String guard_type;
+	private Guard_Type guard_type;
 	private char[] guard_mov = {'a','s','s','s','s','a','a','a','a','a','a','s','d','d','d','d','d','d','d','w','w','w','w','w'};
 	private ArrayList<Ogre> ogres = new ArrayList<Ogre>();
 	private int numOgres;
@@ -25,7 +26,7 @@ public class GameState {
 		lvl = 1;
 		numOgres = r.nextInt(3) + 1;
 		game_level = new GameLevel(lvl);
-		guard_type = "";
+		guard_type = Guard_Type.RANDOM;
 		state = State.PLAYING;
 		create_Level();
 	}
@@ -34,7 +35,7 @@ public class GameState {
 		guard_mov = new char[1];
 		numOgres = 1;
 		game_level = g;
-		guard_type = "";
+		guard_type = Guard_Type.RANDOM;
 		state = State.PLAYING;
 		create_Level();
 	}
@@ -44,7 +45,21 @@ public class GameState {
 		this.numOgres = numOgres;
 		game_level = new GameLevel(lvl);
 		state = State.PLAYING;
-		guard_type = guardtype;
+		switch(guardtype) {
+		case "Rookie":
+			guard_type = Guard_Type.ROOKIE;
+			break;
+		case "Drunken":
+			guard_type = Guard_Type.DRUNKEN;
+			break;
+		case "Suspicious":
+			guard_type = Guard_Type.SUSPICIOUS;
+			break;
+		default:
+			guard_type = Guard_Type.RANDOM;
+			break;
+		}
+		
 		create_Level();
 	}
 	
@@ -91,6 +106,40 @@ public class GameState {
 		return m;
 	}
 	
+	public void createGuard(int x, int y) {
+		if(guard_type == Guard_Type.RANDOM) {
+			Random r = new Random();
+			int o = r.nextInt(3);
+			switch(o) {
+			case 0:
+				guard_type = Guard_Type.ROOKIE;
+				break;
+			case 1:
+				guard_type = Guard_Type.DRUNKEN;
+				break;
+			case 2:
+				guard_type = Guard_Type.SUSPICIOUS;
+				break;
+			default:
+				break;
+			}
+		}
+		
+		switch(guard_type) {
+		case ROOKIE:
+			guard = new Rookie(x, y, guard_mov);
+			break;
+		case DRUNKEN:
+			guard = new Drunken(x, y, guard_mov);
+			break;
+		case SUSPICIOUS:
+			guard = new Suspicious(x, y, guard_mov);
+			break;
+		default:
+			break;
+		}
+	}
+			
 	public void create_Level() {
 		if(game_level.getMaps() != null) {
 			if(lvl > game_level.getMaps().size()) {
@@ -104,83 +153,79 @@ public class GameState {
 		char[][] map = game_level.getMap();
 		for(int i = 0; i < map.length; i++) {
 			for(int j  = 0; j < map[i].length; j++) {
-				if(map[i][j] == 'H') {
+				switch(map[i][j]) {
+				case 'H':
 					hero = new Hero(i, j);
-					if (lvl == 2) {
-						hero.armed(true);;
-					}
 					game_level.setChar(i, j, ' ');
-				}
-				if(map[i][j] == 'G') {
-					if(guard_type == "") {
-						guard = new Guard(i, j, guard_mov);
-					}
-					else {
-						guard = new Guard(i, j, guard_mov, guard_type);
-					}
+					break;
+				case 'G':
+					createGuard(i, j);
 					game_level.setChar(i, j, ' ');
-				}
-				if(map[i][j] == 'O') {
+					break;
+				case 'O':
 					for (int n = 0; n < numOgres; n++) {
 						ogres.add(new Ogre(i, j));
 					}
 					game_level.setChar(i, j, ' ');
+					break;
+				default:
+					break;
 				}
 			}
-		}	
+		}
+		
+		if(ogres.size() > 0) hero.armed(true);
+	}
+	
+	private boolean isPossiblePos(int x, int y) {
+		char ch = game_level.getChar(x, y);
+		if(ch == 'X' || (ch == 'I' && !hero.check_key())) {
+			return false;
+		}
+		
+		return true;
+	}
+	
+	private void updateHero(int x, int y) {
+		char ch = game_level.getChar(x, y);
+		
+		if(ch == 'I') {
+			if(!game_level.lever()) {
+				hero.set_key(true);
+				game_level.setChar(x, y, ' ');
+			}
+		}
+		else {
+			hero.move(x, y);
+		}
 	}
 	
 	public boolean move_Hero(Movement m) {
 		int x = hero.get_X();
 		int y = hero.get_Y();
+		boolean possible = false;
 		
 		switch(m) {
 		case UP:
-			x = hero.get_X()-1;
-			y = hero.get_Y();
+			possible = isPossiblePos(--x, y);
 			break;
 		case DOWN:
-			x = hero.get_X()+1;
-			y = hero.get_Y();
+			possible = isPossiblePos(++x, y);
 			break;
 		case LEFT:
-			x = hero.get_X();
-			y = hero.get_Y()-1;
+			possible = isPossiblePos(x, --y);
 			break;
 		case RIGHT:
-			x = hero.get_X();
-			y = hero.get_Y()+1;
+			possible = isPossiblePos(x, ++y);;
 			break;
 		default:
 			break;
 		}
 		
+		if(!possible) return false;
 		
-		char ch = game_level.getChar(x, y);
-		if(ch == ' ') {
-			hero.move(x, y);
-			return true;
-		}
-		else if(ch == 'k') {
-			hero.move(x, y);
-			if(!game_level.lever()) {
-				hero.set_key(true);
-				game_level.setChar(x, y, ' ');
-			}
-			return true;
-		}
-		else if(ch == 'I' && hero.check_key()) {
-			game_level.setChar(x, y, 'S');
-			return true;
-		}
-		else if(ch == 'S') {
-			hero.move(x, y);
-			return true;
-		}
-		else {
-			return false;
-		}
-		
+		updateHero(x, y);
+		return true;
 	}
 	
 	public boolean isLevelEnd() {
@@ -242,21 +287,18 @@ public class GameState {
 		switch(move) {
 		case UP:
 			ogre.club_up();
-			checkOgreClubAtKey(ogre);
 			break;
 		case DOWN:
 			ogre.club_down();
-			checkOgreClubAtKey(ogre);
 			break;
 		case RIGHT:
 			ogre.club_right();
-			checkOgreClubAtKey(ogre);
 			break;
 		case LEFT:
 			ogre.club_left();
-			checkOgreClubAtKey(ogre);
 			break;
 		}
+		checkOgreClubAtKey(ogre);
 	}
 	
 	public void move_Enemy() {
@@ -272,39 +314,27 @@ public class GameState {
 	public boolean isGameover() {
 		if(guard != null) {
 			if (!guard.asleep) {
-				if ((guard.get_X() == hero.get_X() + 1) && (guard.get_Y() == hero.get_Y())
-						|| ((guard.get_X() == hero.get_X() - 1) && (guard.get_Y() == hero.get_Y()))
-						|| ((guard.get_X() == hero.get_X()) && (guard.get_Y() == hero.get_Y() - 1))
-						|| ((guard.get_X() == hero.get_X()) && (guard.get_Y() == hero.get_Y() + 1))
-						|| ((guard.get_X() == hero.get_X()) && (guard.get_Y() == hero.get_Y()))) {
+				if (guard.checkNear(guard.getPosition())) {
 					state = State.DEFEAT;
 				}
 			}
 		}
 		for (Ogre ogre : ogres) {
 			if (!ogre.stun) {
-				if (((ogre.get_X() == hero.get_X() + 1) && (ogre.get_Y() == hero.get_Y()))
-						|| ((ogre.get_X() == hero.get_X() - 1) && (ogre.get_Y() == hero.get_Y()))
-						|| ((ogre.get_X() == hero.get_X()) && (ogre.get_Y() == hero.get_Y() - 1))
-						|| ((ogre.get_X() == hero.get_X()) && (ogre.get_Y() == hero.get_Y() + 1))
-						|| ((ogre.get_X() == hero.get_X()) && (ogre.get_Y() == hero.get_Y()))) {
+				if (ogre.checkNear(guard.getPosition())) {
 					if (hero.has_arm()) {
 						ogre.stunned(true);
 					} else {
 						state = State.DEFEAT;
 					}
-				} else if (((ogre.get_club_X() == hero.get_X() + 1) && (ogre.get_club_Y() == hero.get_Y()))
-						|| ((ogre.get_club_X() == hero.get_X() - 1) && (ogre.get_club_Y() == hero.get_Y()))
-						|| ((ogre.get_club_X() == hero.get_X()) && (ogre.get_club_Y() == hero.get_Y() - 1))
-						|| ((ogre.get_club_X() == hero.get_X()) && (ogre.get_club_Y() == hero.get_Y() + 1))
-						|| ((ogre.get_club_X() == hero.get_X()) && (ogre.get_club_Y() == hero.get_Y()))) {
+				} else if (ogre.getClub_position().checkNear(guard.getPosition())) {
 					state = State.DEFEAT;
 				}
 			}
 		}
 		
-		if (state == State.DEFEAT) { return true; }
-		else { return false; }
+		if (state == State.DEFEAT) return true;
+		else return false;
 	}
 	
 	public char[][] getMap(){

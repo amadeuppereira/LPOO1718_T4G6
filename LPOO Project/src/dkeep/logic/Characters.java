@@ -58,5 +58,9 @@ public class Characters {
 	public CellPosition getPosition() {
 		return cell_position;
 	}
+	
+	public boolean checkNear(CellPosition pos) {
+		return this.cell_position.checkNear(pos);
+	}
 
 }

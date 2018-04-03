@@ -103,4 +103,8 @@ public class Ogre extends Characters {
 	public int get_club_Y() {
 		return club_position.get_positionY();
 	}
+	
+	public CellPosition clubPos() {
+		return club_position;
+	}
 }

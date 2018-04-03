@@ -2,37 +2,27 @@ package dkeep.logic;
 import dkeep.logic.Characters;
 import java.util.Random;
 
-public class Guard extends Characters {
+public abstract class Guard extends Characters {
 
 	char[] movement;
-	String type;
 	int it;
-	boolean asleep;
-	boolean reverse;
+	protected boolean asleep;
 	
 	
 	public Guard(int x, int y, char[] mov) {
 		super(x, y, 'G');
 		
 		movement = mov;
-		String[] guard_type = {"Rookie","Drunken","Suspicious"};
-		Random randomGenerator = new Random();
-		this.type = guard_type[randomGenerator.nextInt(3)];
-		it = 0;
 		asleep = false;
-		reverse = false;
+		it = 0;
 	} 
 	
-	public Guard(int x, int y, char[] mov, String guardtype) {
-		super(x, y, 'G');
-		
-		movement = mov;
-		this.type = guardtype;
-		it = 0;
-		asleep = false;
-		reverse = false;
-	} 
 	
+
+	public boolean isAsleep() {
+		return asleep;
+	}
+
 	public void reverse_movement() {
 		if(it == 0)
 			it = movement.length - 1;
@@ -79,63 +69,7 @@ public class Guard extends Characters {
 	}
 	
 	
-	public void move() {
-		Random randomGenerator = new Random();
-		int option;
-		
-		switch(type) {
-		case "Rookie":
-			normal_movement();
-			break;
-			
-		case "Drunken":
-			option = randomGenerator.nextInt(2);
-			if(option == 0) { //he will sleep in the same position
-				set_char('g');
-				asleep = true;
-			}
-			else {
-				set_char('G');
-				option = randomGenerator.nextInt(11);
-				if(asleep == true && option < 3) {
-					if(reverse == false)
-						reverse = true;
-					else
-						reverse = false;
-				}
-				if(reverse == false)
-					normal_movement();
-				else
-					reverse_movement();
-				asleep = false;
-			}
-			break;
-			
-		case "Suspicious":
-			option = randomGenerator.nextInt(15);
-			if(option < 3) {
-				if(reverse == false) {
-					reverse = true;
-					reverse_movement();
-				}
-				else {
-					reverse = false;
-					normal_movement();
-				}
-			}
-			else {
-				if(reverse == false) {
-					normal_movement();
-				}
-				else {
-					reverse_movement();
-				}
-			}
-			break;
-		default:
-			break;	
-		}
-
-	}	
+	public abstract void move();
 	
+
 }
