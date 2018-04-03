@@ -28,7 +28,7 @@ public class GameWindow {
 	private JGamePanel gamePanel;
 	private ImageIcon minionhappyicon = new ImageIcon("resources/happyminion.png");
 	private ImageIcon minionsadicon = new ImageIcon("resources/sadminion.png");
-	
+	private GroupLayout groupLayout;
 	public GameState game;
 
 	/**
@@ -108,46 +108,54 @@ public class GameWindow {
 	}
 	
 	private void layout() {
-		GroupLayout groupLayout = new GroupLayout(frameWindow.getContentPane());
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(21)
-					.addComponent(gamePanel, GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE)
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(Alignment.TRAILING, groupLayout.createParallelGroup(Alignment.LEADING)
-							.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-								.addComponent(btnLeft)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(btnRight)
-								.addGap(18))
-							.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-								.addComponent(btnDown)
-								.addGap(54)))
-						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-							.addComponent(btnUp)
-							.addGap(59))))
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(160)
-							.addComponent(btnUp)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(btnRight)
-								.addComponent(btnLeft))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnDown))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(26)
-							.addComponent(gamePanel, GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)))
-					.addGap(37))
-		);
+		groupLayout = new GroupLayout(frameWindow.getContentPane());
+		layout_Horizontal();
+		layout_Vertical();
 		frameWindow.getContentPane().setLayout(groupLayout);
+	}
+	
+	private void layout_Horizontal() {
+		groupLayout.setHorizontalGroup(
+				groupLayout.createParallelGroup(Alignment.TRAILING)
+					.addGroup(groupLayout.createSequentialGroup()
+						.addGap(21)
+						.addComponent(gamePanel, GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE)
+						.addGap(18)
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+							.addGroup(Alignment.TRAILING, groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+									.addComponent(btnLeft)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnRight)
+									.addGap(18))
+								.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+									.addComponent(btnDown)
+									.addGap(54)))
+							.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+								.addComponent(btnUp)
+								.addGap(59))))
+			);
+	}
+	
+	private void layout_Vertical() {
+		groupLayout.setVerticalGroup(
+				groupLayout.createParallelGroup(Alignment.LEADING)
+					.addGroup(groupLayout.createSequentialGroup()
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+							.addGroup(groupLayout.createSequentialGroup()
+								.addGap(160)
+								.addComponent(btnUp)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+									.addComponent(btnRight)
+									.addComponent(btnLeft))
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(btnDown))
+							.addGroup(groupLayout.createSequentialGroup()
+								.addGap(26)
+								.addComponent(gamePanel, GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)))
+						.addGap(37))
+			);
 	}
 	
 	private void rightButtonHandler() {

@@ -12,18 +12,18 @@ import javax.swing.JPanel;
 public class JGamePanel extends JPanel {
 	
 	private char[][] map;
-	Image hero = new ImageIcon("resources/hero.png").getImage();
-	Image herokey = new ImageIcon("resources/herokey.png").getImage();
-	Image heroarmed = new ImageIcon("resources/heroarmed.png").getImage();
-	Image ogre = new ImageIcon("resources/ogre.png").getImage();
-	Image ogrestuned = new ImageIcon("resources/ogrestuned.png").getImage();
-	Image ogreonkey = new ImageIcon("resources/ogreonkey.png").getImage();
-	Image ogreclub = new ImageIcon("resources/ogreclub.png").getImage();
-	Image guard = new ImageIcon("resources/guard.png").getImage();
-	Image guardsleep = new ImageIcon("resources/guardsleep.png").getImage();
-	Image key = new ImageIcon("resources/key.png").getImage();
-	Image dooropen = new ImageIcon("resources/dooropen.png").getImage();
-	Image doorclose = new ImageIcon("resources/doorclose.png").getImage();
+	private Image hero = new ImageIcon("resources/hero.png").getImage();
+	private Image herokey = new ImageIcon("resources/herokey.png").getImage();
+	private Image heroarmed = new ImageIcon("resources/heroarmed.png").getImage();
+	private Image ogre = new ImageIcon("resources/ogre.png").getImage();
+	private Image ogrestuned = new ImageIcon("resources/ogrestuned.png").getImage();
+	private Image ogreonkey = new ImageIcon("resources/ogreonkey.png").getImage();
+	private Image ogreclub = new ImageIcon("resources/ogreclub.png").getImage();
+	private Image guard = new ImageIcon("resources/guard.png").getImage();
+	private Image guardsleep = new ImageIcon("resources/guardsleep.png").getImage();
+	private Image key = new ImageIcon("resources/key.png").getImage();
+	private Image dooropen = new ImageIcon("resources/dooropen.png").getImage();
+	private Image doorclose = new ImageIcon("resources/doorclose.png").getImage();
 	
 
 

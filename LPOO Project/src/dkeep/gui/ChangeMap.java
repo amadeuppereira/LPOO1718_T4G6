@@ -69,6 +69,10 @@ public class ChangeMap {
 	private JPanel newMapConfig;
 	private JPanel buttonsPanel;
 	private JPanel optionsPanel;
+	private GroupLayout groupLayout;
+	private GroupLayout gl_optionsPanel;
+	private GroupLayout gl_buttonsPanel;
+	private GroupLayout gl_newMapConfig;
 	
 	private JLabel lblWall;
 	private JLabel lblPath;
@@ -90,6 +94,16 @@ public class ChangeMap {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		frameInitialize();
+		gamePanelInitialize();
+		labelsInitialize();
+		labels2Initialize();
+		buttonsInitialize();
+		moreInitializes();
+		panelHandler();
+	}
+	
+	private void frameInitialize() {
 		frameChangeMap = new JFrame();
 		frameChangeMap.getContentPane().setFont(new Font("Courier New", Font.PLAIN, 11));
 		frameChangeMap.addWindowListener(new WindowAdapter() {
@@ -99,7 +113,9 @@ public class ChangeMap {
 				super.windowClosing(e);
 			}
 		});
-		
+	}
+	
+	private void gamePanelInitialize() {
 		mapPanel = new JGamePanel();
 		mapPanel.addMouseListener(new MouseAdapter() {
 			@Override
@@ -107,7 +123,9 @@ public class ChangeMap {
 				gamePanelHandler(arg0);
 			}
 		});
-		
+	}
+	
+	private void labelsInitialize() {
 		lblWall = new JLabel("Wall");
 		lblWall.setIcon(new ImageIcon(wall));
 		lblWall.addMouseListener(new MouseAdapter() {
@@ -137,7 +155,9 @@ public class ChangeMap {
 				setOptionsEnabled();
 			}
 		});
-		
+	}
+	
+	private void labels2Initialize() {
 		lblHero = new JLabel("Hero");
 		lblHero.setIcon(hero);
 		lblHero.addMouseListener(new MouseAdapter() {
@@ -167,7 +187,9 @@ public class ChangeMap {
 				setOptionsEnabled();
 			}
 		});
-		
+	}
+	
+	private void buttonsInitialize() {
 		btnCreateMap = new JButton("Create Map");
 		btnCreateMap.setEnabled(false);
 		btnCreateMap.addActionListener(new ActionListener() {
@@ -184,6 +206,15 @@ public class ChangeMap {
 			}
 		});
 		
+		btnDone = new JButton("Set Size");
+		btnDone.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setSizeHandler();
+			}
+		});
+	}
+	
+	private void moreInitializes() {
 		lblSize = new JLabel("Size:");
 		
 		textSizeX = new JTextField();
@@ -194,16 +225,8 @@ public class ChangeMap {
 		textSizeY = new JTextField();
 		textSizeY.setColumns(10);
 		
-		btnDone = new JButton("Set Size");
-		btnDone.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setSizeHandler();
-			}
-		});
-		
 		lblSelectLevel = new JLabel("Select Level:");	
 		LvlcomboBox = new JComboBox(getLevelsString());
-		panelHandler();
 	}
 	
 	private void panelHandler() {
@@ -219,137 +242,169 @@ public class ChangeMap {
 	}
 	
 	private void newMapConfigLayoutHandler(){
-		GroupLayout groupLayout = new GroupLayout(frameChangeMap.getContentPane());
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(newMapConfig, GroupLayout.PREFERRED_SIZE, 513, GroupLayout.PREFERRED_SIZE)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(mapPanel, GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
-							.addGap(18)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(optionsPanel, GroupLayout.PREFERRED_SIZE, 249, GroupLayout.PREFERRED_SIZE)
-								.addComponent(buttonsPanel, GroupLayout.PREFERRED_SIZE, 249, GroupLayout.PREFERRED_SIZE))))
-					.addContainerGap())
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(newMapConfig, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(optionsPanel, GroupLayout.PREFERRED_SIZE, 301, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
-							.addComponent(buttonsPanel, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE))
-						.addComponent(mapPanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE))
-					.addContainerGap())
-		);
+		groupLayout = new GroupLayout(frameChangeMap.getContentPane());
+		newMapConfigLayoutHandler_Horizontal();
+		newMapConfigLayoutHandler_Vertical();
 		frameChangeMap.getContentPane().setLayout(groupLayout);
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 		frameChangeMap.setBounds((screen.width-733)/2, (screen.height-550)/2, 733, 550);	
 	}
 	
+	private void newMapConfigLayoutHandler_Horizontal() {
+		groupLayout.setHorizontalGroup(
+				groupLayout.createParallelGroup(Alignment.LEADING)
+					.addGroup(groupLayout.createSequentialGroup()
+						.addContainerGap()
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+							.addComponent(newMapConfig, GroupLayout.PREFERRED_SIZE, 513, GroupLayout.PREFERRED_SIZE)
+							.addGroup(groupLayout.createSequentialGroup()
+								.addComponent(mapPanel, GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
+								.addGap(18)
+								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+									.addComponent(optionsPanel, GroupLayout.PREFERRED_SIZE, 249, GroupLayout.PREFERRED_SIZE)
+									.addComponent(buttonsPanel, GroupLayout.PREFERRED_SIZE, 249, GroupLayout.PREFERRED_SIZE))))
+						.addContainerGap())
+			);
+	}
+	
+	private void newMapConfigLayoutHandler_Vertical() {
+		groupLayout.setVerticalGroup(
+				groupLayout.createParallelGroup(Alignment.TRAILING)
+					.addGroup(groupLayout.createSequentialGroup()
+						.addContainerGap()
+						.addComponent(newMapConfig, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addGap(18)
+						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+							.addGroup(groupLayout.createSequentialGroup()
+								.addComponent(optionsPanel, GroupLayout.PREFERRED_SIZE, 301, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
+								.addComponent(buttonsPanel, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE))
+							.addComponent(mapPanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE))
+						.addContainerGap())
+			);
+	}
+	
 	private void gl_optionsLayoutHandler() {
-		GroupLayout gl_optionsPanel = new GroupLayout(optionsPanel);
-		gl_optionsPanel.setHorizontalGroup(
-			gl_optionsPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_optionsPanel.createSequentialGroup()
-					.addGap(23)
-					.addGroup(gl_optionsPanel.createParallelGroup(Alignment.TRAILING)
-						.addComponent(lblWall)
-						.addGroup(gl_optionsPanel.createParallelGroup(Alignment.LEADING)
-							.addComponent(lblOgre)
-							.addComponent(lblKey)))
-					.addGap(44)
-					.addGroup(gl_optionsPanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblPath)
-						.addComponent(lblDoor)
-						.addComponent(lblHero))
-					.addContainerGap(68, Short.MAX_VALUE))
-		);
-		gl_optionsPanel.setVerticalGroup(
-			gl_optionsPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_optionsPanel.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_optionsPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblWall)
-						.addComponent(lblPath))
-					.addGap(50)
-					.addGroup(gl_optionsPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblKey)
-						.addComponent(lblDoor))
-					.addPreferredGap(ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
-					.addGroup(gl_optionsPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblOgre)
-						.addComponent(lblHero))
-					.addGap(33))
-		);
+		gl_optionsPanel = new GroupLayout(optionsPanel);
+		gl_optionsLayoutHandler_Horizontal();
+		gl_optionsLayoutHandler_Vertical();
 		optionsPanel.setLayout(gl_optionsPanel);
 	}
 	
+	private void gl_optionsLayoutHandler_Horizontal() {
+		gl_optionsPanel.setHorizontalGroup(
+				gl_optionsPanel.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_optionsPanel.createSequentialGroup()
+						.addGap(23)
+						.addGroup(gl_optionsPanel.createParallelGroup(Alignment.TRAILING)
+							.addComponent(lblWall)
+							.addGroup(gl_optionsPanel.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblOgre)
+								.addComponent(lblKey)))
+						.addGap(44)
+						.addGroup(gl_optionsPanel.createParallelGroup(Alignment.LEADING)
+							.addComponent(lblPath)
+							.addComponent(lblDoor)
+							.addComponent(lblHero))
+						.addContainerGap(68, Short.MAX_VALUE))
+			);
+	}
+	
+	private void gl_optionsLayoutHandler_Vertical() {
+		gl_optionsPanel.setVerticalGroup(
+				gl_optionsPanel.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_optionsPanel.createSequentialGroup()
+						.addContainerGap()
+						.addGroup(gl_optionsPanel.createParallelGroup(Alignment.BASELINE)
+							.addComponent(lblWall)
+							.addComponent(lblPath))
+						.addGap(50)
+						.addGroup(gl_optionsPanel.createParallelGroup(Alignment.BASELINE)
+							.addComponent(lblKey)
+							.addComponent(lblDoor))
+						.addPreferredGap(ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
+						.addGroup(gl_optionsPanel.createParallelGroup(Alignment.BASELINE)
+							.addComponent(lblOgre)
+							.addComponent(lblHero))
+						.addGap(33))
+			);
+	}
+	
 	private void gl_buttonsLayoutHandler() {
-		GroupLayout gl_buttonsPanel = new GroupLayout(buttonsPanel);
-		gl_buttonsPanel.setHorizontalGroup(
-			gl_buttonsPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_buttonsPanel.createSequentialGroup()
-					.addGap(0, 0, Short.MAX_VALUE)
-					.addComponent(btnCreateMap)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnCancel, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE)
-					.addGap(49))
-		);
-		gl_buttonsPanel.setVerticalGroup(
-			gl_buttonsPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_buttonsPanel.createSequentialGroup()
-					.addGap(0, 0, Short.MAX_VALUE)
-					.addGroup(gl_buttonsPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnCreateMap)
-						.addComponent(btnCancel))
-					.addContainerGap())
-		);
+		gl_buttonsPanel = new GroupLayout(buttonsPanel);
+		gl_buttonsLayoutHandler_Horizontal();
+		gl_buttonsLayoutHandler_Vertical();
 		buttonsPanel.setLayout(gl_buttonsPanel);
+	}
+	
+	private void gl_buttonsLayoutHandler_Horizontal() {
+		gl_buttonsPanel.setHorizontalGroup(
+				gl_buttonsPanel.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_buttonsPanel.createSequentialGroup()
+						.addGap(0, 0, Short.MAX_VALUE)
+						.addComponent(btnCreateMap)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(btnCancel, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE)
+						.addGap(49))
+			);
+	}
+	
+	private void gl_buttonsLayoutHandler_Vertical() {
+		gl_buttonsPanel.setVerticalGroup(
+				gl_buttonsPanel.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_buttonsPanel.createSequentialGroup()
+						.addGap(0, 0, Short.MAX_VALUE)
+						.addGroup(gl_buttonsPanel.createParallelGroup(Alignment.BASELINE)
+							.addComponent(btnCreateMap)
+							.addComponent(btnCancel))
+						.addContainerGap())
+			);
 	}
 
 	private void gl_newMapConfigLayoutHandler() {
-		GroupLayout gl_newMapConfig = new GroupLayout(newMapConfig);
-		gl_newMapConfig.setHorizontalGroup(
-			gl_newMapConfig.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, gl_newMapConfig.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblSelectLevel)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(LvlcomboBox, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE)
-					.addGap(28)
-					.addComponent(lblSize)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(textSizeX, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(lblX)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(textSizeY, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnDone)
-					.addContainerGap(109, Short.MAX_VALUE))
-		);
-		gl_newMapConfig.setVerticalGroup(
-			gl_newMapConfig.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_newMapConfig.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_newMapConfig.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblSelectLevel)
-						.addComponent(LvlcomboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblSize)
-						.addComponent(textSizeX, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblX)
-						.addComponent(textSizeY, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnDone))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
+		gl_newMapConfig = new GroupLayout(newMapConfig);
+		gl_newMapConfigLayoutHandler_Horizontal();
+		gl_newMapConfigLayoutHandler_Vertical();
 		newMapConfig.setLayout(gl_newMapConfig);
+	}
+	
+	private void gl_newMapConfigLayoutHandler_Horizontal() {
+		gl_newMapConfig.setHorizontalGroup(
+				gl_newMapConfig.createParallelGroup(Alignment.TRAILING)
+					.addGroup(Alignment.LEADING, gl_newMapConfig.createSequentialGroup()
+						.addContainerGap()
+						.addComponent(lblSelectLevel)
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(LvlcomboBox, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE)
+						.addGap(28)
+						.addComponent(lblSize)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(textSizeX, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(lblX)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(textSizeY, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(btnDone)
+						.addContainerGap(109, Short.MAX_VALUE))
+			);
+	}
+	
+	private void gl_newMapConfigLayoutHandler_Vertical() {
+		gl_newMapConfig.setVerticalGroup(
+				gl_newMapConfig.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_newMapConfig.createSequentialGroup()
+						.addContainerGap()
+						.addGroup(gl_newMapConfig.createParallelGroup(Alignment.BASELINE)
+							.addComponent(lblSelectLevel)
+							.addComponent(LvlcomboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(lblSize)
+							.addComponent(textSizeX, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(lblX)
+							.addComponent(textSizeY, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(btnDone))
+						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+			);
 	}
 	
 	private void createMapHandler() {

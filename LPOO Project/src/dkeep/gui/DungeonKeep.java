@@ -35,6 +35,7 @@ public class DungeonKeep {
 	private JButton btnStartGame;
 	private JLabel keeplbl;
 	private JLabel dungeonlbl;
+	private GroupLayout groupLayout;
 
 	/**
 	 * Launch the application.
@@ -70,9 +71,13 @@ public class DungeonKeep {
 		frameMenu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	
 		dungeonlbl = new JLabel(dungeon);
-		
 		keeplbl = new JLabel(keep);
 		
+		buttonInitialize();
+		layout();
+	}
+	
+	private void buttonInitialize() {
 		btnStartGame = new JButton("Start Game");
 		btnStartGame.setForeground(Color.BLACK);
 		btnStartGame.setFont(new Font("Courier New", Font.BOLD, 16));
@@ -101,55 +106,61 @@ public class DungeonKeep {
 				windowConfig.getFrame().setVisible(true);
 			}
 		});
-		
-		layout();
 	}
 	
 	private void layout() {
-		GroupLayout groupLayout = new GroupLayout(frameMenu.getContentPane());
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(29)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(121)
-							.addComponent(keeplbl, GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
-							.addGap(122))
-						.addComponent(dungeonlbl, GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE))
-					.addGap(29))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(222)
-					.addComponent(btnStartGame, GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
-					.addGap(222))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(222)
-					.addComponent(btnChangeMap, GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
-					.addGap(222))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(222)
-					.addComponent(btnExitGame, GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
-					.addGap(222))
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(6)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(106)
-							.addComponent(keeplbl, GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(dungeonlbl, GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
-							.addGap(106)))
-					.addGap(24)
-					.addComponent(btnStartGame, GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
-					.addGap(12)
-					.addComponent(btnChangeMap, GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
-					.addGap(11)
-					.addComponent(btnExitGame, GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
-					.addGap(28))
-		);
+		groupLayout = new GroupLayout(frameMenu.getContentPane());
+		layout_Horizontal();
+		layout_Vertical();
 		frameMenu.getContentPane().setLayout(groupLayout);
+	}
+	
+	private void layout_Horizontal() {
+		groupLayout.setHorizontalGroup(
+				groupLayout.createParallelGroup(Alignment.LEADING)
+					.addGroup(groupLayout.createSequentialGroup()
+						.addGap(29)
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+							.addGroup(groupLayout.createSequentialGroup()
+								.addGap(121)
+								.addComponent(keeplbl, GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
+								.addGap(122))
+							.addComponent(dungeonlbl, GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE))
+						.addGap(29))
+					.addGroup(groupLayout.createSequentialGroup()
+						.addGap(222)
+						.addComponent(btnStartGame, GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+						.addGap(222))
+					.addGroup(groupLayout.createSequentialGroup()
+						.addGap(222)
+						.addComponent(btnChangeMap, GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+						.addGap(222))
+					.addGroup(groupLayout.createSequentialGroup()
+						.addGap(222)
+						.addComponent(btnExitGame, GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+						.addGap(222))
+			);
+	}
+	
+	private void layout_Vertical() {
+		groupLayout.setVerticalGroup(
+				groupLayout.createParallelGroup(Alignment.LEADING)
+					.addGroup(groupLayout.createSequentialGroup()
+						.addGap(6)
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+							.addGroup(groupLayout.createSequentialGroup()
+								.addGap(106)
+								.addComponent(keeplbl, GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE))
+							.addGroup(groupLayout.createSequentialGroup()
+								.addComponent(dungeonlbl, GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+								.addGap(106)))
+						.addGap(24)
+						.addComponent(btnStartGame, GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+						.addGap(12)
+						.addComponent(btnChangeMap, GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+						.addGap(11)
+						.addComponent(btnExitGame, GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+						.addGap(28))
+			);
 	}
 }
