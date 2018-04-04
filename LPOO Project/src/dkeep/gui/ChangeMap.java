@@ -135,7 +135,6 @@ public class ChangeMap {
 				setOptionsEnabled();
 			}
 		});
-		
 		lblPath = new JLabel("Path");
 		lblPath.setIcon(path);
 		lblPath.addMouseListener(new MouseAdapter() {
@@ -145,7 +144,6 @@ public class ChangeMap {
 				setOptionsEnabled();
 			}
 		});
-		
 		lblKey = new JLabel("Key");
 		lblKey.setIcon(key);
 		lblKey.addMouseListener(new MouseAdapter() {
@@ -167,7 +165,6 @@ public class ChangeMap {
 				setOptionsEnabled();
 			}
 		});
-		
 		lblOgre = new JLabel("Ogre");
 		lblOgre.setIcon(ogre);
 		lblOgre.addMouseListener(new MouseAdapter() {
@@ -177,7 +174,6 @@ public class ChangeMap {
 				setOptionsEnabled();
 			}
 		});
-		
 		lblDoor = new JLabel("Door");
 		lblDoor.setIcon(door);
 		lblDoor.addMouseListener(new MouseAdapter() {
@@ -197,7 +193,6 @@ public class ChangeMap {
 				createMapHandler();
 			}
 		});
-		
 		btnCancel = new JButton("Return to Menu");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -205,7 +200,6 @@ public class ChangeMap {
 				frameMenu.setVisible(true);
 			}
 		});
-		
 		btnDone = new JButton("Set Size");
 		btnDone.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

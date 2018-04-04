@@ -62,7 +62,7 @@ public class GameWindow {
 			}
 		});
 	}
-
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -70,9 +70,13 @@ public class GameWindow {
 		frameWindow = new JFrame("Dungeon Keep");
 		frameWindow.setBounds(484, 100, 626, 463);
 		frameWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		
 		gamePanel = new JGamePanel();
-		
+		buttonUpDown();
+		buttonLeftRight();
+		layout();
+	}
+	
+	private void buttonUpDown() {
 		btnUp = new JButton("Up");
 		btnUp.setEnabled(false);
 		btnUp.addActionListener(new ActionListener() {
@@ -80,7 +84,6 @@ public class GameWindow {
 				upButtonHandler();
 			}
 		});
-		
 		btnDown = new JButton("Down");
 		btnDown.setEnabled(false);
 		btnDown.addActionListener(new ActionListener() {
@@ -88,7 +91,9 @@ public class GameWindow {
 				downButtonHandler();
 			}
 		});
-		
+	}
+	
+	private void buttonLeftRight() {
 		btnLeft = new JButton("Left");
 		btnLeft.setEnabled(false);
 		btnLeft.addActionListener(new ActionListener() {
@@ -96,7 +101,6 @@ public class GameWindow {
 				leftButtonHandler();
 			}
 		});
-		
 		btnRight = new JButton("Right");
 		btnRight.setEnabled(false);
 		btnRight.addActionListener(new ActionListener() {
@@ -104,7 +108,6 @@ public class GameWindow {
 				rightButtonHandler();
 			}
 		});
-		layout();
 	}
 	
 	private void layout() {
@@ -196,7 +199,6 @@ public class GameWindow {
 				gamePanel.setMap(game.getGameMap());
 				JOptionPane.showMessageDialog(frameWindow, "Better luck next time, you lost the game!","Game Lost",JOptionPane.INFORMATION_MESSAGE,minionsadicon);
 				frameWindow.setVisible(false);
-				
 			}
 			else {
 				JOptionPane.showMessageDialog(frameWindow, "Congratulations, you won the game!", "Game Won",JOptionPane.INFORMATION_MESSAGE,minionhappyicon);

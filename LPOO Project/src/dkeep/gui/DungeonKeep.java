@@ -69,10 +69,8 @@ public class DungeonKeep {
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 		frameMenu.setBounds((screen.width-631)/2, (screen.height-460)/2, 631, 460);
 		frameMenu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	
 		dungeonlbl = new JLabel(dungeon);
 		keeplbl = new JLabel(keep);
-		
 		buttonInitialize();
 		layout();
 	}
@@ -88,7 +86,6 @@ public class DungeonKeep {
 				windowConfig.getFrameConfig().setVisible(true);
 			}
 		});
-		
 		btnExitGame = new JButton("Exit Game");
 		btnExitGame.setFont(new Font("Courier New", Font.BOLD, 16));
 		btnExitGame.addActionListener(new ActionListener() {
@@ -96,7 +93,6 @@ public class DungeonKeep {
 				System.exit(0);
 			}
 		});
-		
 		btnChangeMap = new JButton("Create/Change Map");
 		btnChangeMap.setFont(new Font("Courier New", Font.BOLD, 16));
 		btnChangeMap.addActionListener(new ActionListener() {

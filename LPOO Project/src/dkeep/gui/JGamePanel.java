@@ -71,11 +71,11 @@ public class JGamePanel extends JPanel {
 					door = (i == 0 || j == 0 || i == (map[i].length - 1) || j == (map[i].length-1));
 					break;
 				case 'H':
-					if(hero) ret.add(1); // invalid number of heroes
+					if(hero) ret.add(1);
 					else hero = true;
 					break;
 				case 'O':
-					if(ogre) ret.add(2); // invalid number of ogres
+					if(ogre) ret.add(2);
 					else ogre = true;
 					break;
 				case 'k':
@@ -92,60 +92,113 @@ public class JGamePanel extends JPanel {
 		if(!door) ret.add(4); // no valid door	
 		return ret;
 	}
-
+	
 	@Override
 	protected void paintComponent(Graphics g) {
 		if (map == null) return;
 		super.paintComponent(g);
-		g.setColor(Color.BLACK);
 		int addx = this.getWidth() / map[0].length;
 		int addy = this.getHeight() / map.length;
-		int x = 0, y = 0;
 		
-		for(int i = 0; i<map.length; i++) {
-			for(int j = 0; j < map[i].length; j++) {
-				if(map[i][j] == 'X') {
+		paintWallAndPath(g, addx, addy);
+		paintHero(g, addx, addy);
+		paintGuard(g, addx, addy);
+		paintOgre(g, addx, addy);
+		paintDoorsAndKey(g, addx, addy);
+	}
+	
+	private void paintWallAndPath(Graphics g, int addx, int addy) {
+		int x = 0, y = 0;
+		for (int i = 0; i < map.length; i++) {
+			for (int j = 0; j < map[i].length; j++) {
+				char ch = map[i][j];
+				if (ch == 'X') {
 					g.setColor(Color.BLACK);
-					g.fillRect(x, y, addx -1, addy -1);
-				}
-				else if(map[i][j] == ' ') {
+					g.fillRect(x, y, addx - 1, addy - 1);
+				} else if (ch == ' ') {
 					g.setColor(Color.WHITE);
-					g.fillRect(x, y, addx -1, addy -1);
+					g.fillRect(x, y, addx - 1, addy - 1);
 				}
-				else if(map[i][j] == 'H') {
-					g.drawImage(hero, x, y, addx-1, addy-1, this);
+				x += addx;
+			}
+			x = 0;
+			y += addy;
+		}
+	}
+	
+	private void paintHero(Graphics g, int addx, int addy) {
+		int x = 0, y = 0;
+		for (int i = 0; i < map.length; i++) {
+			for (int j = 0; j < map[i].length; j++) {
+				char ch = map[i][j];
+				if (ch == 'H') {
+					g.drawImage(hero, x, y, addx - 1, addy - 1, this);
+				} else if (ch == 'K') {
+					g.drawImage(herokey, x, y, addx - 1, addy - 1, this);
+				} else if (ch == 'A') {
+					g.drawImage(heroarmed, x, y, addx - 1, addy - 1, this);
 				}
-				else if(map[i][j] == 'K') {
-					g.drawImage(herokey, x, y, addx-1, addy-1, this);
-				}
-				else if(map[i][j] == 'A') {
-					g.drawImage(heroarmed, x, y, addx-1, addy-1, this);
-				}
-				else if(map[i][j] == 'G') {
+				x += addx;
+			}
+			x = 0;
+			y += addy;
+		}
+	}
+	
+	private void paintGuard(Graphics g, int addx, int addy) {
+		int x = 0, y = 0;
+		for (int i = 0; i < map.length; i++) {
+			for (int j = 0; j < map[i].length; j++) {
+				char ch = map[i][j];
+				if(ch == 'G') {
 					g.drawImage(guard, x, y, addx-1, addy-1, this);
 				}
-				else if(map[i][j] == 'g') {
+				else if(ch == 'g') {
 					g.drawImage(guardsleep, x, y, addx-1, addy-1, this);
 				}
-				else if(map[i][j] == 'O') {
+				x += addx;
+			}
+			x = 0;
+			y += addy;
+		}
+	}
+	
+	private void paintOgre(Graphics g, int addx, int addy) {
+		int x = 0, y = 0;
+		for (int i = 0; i < map.length; i++) {
+			for (int j = 0; j < map[i].length; j++) {
+				char ch = map[i][j];
+				if(ch == 'O') {
 					g.drawImage(ogre, x, y, addx-1, addy-1, this);
 				}
-				else if(map[i][j] == '8') {
+				else if(ch == '8') {
 					g.drawImage(ogrestuned, x, y, addx-1, addy-1, this);
 				}
-				else if(map[i][j] == '*') {
+				else if(ch == '*') {
 					g.drawImage(ogreclub, x, y, addx-1, addy-1, this);
 				}
-				else if(map[i][j] == 'k') {
+				x += addx;
+			}
+			x = 0;
+			y += addy;
+		}
+	}
+	
+	private void paintDoorsAndKey(Graphics g, int addx, int addy) {
+		int x = 0, y = 0;
+		for (int i = 0; i < map.length; i++) {
+			for (int j = 0; j < map[i].length; j++) {
+				char ch = map[i][j];
+				if(ch == 'k') {
 					g.drawImage(key, x, y, addx-1, addy-1, this);
 				}
-				else if(map[i][j] == 'I') {
+				else if(ch == 'I') {
 					g.drawImage(doorclose, x, y, addx-1, addy-1, this);
 				}
-				else if(map[i][j] == 'S') {
+				else if(ch == 'S') {
 					g.drawImage(dooropen, x, y, addx-1, addy-1, this);
 				}
-				else if(map[i][j] == '$') {
+				else if(ch == '$') {
 					g.drawImage(ogreonkey, x, y, addx-1, addy-1, this);
 				}
 				x += addx;
