@@ -94,19 +94,9 @@ public class TestDungeonGameLogic {
 	}
 	
 	@Test
-	public void testChangeAndCloneMap() {
-		GameLevel game_level = new GameLevel(0);
-		ArrayList<char[][]> mapas = game_level.getMaps();
-		for(int i = 0; i < mapas.size(); i++) {
-			mapas.set(i, game_level.mapclone(mapas.get(i)));
-		}
-		GameLevel game_level2 = new GameLevel(0);
-		game_level2.setMap(1, map);
-		assertFalse(map == game_level2.mapclone(game_level.getMaps().get(0)));
-		assertTrue(map == game_level2.getMaps().get(0));
-		for(int i = 0; i < mapas.size(); i++) {
-			game_level.setMap(i+1, mapas.get(i));
-		}
+	public void testCloneMap() {
+		GameLevel game_level = new GameLevel(map, lever);
+		assertFalse(map == game_level.mapclone(game_level.getMap()));
 	}
 	
 	@Test
