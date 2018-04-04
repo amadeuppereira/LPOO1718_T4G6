@@ -61,9 +61,7 @@ public class JGamePanel extends JPanel {
 		
 	public Set<Integer> acceptable() {
 		Set<Integer> ret = new HashSet<Integer>();
-		
 		boolean hero = false, ogre = false, door = false, key = false;
-		
 		for(int i = 0; i < map.length; i++) {
 			for(int j = 0; j < map[i].length; j++) {
 				switch(map[i][j]) {

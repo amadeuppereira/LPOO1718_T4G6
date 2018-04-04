@@ -83,32 +83,39 @@ public class GameLevel {
 		FileReader fr = null;
 		BufferedReader br = null;
 		String line = "";
-		char[][] newmap;
-		int sizex = 0, sizey = 0;
-		
 		try {
 			fr = new FileReader("maps.txt");
 			br = new BufferedReader(fr);
 			
 			line = br.readLine();
 			while(line != null) {
-				sizex = Integer.parseInt(line);
-				line = br.readLine();
-				sizey = Integer.parseInt(line);
-				newmap = new char[sizex][sizey];
-				for(int i = 0; i < sizex; i++) {
-					for(int j = 0; j < sizey; j++) {
-						line = br.readLine();
-						newmap[i][j] = line.charAt(0);
-					}
-				}
-				maps.add(newmap);
+				analyseLine(line, br);
 				line = br.readLine();
 			}
 			br.close();
 			fr.close();
 		}
 		catch(IOException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	void analyseLine(String line, BufferedReader br){
+		int sizex = 0, sizey = 0;
+		char[][] newmap;
+		try {
+			sizex = Integer.parseInt(line);
+			line = br.readLine();
+			sizey = Integer.parseInt(line);
+			newmap = new char[sizex][sizey];
+			for (int i = 0; i < sizex; i++) {
+				for (int j = 0; j < sizey; j++) {
+					line = br.readLine();
+					newmap[i][j] = line.charAt(0);
+				}
+			}
+			maps.add(newmap);
+		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
 	}

@@ -134,6 +134,10 @@ public class GameState {
 		guard = null;
 		ogres.clear();
 		
+		create_Level_Helper();
+	}
+	
+	private void create_Level_Helper() {
 		char[][] map = game_level.getMap();
 		for(int i = 0; i < map.length; i++) {
 			for(int j  = 0; j < map[i].length; j++) {
@@ -147,9 +151,7 @@ public class GameState {
 					game_level.setChar(i, j, ' ');
 					break;
 				case 'O':
-					for (int n = 0; n < numOgres; n++) {
-						ogres.add(new Ogre(i, j));
-					}
+					for (int n = 0; n < numOgres; n++) {ogres.add(new Ogre(i, j));}
 					game_level.setChar(i, j, ' ');
 					break;
 				default:
@@ -387,17 +389,14 @@ public class GameState {
 		String ret = "";
 		char[][] map = this.getMap();
 		boolean flag = true;
-		
 		for(int i = 0; i<map.length; i++) {
 			ret += "|";
 			for(int j = 0; j< map[i].length; j++) {
 				flag = true;
-				
 				if(this.check_hero(i, j) && flag) {
 					ret += this.get_hero_char() + "|";
 					flag = false;
 				}
-				
 				if(this.check_guard(i, j) && flag) {
 					ret += this.get_guard_char() + "|";
 					flag = false;
@@ -411,10 +410,7 @@ public class GameState {
 						flag = false;
 					}
 				}
-				
-				if(flag) {
-					ret += map[i][j]+"|";
-				}
+				if(flag) ret += map[i][j]+"|";
 			}
 			ret += "\n";
 		}

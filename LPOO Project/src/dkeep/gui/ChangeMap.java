@@ -99,6 +99,9 @@ public class ChangeMap {
 		labelsInitialize();
 		labels2Initialize();
 		labels3Initialize();
+		labels4Initialize();
+		labels5Initialize();
+		labels6Initialize();
 		buttonsInitialize();
 		moreInitializes();
 		panelHandler();
@@ -136,6 +139,9 @@ public class ChangeMap {
 				setOptionsEnabled();
 			}
 		});
+	}
+	
+	private void labels6Initialize() {
 		lblPath = new JLabel("Path");
 		lblPath.setIcon(path);
 		lblPath.addMouseListener(new MouseAdapter() {
@@ -157,6 +163,9 @@ public class ChangeMap {
 				setOptionsEnabled();
 			}
 		});
+	}
+	
+	private void labels5Initialize() {
 		lblOgre = new JLabel("Ogre");
 		lblOgre.setIcon(ogre);
 		lblOgre.addMouseListener(new MouseAdapter() {
@@ -178,6 +187,9 @@ public class ChangeMap {
 				setOptionsEnabled();
 			}
 		});
+	}
+	
+	private void labels4Initialize() {
 		lblKey = new JLabel("Key");
 		lblKey.setIcon(key);
 		lblKey.addMouseListener(new MouseAdapter() {
@@ -484,15 +496,6 @@ public class ChangeMap {
 	private void setOptionsEnabled() {
 		enableAllOptions(true);
 		switch(op) {
-		case WALL:
-			lblWall.setEnabled(false);
-			break;
-		case PATH:
-			lblPath.setEnabled(false);
-			break;
-		case DOOR:
-			lblDoor.setEnabled(false);
-			break;
 		case KEY:
 			lblKey.setEnabled(false);
 			break;
@@ -505,7 +508,24 @@ public class ChangeMap {
 		default:
 			break;
 		}
+		setOptionsEnabled2();
 		mapPanel.requestFocus();
+	}
+	
+	private void setOptionsEnabled2() {
+		switch (op) {
+		case WALL:
+			lblWall.setEnabled(false);
+			break;
+		case PATH:
+			lblPath.setEnabled(false);
+			break;
+		case DOOR:
+			lblDoor.setEnabled(false);
+			break;
+		default:
+			break;
+		}
 	}
 	
 	private void changeMapChar(int x, int y) {
