@@ -55,7 +55,6 @@ public class GameLevel {
 		if(!lever) {
 			return false;
 		}
-		
 		for(int i = 0; i < map.length; i++) {
 			for(int j = 0; j < map[i].length; j++) {
 				if(map[i][j] == 'I') {
@@ -63,7 +62,6 @@ public class GameLevel {
 				}
 			}
 		}
-			
 		return true;
 	}
 	
@@ -125,7 +123,6 @@ public class GameLevel {
 		try {
 		    writer = new BufferedWriter(new OutputStreamWriter(
 		          new FileOutputStream("maps.txt"), "utf-8"));
-		    
 		    for(int n = 0; n < maps.size(); n++) {
 		    	writer.write(new Integer(maps.get(n).length).toString());
 		    writer.newLine();
@@ -134,18 +131,14 @@ public class GameLevel {
 				for(int i = 0; i < maps.get(n).length; i++) {
 					for(int j = 0; j < maps.get(n)[0].length; j++) {
 						writer.write(maps.get(n)[i][j]);
-						if(!(i == maps.get(n).length-1 && j == maps.get(n)[0].length-1 && n == maps.size()-1)) {
-							writer.newLine();
-						}
+						if(!(i == maps.get(n).length-1 && j == maps.get(n)[0].length-1 && n == maps.size()-1)) writer.newLine();
 					}
 				}
 		    }
-		    
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		} finally {
 		   try {writer.close();} catch (Exception ex) {}
 		}
 	}
-	
 }

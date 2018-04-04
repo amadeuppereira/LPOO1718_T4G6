@@ -530,15 +530,6 @@ public class ChangeMap {
 	
 	private void changeMapChar(int x, int y) {
 		switch(op) {
-		case WALL:
-			mapPanel.setChar(x, y, 'X');
-			break;
-		case PATH:
-			mapPanel.setChar(x, y, ' ');
-			break;
-		case DOOR:
-			mapPanel.setChar(x, y, 'I');
-			break;
 		case KEY:
 			mapPanel.setChar(x, y, 'k');
 			break;
@@ -547,6 +538,23 @@ public class ChangeMap {
 			break;
 		case OGRE:
 			mapPanel.setChar(x, y, 'O');
+			break;
+		default:
+			break;
+		}
+		changeMapChar2(x, y);
+	}
+	
+	private void changeMapChar2(int x, int y) {
+		switch(op) {
+		case WALL:
+			mapPanel.setChar(x, y, 'X');
+			break;
+		case PATH:
+			mapPanel.setChar(x, y, ' ');
+			break;
+		case DOOR:
+			mapPanel.setChar(x, y, 'I');
 			break;
 		default:
 			break;

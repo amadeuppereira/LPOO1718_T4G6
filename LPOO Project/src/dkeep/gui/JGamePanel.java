@@ -81,13 +81,15 @@ public class JGamePanel extends JPanel {
 					break;
 				default:
 					break;
-				}
-			}
-		}		
+		}}}
+		return getSetErrors(ret, hero, ogre, key, door);
+	}
+	
+	private Set<Integer> getSetErrors(Set<Integer> ret, boolean hero, boolean ogre, boolean key, boolean door){
 		if(!hero) ret.add(1);
 		if(!ogre) ret.add(2);
-		if(!key) ret.add(3); // no keys
-		if(!door) ret.add(4); // no valid door	
+		if(!key) ret.add(3);
+		if(!door) ret.add(4);
 		return ret;
 	}
 	
@@ -97,7 +99,6 @@ public class JGamePanel extends JPanel {
 		super.paintComponent(g);
 		int addx = this.getWidth() / map[0].length;
 		int addy = this.getHeight() / map.length;
-		
 		paintWallAndPath(g, addx, addy);
 		paintHero(g, addx, addy);
 		paintGuard(g, addx, addy);
@@ -129,13 +130,12 @@ public class JGamePanel extends JPanel {
 		for (int i = 0; i < map.length; i++) {
 			for (int j = 0; j < map[i].length; j++) {
 				char ch = map[i][j];
-				if (ch == 'H') {
+				if (ch == 'H')
 					g.drawImage(hero, x, y, addx - 1, addy - 1, this);
-				} else if (ch == 'K') {
+				else if (ch == 'K')
 					g.drawImage(herokey, x, y, addx - 1, addy - 1, this);
-				} else if (ch == 'A') {
+				else if (ch == 'A')
 					g.drawImage(heroarmed, x, y, addx - 1, addy - 1, this);
-				}
 				x += addx;
 			}
 			x = 0;
@@ -148,12 +148,10 @@ public class JGamePanel extends JPanel {
 		for (int i = 0; i < map.length; i++) {
 			for (int j = 0; j < map[i].length; j++) {
 				char ch = map[i][j];
-				if(ch == 'G') {
+				if(ch == 'G') 
 					g.drawImage(guard, x, y, addx-1, addy-1, this);
-				}
-				else if(ch == 'g') {
+				else if(ch == 'g') 
 					g.drawImage(guardsleep, x, y, addx-1, addy-1, this);
-				}
 				x += addx;
 			}
 			x = 0;
@@ -166,15 +164,12 @@ public class JGamePanel extends JPanel {
 		for (int i = 0; i < map.length; i++) {
 			for (int j = 0; j < map[i].length; j++) {
 				char ch = map[i][j];
-				if(ch == 'O') {
+				if(ch == 'O') 
 					g.drawImage(ogre, x, y, addx-1, addy-1, this);
-				}
-				else if(ch == '8') {
+				else if(ch == '8') 
 					g.drawImage(ogrestuned, x, y, addx-1, addy-1, this);
-				}
-				else if(ch == '*') {
+				else if(ch == '*') 
 					g.drawImage(ogreclub, x, y, addx-1, addy-1, this);
-				}
 				x += addx;
 			}
 			x = 0;
@@ -187,18 +182,14 @@ public class JGamePanel extends JPanel {
 		for (int i = 0; i < map.length; i++) {
 			for (int j = 0; j < map[i].length; j++) {
 				char ch = map[i][j];
-				if(ch == 'k') {
+				if(ch == 'k') 
 					g.drawImage(key, x, y, addx-1, addy-1, this);
-				}
-				else if(ch == 'I') {
+				else if(ch == 'I') 
 					g.drawImage(doorclose, x, y, addx-1, addy-1, this);
-				}
-				else if(ch == 'S') {
+				else if(ch == 'S') 
 					g.drawImage(dooropen, x, y, addx-1, addy-1, this);
-				}
-				else if(ch == '$') {
+				else if(ch == '$') 
 					g.drawImage(ogreonkey, x, y, addx-1, addy-1, this);
-				}
 				x += addx;
 			}
 			x = 0;
