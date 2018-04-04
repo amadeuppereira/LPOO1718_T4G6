@@ -98,6 +98,7 @@ public class ChangeMap {
 		gamePanelInitialize();
 		labelsInitialize();
 		labels2Initialize();
+		labels3Initialize();
 		buttonsInitialize();
 		moreInitializes();
 		panelHandler();
@@ -144,15 +145,6 @@ public class ChangeMap {
 				setOptionsEnabled();
 			}
 		});
-		lblKey = new JLabel("Key");
-		lblKey.setIcon(key);
-		lblKey.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				op = Option.KEY;
-				setOptionsEnabled();
-			}
-		});
 	}
 	
 	private void labels2Initialize() {
@@ -174,12 +166,24 @@ public class ChangeMap {
 				setOptionsEnabled();
 			}
 		});
+	}
+	
+	private void labels3Initialize() {
 		lblDoor = new JLabel("Door");
 		lblDoor.setIcon(door);
 		lblDoor.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				op = Option.DOOR;
+				setOptionsEnabled();
+			}
+		});
+		lblKey = new JLabel("Key");
+		lblKey.setIcon(key);
+		lblKey.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				op = Option.KEY;
 				setOptionsEnabled();
 			}
 		});

@@ -72,20 +72,11 @@ public class DungeonKeep {
 		dungeonlbl = new JLabel(dungeon);
 		keeplbl = new JLabel(keep);
 		buttonInitialize();
+		buttonInitialize2();
 		layout();
 	}
 	
 	private void buttonInitialize() {
-		btnStartGame = new JButton("Start Game");
-		btnStartGame.setForeground(Color.BLACK);
-		btnStartGame.setFont(new Font("Courier New", Font.BOLD, 16));
-		btnStartGame.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frameMenu.setVisible(false);
-				GameConfigurations windowConfig = new GameConfigurations(frameMenu);
-				windowConfig.getFrameConfig().setVisible(true);
-			}
-		});
 		btnExitGame = new JButton("Exit Game");
 		btnExitGame.setFont(new Font("Courier New", Font.BOLD, 16));
 		btnExitGame.addActionListener(new ActionListener() {
@@ -100,6 +91,19 @@ public class DungeonKeep {
 				frameMenu.setVisible(false);
 				ChangeMap windowConfig = new ChangeMap(frameMenu);
 				windowConfig.getFrame().setVisible(true);
+			}
+		});
+	}
+	
+	private void buttonInitialize2() {
+		btnStartGame = new JButton("Start Game");
+		btnStartGame.setForeground(Color.BLACK);
+		btnStartGame.setFont(new Font("Courier New", Font.BOLD, 16));
+		btnStartGame.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frameMenu.setVisible(false);
+				GameConfigurations windowConfig = new GameConfigurations(frameMenu);
+				windowConfig.getFrameConfig().setVisible(true);
 			}
 		});
 	}
