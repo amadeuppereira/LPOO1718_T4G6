@@ -210,15 +210,11 @@ public class ChangeMap {
 	
 	private void moreInitializes() {
 		lblSize = new JLabel("Size:");
-		
 		textSizeX = new JTextField();
 		textSizeX.setColumns(10);
-		
 		lblX = new JLabel("x");
-		
 		textSizeY = new JTextField();
 		textSizeY.setColumns(10);
-		
 		lblSelectLevel = new JLabel("Select Level:");	
 		LvlcomboBox = new JComboBox(getLevelsString());
 	}
@@ -228,7 +224,6 @@ public class ChangeMap {
 		buttonsPanel = new JPanel();
 		optionsPanel = new JPanel();
 		optionsPanel.setToolTipText("");
-		
 		newMapConfigLayoutHandler();
 		gl_optionsLayoutHandler();
 		gl_buttonsLayoutHandler();
@@ -456,7 +451,6 @@ public class ChangeMap {
 				y = -1;
 			}
 		}
-		
 		if(x > 0 && y > 0) {
 			mapPanel.createMap(x, y);
 			btnDone.setEnabled(false);
@@ -466,14 +460,12 @@ public class ChangeMap {
 		else {
 			JOptionPane.showMessageDialog(frameChangeMap,"Erro no tamanho!","Error",JOptionPane.INFORMATION_MESSAGE,minionsadicon);
 		}
-		
 	}
 	
 	private void setSizeHandler() {
 		setMapSize();
 		mapPanel.repaint();
 		btnCreateMap.setEnabled(true);
-		
 	}
 	
 	private void enableAllOptions(boolean b) {
@@ -545,7 +537,6 @@ public class ChangeMap {
 		int y = arg0.getY()/tempy;
 		changeMapChar(x, y);
 		mapPanel.repaint();
-		
 	}
 	
 	public JFrame getFrame() {
