@@ -4,11 +4,9 @@ import java.util.Random;
 
 public class Drunken extends Guard {
 	
-	private boolean reverse;
-
 	public Drunken(int x, int y, char[] mov) {
 		super(x, y, mov);
-		reverse = true;
+		reverse = false;
 	}
 
 	@Override

@@ -22,6 +22,7 @@ public class TestDungeonGameLogicKeep {
 	public void testHeroIsCaptureByOgre() {
 		GameLevel game_level = new GameLevel(map, lever);
 		GameState game = new GameState(game_level);
+		game.giveHeroWeapon(false);
 		assertFalse(game.isGameover());
 		game.move_Hero(Movement.RIGHT);
 		assertTrue(game.isGameover());
@@ -32,6 +33,7 @@ public class TestDungeonGameLogicKeep {
 	public void testHeroGetsKey() {
 		GameLevel game_level = new GameLevel(map, lever);
 		GameState game = new GameState(game_level);
+		game.giveHeroWeapon(false);
 		assertEquals('H', game.get_hero_char());
 		game.move_Hero(Movement.DOWN);
 		game.move_Hero(Movement.DOWN);
@@ -43,6 +45,7 @@ public class TestDungeonGameLogicKeep {
 	public void testHeroFailsToOpenDoor() {
 		GameLevel game_level = new GameLevel(map, lever);
 		GameState game = new GameState(game_level);
+		game.giveHeroWeapon(false);
 		assertEquals('H', game.get_hero_char());
 		game.move_Hero(Movement.DOWN);
 		assertTrue(game.check_hero(2, 1));
@@ -55,6 +58,7 @@ public class TestDungeonGameLogicKeep {
 	public void testHeroSuccessToOpenDoor() {
 		GameLevel game_level = new GameLevel(map, lever);
 		GameState game = new GameState(game_level);
+		game.giveHeroWeapon(false);
 		assertEquals('H', game.get_hero_char());
 		game.move_Hero(Movement.DOWN);
 		game.move_Hero(Movement.DOWN);
@@ -88,6 +92,19 @@ public class TestDungeonGameLogicKeep {
 		game.move_Hero(Movement.RIGHT);
 		assertFalse(game.isGameover());
 		assertEquals(State.PLAYING, game.get_status());
+	}
+	
+	@Test
+	public void testStunedOgre() {
+		GameLevel game_level = new GameLevel(map, lever);
+		GameState game = new GameState(game_level);
+		game.giveHeroWeapon(true);
+		assertEquals('A', game.get_hero_char());
+		assertFalse(game.isGameover());
+		game.move_Hero(Movement.RIGHT);
+		assertFalse(game.isGameover());
+		assertEquals(State.PLAYING, game.get_status());
+		assertEquals('8',game.get_ogre_char(game.get_ogres().get(0)));
 	}
 	
 

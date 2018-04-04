@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 import dkeep.logic.GameState;
+import dkeep.logic.GameState.Guard_Type;
 import dkeep.logic.GameState.Movement;
 import dkeep.logic.GameState.State;
 import dkeep.logic.Guard;
@@ -165,6 +166,62 @@ public class TestDungeonGameLogic {
 	}
 	
 	@Test
+	public void testGuardSleep() {
+		char[] mov = {'a','s','d','w'};
+		Guard guard = new Drunken(10,10,mov);
+		boolean sleep = false;
+		boolean awake = false;
+		int i = 0;
+		while(i < 100) {
+			guard.move();
+			if(guard.isAsleep()) {
+				sleep = true;
+			}
+			if(sleep && !guard.isAsleep()) {
+				awake = true;
+				break;
+			}
+			i++;
+		}
+		assertTrue(sleep);
+		assertTrue(awake);
+	}
+	
+	@Test
+	public void testGuardDrunkenReverse() {
+		char[] mov = {'a','s','d','w'};
+		Guard guard = new Drunken(10,10,mov);
+		boolean reverse = false;
+		int i = 0;
+		while(i < 100) {
+			guard.move();
+			if(guard.isReverse()) {
+				reverse = true;
+				break;
+			}
+			i++;
+		}
+		assertTrue(reverse);
+	}
+	
+	@Test
+	public void testGuardSuspiciousReverse() {
+		char[] mov = {'a','s','d','w'};
+		Guard guard = new Suspicious(10,10,mov);
+		boolean reverse = false;
+		int i = 0;
+		while(i < 100) {
+			guard.move();
+			if(guard.isReverse()) {
+				reverse = true;
+				break;
+			}
+			i++;
+		}
+		assertTrue(reverse);
+	}
+	
+	@Test
 	public void testGuardTypeMovement() {
 		char[] mov = {'a','s','d','w'};
 		Guard guard = new Rookie(10,10,mov);
@@ -178,7 +235,7 @@ public class TestDungeonGameLogic {
 		assertEquals(9,guard.get_Y());
 		guard = new Drunken(10,10,mov);
 		guard.move();
-		if(!(guard.get_X() == 10 && guard.get_Y() == 9) && !(guard.get_X() == 9 && guard.get_Y() == 10) && !(guard.get_X() == 10 && guard.get_Y() == 10))
+		if(!(guard.get_X() == 10 && guard.get_Y() == 9) && !(guard.get_X() == 11 && guard.get_Y() == 10) && !(guard.get_X() == 10 && guard.get_Y() == 10))
 			fail("Error moving Drunken!");
 		guard = new Suspicious(10,10,mov);
 		guard.move();
@@ -207,6 +264,20 @@ public class TestDungeonGameLogic {
 		game.nextMove(Movement.DOWN);
 		assertTrue(game.check_hero(2, 1));
 		assertTrue(game.check_guard(1, 3));
+	}
+	
+	@Test
+	public void testNewGame() {
+		GameState game = new GameState(3, "Rookie");
+		assertEquals(3,game.getNumOgres());
+		assertEquals(Guard_Type.ROOKIE,game.getGuard_type());
+		game = new GameState(3, "Drunken");
+		assertEquals(Guard_Type.DRUNKEN,game.getGuard_type());
+		game = new GameState(3, "Suspicious");
+		assertEquals(Guard_Type.SUSPICIOUS,game.getGuard_type());
+		game = new GameState();
+		if(game.getNumOgres() > 5 || game.getNumOgres()< 1)
+			fail("Wrong number of Ogres");
 	}
 	
 	

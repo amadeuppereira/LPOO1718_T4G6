@@ -136,6 +136,10 @@ public class GameState {
 		create_Level_HeroGuardOgre();
 	}
 	
+	public void giveHeroWeapon(boolean b) {
+		hero.armed(b);
+	}
+	
 	private void create_Level_HeroGuardOgre() {
 		char[][] map = game_level.getMap();
 		for(int i = 0; i < map.length; i++) {
@@ -156,7 +160,7 @@ public class GameState {
 				default:
 					break;
 		}}}
-		if(ogres.size() > 0) hero.armed(true);
+		if(ogres.size() > 0) giveHeroWeapon(true);
 	}
 	
 	private boolean isPossiblePos(int x, int y) {
@@ -425,4 +429,14 @@ public class GameState {
 	public void setLvl(int lvl) {
 		this.lvl = lvl;
 	}
+
+	public Guard_Type getGuard_type() {
+		return guard_type;
+	}
+
+	public int getNumOgres() {
+		return numOgres;
+	}
+	
+	
 }

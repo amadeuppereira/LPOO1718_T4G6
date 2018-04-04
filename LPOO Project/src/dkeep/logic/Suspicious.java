@@ -3,8 +3,6 @@ package dkeep.logic;
 import java.util.Random;
 
 public class Suspicious extends Guard {
-	
-	private boolean reverse;
 
 	public Suspicious(int x, int y, char[] mov) {
 		super(x, y, mov);

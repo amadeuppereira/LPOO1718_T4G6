@@ -7,6 +7,7 @@ public abstract class Guard extends Characters {
 	char[] movement;
 	int it;
 	protected boolean asleep;
+	protected boolean reverse;
 	
 	
 	public Guard(int x, int y, char[] mov) {
@@ -16,8 +17,10 @@ public abstract class Guard extends Characters {
 		asleep = false;
 		it = 0;
 	} 
-	
-	
+
+	public boolean isReverse() {
+		return reverse;
+	}
 
 	public boolean isAsleep() {
 		return asleep;
