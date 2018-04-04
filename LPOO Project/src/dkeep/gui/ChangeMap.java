@@ -377,21 +377,12 @@ public class ChangeMap {
 		gl_newMapConfig.setHorizontalGroup(
 				gl_newMapConfig.createParallelGroup(Alignment.TRAILING)
 					.addGroup(Alignment.LEADING, gl_newMapConfig.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(lblSelectLevel)
-						.addPreferredGap(ComponentPlacement.UNRELATED)
-						.addComponent(LvlcomboBox, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE)
-						.addGap(28)
-						.addComponent(lblSize)
-						.addPreferredGap(ComponentPlacement.RELATED)
+						.addContainerGap() .addComponent(lblSelectLevel) .addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(LvlcomboBox, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE) .addGap(28) .addComponent(lblSize) .addPreferredGap(ComponentPlacement.RELATED)
 						.addComponent(textSizeX, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(lblX)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(textSizeY, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(btnDone)
-						.addContainerGap(109, Short.MAX_VALUE))
+						.addPreferredGap(ComponentPlacement.RELATED) .addComponent(lblX)
+						.addPreferredGap(ComponentPlacement.RELATED) .addComponent(textSizeY, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED) .addComponent(btnDone) .addContainerGap(109, Short.MAX_VALUE))
 			);
 	}
 	
@@ -400,15 +391,9 @@ public class ChangeMap {
 				gl_newMapConfig.createParallelGroup(Alignment.LEADING)
 					.addGroup(gl_newMapConfig.createSequentialGroup()
 						.addContainerGap()
-						.addGroup(gl_newMapConfig.createParallelGroup(Alignment.BASELINE)
-							.addComponent(lblSelectLevel)
-							.addComponent(LvlcomboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addComponent(lblSize)
-							.addComponent(textSizeX, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addComponent(lblX)
-							.addComponent(textSizeY, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addComponent(btnDone))
-						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addGroup(gl_newMapConfig.createParallelGroup(Alignment.BASELINE) .addComponent(lblSelectLevel)
+							.addComponent(LvlcomboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE) .addComponent(lblSize)
+							.addComponent(textSizeX, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE) .addComponent(lblX) .addComponent(textSizeY, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE) .addComponent(btnDone)) .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 			);
 	}
 	

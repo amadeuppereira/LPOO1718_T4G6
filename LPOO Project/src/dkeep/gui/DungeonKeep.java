@@ -118,49 +118,21 @@ public class DungeonKeep {
 	private void layout_Horizontal() {
 		groupLayout.setHorizontalGroup(
 				groupLayout.createParallelGroup(Alignment.LEADING)
-					.addGroup(groupLayout.createSequentialGroup()
-						.addGap(29)
-						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-							.addGroup(groupLayout.createSequentialGroup()
-								.addGap(121)
-								.addComponent(keeplbl, GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
-								.addGap(122))
-							.addComponent(dungeonlbl, GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE))
-						.addGap(29))
-					.addGroup(groupLayout.createSequentialGroup()
-						.addGap(222)
-						.addComponent(btnStartGame, GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
-						.addGap(222))
-					.addGroup(groupLayout.createSequentialGroup()
-						.addGap(222)
-						.addComponent(btnChangeMap, GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
-						.addGap(222))
-					.addGroup(groupLayout.createSequentialGroup()
-						.addGap(222)
-						.addComponent(btnExitGame, GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
-						.addGap(222))
+					.addGroup(groupLayout.createSequentialGroup() .addGap(29) .addGroup(groupLayout.createParallelGroup(Alignment.LEADING) .addGroup(groupLayout.createSequentialGroup() .addGap(121) .addComponent(keeplbl, GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE) .addGap(122)) .addComponent(dungeonlbl, GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)) .addGap(29))
+					.addGroup(groupLayout.createSequentialGroup() .addGap(222) .addComponent(btnStartGame, GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE) .addGap(222))
+					.addGroup(groupLayout.createSequentialGroup() .addGap(222) .addComponent(btnChangeMap, GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE) .addGap(222))
+					.addGroup(groupLayout.createSequentialGroup() .addGap(222) .addComponent(btnExitGame, GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE) .addGap(222))
 			);
 	}
 	
 	private void layout_Vertical() {
 		groupLayout.setVerticalGroup(
 				groupLayout.createParallelGroup(Alignment.LEADING)
-					.addGroup(groupLayout.createSequentialGroup()
-						.addGap(6)
-						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-							.addGroup(groupLayout.createSequentialGroup()
-								.addGap(106)
-								.addComponent(keeplbl, GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE))
-							.addGroup(groupLayout.createSequentialGroup()
-								.addComponent(dungeonlbl, GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
-								.addGap(106)))
-						.addGap(24)
-						.addComponent(btnStartGame, GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
-						.addGap(12)
-						.addComponent(btnChangeMap, GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
-						.addGap(11)
-						.addComponent(btnExitGame, GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
-						.addGap(28))
+					.addGroup(groupLayout.createSequentialGroup() .addGap(6)
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING) .addGroup(groupLayout.createSequentialGroup() .addGap(106) .addComponent(keeplbl, GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)) .addGroup(groupLayout.createSequentialGroup() .addComponent(dungeonlbl, GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE) .addGap(106))) .addGap(24)
+						.addComponent(btnStartGame, GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE) .addGap(12)
+						.addComponent(btnChangeMap, GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE) .addGap(11)
+						.addComponent(btnExitGame, GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE) .addGap(28))
 			);
 	}
 }
