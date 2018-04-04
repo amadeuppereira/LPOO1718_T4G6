@@ -37,7 +37,6 @@ public class GameWindow {
 	public GameWindow(GameState game) {
 		this.game = game;
 		initialize();
-		
 		frameWindow.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -57,10 +56,7 @@ public class GameWindow {
 						break;
 					default:
 						break;
-					}
-				}
-			}
-		});
+		}}}});
 	}
 	
 	/**

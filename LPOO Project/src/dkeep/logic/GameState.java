@@ -133,11 +133,10 @@ public class GameState {
 		}
 		guard = null;
 		ogres.clear();
-		
-		create_Level_Helper();
+		create_Level_HeroGuardOgre();
 	}
 	
-	private void create_Level_Helper() {
+	private void create_Level_HeroGuardOgre() {
 		char[][] map = game_level.getMap();
 		for(int i = 0; i < map.length; i++) {
 			for(int j  = 0; j < map[i].length; j++) {
@@ -156,9 +155,7 @@ public class GameState {
 					break;
 				default:
 					break;
-				}
-			}
-		}
+		}}}
 		if(ogres.size() > 0) hero.armed(true);
 	}
 	
@@ -241,39 +238,27 @@ public class GameState {
 	public void move_Ogre(Ogre ogre) {
 		if(ogre.updateStunTime()) return;
 		Movement move = getRandomPossibleMove(ogre.get_X(), ogre.get_Y(), false);
-		switch(move) {
-		case UP:
+		if(move == Movement.UP)
 			ogre.move_up();
-			break;
-		case DOWN:
+		else if(move == Movement.DOWN)
 			ogre.move_down();
-			break;
-		case RIGHT:
-			ogre.move_right();
-			break;
-		case LEFT:
+		else if(move == Movement.LEFT)
 			ogre.move_left();
-			break;
-		}
+		else if(move == Movement.RIGHT)
+			ogre.move_right();
 		checkOgreAtKey(ogre);
 	}
 
 	public void move_OgreClub(Ogre ogre) {
 		Movement move = getRandomPossibleMove(ogre.get_X(), ogre.get_Y(), true);
-		switch(move) {
-		case UP:
+		if(move == Movement.UP)
 			ogre.club_up();
-			break;
-		case DOWN:
+		else if(move == Movement.DOWN)
 			ogre.club_down();
-			break;
-		case RIGHT:
-			ogre.club_right();
-			break;
-		case LEFT:
+		else if(move == Movement.LEFT)
 			ogre.club_left();
-			break;
-		}
+		else if(move == Movement.RIGHT)
+			ogre.club_right();
 		checkOgreClubAtKey(ogre);
 	}
 	
@@ -390,30 +375,29 @@ public class GameState {
 		char[][] map = this.getMap();
 		boolean flag = true;
 		for(int i = 0; i<map.length; i++) {
-			ret += "|";
-			for(int j = 0; j< map[i].length; j++) {
-				flag = true;
-				if(this.check_hero(i, j) && flag) {
-					ret += this.get_hero_char() + "|";
-					flag = false;
-				}
-				if(this.check_guard(i, j) && flag) {
-					ret += this.get_guard_char() + "|";
-					flag = false;
-				}
-				for (Ogre ogre : this.get_ogres()) {
-					if (this.check_ogre(i, j, ogre) && flag) {
-						ret += this.get_ogre_char(ogre) + "|";
-						flag = false;
-					} else if (this.check_ogre_club(i, j, ogre) && flag) {
-						ret += this.get_ogre_club_char(ogre) + "|";
-						flag = false;
-					}
-				}
-				if(flag) ret += map[i][j]+"|";
-			}
-			ret += "\n";
+			ret += "|" + getGameLineString(map, i, flag, ret) + "\n";
 		}
+		return ret;
+	}
+	
+	public String getGameLineString(char[][] map, int i, boolean flag, String ret) {
+		for(int j = 0; j< map[i].length; j++) {
+			flag = true;
+			if(this.check_hero(i, j) && flag) {
+				ret += this.get_hero_char() + "|";
+				flag = false;}
+			if(this.check_guard(i, j) && flag) {
+				ret += this.get_guard_char() + "|";
+				flag = false;}
+			for (Ogre ogre : this.get_ogres()) {
+				if (this.check_ogre(i, j, ogre) && flag) {
+					ret += this.get_ogre_char(ogre) + "|";
+					flag = false;
+				} else if (this.check_ogre_club(i, j, ogre) && flag) {
+					ret += this.get_ogre_club_char(ogre) + "|";
+					flag = false;
+			}}
+			if(flag) ret += map[i][j]+"|";}
 		return ret;
 	}
 	
