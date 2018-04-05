@@ -36,6 +36,7 @@ public class GameWindow {
 
 	/**
 	 * Create the application.
+	 * @param game game
 	 */
 	public GameWindow(GameState game) {
 		this.game = game;

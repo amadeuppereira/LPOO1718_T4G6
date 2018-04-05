@@ -59,6 +59,7 @@ public class Characters {
 	
 	/**
 	 * Set a new representative char
+	 * @param new char
 	 */
 	public void set_char(char ch) {
 		this.ch = ch;
@@ -98,7 +99,7 @@ public class Characters {
 	
 	/**
 	 * Set a new y coordinate
-	 * @param x new y coordinate
+	 * @param y new y coordinate
 	 */
 	public void set_Y(int y) {
 		cell_position.set_positionY(y);

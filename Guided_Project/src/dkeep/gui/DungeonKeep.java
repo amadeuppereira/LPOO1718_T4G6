@@ -42,6 +42,7 @@ public class DungeonKeep {
 
 	/**
 	 * Launch the application.
+	 * @param args args
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {

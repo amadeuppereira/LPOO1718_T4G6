@@ -9,7 +9,7 @@ public class Game {
 	
 	/**
 	 * Main function
-	 * @param args
+	 * @param args args
 	 */
 	public static void main(String[] args) {
 			

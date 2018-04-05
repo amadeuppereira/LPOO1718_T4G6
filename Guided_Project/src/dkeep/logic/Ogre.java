@@ -164,7 +164,7 @@ public class Ogre extends Characters {
 	
 	/**
 	 * Get club's CellPosition object
-	 * @return
+	 * @return club's position
 	 */
 	public CellPosition clubPos() {
 		return club_position;

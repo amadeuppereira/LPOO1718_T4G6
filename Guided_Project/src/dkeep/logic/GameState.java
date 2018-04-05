@@ -102,10 +102,10 @@ public class GameState {
 
 	/**
 	 * Get a random possible movement
-	 * @param x
-	 * @param y
+	 * @param x actual x coordinate
+	 * @param y actual y coordinate
 	 * @param flag true if it is possible to go to the edges, false otherwise (e.g: must be false for an ogre)
-	 * @return
+	 * @return random movement
 	 */
 	public Movement getRandomPossibleMove(int x, int y, boolean flag) {
 		CellPosition pos = new CellPosition(x, y);

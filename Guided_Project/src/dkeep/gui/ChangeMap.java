@@ -86,6 +86,7 @@ public class ChangeMap {
 
 	/**
 	 * Create the application.
+	 * @param frameMenu menu frame
 	 */
 	public ChangeMap(JFrame frameMenu) {
 		this.frameMenu = frameMenu;
