@@ -9,6 +9,9 @@ import java.util.Set;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+/**
+ * JGamePanel.java - class handling the map display 
+ */
 public class JGamePanel extends JPanel {
 	
 	private char[][] map;
@@ -26,24 +29,45 @@ public class JGamePanel extends JPanel {
 	private Image doorclose = new ImageIcon("resources/doorclose.png").getImage();
 	
 
-
+	/**
+	 * Create the application.
+	 */
 	public JGamePanel() {
 		super();
 	}
 	
+	/**
+	 * Set a new map array
+	 * @param map new map array
+	 */
 	public void setMap(char[][] map) {
 		this.map = map;
 		repaint();
 	}
 	
+	/**
+	 * Get map array
+	 * @return map array
+	 */
 	public char[][] getMap() {
 		return map;
 	}
 	
+	/**
+	 * Set a new char at a given position
+	 * @param x x coordinate
+	 * @param y y coordinate
+	 * @param ch new char
+	 */
 	public void setChar(int x, int y, char ch) {
 		map[y][x] = ch;
 	}
 	
+	/**
+	 * Create a new map with a given size
+	 * @param x width
+	 * @param y length
+	 */
 	public void createMap(int x, int y) {
 		this.map = new char[y][x];
 		for(int i = 0; i < map.length; i++) {
@@ -58,7 +82,10 @@ public class JGamePanel extends JPanel {
 		}
 	}
 	
-		
+	/**
+	 * Check if the map is acceptable
+	 * @return set with the errors (1 - no hero, 2 - number of ogres != 1, 3 - no key, 4 - no door at valid position)
+	 */
 	public Set<Integer> acceptable() {
 		Set<Integer> ret = new HashSet<Integer>();
 		boolean hero = false, ogre = false, door = false, key = false;
@@ -85,6 +112,15 @@ public class JGamePanel extends JPanel {
 		return getSetErrors(ret, hero, ogre, key, door);
 	}
 	
+	/**
+	 * Checks the errors
+	 * @param ret set to update
+	 * @param hero hero flag
+	 * @param ogre ogre flag
+	 * @param key key flag
+	 * @param door door flag
+	 * @return updated set with errors
+	 */
 	private Set<Integer> getSetErrors(Set<Integer> ret, boolean hero, boolean ogre, boolean key, boolean door){
 		if(!hero) ret.add(1);
 		if(!ogre) ret.add(2);

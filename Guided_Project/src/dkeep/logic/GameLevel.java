@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
+/**
+ * GameLevel.java - a class that handles the game maps and levels
+ */
 public class GameLevel {
 	
 	private char[][] map;
@@ -26,6 +29,11 @@ public class GameLevel {
 		}	
 	}
 	
+	/**
+	 * Clones a given two dimensional array
+	 * @param map given array
+	 * @return new array
+	 */
 	public char[][]  mapclone(char [][] map){
 		char[][] newmap = new char[map.length][];
 		for(int i = 0; i < map.length; i++) {
@@ -34,23 +42,48 @@ public class GameLevel {
 		return newmap;
 	}
 	
+	/**
+	 * Create a new GameLever object
+	 * @param m map array
+	 * @param l lever flag
+	 */
 	public GameLevel(char[][] m, boolean l) {
 		lever = l;
 		map = m.clone();
 	}
 	
+	/**
+	 * Get a given position char from the map
+	 * @param x x coordinate
+	 * @param y y coordinate
+	 * @return char
+	 */
 	public char getChar(int x, int y) {
 		return map[x][y];
 	}
 	
+	/**
+	 * Set a given char to a map position
+	 * @param x x coordinate
+	 * @param y y coordinate
+	 * @param ch new char
+	 */
 	public void setChar(int x, int y, char ch) {
 		map[x][y] = ch;
 	}
 	
+	/**
+	 * Get the map array
+	 * @return map array
+	 */
 	public char[][] getMap(){
 		return map;
 	}
 	
+	/**
+	 * Activate lever, if it is a level level it opens all the doors (change their representative char) 
+	 * @return true if lever level, false otherwise
+	 */
 	public boolean lever() {
 		if(!lever) {
 			return false;
@@ -65,6 +98,11 @@ public class GameLevel {
 		return true;
 	}
 	
+	/**
+	 * Change a level map (or creates a new one if the level doesn't exist)
+	 * @param n level
+	 * @param m map
+	 */
 	public void setMap(int n, char[][] m) {
 		if(n <= maps.size())
 			maps.set(n - 1, m);
@@ -73,10 +111,17 @@ public class GameLevel {
 		saveFile();
 	}
 	
+	/**
+	 * Get all the maps
+	 * @return arraylist with all the maps
+	 */
 	public ArrayList<char[][]> getMaps() {
 		return maps;
 	}
 	
+	/**
+	 * Read the maps file
+	 */
 	public void readFile() {
 		FileReader fr = null;
 		BufferedReader br = null;
@@ -98,6 +143,11 @@ public class GameLevel {
 		}
 	}
 	
+	/**
+	 * Transform a string into a 2 dimensional array
+	 * @param line line
+	 * @param br buffered reader
+	 */
 	void analyseLine(String line, BufferedReader br){
 		int sizex = 0, sizey = 0;
 		char[][] newmap;
@@ -118,6 +168,9 @@ public class GameLevel {
 		}
 	}
 	
+	/**
+	 * Save all the maps to the file
+	 */
 	public void saveFile() {
 		BufferedWriter writer = null;
 		try {

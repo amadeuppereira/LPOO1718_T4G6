@@ -2,6 +2,9 @@ package dkeep.logic;
 import dkeep.logic.Characters;
 import java.util.Random;
 
+/**
+ * Guard.java - an abstract class that handles all types of guards 
+ */
 public abstract class Guard extends Characters {
 
 	char[] movement;
@@ -10,6 +13,12 @@ public abstract class Guard extends Characters {
 	protected boolean reverse;
 	
 	
+	/**
+	 * Create a new Guard object
+	 * @param x x coordinate
+	 * @param y y coordinate
+	 * @param mov the movement that the guard follows
+	 */
 	public Guard(int x, int y, char[] mov) {
 		super(x, y, 'G');
 		
@@ -18,14 +27,25 @@ public abstract class Guard extends Characters {
 		it = 0;
 	} 
 
+	/**
+	 * Get the value of the reverse movement flag
+	 * @return reverse movement flag value
+	 */
 	public boolean isReverse() {
 		return reverse;
 	}
-
+	
+	/**
+	 * Get the value of the asleep flag
+	 * @return asleep flag value
+	 */
 	public boolean isAsleep() {
 		return asleep;
 	}
 
+	/**
+	 * Move the guard in a reverse order
+	 */
 	public void reverse_movement() {
 		if(it == 0) it = movement.length - 1;
 		else it--;
@@ -47,6 +67,9 @@ public abstract class Guard extends Characters {
 		}
 	}
 	
+	/**
+	 * Move the guard in a normal order
+	 */
 	public void normal_movement() {
 		switch (movement[it]) {
 		case 'w':
@@ -69,6 +92,9 @@ public abstract class Guard extends Characters {
 	}
 	
 	
+	/**
+	 * Move the guard
+	 */
 	public abstract void move();
 	
 

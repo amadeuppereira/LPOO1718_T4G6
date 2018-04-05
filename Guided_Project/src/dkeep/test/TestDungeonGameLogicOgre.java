@@ -8,6 +8,9 @@ import dkeep.logic.GameLevel;
 import dkeep.logic.GameState;
 import dkeep.logic.Ogre;
 
+/**
+ * TestDungeoGameLogicOgre.java - class testing the ogre
+ */
 public class TestDungeonGameLogicOgre {
 
 	char [][] map = {{'X','X','X','X','X'},
@@ -18,6 +21,9 @@ public class TestDungeonGameLogicOgre {
 	
 	boolean lever = false;
 	
+	/**
+	 * Test ogre random movement
+	 */
 	@Test
 	public void testOgreRandomMovement() {
 		GameLevel game_level = new GameLevel(map, lever);
@@ -65,6 +71,9 @@ public class TestDungeonGameLogicOgre {
 		
 	}
 	
+	/**
+	 * Test club random movement
+	 */
 	@Test
 	public void testOgreClubRandomMovement() {
 		GameLevel game_level = new GameLevel(map, lever);
@@ -103,6 +112,9 @@ public class TestDungeonGameLogicOgre {
 		
 	}
 	
+	/**
+	 * Test club movement
+	 */
 	@Test
 	public void testOgresClubMovement() {
 		Ogre ogre = new Ogre(0,0);
@@ -122,6 +134,9 @@ public class TestDungeonGameLogicOgre {
 		assertEquals(0,ogre.getClub_position().get_positionY());
 	}
 	
+	/**
+	 * Test ogre an club representative char
+	 */
 	@Test
 	public void testOgresAndClubChar() {
 		Ogre ogre = new Ogre(1,1);

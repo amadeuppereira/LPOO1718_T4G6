@@ -18,6 +18,9 @@ import dkeep.logic.CellPosition;
 import dkeep.logic.Drunken;
 import dkeep.logic.GameLevel;
 
+/**
+ * TestDungeoGameLogic.java - class testing the game logic
+ */
 public class TestDungeonGameLogic {
 	
 	char [][] map = {{'X','X','X','X','X'},
@@ -28,6 +31,9 @@ public class TestDungeonGameLogic {
 
 	boolean lever = true;
 	
+	/**
+	 * Test hero movement to free cell
+	 */
 	@Test
 	public void testMoveHeroIntoFreeCell() {
 		GameLevel game_level = new GameLevel(map, lever);
@@ -37,6 +43,9 @@ public class TestDungeonGameLogic {
 		assertTrue(game.check_hero(2, 1));
 	}
 	
+	/**
+	 * Test hero movement into a wall
+	 */
 	@Test
 	public void testMoveHeroIntoWall() {
 		GameLevel game_level = new GameLevel(map, lever);
@@ -46,6 +55,9 @@ public class TestDungeonGameLogic {
 		assertTrue(game.check_hero(1, 1));
 	}
 	
+	/**
+	 * Test hero captured by guard
+	 */
 	@Test
 	public void testHeroIsCaptureByGuard() {
 		GameLevel game_level = new GameLevel(map, lever);
@@ -56,6 +68,9 @@ public class TestDungeonGameLogic {
 		assertEquals(State.DEFEAT, game.get_status());
 	}
 	
+	/**
+	 * Test hero fails to leave
+	 */
 	@Test
 	public void testHeroFailsToLeave() {
 		GameLevel game_level = new GameLevel(map, lever);
@@ -66,6 +81,9 @@ public class TestDungeonGameLogic {
 		assertTrue(game.check_hero(2, 1));
 	}
 	
+	/**
+	 * Test hero move into lever cell
+	 */
 	@Test
 	public void testHeroMovesIntoLeverCell() {
 		GameLevel game_level = new GameLevel(map, lever);
@@ -78,6 +96,9 @@ public class TestDungeonGameLogic {
 		assertEquals('S', game_level.getChar(3, 0));
 	}
 	
+	/**
+	 * Test hero successes to leave
+	 */
 	@Test
 	public void testHeroSuccessToLeave() {
 		GameLevel game_level = new GameLevel(map, lever);
@@ -93,12 +114,18 @@ public class TestDungeonGameLogic {
 		assertTrue(game.isLevelEnd());
 	}
 	
+	/**
+	 * Test map cloning
+	 */
 	@Test
 	public void testCloneMap() {
 		GameLevel game_level = new GameLevel(map, lever);
 		assertFalse(map == game_level.mapclone(game_level.getMap()));
 	}
 	
+	/**
+	 * Test same position
+	 */
 	@Test
 	public void testSamePosition() {
 		CellPosition cell1 = new CellPosition(0,0);
@@ -108,6 +135,9 @@ public class TestDungeonGameLogic {
 		assertTrue(cell2.equals(cell3));
 	}
 	
+	/**
+	 * Test hero representative char
+	 */
 	@Test
 	public void testHeroChar() {
 		Hero hero = new Hero(0,0);
@@ -123,6 +153,9 @@ public class TestDungeonGameLogic {
 		assertEquals('H',hero.get_char());
 	}
 	
+	/**
+	 * Test guard movement
+	 */
 	@Test
 	public void testGuardMovement() {
 		char[] mov = {'a','s','d','w'};
@@ -155,6 +188,9 @@ public class TestDungeonGameLogic {
 		assertEquals(10,guard.get_Y());
 	}
 	
+	/**
+	 * Test guard falls asleep
+	 */
 	@Test
 	public void testGuardSleep() {
 		char[] mov = {'a','s','d','w'};
@@ -177,6 +213,9 @@ public class TestDungeonGameLogic {
 		assertTrue(awake);
 	}
 	
+	/**
+	 * Test drunken guard reverse movement
+	 */
 	@Test
 	public void testGuardDrunkenReverse() {
 		char[] mov = {'a','s','d','w'};
@@ -194,6 +233,9 @@ public class TestDungeonGameLogic {
 		assertTrue(reverse);
 	}
 	
+	/**
+	 * Test suspicious guard reverse movement
+	 */
 	@Test
 	public void testGuardSuspiciousReverse() {
 		char[] mov = {'a','s','d','w'};
@@ -211,6 +253,9 @@ public class TestDungeonGameLogic {
 		assertTrue(reverse);
 	}
 	
+	/**
+	 * Test if guard moves accordingly to given movement
+	 */
 	@Test
 	public void testGuardTypeMovement() {
 		char[] mov = {'a','s','d','w'};
@@ -236,6 +281,9 @@ public class TestDungeonGameLogic {
 			fail("Error moving Suspicious!");
 	}
 	
+	/**
+	 * Test converting map to string and map array cloning
+	 */
 	@Test
 	public void testGameStringAndClone() {
 		GameLevel game_level = new GameLevel(map, lever);
@@ -247,6 +295,9 @@ public class TestDungeonGameLogic {
 		assertEquals(game2.getGameString(),game.getGameString());
 	}
 	
+	/**
+	 * Test all characters move
+	 */
 	@Test
 	public void testCharactersMove() {
 		GameLevel game_level = new GameLevel(map, lever);
@@ -256,6 +307,9 @@ public class TestDungeonGameLogic {
 		assertTrue(game.check_guard(1, 3));
 	}
 	
+	/**
+	 * Test new game creation
+	 */
 	@Test
 	public void testNewGame() {
 		GameState game = new GameState(3, "Rookie");

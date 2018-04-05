@@ -8,6 +8,9 @@ import dkeep.logic.GameState.Movement;
 import dkeep.logic.GameState.State;
 import dkeep.logic.GameLevel;
 
+/**
+ * TestDungeoGameLogicKeep.java - class testing the ogre level
+ */
 public class TestDungeonGameLogicKeep {
 
 	char [][] map = {{'X','X','X','X','X'},
@@ -18,6 +21,9 @@ public class TestDungeonGameLogicKeep {
 	
 	boolean lever = false;
 	
+	/**
+	 * Test hero captured by ogre
+	 */
 	@Test
 	public void testHeroIsCaptureByOgre() {
 		GameLevel game_level = new GameLevel(map, lever);
@@ -29,6 +35,9 @@ public class TestDungeonGameLogicKeep {
 		assertEquals(State.DEFEAT, game.get_status());
 	}
 	
+	/**
+	 * Test if hero gets key
+	 */
 	@Test
 	public void testHeroGetsKey() {
 		GameLevel game_level = new GameLevel(map, lever);
@@ -41,6 +50,9 @@ public class TestDungeonGameLogicKeep {
 		assertEquals('K', game.get_hero_char());
 	}
 	
+	/**
+	 * Test hero fails to open door
+	 */
 	@Test
 	public void testHeroFailsToOpenDoor() {
 		GameLevel game_level = new GameLevel(map, lever);
@@ -54,6 +66,9 @@ public class TestDungeonGameLogicKeep {
 		assertEquals('I', game_level.getChar(2, 0));
 	}
 	
+	/**
+	 * Test hero successes to open door
+	 */
 	@Test
 	public void testHeroSuccessToOpenDoor() {
 		GameLevel game_level = new GameLevel(map, lever);
@@ -70,6 +85,9 @@ public class TestDungeonGameLogicKeep {
 		assertEquals('S', game_level.getChar(3, 0));
 	}
 	
+	/**
+	 * Test hero success to exit
+	 */
 	@Test
 	public void testHeroSuccessToExitDoor() {
 		GameLevel game_level = new GameLevel(map, lever);
@@ -82,6 +100,9 @@ public class TestDungeonGameLogicKeep {
 		assertTrue(game.isLevelEnd());
 	}
 	
+	/**
+	 * Test if hero stuns ogre
+	 */
 	@Test
 	public void testHeroStunesOgre() {
 		GameLevel game_level = new GameLevel(map, lever);
@@ -94,6 +115,9 @@ public class TestDungeonGameLogicKeep {
 		assertEquals(State.PLAYING, game.get_status());
 	}
 	
+	/**
+	 * Test ogre stun
+	 */
 	@Test
 	public void testStunedOgre() {
 		GameLevel game_level = new GameLevel(map, lever);

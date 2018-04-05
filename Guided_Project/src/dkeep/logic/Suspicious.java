@@ -2,13 +2,26 @@ package dkeep.logic;
 
 import java.util.Random;
 
+
+/**
+ * Suspicious.java - A class that handles a specific type of guard (Suspicious)
+ */
 public class Suspicious extends Guard {
 
+	/**
+	 * Create a new Suspicious object
+	 * @param x x coordinate
+	 * @param y y coordinate
+	 * @param mov the movement that guard follows
+	 */
 	public Suspicious(int x, int y, char[] mov) {
 		super(x, y, mov);
 		reverse = false;
 	}
 
+	/* (non-Javadoc)
+	 * @see dkeep.logic.Guard#move()
+	 */
 	@Override
 	public void move() {
 		
@@ -20,6 +33,9 @@ public class Suspicious extends Guard {
 		
 	}
 	
+	/**
+	 * Change the guard movement if he awakes (20% chance) 
+	 */
 	private void changeMovement() {
 		Random randomGenerator = new Random();
 		int option = randomGenerator.nextInt(11);

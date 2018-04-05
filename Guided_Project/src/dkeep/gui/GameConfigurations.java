@@ -29,6 +29,9 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextPane;
 import java.awt.Font;
 
+/**
+ * GameConfigurations.java - class handling the map configurations interface 
+ */
 public class GameConfigurations {
 
 	private JFrame frameConfig;
@@ -44,6 +47,11 @@ public class GameConfigurations {
 	private GameWindow windowGame;
 	private GroupLayout groupLayout;
 
+	
+	/**
+	 * Create the application
+	 * @param frameMenu menu frame
+	 */
 	public GameConfigurations(JFrame frameMenu) {
 		this.frameMenu = frameMenu;
 		initialize();
@@ -166,6 +174,10 @@ public class GameConfigurations {
 				.addComponent(btnReturn).addGap(34)));
 	}
 
+	/**
+	 * Get the frame
+	 * @return frame
+	 */
 	public JFrame getFrameConfig() {
 		return frameConfig;
 	}

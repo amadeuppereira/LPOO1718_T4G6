@@ -39,6 +39,9 @@ import java.util.Set;
 
 import javax.swing.ImageIcon;
 
+/**
+ * ChangeMap.java - class handling the map changing interface 
+ */
 public class ChangeMap {
 	
 	private enum Option {NONE, WALL, PATH, HERO, OGRE, KEY, DOOR};
@@ -556,6 +559,10 @@ public class ChangeMap {
 		mapPanel.repaint();
 	}
 	
+	/**
+	 * Get the frame
+	 * @return frame
+	 */
 	public JFrame getFrame() {
 		return frameChangeMap;
 	}

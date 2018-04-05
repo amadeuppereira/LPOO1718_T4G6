@@ -18,6 +18,9 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+/**
+ * GameWindow.java - class handling the game playing interface 
+ */
 public class GameWindow {
 
 	private JFrame frameWindow;
@@ -158,6 +161,10 @@ public class GameWindow {
 		frameWindow.requestFocusInWindow();
 	}
 	
+	/**
+	 * Update the ability to click the movement buttons
+	 * @param act new value
+	 */
 	public void updateMovementButtons(boolean act) {
 		btnRight.setEnabled(act);
 		btnLeft.setEnabled(act);
@@ -165,6 +172,9 @@ public class GameWindow {
 		btnDown.setEnabled(act);
 	}
 	
+	/**
+	 * Update the game state, showing messages dialogs if the player lost / won the game
+	 */
 	public void updateGame() {
 		if(game.get_status() == State.DEFEAT || game.get_status() == State.WIN) {
 			updateMovementButtons(false);
@@ -183,6 +193,10 @@ public class GameWindow {
 		}
 	}
 	
+	/**
+	 * Get the frame
+	 * @return frame
+	 */
 	public JFrame getFrame() {
 		return this.frameWindow;
 	}

@@ -25,6 +25,9 @@ import java.awt.Font;
 import java.awt.Color;
 import java.awt.Dimension;
 
+/**
+ * DungeonKeep.java - class handling the menu interface 
+ */
 public class DungeonKeep {
 
 	private JFrame frameMenu;

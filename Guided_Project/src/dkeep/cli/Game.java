@@ -2,10 +2,15 @@ package dkeep.cli;
 import dkeep.logic.GameState;
 import dkeep.logic.GameState.State;;
 
-
+/**
+ * Game.jave - main class for playing in the console 
+ */
 public class Game {
-
 	
+	/**
+	 * Main function
+	 * @param args
+	 */
 	public static void main(String[] args) {
 			
 		GameState game = new GameState();
