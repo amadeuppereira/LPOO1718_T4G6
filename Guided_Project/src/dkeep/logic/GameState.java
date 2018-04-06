@@ -8,8 +8,19 @@ import java.util.ArrayList;
  */
 public class GameState {
 	
+	/**
+	 * Represents the different states of the game
+	 */
 	public enum State {WIN, DEFEAT, PLAYING}
+	
+	/**
+	 * Represents the different types of movement
+	 */
 	public enum Movement {UP, DOWN, LEFT, RIGHT}
+	
+	/**
+	 * Represents the different types of guard
+	 */
 	public enum Guard_Type {RANDOM, ROOKIE, DRUNKEN, SUSPICIOUS}
 	private State state;
 	
