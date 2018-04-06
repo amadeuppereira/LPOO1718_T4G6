@@ -4,14 +4,6 @@ import dkeep.logic.Characters;
 /**
  * Ogre.java - a class that handles an ogre
  */
-/**
- * @author amade
- *
- */
-/**
- * @author amade
- *
- */
 public class Ogre extends Characters {
 
 	CellPosition club_position;
