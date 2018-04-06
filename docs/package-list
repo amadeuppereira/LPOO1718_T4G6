@@ -1,1 +1,4 @@
+dkeep.cli
 dkeep.gui
+dkeep.logic
+dkeep.test
