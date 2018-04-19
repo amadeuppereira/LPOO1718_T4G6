@@ -7,6 +7,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 
+import static com.fr.funrungame.controller.GameController.GAME_HEIGHT;
+import static com.fr.funrungame.controller.GameController.GAME_WIDTH;
+
 public class GameView extends ScreenAdapter {
 
     /**
@@ -25,11 +28,6 @@ public class GameView extends ScreenAdapter {
     private final FunRunGame game;
 
     /**
-     * The ball texture.
-     */
-    private final Texture ballTexture;
-
-    /**
      * The camera.
      */
     private final OrthographicCamera camera;
@@ -43,10 +41,7 @@ public class GameView extends ScreenAdapter {
     public GameView(FunRunGame game) {
         this.game = game;
 
-        game.getAssetManager().load("core/assets/ball.png", Texture.class);
-        game.getAssetManager().finishLoading();
-
-        ballTexture = (Texture) game.getAssetManager().get("core/assets/ball.png");
+        loadAssets();
 
         // Create the camera
         float ratio = ((float) Gdx.graphics.getHeight() / (float)Gdx.graphics.getWidth());
@@ -75,8 +70,20 @@ public class GameView extends ScreenAdapter {
 
         // Draw the texture
         game.getBatch().begin();
-        game.getBatch().draw(ballTexture, 0, 0);
+        drawBackground();
         game.getBatch().end();
+    }
+
+    private void loadAssets(){
+        game.getAssetManager().load("background.png", Texture.class);
+        game.getAssetManager().finishLoading();
+
+    }
+
+    private void drawBackground(){
+        Texture background = game.getAssetManager().get("background.png");
+        background.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
+        game.getBatch().draw(background, 0, 0, 0, 0, (int)(GAME_WIDTH / PIXEL_TO_METER), (int) (GAME_HEIGHT / PIXEL_TO_METER));
     }
 }
 

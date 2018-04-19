@@ -1,8 +1,8 @@
 package com.fr.funrungame.desktop;
 
-import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.fr.funrungame.FunRunGame;
+		import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
+		import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+		import com.fr.funrungame.FunRunGame;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
