@@ -1,26 +1,25 @@
 package com.fr.funrungame.view;
 
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.fr.funrungame.FunRunGame;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 import static com.fr.funrungame.controller.GameController.GAME_HEIGHT;
 import static com.fr.funrungame.controller.GameController.GAME_WIDTH;
 
 public class GameView extends ScreenAdapter {
 
-    /**
-     * Viewport width in meters. Height depends on screen ratio
-     */
-    private static final int VIEWPORT_WIDTH = 6;
+    private static final int VIEWPORT_WIDTH = 750;
 
-    /**
-     * A football is 22cm in diameter and the sprite has a width of 200px
-     */
-    private static final float PIXEL_TO_METER = 0.22f / 200;
+    private static final float VIEWPORT_HEIGHT = VIEWPORT_WIDTH * ((float) Gdx.graphics.getHeight() / (float) Gdx.graphics.getWidth());
+
+
+    Image background;
 
     /**
      * The game this screen belongs to.
@@ -30,7 +29,7 @@ public class GameView extends ScreenAdapter {
     /**
      * The camera.
      */
-    private final OrthographicCamera camera;
+    //private final OrthographicCamera camera;
 
 
     /**
@@ -43,12 +42,7 @@ public class GameView extends ScreenAdapter {
 
         loadAssets();
 
-        // Create the camera
-        float ratio = ((float) Gdx.graphics.getHeight() / (float)Gdx.graphics.getWidth());
-        camera = new OrthographicCamera(
-                VIEWPORT_WIDTH / PIXEL_TO_METER,
-                VIEWPORT_WIDTH / PIXEL_TO_METER * ratio
-        );
+        //camera = createCamera();
     }
 
     /**
@@ -61,12 +55,13 @@ public class GameView extends ScreenAdapter {
         super.render(delta);
 
         // Update the camera
-        camera.update();
-        game.getBatch().setProjectionMatrix(camera.combined);
+       // camera.update();
+        //game.getBatch().setProjectionMatrix(camera.combined);
 
         // Clear the screen
         Gdx.gl.glClearColor( 0/255f, 0/255f, 0/255f, 1 );
         Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
+
 
         // Draw the texture
         game.getBatch().begin();
@@ -74,16 +69,25 @@ public class GameView extends ScreenAdapter {
         game.getBatch().end();
     }
 
+    //private OrthographicCamera createCamera(){
+        //float ratio = ((float) Gdx.graphics.getHeight() / (float)Gdx.graphics.getWidth());
+       // OrthographicCamera camera = new OrthographicCamera(
+         //       VIEWPORT_WIDTH / PIXEL_TO_METER,
+          //      VIEWPORT_WIDTH / PIXEL_TO_METER * ratio
+        //);
+
+        //camera.position.set(camera.viewportWidth,camera.viewportHeight,0);
+        //return camera;
+   // }
+
     private void loadAssets(){
-        game.getAssetManager().load("background.png", Texture.class);
+        game.getAssetManager().load("background_menu.png", Texture.class);
         game.getAssetManager().finishLoading();
 
     }
 
     private void drawBackground(){
-        Texture background = game.getAssetManager().get("background.png");
-        background.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
-        game.getBatch().draw(background, 0, 0, 0, 0, (int)(GAME_WIDTH / PIXEL_TO_METER), (int) (GAME_HEIGHT / PIXEL_TO_METER));
+        game.getBatch().draw(game.getAssetManager().get("background_menu.png", Texture.class),0,0);
     }
 }
 
