@@ -14,12 +14,22 @@ import static com.fr.funrungame.controller.GameController.GAME_WIDTH;
 
 public class GameView extends ScreenAdapter {
 
-    private static final int VIEWPORT_WIDTH = 750;
+    /**
+     * Used to debug the position of the physics fixtures
+     */
+    private static final boolean DEBUG_PHYSICS = false;
 
-    private static final float VIEWPORT_HEIGHT = VIEWPORT_WIDTH * ((float) Gdx.graphics.getHeight() / (float) Gdx.graphics.getWidth());
+    /**
+     * How much meters does a pixel represent.
+     */
+    public final static float PIXEL_TO_METER = 0.04f;
 
+    /**
+     * The width of the viewport in meters. The height is
+     * automatically calculated using the screen ratio.
+     */
+    private static final float VIEWPORT_WIDTH = 30;
 
-    Image background;
 
     /**
      * The game this screen belongs to.
@@ -82,6 +92,7 @@ public class GameView extends ScreenAdapter {
 
     private void loadAssets(){
         game.getAssetManager().load("background_menu.png", Texture.class);
+        game.getAssetManager().load("alien.png", Texture.class);
         game.getAssetManager().finishLoading();
 
     }
