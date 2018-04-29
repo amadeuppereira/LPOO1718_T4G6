@@ -3,7 +3,7 @@
 
 ## Package and class diagram (UML)
 
-<img src="https://user-images.githubusercontent.com/25926554/39405267-2f0540b6-4b9a-11e8-86f8-7430a2c33211.PNG" width="100%"></img> 
+<img src="https://user-images.githubusercontent.com/25926554/39405853-23d1ed60-4ba5-11e8-9828-cb5112439049.png" width="100%"></img> 
 
 ## Design patterns (NEED TO FINISH)
   ### Model-View-Controller (MVC)
@@ -31,6 +31,42 @@
   
   
 ## GUI design
+
+  * ### Main Menu
+    ![MainMenu](https://user-images.githubusercontent.com/25926554/39405743-3c58dd06-4ba2-11e8-8116-853134c7f3f9.png)
+
+    **Functionalities:**
+    * Choose to Play a game.
+    * Choose to Customize the game (the player's skin).
+    * Choose to Exit the game.
+    
+  * ### Map Select Menu
+     ![MapSelectMenu](https://user-images.githubusercontent.com/25926554/39405755-a2a00684-4ba2-11e8-9073-a6f2c98d1dc1.png)
+     
+    **Functionalities:**
+    * Select map to play.
+    * Swipe down to navigate between maps.
+    * Button to return to the main menu.
+    
+   * ### Play Screen
+      ![PlayScreen](https://user-images.githubusercontent.com/25926554/39405767-19895534-4ba3-11e8-9c72-420c4c17e06e.png)
+      
+     **Functionalities:**
+     * Play the game using the arrows on the right side to jump or get down and the circle on the left side to use power ups.
+
+   * ### Pause Menu
+      ![PauseMenu](https://user-images.githubusercontent.com/25926554/39405796-170c8fb4-4ba4-11e8-9400-0985af63ddde.png)
+      
+     **Functionalities:**
+     * This screen appears when the cross from the Play Screen is pressed.
+     * In this screen the player is able to leave a game or continue.
+     
+   * ### Finish Menu
+      ![FinishMenu](https://user-images.githubusercontent.com/25926554/39405810-5d55dc46-4ba4-11e8-8fc8-9ee9b76d6e6b.png)
+           
+     **Functionalities:**
+     * Game standings and time accomplished.
+     * Return to main menu by pressing the arrow.
 
 ## Tests
 
