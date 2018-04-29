@@ -3,7 +3,7 @@
 
 ## Package and class diagram (UML)
 
-<img src="https://user-images.githubusercontent.com/25926554/39405853-23d1ed60-4ba5-11e8-9828-cb5112439049.png" width="100%"></img> 
+<img src="https://user-images.githubusercontent.com/25926554/39406005-b630065e-4ba7-11e8-914f-4b417a35916d.png" width="100%"></img> 
 
 ## Design patterns (NEED TO FINISH)
   ### Model-View-Controller (MVC)
@@ -33,12 +33,19 @@
 ## GUI design
 
   * ### Main Menu
-    ![MainMenu](https://user-images.githubusercontent.com/25926554/39405743-3c58dd06-4ba2-11e8-8116-853134c7f3f9.png)
+    ![MainMenu](https://user-images.githubusercontent.com/25926554/39405917-6099cd20-4ba6-11e8-9b35-85d3aad5e144.png)
 
     **Functionalities:**
     * Choose to Play a game.
-    * Choose to Customize the game (the player's skin).
+    * Choose to Customize the game (the player's avatar).
     * Choose to Exit the game.
+    
+  * ### Finish Menu
+    ![CustomizeMenu](https://user-images.githubusercontent.com/25926554/39405962-08d009fa-4ba7-11e8-9ebe-8ea3207e9192.png)
+    
+    **Functionalities:**
+    * By swiping left and right the User can choose which avatar his player will have.
+    * Button to return to the main menu.
     
   * ### Map Select Menu
      ![MapSelectMenu](https://user-images.githubusercontent.com/25926554/39405755-a2a00684-4ba2-11e8-9073-a6f2c98d1dc1.png)
@@ -52,15 +59,15 @@
       ![PlayScreen](https://user-images.githubusercontent.com/25926554/39405767-19895534-4ba3-11e8-9c72-420c4c17e06e.png)
       
      **Functionalities:**
-     * Play the game using the arrows on the right side to jump or get down.
-     * The circle on the left side is where the power ups will appear and can be activated.
+      * Play the game using the arrows on the right side to jump or get down.
+      * The circle on the left side is where the power ups will appear and can be activated.
 
    * ### Pause Menu
       ![PauseMenu](https://user-images.githubusercontent.com/25926554/39405796-170c8fb4-4ba4-11e8-9400-0985af63ddde.png)
       
      **Functionalities:**
      * This screen appears when the cross from the Play Screen is pressed.
-     * In this screen the player is able to leave a game or continue.
+     * In this screen the User is able to leave a running game or continue.
      
    * ### Finish Menu
       ![FinishMenu](https://user-images.githubusercontent.com/25926554/39405810-5d55dc46-4ba4-11e8-8fc8-9ee9b76d6e6b.png)
