@@ -1,6 +1,8 @@
 package com.fr.funrungame.model.entities;
 
-public class EntityModel {
+public abstract class EntityModel {
+
+    public enum ModelType {PLAYER, ENEMY, POWERUP, PLATFORM};
 
     /**
      * The x-coordinate of this model in meters.
@@ -51,4 +53,6 @@ public class EntityModel {
         this.x = x;
         this.y = y;
     }
+
+    public abstract ModelType getType();
 }

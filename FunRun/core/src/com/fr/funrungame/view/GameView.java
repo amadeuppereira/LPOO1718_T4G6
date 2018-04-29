@@ -2,12 +2,17 @@ package com.fr.funrungame.view;
 
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.Array;
 import com.fr.funrungame.FunRunGame;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.fr.funrungame.model.entities.EntityModel;
+import com.fr.funrungame.view.entities.EntityView;
+
+import java.util.List;
 
 import static com.fr.funrungame.controller.GameController.GAME_HEIGHT;
 import static com.fr.funrungame.controller.GameController.GAME_WIDTH;
@@ -40,6 +45,9 @@ public class GameView extends ScreenAdapter {
      * The camera.
      */
     //private final OrthographicCamera camera;
+
+
+    private List<EntityView> entityViews;
 
 
     /**
