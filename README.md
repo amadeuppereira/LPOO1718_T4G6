@@ -52,7 +52,8 @@
       ![PlayScreen](https://user-images.githubusercontent.com/25926554/39405767-19895534-4ba3-11e8-9c72-420c4c17e06e.png)
       
      **Functionalities:**
-     * Play the game using the arrows on the right side to jump or get down and the circle on the left side to use power ups.
+     * Play the game using the arrows on the right side to jump or get down.
+     * The circle on the left side is where the power ups will appear and can be activated.
 
    * ### Pause Menu
       ![PauseMenu](https://user-images.githubusercontent.com/25926554/39405796-170c8fb4-4ba4-11e8-9400-0985af63ddde.png)
