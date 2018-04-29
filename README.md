@@ -28,6 +28,18 @@
   Used in GameModel.
   The game only needs one GameModel object, that must be accessible to several other classes.
   
+  ### Update Method
+  Used in EntityModel (and subclasses).
+  Helps updating all entities in the game, rendering smoother animations.
+  
+  ### Game Loop
+  Used in GameModel.
+  To separate game speed from processor speed.
+  
+  ### State
+  Used in EntityModel.
+  The game models state is controlled by a state machine.
+  
   
   
 ## GUI design
@@ -85,10 +97,8 @@
 * Check character collision with terrain.
 * Check character collision with enemies.
 * Test if the player reached the end of the game.
-* (Pick up a power ups)
-* ....
+* Test getting powerups.
 * Check character invulnerability after colliding with an enemy.
 * Test if the player doesn't jump unless there is an object underneath him.
 * Test if the player doesn't jump unless there is an object immediately in front of him.
-* (Test menu change)
-* ....
+* Test map changing option.
