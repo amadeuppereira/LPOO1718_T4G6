@@ -3,7 +3,7 @@
 
 ## Package and class diagram (UML)
 
-<img src="https://user-images.githubusercontent.com/25926554/39405267-2f0540b6-4b9a-11e8-86f8-7430a2c33211.PNG" width="90%"></img> 
+<img src="https://user-images.githubusercontent.com/25926554/39405267-2f0540b6-4b9a-11e8-86f8-7430a2c33211.PNG" width="100%"></img> 
 
 ## Design patterns (NEED TO FINISH)
   ### Model-View-Controller (MVC)
