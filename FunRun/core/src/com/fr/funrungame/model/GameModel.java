@@ -36,6 +36,8 @@ public class GameModel {
 
     private GameModel(){
         players = new ArrayList<PlayerModel>();
+        players.add(new PlayerModel(10,10));
+        players.add(new PlayerModel(11,11));
         enemies = new ArrayList<EnemyModel>();
         powerUps = new ArrayList<PowerUpModel>();
 
