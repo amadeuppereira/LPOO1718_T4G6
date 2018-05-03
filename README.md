@@ -5,7 +5,7 @@
 
 <img src="https://user-images.githubusercontent.com/25926554/39406005-b630065e-4ba7-11e8-914f-4b417a35916d.png" width="100%"></img> 
 
-## Design patterns (NEED TO FINISH)
+## Design patterns
   ### Model-View-Controller (MVC)
   <img src=https://upload.wikimedia.org/wikipedia/commons/f/fd/MVC-Process.png>
   
