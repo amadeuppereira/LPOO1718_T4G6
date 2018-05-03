@@ -3,8 +3,10 @@ package com.fr.funrungame.controller;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
+import com.fr.funrungame.controller.entities.PlayerBody;
 import com.fr.funrungame.model.GameModel;
 import com.fr.funrungame.model.entities.EntityModel;
+import com.fr.funrungame.model.entities.PlayerModel;
 
 public class GameController implements ContactListener{
 
@@ -24,14 +26,27 @@ public class GameController implements ContactListener{
     public static final int GAME_HEIGHT = 1080;
 
     /**
+     * The movement speed.
+     */
+    private static final float MOVEMENT_SPEED = 15;
+
+    /**
+     * Accumulator used to calculate the simulation step.
+     */
+    private float accumulator;
+
+    /**
      * The physics world controlled by this controller.
      */
     private final World world;
+
+    private final PlayerBody playerBody;
 
 
     private GameController() {
         world = new World(new Vector2(0, 0), true);
 
+        playerBody = new PlayerBody(world, GameModel.getInstance().getPlayers().get(0));
 
         world.setContactListener(this);
     }
@@ -72,7 +87,7 @@ public class GameController implements ContactListener{
 //            world.step(1/60f, 6, 2);
 //            accumulator -= 1/60f;
 //        }
-//
+
         Array<Body> bodies = new Array<Body>();
         world.getBodies(bodies);
 
@@ -89,17 +104,27 @@ public class GameController implements ContactListener{
      * @param body The body to be verified.
      */
     private void verifyBounds(Body body) {
-//        if (body.getPosition().x < 0)
-//            body.setTransform(ARENA_WIDTH, body.getPosition().y, body.getAngle());
-//
-//        if (body.getPosition().y < 0)
-//            body.setTransform(body.getPosition().x, ARENA_HEIGHT, body.getAngle());
-//
-//        if (body.getPosition().x > ARENA_WIDTH)
-//            body.setTransform(0, body.getPosition().y, body.getAngle());
-//
-//        if (body.getPosition().y > ARENA_HEIGHT)
-//            body.setTransform(body.getPosition().x, 0, body.getAngle());
+        if (body.getPosition().x < 0)
+            body.setTransform(GAME_WIDTH, body.getPosition().y, body.getAngle());
+
+        if (body.getPosition().y < 0)
+            body.setTransform(body.getPosition().x, GAME_HEIGHT, body.getAngle());
+
+        if (body.getPosition().x > GAME_WIDTH)
+            body.setTransform(0, body.getPosition().y, body.getAngle());
+
+        if (body.getPosition().y > GAME_HEIGHT)
+            body.setTransform(body.getPosition().x, 0, body.getAngle());
+    }
+
+    public void moveLeft(float delta) {
+        //if(playerBody.getX()-(MOVEMENT_SPEED * delta)>0) {
+            playerBody.setTransform(playerBody.getX() - (MOVEMENT_SPEED * delta), playerBody.getY());
+        //}
+    }
+
+    public void moveRight(float delta) {
+        playerBody.setTransform(playerBody.getX()+(MOVEMENT_SPEED * delta), playerBody.getY());
     }
 
     /**

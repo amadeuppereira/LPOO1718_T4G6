@@ -46,4 +46,13 @@ public abstract class EntityBody {
         return body.getPosition().y;
     }
 
+    /**
+     * Wraps the setTransform method from the Box2D body class.
+     *
+     * @param x the new x-coordinate for this body
+     * @param y the new y-coordinate for this body
+     */
+    public void setTransform(float x, float y) {
+        body.setTransform(x, y,0);
+    }
 }

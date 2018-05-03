@@ -5,6 +5,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.Game;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class FunRunGame extends Game {
 	private SpriteBatch batch;
 	private AssetManager assetManager;

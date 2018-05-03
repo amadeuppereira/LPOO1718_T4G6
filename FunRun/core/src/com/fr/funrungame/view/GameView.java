@@ -1,7 +1,12 @@
 package com.fr.funrungame.view;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.Array;
@@ -11,13 +16,16 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.fr.funrungame.controller.GameController;
 import com.fr.funrungame.model.GameModel;
 import com.fr.funrungame.model.entities.EntityModel;
 import com.fr.funrungame.model.entities.PlayerModel;
 import com.fr.funrungame.view.entities.EntityView;
 import com.fr.funrungame.view.entities.PlayerView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.fr.funrungame.controller.GameController.GAME_HEIGHT;
 import static com.fr.funrungame.controller.GameController.GAME_WIDTH;
@@ -38,7 +46,7 @@ public class GameView extends ScreenAdapter {
      * The width of the viewport in meters. The height is
      * automatically calculated using the screen ratio.
      */
-    private static final float VIEWPORT_WIDTH = 30;
+    private static final float VIEWPORT_WIDTH = 40;
 
 
     /**
@@ -62,6 +70,9 @@ public class GameView extends ScreenAdapter {
      */
     private Matrix4 debugCamera;
 
+    private OrthogonalTiledMapRenderer mapRenderer;
+
+    private Map<Integer,String> gameMaps = new HashMap<Integer, String>();
 
     private List<EntityView> entityViews;
 
@@ -76,7 +87,13 @@ public class GameView extends ScreenAdapter {
 
         loadAssets();
 
+        TiledMap map = game.getAssetManager().get(gameMaps.get(GameModel.getInstance().getCurrentMap()), TiledMap.class);
+        GameModel.getInstance().setMap(map);
+        if(mapRenderer != null)
+            mapRenderer.setMap(map);
+
         camera = createCamera();
+        mapRenderer = new OrthogonalTiledMapRenderer(GameModel.getInstance().getMap(),game.getBatch());
     }
 
 
@@ -109,7 +126,11 @@ public class GameView extends ScreenAdapter {
     public void render(float delta) {
         super.render(delta);
 
-        // Update the camera
+        handleInputs(delta);
+
+        GameController.getInstance().update(delta);
+
+        camera.position.set(GameModel.getInstance().getPlayers().get(0).getX() / PIXEL_TO_METER, GameModel.getInstance().getPlayers().get(0).getY() / PIXEL_TO_METER, 0);
         camera.update();
         game.getBatch().setProjectionMatrix(camera.combined);
 
@@ -117,10 +138,15 @@ public class GameView extends ScreenAdapter {
         Gdx.gl.glClearColor( 0/255f, 0/255f, 0/255f, 1 );
         Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
 
+        game.getBatch().begin();
+        drawBackground();
+        game.getBatch().end();
+
+        mapRenderer.setView(camera);
+        mapRenderer.render();
 
         // Draw the texture
         game.getBatch().begin();
-        drawBackground();
         drawEntities();
         game.getBatch().end();
     }
@@ -129,12 +155,20 @@ public class GameView extends ScreenAdapter {
     private void loadAssets(){
         game.getAssetManager().load("background_menu.png", Texture.class);
         game.getAssetManager().load("player.png", Texture.class);
+        loadMaps();
         game.getAssetManager().finishLoading();
 
     }
 
+    private void loadMaps(){
+        gameMaps.put(1, "maps/map1.tmx");
+        game.getAssetManager().setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
+        for(String mapPath : gameMaps.values()){
+            game.getAssetManager().load(mapPath, TiledMap.class);
+        }
+    }
+
     private void drawBackground(){
-        //game.getBatch().draw(game.getAssetManager().get("background_menu.png", Texture.class),0,0);
         Texture background = game.getAssetManager().get("background_menu.png", Texture.class);
         background.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
         game.getBatch().draw(background, 0, 0, 0, 0, (int)(GAME_WIDTH / PIXEL_TO_METER), (int) (GAME_HEIGHT / PIXEL_TO_METER));
@@ -163,6 +197,20 @@ public class GameView extends ScreenAdapter {
             EntityView view = new PlayerView(game);
             view.update(player);
             view.draw(game.getBatch());
+        }
+    }
+
+    /**
+     * Handles any inputs and passes them to the controller.
+     *
+     * @param delta time since last time inputs where handled in seconds
+     */
+    private void handleInputs(float delta) {
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+            GameController.getInstance().moveLeft(delta);
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+            GameController.getInstance().moveRight(delta);
         }
     }
 }

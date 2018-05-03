@@ -1,5 +1,6 @@
 package com.fr.funrungame.model;
 
+import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.fr.funrungame.model.entities.*;
 
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public class GameModel {
 
     private List<PowerUpModel> powerUps;
 
-    private List<GameMap> maps;
+    private TiledMap map;
 
     private int currentMap;
 
@@ -36,13 +37,11 @@ public class GameModel {
 
     private GameModel(){
         players = new ArrayList<PlayerModel>();
-        players.add(new PlayerModel(10,10));
-        players.add(new PlayerModel(11,11));
+        players.add(new PlayerModel(10,48));
         enemies = new ArrayList<EnemyModel>();
         powerUps = new ArrayList<PowerUpModel>();
 
-        //readMaps() - need to implement a function that reads the maps from a file
-        maps = new ArrayList<GameMap>();
+        currentMap = 1;
     }
 
     /**
@@ -66,7 +65,13 @@ public class GameModel {
 
     }
 
+    public TiledMap getMap() {
+        return map;
+    }
 
+    public void setMap(TiledMap map){
+        this.map = map;
+    }
 
     public List<PlayerModel> getPlayers() {
         return players;
@@ -78,10 +83,6 @@ public class GameModel {
 
     public List<PowerUpModel> getPowerUps() {
         return powerUps;
-    }
-
-    public List<GameMap> getMaps() {
-        return maps;
     }
 
     public int getCurrentMap() {
