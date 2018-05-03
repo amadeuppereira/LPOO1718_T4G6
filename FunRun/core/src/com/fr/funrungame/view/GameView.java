@@ -3,6 +3,7 @@ package com.fr.funrungame.view;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -48,7 +49,6 @@ public class GameView extends ScreenAdapter {
      */
     private static final float VIEWPORT_WIDTH = 40;
 
-
     /**
      * The game this screen belongs to.
      */
@@ -74,7 +74,7 @@ public class GameView extends ScreenAdapter {
 
     private Map<Integer,String> gameMaps = new HashMap<Integer, String>();
 
-    private List<EntityView> entityViews;
+    EntityView view; //because of PlayerView draw
 
 
     /**
@@ -86,6 +86,8 @@ public class GameView extends ScreenAdapter {
         this.game = game;
 
         loadAssets();
+
+        view = new PlayerView(game);
 
         TiledMap map = game.getAssetManager().get(gameMaps.get(GameModel.getInstance().getCurrentMap()), TiledMap.class);
         GameModel.getInstance().setMap(map);
@@ -104,7 +106,6 @@ public class GameView extends ScreenAdapter {
      */
     private OrthographicCamera createCamera() {
         OrthographicCamera camera = new OrthographicCamera(VIEWPORT_WIDTH / PIXEL_TO_METER, VIEWPORT_WIDTH / PIXEL_TO_METER * ((float) Gdx.graphics.getHeight() / (float)Gdx.graphics.getWidth()));
-
         camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0);
         camera.update();
 
@@ -130,9 +131,7 @@ public class GameView extends ScreenAdapter {
 
         GameController.getInstance().update(delta);
 
-        camera.position.set(GameModel.getInstance().getPlayers().get(0).getX() / PIXEL_TO_METER, GameModel.getInstance().getPlayers().get(0).getY() / PIXEL_TO_METER, 0);
-        camera.update();
-        game.getBatch().setProjectionMatrix(camera.combined);
+        cameraHandler();
 
         // Clear the screen
         Gdx.gl.glClearColor( 0/255f, 0/255f, 0/255f, 1 );
@@ -151,10 +150,24 @@ public class GameView extends ScreenAdapter {
         game.getBatch().end();
     }
 
+    private void cameraHandler(){
+        float x = GameModel.getInstance().getPlayers().get(0).getX();
+        float y = GameModel.getInstance().getPlayers().get(0).getY() + 5;
+        if(GameModel.getInstance().getPlayers().get(0).getX() < 20){
+            camera.position.set(20 / PIXEL_TO_METER, y / PIXEL_TO_METER, 0);
+        }
+        else{
+            camera.position.set(x / PIXEL_TO_METER, y / PIXEL_TO_METER, 0);
+        }
+        camera.update();
+        game.getBatch().setProjectionMatrix(camera.combined);
+    }
 
     private void loadAssets(){
         game.getAssetManager().load("background_menu.png", Texture.class);
         game.getAssetManager().load("player.png", Texture.class);
+        game.getAssetManager().load("player_running.png", Texture.class);
+        game.getAssetManager().load("player_jumping.png", Texture.class);
         loadMaps();
         game.getAssetManager().finishLoading();
 
@@ -170,7 +183,6 @@ public class GameView extends ScreenAdapter {
 
     private void drawBackground(){
         Texture background = game.getAssetManager().get("background_menu.png", Texture.class);
-        background.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
         game.getBatch().draw(background, 0, 0, 0, 0, (int)(GAME_WIDTH / PIXEL_TO_METER), (int) (GAME_HEIGHT / PIXEL_TO_METER));
     }
 
@@ -194,7 +206,7 @@ public class GameView extends ScreenAdapter {
 //
         List<PlayerModel> players = GameModel.getInstance().getPlayers();
         for (PlayerModel player : players){
-            EntityView view = new PlayerView(game);
+            //EntityView view = new PlayerView(game);   - fiz como uma variável global
             view.update(player);
             view.draw(game.getBatch());
         }
@@ -212,6 +224,10 @@ public class GameView extends ScreenAdapter {
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
             GameController.getInstance().moveRight(delta);
         }
+        if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+            GameController.getInstance().jump(delta);
+        }
+
     }
 }
 

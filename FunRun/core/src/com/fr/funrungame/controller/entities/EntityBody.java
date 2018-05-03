@@ -55,4 +55,13 @@ public abstract class EntityBody {
     public void setTransform(float x, float y) {
         body.setTransform(x, y,0);
     }
+
+    /**
+     * Wraps the getUserData method from the Box2D body class.
+     *
+     * @return the user data
+     */
+    public Object getUserData() {
+        return body.getUserData();
+    }
 }

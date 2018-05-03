@@ -104,11 +104,11 @@ public class GameController implements ContactListener{
      * @param body The body to be verified.
      */
     private void verifyBounds(Body body) {
-        if (body.getPosition().x < 0)
-            body.setTransform(GAME_WIDTH, body.getPosition().y, body.getAngle());
+        if (body.getPosition().x < 1)
+            body.setTransform(1, body.getPosition().y, body.getAngle());
 
         if (body.getPosition().y < 0)
-            body.setTransform(body.getPosition().x, GAME_HEIGHT, body.getAngle());
+            body.setTransform(body.getPosition().x, 0, body.getAngle());
 
         if (body.getPosition().x > GAME_WIDTH)
             body.setTransform(0, body.getPosition().y, body.getAngle());
@@ -118,13 +118,17 @@ public class GameController implements ContactListener{
     }
 
     public void moveLeft(float delta) {
-        //if(playerBody.getX()-(MOVEMENT_SPEED * delta)>0) {
             playerBody.setTransform(playerBody.getX() - (MOVEMENT_SPEED * delta), playerBody.getY());
-        //}
     }
 
     public void moveRight(float delta) {
         playerBody.setTransform(playerBody.getX()+(MOVEMENT_SPEED * delta), playerBody.getY());
+        ((PlayerModel)playerBody.getUserData()).setRunning(true);
+    }
+
+    public void jump(float delta){
+        playerBody.setTransform(playerBody.getX(), playerBody.getY()+(MOVEMENT_SPEED * delta));
+        ((PlayerModel)playerBody.getUserData()).setJumping(true);
     }
 
     /**
