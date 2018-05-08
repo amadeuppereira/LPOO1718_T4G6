@@ -11,6 +11,8 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.fr.funrungame.FunRunGame;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.Gdx;
@@ -21,6 +23,7 @@ import com.fr.funrungame.controller.GameController;
 import com.fr.funrungame.model.GameModel;
 import com.fr.funrungame.model.entities.EntityModel;
 import com.fr.funrungame.model.entities.PlayerModel;
+import com.fr.funrungame.view.Screens.Hud;
 import com.fr.funrungame.view.entities.EntityView;
 import com.fr.funrungame.view.entities.PlayerView;
 
@@ -59,6 +62,8 @@ public class GameView extends ScreenAdapter {
      */
     private final OrthographicCamera camera;
 
+    private Viewport gamePort;
+
     /**
      * A renderer used to debug the physical fixtures.
      */
@@ -70,11 +75,14 @@ public class GameView extends ScreenAdapter {
      */
     private Matrix4 debugCamera;
 
+    private TiledMap map;
     private OrthogonalTiledMapRenderer mapRenderer;
 
     private Map<Integer,String> gameMaps = new HashMap<Integer, String>();
 
     EntityView view; //because of PlayerView draw
+
+    private Hud hud;
 
 
     /**
@@ -89,12 +97,16 @@ public class GameView extends ScreenAdapter {
 
         view = new PlayerView(game);
 
-        TiledMap map = game.getAssetManager().get(gameMaps.get(GameModel.getInstance().getCurrentMap()), TiledMap.class);
+        camera = createCamera();
+
+        gamePort = new FitViewport(GAME_WIDTH , GAME_HEIGHT, camera);
+
+        hud = new Hud(game.getBatch());
+
+        map = game.getAssetManager().get(gameMaps.get(GameModel.getInstance().getCurrentMap()), TiledMap.class);
         GameModel.getInstance().setMap(map);
         if(mapRenderer != null)
             mapRenderer.setMap(map);
-
-        camera = createCamera();
         mapRenderer = new OrthogonalTiledMapRenderer(GameModel.getInstance().getMap(),game.getBatch());
     }
 
@@ -140,6 +152,9 @@ public class GameView extends ScreenAdapter {
         game.getBatch().begin();
         drawBackground();
         game.getBatch().end();
+
+        game.getBatch().setProjectionMatrix(hud.stage.getCamera().combined);
+        hud.stage.draw();
 
         mapRenderer.setView(camera);
         mapRenderer.render();
@@ -228,6 +243,11 @@ public class GameView extends ScreenAdapter {
             GameController.getInstance().jump(delta);
         }
 
+    }
+
+    @Override
+    public void resize(int width, int height){
+        gamePort.update(width, height);
     }
 }
 

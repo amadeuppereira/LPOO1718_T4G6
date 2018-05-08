@@ -3,6 +3,7 @@ package com.fr.funrungame.controller;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
+import com.fr.funrungame.controller.entities.EntityBody;
 import com.fr.funrungame.controller.entities.PlayerBody;
 import com.fr.funrungame.model.GameModel;
 import com.fr.funrungame.model.entities.EntityModel;
@@ -18,12 +19,12 @@ public class GameController implements ContactListener{
     /**
      * The arena width in meters.
      */
-    public static final int GAME_WIDTH = 1980;
+    public static final int GAME_WIDTH = 800;
 
     /**
      * The arena height in meters.
      */
-    public static final int GAME_HEIGHT = 1080;
+    public static final int GAME_HEIGHT = 480;
 
     /**
      * The movement speed.
@@ -118,7 +119,7 @@ public class GameController implements ContactListener{
     }
 
     public void moveLeft(float delta) {
-            playerBody.setTransform(playerBody.getX() - (MOVEMENT_SPEED * delta), playerBody.getY());
+        playerBody.setTransform(playerBody.getX() - (MOVEMENT_SPEED * delta), playerBody.getY());
     }
 
     public void moveRight(float delta) {
