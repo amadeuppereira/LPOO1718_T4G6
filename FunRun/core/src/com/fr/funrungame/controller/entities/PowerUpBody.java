@@ -6,6 +6,6 @@ import com.fr.funrungame.model.entities.EntityModel;
 public class PowerUpBody extends EntityBody {
 
     public PowerUpBody(World world, EntityModel model) {
-        super(world, model);
+        super();
     }
 }

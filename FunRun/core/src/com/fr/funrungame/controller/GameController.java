@@ -1,13 +1,20 @@
 package com.fr.funrungame.controller;
 
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import com.fr.funrungame.controller.entities.EntityBody;
+import com.fr.funrungame.controller.entities.PlatformBody;
 import com.fr.funrungame.controller.entities.PlayerBody;
 import com.fr.funrungame.model.GameModel;
 import com.fr.funrungame.model.entities.EntityModel;
 import com.fr.funrungame.model.entities.PlayerModel;
+import com.fr.funrungame.view.GameView;
+
+import java.util.List;
 
 public class GameController implements ContactListener{
 
@@ -43,11 +50,17 @@ public class GameController implements ContactListener{
 
     private final PlayerBody playerBody;
 
+    private List<PlatformBody> platformsBody;
+
 
     private GameController() {
         world = new World(new Vector2(0, 0), true);
 
         playerBody = new PlayerBody(world, GameModel.getInstance().getPlayers().get(0));
+
+        for(int i = 0; i < GameModel.getInstance().getPlatformsModel().size(); i++){
+            platformsBody.add(new PlatformBody(world,GameModel.getInstance().getPlatformsModel().get(i), GameModel.getInstance().getPlatformsModel().get(i).getObject()));
+        }
 
         world.setContactListener(this);
     }

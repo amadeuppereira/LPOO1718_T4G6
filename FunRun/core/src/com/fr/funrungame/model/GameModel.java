@@ -1,10 +1,15 @@
 package com.fr.funrungame.model;
 
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.math.Rectangle;
 import com.fr.funrungame.model.entities.*;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.fr.funrungame.view.GameView.PIXEL_TO_METER;
 
 public class GameModel {
 
@@ -19,6 +24,8 @@ public class GameModel {
 
     private List<PowerUpModel> powerUps;
 
+    private List<PlatformModel> platformsModel;
+
     private TiledMap map;
 
     private int currentMap;
@@ -30,20 +37,29 @@ public class GameModel {
      * @return the singleton instance
      */
     public static GameModel getInstance() {
-        if (instance == null)
+        if (instance == null) {
             instance = new GameModel();
+        }
         return instance;
     }
 
     private GameModel(){
         players = new ArrayList<PlayerModel>();
-        players.add(new PlayerModel(10,48));
         enemies = new ArrayList<EnemyModel>();
         powerUps = new ArrayList<PowerUpModel>();
-
+        platformsModel = new ArrayList<PlatformModel>();
         currentMap = 1;
     }
 
+    public void addEntities(){
+        players.add(new PlayerModel(10,48));
+
+        //not sure if it is layer 0
+        for(MapObject object : map.getLayers().get(0).getObjects().getByType(RectangleMapObject.class)){
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            platformsModel.add(new PlatformModel(PIXEL_TO_METER *(rect.getX()+rect.getWidth()/2),PIXEL_TO_METER * (rect.getY() + rect.getHeight()/2), (RectangleMapObject) object));
+        }
+    }
     /**
      * Removes a model from this game.
      *
@@ -87,5 +103,9 @@ public class GameModel {
 
     public int getCurrentMap() {
         return currentMap;
+    }
+
+    public List<PlatformModel> getPlatformsModel() {
+        return platformsModel;
     }
 }

@@ -17,7 +17,7 @@ public class PlayerView extends EntityView {
     /**
      * The time between the animation frames
      */
-    private static final float FRAME_TIME = 0.08f;
+    private static final float FRAME_TIME = 0.09f;
 
     /**
      * The animation used when the player is running

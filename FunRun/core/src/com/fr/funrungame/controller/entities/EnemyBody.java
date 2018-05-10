@@ -6,6 +6,6 @@ import com.fr.funrungame.model.entities.EntityModel;
 public class EnemyBody extends EntityBody{
 
     public EnemyBody(World world, EntityModel model) {
-        super(world, model);
+        super();
     }
 }
