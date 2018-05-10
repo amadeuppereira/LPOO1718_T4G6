@@ -27,5 +27,6 @@ public class PlatformBody extends EntityBody {
         shape.setAsBox(rect.getWidth()/2, rect.getHeight()/2);
         fixturedef.shape = shape;
         body.createFixture(fixturedef);
+        body.setUserData(model);
     }
 }

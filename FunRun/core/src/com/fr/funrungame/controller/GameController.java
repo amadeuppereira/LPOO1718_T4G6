@@ -14,6 +14,7 @@ import com.fr.funrungame.model.entities.EntityModel;
 import com.fr.funrungame.model.entities.PlayerModel;
 import com.fr.funrungame.view.GameView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameController implements ContactListener{
@@ -58,6 +59,7 @@ public class GameController implements ContactListener{
 
         playerBody = new PlayerBody(world, GameModel.getInstance().getPlayers().get(0));
 
+        platformsBody = new ArrayList<PlatformBody>();
         for(int i = 0; i < GameModel.getInstance().getPlatformsModel().size(); i++){
             platformsBody.add(new PlatformBody(world,GameModel.getInstance().getPlatformsModel().get(i), GameModel.getInstance().getPlatformsModel().get(i).getObject()));
         }
@@ -104,7 +106,6 @@ public class GameController implements ContactListener{
 
         Array<Body> bodies = new Array<Body>();
         world.getBodies(bodies);
-
         for (Body body : bodies) {
             verifyBounds(body);
             ((EntityModel) body.getUserData()).setPosition(body.getPosition().x, body.getPosition().y);
@@ -144,6 +145,11 @@ public class GameController implements ContactListener{
         playerBody.setTransform(playerBody.getX(), playerBody.getY()+(MOVEMENT_SPEED * delta));
         ((PlayerModel)playerBody.getUserData()).setJumping(true);
     }
+
+    public void moveDown(float delta) {
+        playerBody.setTransform(playerBody.getX(), playerBody.getY() - (MOVEMENT_SPEED * delta));
+    }
+
 
     /**
      * A contact between two objects was detected

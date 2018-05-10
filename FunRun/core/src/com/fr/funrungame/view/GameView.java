@@ -171,8 +171,8 @@ public class GameView extends ScreenAdapter {
     private void cameraHandler(){
         float x = GameModel.getInstance().getPlayers().get(0).getX();
         float y = GameModel.getInstance().getPlayers().get(0).getY() + 5;
-        if(GameModel.getInstance().getPlayers().get(0).getX() < 20){
-            camera.position.set(20 / PIXEL_TO_METER, y / PIXEL_TO_METER, 0);
+        if(GameModel.getInstance().getPlayers().get(0).getX() < 0){
+            camera.position.set(0 / PIXEL_TO_METER, y / PIXEL_TO_METER, 0);
         }
         else{
             camera.position.set(x / PIXEL_TO_METER, y / PIXEL_TO_METER, 0);
@@ -192,7 +192,7 @@ public class GameView extends ScreenAdapter {
     }
 
     private void loadMaps(){
-        gameMaps.put(1, "maps/map1.tmx");
+        gameMaps.put(1, "maps/map2.tmx");
         game.getAssetManager().setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
         for(String mapPath : gameMaps.values()){
             game.getAssetManager().load(mapPath, TiledMap.class);
@@ -244,6 +244,9 @@ public class GameView extends ScreenAdapter {
         }
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
             GameController.getInstance().jump(delta);
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+            GameController.getInstance().moveDown(delta);
         }
 
     }
