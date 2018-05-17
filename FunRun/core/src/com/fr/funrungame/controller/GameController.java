@@ -107,7 +107,7 @@ public class GameController implements ContactListener{
         Array<Body> bodies = new Array<Body>();
         world.getBodies(bodies);
         for (Body body : bodies) {
-            verifyBounds(body);
+            //verifyBounds(body);
             ((EntityModel) body.getUserData()).setPosition(body.getPosition().x, body.getPosition().y);
         }
     }
