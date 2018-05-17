@@ -154,10 +154,6 @@ public class GameView extends ScreenAdapter {
         //drawBackground();
         game.getBatch().end();
 
-        debugCamera = camera.combined.cpy();
-        debugCamera.scl(1 / PIXEL_TO_METER);
-        debugRenderer.render(GameController.getInstance().getWorld(), debugCamera);
-
         game.getBatch().setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
 
@@ -169,13 +165,19 @@ public class GameView extends ScreenAdapter {
         drawEntities();
         game.getBatch().end();
 
+        if (DEBUG_PHYSICS) {
+            debugCamera = camera.combined.cpy();
+            debugCamera.scl(1 / PIXEL_TO_METER);
+            debugRenderer.render(GameController.getInstance().getWorld(), debugCamera);
+        }
+
     }
 
     private void cameraHandler(){
         float x = GameModel.getInstance().getPlayers().get(0).getX();
-        float y = GameModel.getInstance().getPlayers().get(0).getY() + 5;
+        float y = GameModel.getInstance().getPlayers().get(0).getY();
 
-        camera.position.set(x, y, 0);
+        camera.position.set(x / PIXEL_TO_METER, y / PIXEL_TO_METER + 100, 0);
 
         camera.update();
         game.getBatch().setProjectionMatrix(camera.combined);

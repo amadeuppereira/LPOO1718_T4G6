@@ -52,9 +52,8 @@ public abstract class EntityBody {
         body.setTransform(x, y,0);
     }
 
-    public void applyForce() {
-                body.applyForceToCenter(0, 100, true);
-        
+    public void applyForce(float x, float y) {
+        body.applyForceToCenter(x, y, true);
     }
 
 

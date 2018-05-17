@@ -133,18 +133,21 @@ public class GameController implements ContactListener{
     }
 
     public void moveLeft(float delta) {
+        playerBody.applyForce(-10, 0);
         playerBody.setTransform(playerBody.getX() - (MOVEMENT_SPEED * delta), playerBody.getY());
     }
 
     public void moveRight(float delta) {
-        playerBody.setTransform(playerBody.getX()+(MOVEMENT_SPEED * delta), playerBody.getY());
+        playerBody.applyForce(10, 0);
+        //playerBody.setTransform(playerBody.getX()+(MOVEMENT_SPEED * delta), playerBody.getY());
         ((PlayerModel)playerBody.getUserData()).setRunning(true);
     }
 
     public void jump(float delta){
-        playerBody.applyForce();
+        playerBody.jump();
+//        playerBody.applyForce(0, 100);
 //        playerBody.setTransform(playerBody.getX(), playerBody.getY()+(MOVEMENT_SPEED * delta));
-        ((PlayerModel)playerBody.getUserData()).setJumping(true);
+//        ((PlayerModel)playerBody.getUserData()).setJumping(true);
     }
 
     public void moveDown(float delta) {

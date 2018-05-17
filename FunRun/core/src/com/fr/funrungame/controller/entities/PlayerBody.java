@@ -7,6 +7,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.fr.funrungame.model.entities.EntityModel;
+import com.fr.funrungame.model.entities.PlayerModel;
 
 import static com.fr.funrungame.view.GameView.PIXEL_TO_METER;
 
@@ -30,5 +31,11 @@ public class PlayerBody extends EntityBody {
         FixtureDef fixturedef = new FixtureDef();
         fixturedef.shape = shape;
         body.createFixture(fixturedef);
+    }
+
+    public void jump() {
+            applyForce(0, 100);
+//        playerBody.setTransform(playerBody.getX(), playerBody.getY()+(MOVEMENT_SPEED * delta));
+            ((PlayerModel) getUserData()).setJumping(true);
     }
 }
