@@ -17,6 +17,8 @@ import com.fr.funrungame.view.GameView;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.fr.funrungame.view.GameView.PIXEL_TO_METER;
+
 public class GameController implements ContactListener{
 
     /**
@@ -37,7 +39,7 @@ public class GameController implements ContactListener{
     /**
      * The movement speed.
      */
-    private static final float MOVEMENT_SPEED = 15;
+    private static final float MOVEMENT_SPEED = 1;
 
     /**
      * Accumulator used to calculate the simulation step.
@@ -55,7 +57,7 @@ public class GameController implements ContactListener{
 
 
     private GameController() {
-        world = new World(new Vector2(0, 0), true);
+        world = new World(new Vector2(0, -9.8f), true);
 
         playerBody = new PlayerBody(world, GameModel.getInstance().getPlayers().get(0));
 
@@ -94,15 +96,13 @@ public class GameController implements ContactListener{
      */
     public void update(float delta) {
         GameModel.getInstance().update(delta);
-//
-//        timeToNextShoot -= delta;
-//
-//        float frameTime = Math.min(delta, 0.25f);
-//        accumulator += frameTime;
-//        while (accumulator >= 1/60f) {
-//            world.step(1/60f, 6, 2);
-//            accumulator -= 1/60f;
-//        }
+
+        float frameTime = Math.min(delta, 0.25f);
+        accumulator += frameTime;
+        while (accumulator >= 1/60f) {
+            world.step(1/60f, 6, 2);
+            accumulator -= 1/60f;
+        }
 
         Array<Body> bodies = new Array<Body>();
         world.getBodies(bodies);
@@ -142,7 +142,8 @@ public class GameController implements ContactListener{
     }
 
     public void jump(float delta){
-        playerBody.setTransform(playerBody.getX(), playerBody.getY()+(MOVEMENT_SPEED * delta));
+        playerBody.applyForce();
+//        playerBody.setTransform(playerBody.getX(), playerBody.getY()+(MOVEMENT_SPEED * delta));
         ((PlayerModel)playerBody.getUserData()).setJumping(true);
     }
 

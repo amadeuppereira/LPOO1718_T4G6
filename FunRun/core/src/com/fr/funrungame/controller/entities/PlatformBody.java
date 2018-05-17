@@ -20,15 +20,13 @@ public class PlatformBody extends EntityBody {
         Rectangle rect = object.getRectangle();
 
         bodydef.type = BodyDef.BodyType.StaticBody;
-        bodydef.position.set(rect.getX() + rect.getWidth() / 2, rect.getY() + rect.getHeight() / 2);
+        bodydef.position.set((rect.getX() + rect.getWidth() / 2) * PIXEL_TO_METER, (rect.getY() + rect.getHeight() / 2) * PIXEL_TO_METER);
 
         this.body = world.createBody(bodydef);
 
-        shape.setAsBox((rect.getWidth() / 2), (rect.getHeight() / 2));
+        shape.setAsBox((rect.getWidth() / 2) * PIXEL_TO_METER, (rect.getHeight() / 2) * PIXEL_TO_METER);
         fixturedef.shape = shape;
         body.createFixture(fixturedef);
         body.setUserData(model);
-
-        System.out.println(body.getPosition().x);
     }
 }

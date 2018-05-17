@@ -38,12 +38,12 @@ public class GameView extends ScreenAdapter {
     /**
      * Used to debug the position of the physics fixtures
      */
-    private static final boolean DEBUG_PHYSICS = false;
+    private static final boolean DEBUG_PHYSICS = true;
 
     /**
      * How much meters does a pixel represent.
      */
-    public final static float PIXEL_TO_METER = 0.04f;
+    public final static float PIXEL_TO_METER = 0.015f;
 
     /**
      * The width of the viewport in meters. The height is
@@ -151,32 +151,32 @@ public class GameView extends ScreenAdapter {
         Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
 
         game.getBatch().begin();
-        drawBackground();
+        //drawBackground();
         game.getBatch().end();
 
-        debugRenderer.render(GameController.getInstance().getWorld(), camera.combined);
+        debugCamera = camera.combined.cpy();
+        debugCamera.scl(1 / PIXEL_TO_METER);
+        debugRenderer.render(GameController.getInstance().getWorld(), debugCamera);
 
         game.getBatch().setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
 
         mapRenderer.setView(camera);
-        mapRenderer.render();
+        //mapRenderer.render();
 
         // Draw the texture
         game.getBatch().begin();
         drawEntities();
         game.getBatch().end();
+
     }
 
     private void cameraHandler(){
         float x = GameModel.getInstance().getPlayers().get(0).getX();
         float y = GameModel.getInstance().getPlayers().get(0).getY() + 5;
-        if(GameModel.getInstance().getPlayers().get(0).getX() < 0){
-            camera.position.set(0 / PIXEL_TO_METER, y / PIXEL_TO_METER, 0);
-        }
-        else{
-            camera.position.set(x / PIXEL_TO_METER, y / PIXEL_TO_METER, 0);
-        }
+
+        camera.position.set(x, y, 0);
+
         camera.update();
         game.getBatch().setProjectionMatrix(camera.combined);
     }
@@ -201,7 +201,7 @@ public class GameView extends ScreenAdapter {
 
     private void drawBackground(){
         Texture background = game.getAssetManager().get("background_menu.png", Texture.class);
-        game.getBatch().draw(background, 0, 0, 0, 0, (int)(GAME_WIDTH / PIXEL_TO_METER), (int) (GAME_HEIGHT / PIXEL_TO_METER));
+        game.getBatch().draw(background, 0, 0, 0, 0, (int)(GAME_WIDTH), (int) (GAME_HEIGHT));
     }
 
     /**

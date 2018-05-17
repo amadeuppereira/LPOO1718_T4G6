@@ -52,12 +52,11 @@ public class GameModel {
     }
 
     public void addEntities(){
-        players.add(new PlayerModel(0,5));
+        players.add(new PlayerModel(1,3));
 
         for(MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             platformsModel.add(new PlatformModel(PIXEL_TO_METER*(rect.getX()+rect.getWidth()/2),PIXEL_TO_METER*(rect.getY() + rect.getHeight()/2), (RectangleMapObject) object));
-            //platformsModel.add(new PlatformModel((rect.getX()+rect.getWidth()/2),(rect.getY() + rect.getHeight()/2), (RectangleMapObject) object));
         }
     }
     /**
