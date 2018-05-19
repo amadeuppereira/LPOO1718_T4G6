@@ -105,6 +105,17 @@ public class GameController implements ContactListener{
             accumulator -= 1/60f;
         }
 
+        playerVerifications();
+
+        Array<Body> bodies = new Array<Body>();
+        world.getBodies(bodies);
+        for (Body body : bodies) {
+            //verifyBounds(body);
+            ((EntityModel) body.getUserData()).setPosition(body.getPosition().x, body.getPosition().y);
+        }
+    }
+
+    private void playerVerifications(){
         //to keep the player always moving forward
         if(playerBody.getBody().getLinearVelocity().x <= 5)
             playerBody.getBody().applyForceToCenter(15f,0, true);
@@ -128,17 +139,7 @@ public class GameController implements ContactListener{
 //            ((PlayerModel) playerBody.getUserData()).setJumping(false);
 //            ((PlayerModel) playerBody.getUserData()).setFalling(false);
 //        }
-
-
-
-        Array<Body> bodies = new Array<Body>();
-        world.getBodies(bodies);
-        for (Body body : bodies) {
-            //verifyBounds(body);
-            ((EntityModel) body.getUserData()).setPosition(body.getPosition().x, body.getPosition().y);
-        }
     }
-
     /**
      * Verifies if the body is inside the arena bounds and if not
      * wraps it around to the other side.
@@ -160,7 +161,9 @@ public class GameController implements ContactListener{
     }
 
     public void jump(){
-        if(playerBody.getBody().getLinearVelocity().y == 0)
+        if(playerBody.getBody().getLinearVelocity().x == 0 && playerBody.getBody().getLinearVelocity().y < 4)
+            playerBody.climb();
+        else if(playerBody.getBody().getLinearVelocity().y == 0)
             playerBody.jump();
     }
 

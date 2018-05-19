@@ -24,7 +24,7 @@ public class PlayerBody extends EntityBody {
         body.setUserData(model);
 
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(53/2 * PIXEL_TO_METER, 84/2 * PIXEL_TO_METER);
+        shape.setAsBox(55/2 * PIXEL_TO_METER, 84/2 * PIXEL_TO_METER);
         FixtureDef fixturedef = new FixtureDef();
         fixturedef.shape = shape;
         body.createFixture(fixturedef);
@@ -33,6 +33,10 @@ public class PlayerBody extends EntityBody {
     public void jump() {
         body.applyLinearImpulse(new Vector2(0, 6f), body.getWorldCenter(), true);
         ((PlayerModel) getUserData()).setJumping(true);
+    }
+
+    public void climb(){
+        body.applyLinearImpulse(new Vector2(0, 2f), body.getWorldCenter(), true);
     }
 
     public void moveDown(){

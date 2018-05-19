@@ -177,7 +177,7 @@ public class GameView extends ScreenAdapter {
         float x = GameModel.getInstance().getPlayers().get(0).getX();
         float y = GameModel.getInstance().getPlayers().get(0).getY();
 
-        camera.position.set(x / PIXEL_TO_METER, 2 / PIXEL_TO_METER + 100, 0);
+        camera.position.set(x / PIXEL_TO_METER, y / PIXEL_TO_METER + 80, 0);
 
         camera.update();
         game.getBatch().setProjectionMatrix(camera.combined);
