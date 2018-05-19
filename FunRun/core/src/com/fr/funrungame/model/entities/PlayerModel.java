@@ -6,6 +6,8 @@ public class PlayerModel extends EntityModel {
 
     private boolean jumping = false;
 
+    private boolean falling = false;
+
     public PlayerModel(float x, float y){
         super(x,y);
     }
@@ -24,6 +26,14 @@ public class PlayerModel extends EntityModel {
 
     public void setJumping(boolean jumping) {
         this.jumping = jumping;
+    }
+
+    public boolean isFalling() {
+        return falling;
+    }
+
+    public void setFalling(boolean falling) {
+        this.falling = falling;
     }
 
     @Override

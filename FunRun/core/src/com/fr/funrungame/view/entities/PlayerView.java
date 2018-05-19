@@ -25,14 +25,19 @@ public class PlayerView extends EntityView {
     private Animation<TextureRegion> runningAnimation;
 
     /**
-     * The animation used when the player is jumping
-     */
-    private Animation<TextureRegion> jumpingAnimation;
-
-    /**
      * The texture used when the player is not running
      */
     private TextureRegion notRunningRegion;
+
+    /**
+     * The texture used when the player is jumping
+     */
+    private TextureRegion jumpingRegion;
+
+    /**
+     * The texture used when the player is falling
+     */
+    private TextureRegion fallingRegion;
 
     /**
      * Time since the player started the game. Used
@@ -50,6 +55,11 @@ public class PlayerView extends EntityView {
      */
     private boolean jumping;
 
+    /**
+     * Is the player falling.
+     */
+    private boolean falling;
+
     public PlayerView(FunRunGame game){
         super(game);
         stateTime = 0;
@@ -57,14 +67,25 @@ public class PlayerView extends EntityView {
 
     public Sprite createSprite(FunRunGame game) {
         runningAnimation = createRunningAnimation(game);
-        jumpingAnimation = createJumpingAnimation(game);
         notRunningRegion = createNotRunningRegion(game);
+        jumpingRegion = createJumpingRegion(game);
+        fallingRegion = createFallingRegion(game);
 
         return new Sprite(notRunningRegion);
     }
 
     private TextureRegion createNotRunningRegion(FunRunGame game){
         Texture texture = game.getAssetManager().get("player.png");
+        return new TextureRegion(texture, texture.getWidth(), texture.getHeight());
+    }
+
+    private TextureRegion createJumpingRegion(FunRunGame game){
+        Texture texture = game.getAssetManager().get("player_jumping.png");
+        return new TextureRegion(texture, texture.getWidth(), texture.getHeight());
+    }
+
+    private TextureRegion createFallingRegion(FunRunGame game){
+        Texture texture = game.getAssetManager().get("player_falling.png");
         return new TextureRegion(texture, texture.getWidth(), texture.getHeight());
     }
 
@@ -78,25 +99,13 @@ public class PlayerView extends EntityView {
         return new Animation<TextureRegion>(FRAME_TIME, frames);
     }
 
-    private Animation<TextureRegion> createJumpingAnimation(FunRunGame game) {
-        Texture thrustTexture = game.getAssetManager().get("player_jumping.png");
-        TextureRegion[][] thrustRegion = TextureRegion.split(thrustTexture, thrustTexture.getWidth() / 2, thrustTexture.getHeight());
-
-        TextureRegion[] frames = new TextureRegion[2];
-        System.arraycopy(thrustRegion[0], 0, frames, 0, 2);
-
-        return new Animation<TextureRegion>(FRAME_TIME, frames);
-    }
-
     @Override
     public void update(EntityModel model) {
         super.update(model);
 
         jumping = ((PlayerModel)model).isJumping();
-        ((PlayerModel)model).setJumping(false);
-
         running = ((PlayerModel)model).isRunning();
-        ((PlayerModel)model).setRunning(false);
+        falling = ((PlayerModel)model).isFalling();
     }
 
     @Override
@@ -104,7 +113,9 @@ public class PlayerView extends EntityView {
         stateTime += Gdx.graphics.getDeltaTime();
 
         if(jumping)
-            sprite.setRegion(jumpingAnimation.getKeyFrame(stateTime, true));
+            sprite.setRegion(jumpingRegion);
+        else if(falling)
+            sprite.setRegion(fallingRegion);
         else if (running)
             sprite.setRegion(runningAnimation.getKeyFrame(stateTime, true));
         else

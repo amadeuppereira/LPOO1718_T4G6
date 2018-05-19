@@ -158,7 +158,7 @@ public class GameView extends ScreenAdapter {
         hud.stage.draw();
 
         mapRenderer.setView(camera);
-        //mapRenderer.render();
+        mapRenderer.render();
 
         // Draw the texture
         game.getBatch().begin();
@@ -177,7 +177,7 @@ public class GameView extends ScreenAdapter {
         float x = GameModel.getInstance().getPlayers().get(0).getX();
         float y = GameModel.getInstance().getPlayers().get(0).getY();
 
-        camera.position.set(x / PIXEL_TO_METER, y / PIXEL_TO_METER + 100, 0);
+        camera.position.set(x / PIXEL_TO_METER, 2 / PIXEL_TO_METER + 100, 0);
 
         camera.update();
         game.getBatch().setProjectionMatrix(camera.combined);
@@ -188,6 +188,7 @@ public class GameView extends ScreenAdapter {
         game.getAssetManager().load("player.png", Texture.class);
         game.getAssetManager().load("player_running.png", Texture.class);
         game.getAssetManager().load("player_jumping.png", Texture.class);
+        game.getAssetManager().load("player_falling.png", Texture.class);
         loadMaps();
         game.getAssetManager().finishLoading();
 
@@ -238,17 +239,17 @@ public class GameView extends ScreenAdapter {
      * @param delta time since last time inputs where handled in seconds
      */
     private void handleInputs(float delta) {
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            GameController.getInstance().moveLeft(delta);
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            GameController.getInstance().moveRight(delta);
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-            GameController.getInstance().jump(delta);
+//        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+//            GameController.getInstance().moveLeft(delta);
+//        }
+//        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+//            GameController.getInstance().moveRight(delta);
+//        }
+        if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+            GameController.getInstance().jump();
         }
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            GameController.getInstance().moveDown(delta);
+            GameController.getInstance().moveDown();
         }
 
     }

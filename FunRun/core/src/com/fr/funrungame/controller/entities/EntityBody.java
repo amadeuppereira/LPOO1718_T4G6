@@ -1,5 +1,6 @@
 package com.fr.funrungame.controller.entities;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.fr.funrungame.model.entities.EntityModel;
 
@@ -56,7 +57,13 @@ public abstract class EntityBody {
         body.applyForceToCenter(x, y, true);
     }
 
+    public void applyLinearImpulse(float x, float y){
+        body.applyLinearImpulse(new Vector2(5,0), body.getWorldCenter(), true);
+    }
 
+    public Body getBody() {
+        return body;
+    }
 
     /**
      * Wraps the getUserData method from the Box2D body class.

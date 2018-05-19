@@ -11,6 +11,7 @@ import com.fr.funrungame.controller.entities.PlatformBody;
 import com.fr.funrungame.controller.entities.PlayerBody;
 import com.fr.funrungame.model.GameModel;
 import com.fr.funrungame.model.entities.EntityModel;
+import com.fr.funrungame.model.entities.PlatformModel;
 import com.fr.funrungame.model.entities.PlayerModel;
 import com.fr.funrungame.view.GameView;
 
@@ -104,6 +105,32 @@ public class GameController implements ContactListener{
             accumulator -= 1/60f;
         }
 
+        //to keep the player always moving forward
+        if(playerBody.getBody().getLinearVelocity().x <= 5)
+            playerBody.getBody().applyForceToCenter(15f,0, true);
+
+        if(playerBody.getBody().getLinearVelocity().x == 0){
+            ((PlayerModel) playerBody.getUserData()).setRunning(false);
+        }
+        else{
+            ((PlayerModel) playerBody.getUserData()).setRunning(true);
+        }
+
+        if(playerBody.getBody().getLinearVelocity().y > 0){
+            ((PlayerModel) playerBody.getUserData()).setJumping(true);
+            ((PlayerModel) playerBody.getUserData()).setFalling(false);
+        }
+        else if(playerBody.getBody().getLinearVelocity().y < 0){
+            ((PlayerModel) playerBody.getUserData()).setJumping(false);
+            ((PlayerModel) playerBody.getUserData()).setFalling(true);
+        }
+//        else{
+//            ((PlayerModel) playerBody.getUserData()).setJumping(false);
+//            ((PlayerModel) playerBody.getUserData()).setFalling(false);
+//        }
+
+
+
         Array<Body> bodies = new Array<Body>();
         world.getBodies(bodies);
         for (Body body : bodies) {
@@ -132,26 +159,13 @@ public class GameController implements ContactListener{
             body.setTransform(body.getPosition().x, 0, body.getAngle());
     }
 
-    public void moveLeft(float delta) {
-        playerBody.applyForce(-10, 0);
-        playerBody.setTransform(playerBody.getX() - (MOVEMENT_SPEED * delta), playerBody.getY());
+    public void jump(){
+        if(playerBody.getBody().getLinearVelocity().y == 0)
+            playerBody.jump();
     }
 
-    public void moveRight(float delta) {
-        playerBody.applyForce(10, 0);
-        //playerBody.setTransform(playerBody.getX()+(MOVEMENT_SPEED * delta), playerBody.getY());
-        ((PlayerModel)playerBody.getUserData()).setRunning(true);
-    }
-
-    public void jump(float delta){
-        playerBody.jump();
-//        playerBody.applyForce(0, 100);
-//        playerBody.setTransform(playerBody.getX(), playerBody.getY()+(MOVEMENT_SPEED * delta));
-//        ((PlayerModel)playerBody.getUserData()).setJumping(true);
-    }
-
-    public void moveDown(float delta) {
-        playerBody.setTransform(playerBody.getX(), playerBody.getY() - (MOVEMENT_SPEED * delta));
+    public void moveDown() {
+        playerBody.moveDown();
     }
 
 
@@ -162,8 +176,13 @@ public class GameController implements ContactListener{
      */
     @Override
     public void beginContact(Contact contact) {
+        Body bodyA = contact.getFixtureA().getBody();
+        Body bodyB = contact.getFixtureB().getBody();
 
-
+        if (bodyA.getUserData() instanceof PlayerModel && bodyB.getUserData() instanceof PlatformModel){
+            ((PlayerModel) playerBody.getUserData()).setJumping(false);
+            ((PlayerModel) playerBody.getUserData()).setFalling(false);
+        }
     }
 
     @Override
