@@ -17,7 +17,6 @@ public class PlayerBody extends EntityBody {
 
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
-        System.out.println(model.getX());
         bodyDef.position.set(model.getX(), model.getY());
 
         body = world.createBody(bodyDef);
@@ -31,7 +30,7 @@ public class PlayerBody extends EntityBody {
     }
 
     public void jump() {
-        body.applyLinearImpulse(new Vector2(0, 6f), body.getWorldCenter(), true);
+        body.applyLinearImpulse(new Vector2(0, 5f), body.getWorldCenter(), true);
         ((PlayerModel) getUserData()).setJumping(true);
     }
 
@@ -40,6 +39,6 @@ public class PlayerBody extends EntityBody {
     }
 
     public void moveDown(){
-        body.applyForceToCenter(0, -17f, true);
+        body.applyForceToCenter(0, -40f, true);
     }
 }

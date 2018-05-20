@@ -30,12 +30,12 @@ public class GameController implements ContactListener{
     /**
      * The arena width in meters.
      */
-    public static final int GAME_WIDTH = 800;
+    public static final int GAME_WIDTH = 1000;
 
     /**
      * The arena height in meters.
      */
-    public static final int GAME_HEIGHT = 480;
+    public static final int GAME_HEIGHT = 620;
 
     /**
      * The movement speed.
@@ -118,7 +118,7 @@ public class GameController implements ContactListener{
     private void playerVerifications(){
         //to keep the player always moving forward
         if(playerBody.getBody().getLinearVelocity().x <= 5)
-            playerBody.getBody().applyForceToCenter(15f,0, true);
+            playerBody.getBody().applyForceToCenter(12f,0, true);
 
         if(playerBody.getBody().getLinearVelocity().x == 0){
             ((PlayerModel) playerBody.getUserData()).setRunning(false);

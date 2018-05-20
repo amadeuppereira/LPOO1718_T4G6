@@ -3,10 +3,6 @@ package com.fr.funrungame.view;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -150,27 +146,21 @@ public class GameView extends ScreenAdapter {
         Gdx.gl.glClearColor( 0/255f, 0/255f, 0/255f, 1 );
         Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
 
-        game.getBatch().begin();
-        //drawBackground();
-        game.getBatch().end();
-
-        game.getBatch().setProjectionMatrix(hud.stage.getCamera().combined);
-        hud.stage.draw();
-
-        mapRenderer.setView(camera);
-        mapRenderer.render();
-
-        // Draw the texture
-        game.getBatch().begin();
-        drawEntities();
-        game.getBatch().end();
-
         if (DEBUG_PHYSICS) {
             debugCamera = camera.combined.cpy();
             debugCamera.scl(1 / PIXEL_TO_METER);
             debugRenderer.render(GameController.getInstance().getWorld(), debugCamera);
         }
 
+        mapRenderer.setView(camera);
+        mapRenderer.render();
+
+        game.getBatch().begin();
+        drawEntities();
+        game.getBatch().end();
+
+        game.getBatch().setProjectionMatrix(hud.stage.getCamera().combined);
+        hud.stage.draw();
     }
 
     private void cameraHandler(){
@@ -195,16 +185,11 @@ public class GameView extends ScreenAdapter {
     }
 
     private void loadMaps(){
-        gameMaps.put(1, "maps/map2.tmx");
+        gameMaps.put(1, "maps/map3.tmx");
         game.getAssetManager().setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
         for(String mapPath : gameMaps.values()){
             game.getAssetManager().load(mapPath, TiledMap.class);
         }
-    }
-
-    private void drawBackground(){
-        Texture background = game.getAssetManager().get("background_menu.png", Texture.class);
-        game.getBatch().draw(background, 0, 0, 0, 0, (int)(GAME_WIDTH), (int) (GAME_HEIGHT));
     }
 
     /**
@@ -239,12 +224,6 @@ public class GameView extends ScreenAdapter {
      * @param delta time since last time inputs where handled in seconds
      */
     private void handleInputs(float delta) {
-//        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-//            GameController.getInstance().moveLeft(delta);
-//        }
-//        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-//            GameController.getInstance().moveRight(delta);
-//        }
         if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
             GameController.getInstance().jump();
         }
