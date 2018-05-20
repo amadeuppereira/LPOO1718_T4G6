@@ -102,7 +102,7 @@ public class GameView extends ScreenAdapter {
 
         if(mapRenderer != null)
             mapRenderer.setMap(map);
-        mapRenderer = new OrthogonalTiledMapRenderer(GameModel.getInstance().getMap(),game.getBatch());
+        mapRenderer = new OrthogonalTiledMapRenderer(GameModel.getInstance().getMap(), game.getBatch());
 
         debugRenderer = new Box2DDebugRenderer();
     }
@@ -152,7 +152,13 @@ public class GameView extends ScreenAdapter {
             debugRenderer.render(GameController.getInstance().getWorld(), debugCamera);
         }
 
-        mapRenderer.setView(camera);
+        float x = camera.position.x - camera.viewportWidth * camera.zoom;
+        float y = camera.position.y - camera.viewportHeight * camera.zoom;
+
+        float width = camera.viewportWidth * camera.zoom * 2;
+        float height = camera.viewportHeight * camera.zoom * 2;
+
+        mapRenderer.setView(camera.combined, x, y, width, height);
         mapRenderer.render();
 
         game.getBatch().begin();
