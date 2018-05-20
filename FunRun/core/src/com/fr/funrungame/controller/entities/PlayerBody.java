@@ -12,6 +12,10 @@ import static com.fr.funrungame.view.GameView.PIXEL_TO_METER;
 
 public class PlayerBody extends EntityBody {
 
+    private float JUMP_FORCE = 5f;
+    private float CLIMB_FORCE = 2f;
+    private float DOWN_FORCE = -40f;
+
     public PlayerBody(World world, EntityModel model) {
         super();
 
@@ -30,15 +34,15 @@ public class PlayerBody extends EntityBody {
     }
 
     public void jump() {
-        body.applyLinearImpulse(new Vector2(0, 5f), body.getWorldCenter(), true);
+        body.applyLinearImpulse(new Vector2(0, JUMP_FORCE), body.getWorldCenter(), true);
         ((PlayerModel) getUserData()).setJumping(true);
     }
 
     public void climb(){
-        body.applyLinearImpulse(new Vector2(0, 2f), body.getWorldCenter(), true);
+        body.applyLinearImpulse(new Vector2(0, CLIMB_FORCE), body.getWorldCenter(), true);
     }
 
     public void moveDown(){
-        body.applyForceToCenter(0, -40f, true);
+        body.applyForceToCenter(0, DOWN_FORCE, true);
     }
 }

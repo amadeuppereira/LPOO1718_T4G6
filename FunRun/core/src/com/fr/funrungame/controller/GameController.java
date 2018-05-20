@@ -9,10 +9,12 @@ import com.badlogic.gdx.utils.Array;
 import com.fr.funrungame.controller.entities.EntityBody;
 import com.fr.funrungame.controller.entities.PlatformBody;
 import com.fr.funrungame.controller.entities.PlayerBody;
+import com.fr.funrungame.controller.entities.PowerUpBody;
 import com.fr.funrungame.model.GameModel;
 import com.fr.funrungame.model.entities.EntityModel;
 import com.fr.funrungame.model.entities.PlatformModel;
 import com.fr.funrungame.model.entities.PlayerModel;
+import com.fr.funrungame.model.entities.PowerUpModel;
 import com.fr.funrungame.view.GameView;
 
 import java.util.ArrayList;
@@ -30,12 +32,12 @@ public class GameController implements ContactListener{
     /**
      * The arena width in meters.
      */
-    public static final int GAME_WIDTH = 1000;
+    public static final int GAME_WIDTH = 1080;
 
     /**
      * The arena height in meters.
      */
-    public static final int GAME_HEIGHT = 620;
+    public static final int GAME_HEIGHT = 720;
 
     /**
      * The movement speed.
@@ -56,6 +58,8 @@ public class GameController implements ContactListener{
 
     private List<PlatformBody> platformsBody;
 
+    private List<PowerUpBody> powerUps;
+
 
     private GameController() {
         world = new World(new Vector2(0, -9.8f), true);
@@ -65,6 +69,11 @@ public class GameController implements ContactListener{
         platformsBody = new ArrayList<PlatformBody>();
         for(int i = 0; i < GameModel.getInstance().getPlatformsModel().size(); i++){
             platformsBody.add(new PlatformBody(world,GameModel.getInstance().getPlatformsModel().get(i), GameModel.getInstance().getPlatformsModel().get(i).getObject()));
+        }
+
+        powerUps = new ArrayList<PowerUpBody>();
+        for(int i = 0; i < GameModel.getInstance().getPowerUps().size(); i++){
+            powerUps.add(new PowerUpBody(world,GameModel.getInstance().getPowerUps().get(i), GameModel.getInstance().getPowerUps().get(i).getObject()));
         }
 
         world.setContactListener(this);
@@ -185,6 +194,10 @@ public class GameController implements ContactListener{
         if (bodyA.getUserData() instanceof PlayerModel && bodyB.getUserData() instanceof PlatformModel){
             ((PlayerModel) playerBody.getUserData()).setJumping(false);
             ((PlayerModel) playerBody.getUserData()).setFalling(false);
+        }
+
+        if (bodyA.getUserData() instanceof PlayerModel && bodyB.getUserData() instanceof PowerUpModel){
+            System.out.println("POWER UP!\n");
         }
     }
 
