@@ -12,8 +12,9 @@ import static com.fr.funrungame.view.GameView.PIXEL_TO_METER;
 
 public class PlayerBody extends EntityBody {
 
+    private float RUN_FORCE = 12f;
     private float JUMP_FORCE = 5f;
-    private float CLIMB_FORCE = 2f;
+    private float CLIMB_FORCE = 1.5f;
     private float DOWN_FORCE = -40f;
 
     public PlayerBody(World world, EntityModel model) {
@@ -23,6 +24,7 @@ public class PlayerBody extends EntityBody {
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         bodyDef.position.set(model.getX(), model.getY());
 
+
         body = world.createBody(bodyDef);
         body.setUserData(model);
 
@@ -30,6 +32,7 @@ public class PlayerBody extends EntityBody {
         shape.setAsBox(55/2 * PIXEL_TO_METER, 84/2 * PIXEL_TO_METER);
         FixtureDef fixturedef = new FixtureDef();
         fixturedef.shape = shape;
+        //fixturedef.density = 1;
         body.createFixture(fixturedef);
     }
 
@@ -44,5 +47,13 @@ public class PlayerBody extends EntityBody {
 
     public void moveDown(){
         body.applyForceToCenter(0, DOWN_FORCE, true);
+    }
+
+    public void run() {
+        body.applyForceToCenter(RUN_FORCE,0, true);
+    }
+
+    public void die() {
+        System.out.println("Morreu");
     }
 }

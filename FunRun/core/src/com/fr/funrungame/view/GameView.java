@@ -146,12 +146,6 @@ public class GameView extends ScreenAdapter {
         Gdx.gl.glClearColor( 0/255f, 0/255f, 0/255f, 1 );
         Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
 
-        if (DEBUG_PHYSICS) {
-            debugCamera = camera.combined.cpy();
-            debugCamera.scl(1 / PIXEL_TO_METER);
-            debugRenderer.render(GameController.getInstance().getWorld(), debugCamera);
-        }
-
         float x = camera.position.x - camera.viewportWidth * camera.zoom;
         float y = camera.position.y - camera.viewportHeight * camera.zoom;
 
@@ -160,6 +154,12 @@ public class GameView extends ScreenAdapter {
 
         mapRenderer.setView(camera.combined, x, y, width, height);
         mapRenderer.render();
+
+        if (DEBUG_PHYSICS) {
+            debugCamera = camera.combined.cpy();
+            debugCamera.scl(1 / PIXEL_TO_METER);
+            debugRenderer.render(GameController.getInstance().getWorld(), debugCamera);
+        }
 
         game.getBatch().begin();
         drawEntities();

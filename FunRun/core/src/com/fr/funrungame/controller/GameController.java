@@ -6,15 +6,9 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
-import com.fr.funrungame.controller.entities.EntityBody;
-import com.fr.funrungame.controller.entities.PlatformBody;
-import com.fr.funrungame.controller.entities.PlayerBody;
-import com.fr.funrungame.controller.entities.PowerUpBody;
+import com.fr.funrungame.controller.entities.*;
 import com.fr.funrungame.model.GameModel;
-import com.fr.funrungame.model.entities.EntityModel;
-import com.fr.funrungame.model.entities.PlatformModel;
-import com.fr.funrungame.model.entities.PlayerModel;
-import com.fr.funrungame.model.entities.PowerUpModel;
+import com.fr.funrungame.model.entities.*;
 import com.fr.funrungame.view.GameView;
 
 import java.util.ArrayList;
@@ -40,11 +34,6 @@ public class GameController implements ContactListener{
     public static final int GAME_HEIGHT = 720;
 
     /**
-     * The movement speed.
-     */
-    private static final float MOVEMENT_SPEED = 1;
-
-    /**
      * Accumulator used to calculate the simulation step.
      */
     private float accumulator;
@@ -60,6 +49,9 @@ public class GameController implements ContactListener{
 
     private List<PowerUpBody> powerUps;
 
+    private List<EnemyBody> enemies;
+
+
 
     private GameController() {
         world = new World(new Vector2(0, -9.8f), true);
@@ -74,6 +66,10 @@ public class GameController implements ContactListener{
         powerUps = new ArrayList<PowerUpBody>();
         for(int i = 0; i < GameModel.getInstance().getPowerUps().size(); i++){
             powerUps.add(new PowerUpBody(world,GameModel.getInstance().getPowerUps().get(i), GameModel.getInstance().getPowerUps().get(i).getObject()));
+        }
+        enemies = new ArrayList<EnemyBody>();
+        for(int i = 0; i < GameModel.getInstance().getEnemies().size(); i++){
+            enemies.add(new EnemyBody(world,GameModel.getInstance().getEnemies().get(i), GameModel.getInstance().getEnemies().get(i).getObject()));
         }
 
         world.setContactListener(this);
@@ -127,7 +123,7 @@ public class GameController implements ContactListener{
     private void playerVerifications(){
         //to keep the player always moving forward
         if(playerBody.getBody().getLinearVelocity().x <= 5)
-            playerBody.getBody().applyForceToCenter(12f,0, true);
+            playerBody.run();
 
         if(playerBody.getBody().getLinearVelocity().x == 0){
             ((PlayerModel) playerBody.getUserData()).setRunning(false);
@@ -198,6 +194,10 @@ public class GameController implements ContactListener{
 
         if (bodyA.getUserData() instanceof PlayerModel && bodyB.getUserData() instanceof PowerUpModel){
             System.out.println("POWER UP!\n");
+        }
+
+        if (bodyA.getUserData() instanceof PlayerModel && bodyB.getUserData() instanceof EnemyModel){
+            playerBody.die();
         }
     }
 

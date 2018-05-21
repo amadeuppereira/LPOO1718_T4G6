@@ -63,6 +63,11 @@ public class GameModel {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             powerUps.add(new PowerUpModel(PIXEL_TO_METER*(rect.getX()+rect.getWidth()/2),PIXEL_TO_METER*(rect.getY() + rect.getHeight()/2), (RectangleMapObject) object));
         }
+
+        for(MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)){
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            enemies.add(new EnemyModel(PIXEL_TO_METER*(rect.getX()+rect.getWidth()/2),PIXEL_TO_METER*(rect.getY() + rect.getHeight()/2), (RectangleMapObject) object));
+        }
     }
     /**
      * Removes a model from this game.
@@ -78,6 +83,9 @@ public class GameModel {
         }
         if (model instanceof PowerUpModel) {
             powerUps.remove(model);
+        }
+        if (model instanceof EnemyModel) {
+            enemies.remove(model);
         }
     }
 
