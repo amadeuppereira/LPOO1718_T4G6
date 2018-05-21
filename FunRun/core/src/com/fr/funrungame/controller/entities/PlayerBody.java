@@ -16,6 +16,11 @@ public class PlayerBody extends EntityBody {
     private float JUMP_FORCE = 5f;
     private float CLIMB_FORCE = 1.5f;
     private float DOWN_FORCE = -40f;
+    private boolean DEAD = false;
+    private boolean INVULNERABLE = false;
+
+    private int death_timer = 0;
+    private int invulnerable_timer = 0;
 
     public PlayerBody(World world, EntityModel model) {
         super();
@@ -36,24 +41,51 @@ public class PlayerBody extends EntityBody {
         body.createFixture(fixturedef);
     }
 
+    public void update() {
+        System.out.println("death_timer:        " + death_timer);
+        System.out.println("invulnerable_timer: " + invulnerable_timer);
+        if(DEAD) {
+            death_timer--;
+            if(death_timer == 0) DEAD = false;
+        }
+
+        if(INVULNERABLE) {
+            invulnerable_timer--;
+            if(invulnerable_timer == 0) INVULNERABLE = false;
+        }
+    }
+
     public void jump() {
+        if(DEAD) return;
         body.applyLinearImpulse(new Vector2(0, JUMP_FORCE), body.getWorldCenter(), true);
         ((PlayerModel) getUserData()).setJumping(true);
     }
 
     public void climb(){
+        if(DEAD) return;
         body.applyLinearImpulse(new Vector2(0, CLIMB_FORCE), body.getWorldCenter(), true);
     }
 
     public void moveDown(){
+        if(DEAD) return;
         body.applyForceToCenter(0, DOWN_FORCE, true);
     }
 
     public void run() {
+        if(death_timer != 0) return;
         body.applyForceToCenter(RUN_FORCE,0, true);
     }
 
+    public void stop() {
+        body.setLinearVelocity(new Vector2(0,0));
+    }
+
     public void die() {
-        System.out.println("Morreu");
+        if(INVULNERABLE || DEAD) return;
+        stop();
+        death_timer = 100;
+        invulnerable_timer = 150;
+        INVULNERABLE = true;
+        DEAD = true;
     }
 }

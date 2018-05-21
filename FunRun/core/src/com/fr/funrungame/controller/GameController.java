@@ -121,6 +121,7 @@ public class GameController implements ContactListener{
     }
 
     private void playerVerifications(){
+        playerBody.update();
         //to keep the player always moving forward
         if(playerBody.getBody().getLinearVelocity().x <= 5)
             playerBody.run();
