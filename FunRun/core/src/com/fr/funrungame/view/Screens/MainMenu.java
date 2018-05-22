@@ -31,6 +31,7 @@ public class MainMenu extends MenuScreen {
         playButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                dispose();
                 game.setScreen(new GameView(game));
             }
         });
