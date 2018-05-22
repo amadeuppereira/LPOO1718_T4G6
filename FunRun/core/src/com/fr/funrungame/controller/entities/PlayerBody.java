@@ -40,7 +40,6 @@ public class PlayerBody extends EntityBody {
         shape.setAsBox(55/2 * PIXEL_TO_METER, 84/2 * PIXEL_TO_METER);
         FixtureDef fixturedef = new FixtureDef();
         fixturedef.shape = shape;
-        //fixturedef.density = 1;
         body.createFixture(fixturedef);
     }
 
@@ -69,7 +68,8 @@ public class PlayerBody extends EntityBody {
 
     public void moveDown(){
         if(DEAD) return;
-        body.applyForceToCenter(0, DOWN_FORCE, true);
+        if(((PlayerModel) getUserData()).isJumping() || ((PlayerModel) getUserData()).isFalling())
+            body.applyForceToCenter(0, DOWN_FORCE, true);
     }
 
     public void run() {

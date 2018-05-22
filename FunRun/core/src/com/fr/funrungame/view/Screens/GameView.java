@@ -246,5 +246,7 @@ public class GameView extends ScreenAdapter {
     public void resize(int width, int height){
         gamePort.update(width, height);
     }
+
+
 }
 

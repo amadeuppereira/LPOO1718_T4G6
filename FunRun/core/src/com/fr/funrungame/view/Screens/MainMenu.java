@@ -31,12 +31,9 @@ public class MainMenu extends MenuScreen {
         playButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                System.out.println("PLAY!");
                 game.setScreen(new GameView(game));
             }
         });
-       // playButton.setSize(5, 5);
-       // playButton.setPosition(50, 50);
         table.add(playButton).size(BUTTON_WIDTH, DEFAULT_BUTTON_SIZE).pad(BUTTON_EDGE).row();
     }
 
