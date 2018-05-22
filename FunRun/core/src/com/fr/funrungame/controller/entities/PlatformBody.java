@@ -2,11 +2,10 @@ package com.fr.funrungame.controller.entities;
 
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.fr.funrungame.model.entities.EntityModel;
 
-import static com.fr.funrungame.view.GameView.PIXEL_TO_METER;
+import static com.fr.funrungame.view.Screens.GameView.PIXEL_TO_METER;
 
 public class PlatformBody extends EntityBody {
 

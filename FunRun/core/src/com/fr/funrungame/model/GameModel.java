@@ -9,7 +9,7 @@ import com.fr.funrungame.model.entities.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.fr.funrungame.view.GameView.PIXEL_TO_METER;
+import static com.fr.funrungame.view.Screens.GameView.PIXEL_TO_METER;
 
 public class GameModel {
 

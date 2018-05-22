@@ -1,4 +1,4 @@
-package com.fr.funrungame.view;
+package com.fr.funrungame.view.Screens;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;

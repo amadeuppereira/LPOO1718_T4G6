@@ -1,20 +1,14 @@
 package com.fr.funrungame.controller;
 
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import com.fr.funrungame.controller.entities.*;
 import com.fr.funrungame.model.GameModel;
 import com.fr.funrungame.model.entities.*;
-import com.fr.funrungame.view.GameView;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.fr.funrungame.view.GameView.PIXEL_TO_METER;
 
 public class GameController implements ContactListener{
 

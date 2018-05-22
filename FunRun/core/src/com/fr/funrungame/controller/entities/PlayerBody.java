@@ -8,7 +8,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.fr.funrungame.model.entities.EntityModel;
 import com.fr.funrungame.model.entities.PlayerModel;
 
-import static com.fr.funrungame.view.GameView.PIXEL_TO_METER;
+import static com.fr.funrungame.view.Screens.GameView.PIXEL_TO_METER;
 
 public class PlayerBody extends EntityBody {
 

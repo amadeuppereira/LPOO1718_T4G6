@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.fr.funrungame.model.entities.EntityModel;
 
-import static com.fr.funrungame.view.GameView.PIXEL_TO_METER;
+import static com.fr.funrungame.view.Screens.GameView.PIXEL_TO_METER;
 
 public abstract class EntityView {
 

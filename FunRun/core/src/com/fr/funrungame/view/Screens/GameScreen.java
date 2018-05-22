@@ -1,4 +1,8 @@
 package com.fr.funrungame.view.Screens;
 
-public abstract class GameScreen {
+import com.badlogic.gdx.ScreenAdapter;
+
+public abstract class GameScreen extends ScreenAdapter {
+
+
 }

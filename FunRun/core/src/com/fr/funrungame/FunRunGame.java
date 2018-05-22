@@ -1,9 +1,10 @@
 package com.fr.funrungame;
 
-import com.fr.funrungame.view.GameView;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.Game;
+import com.fr.funrungame.view.Screens.MainMenu;
 
 public class FunRunGame extends Game {
 	private SpriteBatch batch;
@@ -17,15 +18,24 @@ public class FunRunGame extends Game {
 	public void create () {
 		batch = new SpriteBatch();
 		assetManager = new AssetManager();
+		loadAssets();
 
 		startGame();
+	}
+
+	private void loadAssets() {
+	 	assetManager.load("background_menu.png", Texture.class);
+		assetManager.load("title.png", Texture.class);
+		assetManager.load("play_button.png", Texture.class);
+
+		assetManager.finishLoading();
 	}
 
 	/**
 	 * Starts the game.
 	 */
 	private void startGame() {
-		setScreen(new GameView(this));
+		setScreen(new MainMenu(this));
 	}
 
 	/**
