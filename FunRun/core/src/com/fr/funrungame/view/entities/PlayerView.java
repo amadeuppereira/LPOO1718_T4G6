@@ -60,6 +60,18 @@ public class PlayerView extends EntityView {
      */
     private boolean falling;
 
+    /**
+     * Is the player invulnerable
+     */
+    private boolean invulnerable;
+
+    /**
+     * Is the player dead
+     */
+    private boolean dead;
+
+    private float alpha = .0f;
+
     public PlayerView(FunRunGame game){
         super(game);
         stateTime = 0;
@@ -106,6 +118,8 @@ public class PlayerView extends EntityView {
         jumping = ((PlayerModel)model).isJumping();
         running = ((PlayerModel)model).isRunning();
         falling = ((PlayerModel)model).isFalling();
+        invulnerable = ((PlayerModel)model).isInvulnerable();
+        dead = ((PlayerModel)model).isDead();
     }
 
     @Override
@@ -121,7 +135,15 @@ public class PlayerView extends EntityView {
         else
             sprite.setRegion(notRunningRegion);
 
-        sprite.draw(batch);
+        if(dead) {
+            sprite.draw(batch, 0.1f);
+        } else if (invulnerable) {
+            sprite.draw(batch, alpha);
+            alpha += 0.05;
+            if (alpha > 1) alpha = 0;
+        } else {
+            sprite.draw(batch);
+        }
     }
 
     public static void setCurrentSkin(int id){

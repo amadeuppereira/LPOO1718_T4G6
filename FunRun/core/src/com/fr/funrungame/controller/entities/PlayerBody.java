@@ -15,9 +15,12 @@ public class PlayerBody extends EntityBody {
     private float RUN_FORCE = 12f;
     private float JUMP_FORCE = 5f;
     private float CLIMB_FORCE = 1.5f;
-    private float DOWN_FORCE = -40f;
+    private float DOWN_FORCE = -100f;
     private boolean DEAD = false;
     private boolean INVULNERABLE = false;
+
+    private int DEAD_TIME = 100;
+    private int INVULNERABLE_TIME = 200;
 
     private int death_timer = 0;
     private int invulnerable_timer = 0;
@@ -42,16 +45,14 @@ public class PlayerBody extends EntityBody {
     }
 
     public void update() {
-        System.out.println("death_timer:        " + death_timer);
-        System.out.println("invulnerable_timer: " + invulnerable_timer);
         if(DEAD) {
             death_timer--;
-            if(death_timer == 0) DEAD = false;
+            if(death_timer == 0) setDead(false);
         }
 
         if(INVULNERABLE) {
             invulnerable_timer--;
-            if(invulnerable_timer == 0) INVULNERABLE = false;
+            if(invulnerable_timer == 0) setInvulnerable(false);
         }
     }
 
@@ -80,12 +81,34 @@ public class PlayerBody extends EntityBody {
         body.setLinearVelocity(new Vector2(0,0));
     }
 
+    private void setInvulnerable(boolean invulnerable) {
+        if(invulnerable) {
+            invulnerable_timer = INVULNERABLE_TIME;
+            INVULNERABLE = true;
+            ((PlayerModel)getUserData()).setInvulnerable(true);
+        }
+        else {
+            INVULNERABLE = false;
+            ((PlayerModel)getUserData()).setInvulnerable(false);
+        }
+    }
+
+    private void setDead(boolean dead) {
+        if(dead) {
+            death_timer = DEAD_TIME;
+            DEAD = true;
+            ((PlayerModel)getUserData()).setDead(true);
+        }
+        else {
+            DEAD = false;
+            ((PlayerModel)getUserData()).setDead(false);
+        }
+    }
+
     public void die() {
         if(INVULNERABLE || DEAD) return;
         stop();
-        death_timer = 100;
-        invulnerable_timer = 150;
-        INVULNERABLE = true;
-        DEAD = true;
+        setDead(true);
+        setInvulnerable(true);
     }
 }

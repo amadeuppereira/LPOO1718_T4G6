@@ -10,6 +10,10 @@ public class PlayerModel extends EntityModel {
 
     private boolean falling = false;
 
+    private boolean invulnerable = false;
+
+    private boolean dead = false;
+
     public PlayerModel(float x, float y){
         super(x,y);
     }
@@ -37,6 +41,16 @@ public class PlayerModel extends EntityModel {
     public void setFalling(boolean falling) {
         this.falling = falling;
     }
+
+    public boolean isInvulnerable() {return invulnerable;}
+
+    public void setInvulnerable(boolean invulnerable) {
+        this.invulnerable = invulnerable;
+    }
+
+    public boolean isDead() { return dead; }
+
+    public void setDead(boolean dead) { this.dead = dead; }
 
     public void givePowerup(PowerUpModel pu) {
         if(powerup != null)
