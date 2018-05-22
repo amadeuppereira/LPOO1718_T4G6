@@ -45,6 +45,8 @@ public class GameController implements ContactListener{
 
     private List<EnemyBody> enemies;
 
+    private EndLineBody endline;
+
 
 
     private GameController() {
@@ -65,6 +67,8 @@ public class GameController implements ContactListener{
         for(int i = 0; i < GameModel.getInstance().getEnemies().size(); i++){
             enemies.add(new EnemyBody(world,GameModel.getInstance().getEnemies().get(i), GameModel.getInstance().getEnemies().get(i).getObject()));
         }
+
+        endline = new EndLineBody(world, GameModel.getInstance().getEndline(), GameModel.getInstance().getEndline().getObject());
 
         world.setContactListener(this);
     }
@@ -162,9 +166,9 @@ public class GameController implements ContactListener{
 
     public void jump(){
         if(playerBody.getBody().getLinearVelocity().x == 0 && playerBody.getBody().getLinearVelocity().y < 4)
-            playerBody.climb();
+            playerBody.jump(1);
         else if(playerBody.getBody().getLinearVelocity().y == 0)
-            playerBody.jump();
+            playerBody.jump(0);
     }
 
     public void moveDown() {
@@ -193,6 +197,10 @@ public class GameController implements ContactListener{
 
         if (bodyA.getUserData() instanceof PlayerModel && bodyB.getUserData() instanceof EnemyModel){
             playerBody.die();
+        }
+
+        if (bodyA.getUserData() instanceof PlayerModel && bodyB.getUserData() instanceof EndLineModel){
+            playerBody.finish();
         }
     }
 

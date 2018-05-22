@@ -26,9 +26,13 @@ public class GameModel {
 
     private List<PlatformModel> platformsModel;
 
+    private EndLineModel endline;
+
     private TiledMap map;
 
     private int currentMap;
+
+    private boolean flag = false;
 
 
     /**
@@ -52,7 +56,9 @@ public class GameModel {
     }
 
     public void addEntities(){
-        players.add(new PlayerModel(2,10));
+        if(flag) return;
+        flag = true;
+        players.add(new PlayerModel(2,8));
 
         for(MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
@@ -68,6 +74,11 @@ public class GameModel {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             enemies.add(new EnemyModel(PIXEL_TO_METER*(rect.getX()+rect.getWidth()/2),PIXEL_TO_METER*(rect.getY() + rect.getHeight()/2), (RectangleMapObject) object));
         }
+
+        MapObject object = map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class).get(0);
+        Rectangle rect = ((RectangleMapObject) object).getRectangle();
+        endline = new EndLineModel(PIXEL_TO_METER*(rect.getX()+rect.getWidth()/2),PIXEL_TO_METER*(rect.getY() + rect.getHeight()/2), (RectangleMapObject) object);
+
     }
     /**
      * Removes a model from this game.
@@ -84,8 +95,8 @@ public class GameModel {
         if (model instanceof PowerUpModel) {
             powerUps.remove(model);
         }
-        if (model instanceof EnemyModel) {
-            enemies.remove(model);
+        if (model instanceof PlatformModel) {
+            platformsModel.remove(model);
         }
     }
 
@@ -119,5 +130,9 @@ public class GameModel {
 
     public List<PlatformModel> getPlatformsModel() {
         return platformsModel;
+    }
+
+    public EndLineModel getEndline() {
+        return endline;
     }
 }

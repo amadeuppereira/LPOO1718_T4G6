@@ -45,17 +45,19 @@ public class GameView extends ScreenAdapter {
      * The width of the viewport in meters. The height is
      * automatically calculated using the screen ratio.
      */
-    private static final float VIEWPORT_WIDTH = 40;
+    protected static final float VIEWPORT_WIDTH = 40;
+
+    protected static final float VIEWPORT_HEIGHT = VIEWPORT_WIDTH * ((float) Gdx.graphics.getHeight() / (float)Gdx.graphics.getWidth());
 
     /**
      * The game this screen belongs to.
      */
-    private final FunRunGame game;
+    protected final FunRunGame game;
 
     /**
      * The camera.
      */
-    private final OrthographicCamera camera;
+    protected final OrthographicCamera camera;
 
     private Viewport gamePort;
 
@@ -70,7 +72,7 @@ public class GameView extends ScreenAdapter {
      */
     private Matrix4 debugCamera;
 
-    private OrthogonalTiledMapRenderer mapRenderer;
+    protected OrthogonalTiledMapRenderer mapRenderer;
 
     private Map<Integer,String> gameMaps = new HashMap<Integer, String>();
 
@@ -114,7 +116,7 @@ public class GameView extends ScreenAdapter {
      * @return the camera
      */
     private OrthographicCamera createCamera() {
-        OrthographicCamera camera = new OrthographicCamera(VIEWPORT_WIDTH / PIXEL_TO_METER, VIEWPORT_WIDTH / PIXEL_TO_METER * ((float) Gdx.graphics.getHeight() / (float)Gdx.graphics.getWidth()));
+        OrthographicCamera camera = new OrthographicCamera(VIEWPORT_WIDTH / PIXEL_TO_METER, VIEWPORT_HEIGHT / PIXEL_TO_METER);
         camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0);
         camera.update();
 
@@ -169,7 +171,7 @@ public class GameView extends ScreenAdapter {
         hud.stage.draw();
     }
 
-    private void cameraHandler(){
+    protected void cameraHandler(){
         float x = GameModel.getInstance().getPlayers().get(0).getX();
         float y = GameModel.getInstance().getPlayers().get(0).getY();
 
@@ -204,7 +206,7 @@ public class GameView extends ScreenAdapter {
     /**
      * Draws the entities to the screen.
      */
-    private void drawEntities() {
+    protected void drawEntities() {
 //        List<AsteroidModel> asteroids = GameModel.getInstance().getAsteroids();
 //        for (AsteroidModel asteroid : asteroids) {
 //            EntityView view = ViewFactory.makeView(game, asteroid);
@@ -247,6 +249,8 @@ public class GameView extends ScreenAdapter {
         gamePort.update(width, height);
     }
 
-
+    protected GameView getThis() {
+        return this;
+    }
 }
 

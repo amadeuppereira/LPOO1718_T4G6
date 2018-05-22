@@ -8,6 +8,8 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.fr.funrungame.model.entities.EntityModel;
 import com.fr.funrungame.model.entities.PlayerModel;
 
+import java.util.ArrayList;
+
 import static com.fr.funrungame.view.Screens.GameView.PIXEL_TO_METER;
 
 public class PlayerBody extends EntityBody {
@@ -18,6 +20,7 @@ public class PlayerBody extends EntityBody {
     private float DOWN_FORCE = -100f;
     private boolean DEAD = false;
     private boolean INVULNERABLE = false;
+    private boolean FINISHED = false;
 
     private int DEAD_TIME = 100;
     private int INVULNERABLE_TIME = 200;
@@ -25,8 +28,11 @@ public class PlayerBody extends EntityBody {
     private int death_timer = 0;
     private int invulnerable_timer = 0;
 
+    private ArrayList history;
+
     public PlayerBody(World world, EntityModel model) {
         super();
+        history = new ArrayList();
 
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
@@ -44,6 +50,8 @@ public class PlayerBody extends EntityBody {
     }
 
     public void update() {
+        if(FINISHED) return;
+        history.add(0);
         if(DEAD) {
             death_timer--;
             if(death_timer == 0) setDead(false);
@@ -55,26 +63,29 @@ public class PlayerBody extends EntityBody {
         }
     }
 
-    public void jump() {
-        if(DEAD) return;
-        body.applyLinearImpulse(new Vector2(0, JUMP_FORCE), body.getWorldCenter(), true);
-        ((PlayerModel) getUserData()).setJumping(true);
-    }
-
-    public void climb(){
-        if(DEAD) return;
-        body.applyLinearImpulse(new Vector2(0, CLIMB_FORCE), body.getWorldCenter(), true);
+    public void jump(int f) {
+        history.add(1);
+        if(DEAD || FINISHED) return;
+        if(f == 0) {//jump
+            body.applyLinearImpulse(new Vector2(0, JUMP_FORCE), body.getWorldCenter(), true);
+            ((PlayerModel) getUserData()).setJumping(true);
+        }
+        else {
+            body.applyLinearImpulse(new Vector2(0, CLIMB_FORCE), body.getWorldCenter(), true);
+        }
     }
 
     public void moveDown(){
-        if(DEAD) return;
+        history.add(2);
+        if(DEAD || FINISHED) return;
         if(((PlayerModel) getUserData()).isJumping() || ((PlayerModel) getUserData()).isFalling())
             body.applyForceToCenter(0, DOWN_FORCE, true);
     }
 
     public void run() {
-        if(death_timer != 0) return;
-        body.applyForceToCenter(RUN_FORCE,0, true);
+        if(DEAD) return;
+        else if(FINISHED) body.applyForceToCenter(0,-50, true);
+        else body.applyForceToCenter(RUN_FORCE,0, true);
     }
 
     public void stop() {
@@ -106,9 +117,13 @@ public class PlayerBody extends EntityBody {
     }
 
     public void die() {
-        if(INVULNERABLE || DEAD) return;
+        if(INVULNERABLE || DEAD || FINISHED) return;
         stop();
         setDead(true);
         setInvulnerable(true);
+    }
+
+    public void finish() {
+        FINISHED = true;
     }
 }

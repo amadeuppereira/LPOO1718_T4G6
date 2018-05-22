@@ -2,7 +2,7 @@ package com.fr.funrungame.model.entities;
 
 public abstract class EntityModel {
 
-    public enum ModelType {PLAYER, ENEMY, POWERUP, PLATFORM};
+    public enum ModelType {PLAYER, ENEMY, POWERUP, PLATFORM, ENDLINE};
 
     /**
      * The x-coordinate of this model in meters.
