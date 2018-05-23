@@ -121,10 +121,10 @@ public class GameController implements ContactListener{
     }
 
     private void playerVerifications(float delta){
-        playerBody.update();
+        playerBody.update(delta);
 
         //to keep the player always moving forward
-        if(playerBody.getBody().getLinearVelocity().x <= 5)
+        if(playerBody.getBody().getLinearVelocity().x <= 5 && !playerBody.isFINISHED())
             playerBody.run();
 
         //jumping and fallind handlers

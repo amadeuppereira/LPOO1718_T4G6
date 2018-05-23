@@ -24,7 +24,7 @@ public class ShieldPowerUp extends PowerUpModel {
         }
         if(timecount > 0) {
             timecount -= delta;
-            playerBody.speedPowerUp();
+            playerBody.shieldPowerUp();
             System.out.println("shield_action");
         }
         return 0;

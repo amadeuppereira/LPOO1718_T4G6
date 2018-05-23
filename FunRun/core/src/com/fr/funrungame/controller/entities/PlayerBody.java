@@ -22,11 +22,11 @@ public class PlayerBody extends EntityBody {
     private boolean INVULNERABLE = false;
     private boolean FINISHED = false;
 
-    private int DEAD_TIME = 100;
-    private int INVULNERABLE_TIME = 200;
+    private int DEAD_TIME = 1;
+    private int INVULNERABLE_TIME = 2;
 
-    private int death_timer = 0;
-    private int invulnerable_timer = 0;
+    private float death_timer = 0;
+    private float invulnerable_timer = 0;
 
     private ArrayList history;
 
@@ -49,17 +49,17 @@ public class PlayerBody extends EntityBody {
         body.createFixture(fixturedef);
     }
 
-    public void update() {
+    public void update(float delta) {
         if(FINISHED) return;
         history.add(0);
         if(DEAD) {
-            death_timer--;
-            if(death_timer == 0) setDead(false);
+            death_timer -= delta;
+            if(death_timer <= 0) setDead(false);
         }
 
         if(INVULNERABLE) {
-            invulnerable_timer--;
-            if(invulnerable_timer == 0) setInvulnerable(false);
+            invulnerable_timer -= delta;
+            if(invulnerable_timer <= 0) setInvulnerable(false);
         }
     }
 
@@ -84,7 +84,6 @@ public class PlayerBody extends EntityBody {
 
     public void run() {
         if(DEAD) return;
-        else if(FINISHED) body.applyForceToCenter(-(RUN_FORCE-2),-1000, true);
         else body.applyForceToCenter(RUN_FORCE,0, true);
     }
 
@@ -125,6 +124,7 @@ public class PlayerBody extends EntityBody {
 
     public void finish() {
         FINISHED = true;
+        body.applyForceToCenter(-RUN_FORCE,-1000, true);
     }
 
     public void speedPowerUp(){
@@ -132,9 +132,17 @@ public class PlayerBody extends EntityBody {
             stop();
             return;
         }
-        if(body.getLinearVelocity().x <= 10)
+        if(body.getLinearVelocity().x <= 8)
             body.applyLinearImpulse(new Vector2(1,0), body.getWorldCenter(),true);
 
+    }
+
+    public void shieldPowerUp(){
+        if(FINISHED){
+            stop();
+            return;
+        }
+        setInvulnerable(true);
     }
 
     public boolean isFINISHED() {

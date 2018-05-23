@@ -13,7 +13,6 @@ public class SpeedPowerUp extends PowerUpModel {
     }
 
     public void action(){
-        System.out.println("speed power up");
         timecount = TIME;
     }
 
@@ -25,7 +24,6 @@ public class SpeedPowerUp extends PowerUpModel {
         if(timecount > 0) {
             timecount -= delta;
             playerBody.speedPowerUp();
-            System.out.println("speed_action");
         }
         return 0;
     }
