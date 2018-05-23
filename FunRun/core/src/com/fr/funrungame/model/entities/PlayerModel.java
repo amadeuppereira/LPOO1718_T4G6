@@ -53,7 +53,7 @@ public class PlayerModel extends EntityModel {
     public void setDead(boolean dead) { this.dead = dead; }
 
     public void givePowerup(PowerUpModel pu) {
-        if(powerup != null)
+        if(powerup == null)
             this.powerup = pu;
     }
 

@@ -58,7 +58,7 @@ public class GameModel {
     public void addEntities(){
         if(flag) return;
         flag = true;
-        players.add(new PlayerModel(2,8));
+        players.add(new PlayerModel(2,8.1f));
 
         for(MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect = ((RectangleMapObject) object).getRectangle();

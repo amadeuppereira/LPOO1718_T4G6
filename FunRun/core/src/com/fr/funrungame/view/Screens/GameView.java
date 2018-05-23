@@ -241,7 +241,9 @@ public class GameView extends ScreenAdapter {
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
             GameController.getInstance().moveDown();
         }
-
+        if(Gdx.input.isKeyPressed(Input.Keys.SPACE)){
+            GameController.getInstance().usePowerUp();
+        }
     }
 
     @Override

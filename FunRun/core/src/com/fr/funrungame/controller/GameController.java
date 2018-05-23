@@ -108,7 +108,9 @@ public class GameController implements ContactListener{
             accumulator -= 1/60f;
         }
 
-        playerVerifications();
+        playerVerifications(delta);
+
+
 
         Array<Body> bodies = new Array<Body>();
         world.getBodies(bodies);
@@ -118,12 +120,14 @@ public class GameController implements ContactListener{
         }
     }
 
-    private void playerVerifications(){
+    private void playerVerifications(float delta){
         playerBody.update();
+
         //to keep the player always moving forward
         if(playerBody.getBody().getLinearVelocity().x <= 5)
             playerBody.run();
 
+        //jumping and fallind handlers
         if(playerBody.getBody().getLinearVelocity().x == 0){
             ((PlayerModel) playerBody.getUserData()).setRunning(false);
         }
@@ -139,10 +143,14 @@ public class GameController implements ContactListener{
             ((PlayerModel) playerBody.getUserData()).setJumping(false);
             ((PlayerModel) playerBody.getUserData()).setFalling(true);
         }
-//        else{
-//            ((PlayerModel) playerBody.getUserData()).setJumping(false);
-//            ((PlayerModel) playerBody.getUserData()).setFalling(false);
-//        }
+
+        //power up handler
+        if(((PlayerModel) playerBody.getUserData()).getPowerup() != null){
+            if(((PlayerModel) playerBody.getUserData()).getPowerup().update(delta, playerBody) == 1){
+                ((PlayerModel) playerBody.getUserData()).removePowerup();
+                System.out.println("remove");
+            }
+        }
     }
     /**
      * Verifies if the body is inside the arena bounds and if not
@@ -171,6 +179,11 @@ public class GameController implements ContactListener{
             playerBody.jump(0);
     }
 
+    public void usePowerUp(){
+        if(((PlayerModel) playerBody.getUserData()).getPowerup() != null){
+            ((PlayerModel) playerBody.getUserData()).getPowerup().action();
+        }
+    }
     public void moveDown() {
         playerBody.moveDown();
     }
@@ -192,7 +205,7 @@ public class GameController implements ContactListener{
         }
 
         if (bodyA.getUserData() instanceof PlayerModel && bodyB.getUserData() instanceof PowerUpModel){
-            System.out.println("POWER UP!\n");
+            ((PowerUpModel) bodyB.getUserData()).givePowerUp((PlayerModel) playerBody.getUserData());
         }
 
         if (bodyA.getUserData() instanceof PlayerModel && bodyB.getUserData() instanceof EnemyModel){

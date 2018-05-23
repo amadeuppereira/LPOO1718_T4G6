@@ -25,6 +25,7 @@ public class CountdownScreen extends GameView {
     public CountdownScreen(FunRunGame game) {
         super(game);
 
+        GameModel.getInstance().getPlayers().get(0).setRunning(false);
         n = 3;
         number = game.getAssetManager().get("3.png", Texture.class);
         xi = Gdx.graphics.getWidth() / 2 - (NUMBER_WIDTH / 2);
@@ -71,6 +72,7 @@ public class CountdownScreen extends GameView {
             }
             else {
                 dispose();
+                GameModel.getInstance().getPlayers().get(0).setRunning(true);
                 game.setScreen(new GameView(game));
             }
         }
