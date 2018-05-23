@@ -57,7 +57,7 @@ public class PlayerBody extends EntityBody {
             if(body.getLinearVelocity().x  < 0.1)
                 body.setLinearVelocity(new Vector2(0,0));
             else
-                body.setLinearVelocity(new Vector2(body.getLinearVelocity().x * 0.9f,0));
+                body.setLinearVelocity(new Vector2(body.getLinearVelocity().x * 0.9f,-5));
         }
 
         if(DEAD) {

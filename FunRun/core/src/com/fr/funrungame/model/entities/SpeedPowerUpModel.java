@@ -3,17 +3,16 @@ package com.fr.funrungame.model.entities;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.fr.funrungame.controller.entities.PlayerBody;
 
-public class RocketPowerUp extends PowerUpModel {
+public class SpeedPowerUpModel extends PowerUpModel {
 
     private static final int TIME = 1;
 
-    public RocketPowerUp(float x, float y, RectangleMapObject object){
+    public SpeedPowerUpModel(float x, float y, RectangleMapObject object){
         super(x,y,object);
         timecount = 0;
     }
 
     public void action(){
-        System.out.println("rocket power up");
         timecount = TIME;
     }
 
@@ -24,8 +23,7 @@ public class RocketPowerUp extends PowerUpModel {
         }
         if(timecount > 0) {
             timecount -= delta;
-            playerBody.rocketPowerUp();
-            System.out.println("rocket_action");
+            playerBody.speedPowerUp();
         }
         return 0;
     }

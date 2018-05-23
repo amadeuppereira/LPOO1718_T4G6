@@ -16,11 +16,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.fr.funrungame.controller.GameController;
+import com.fr.funrungame.controller.entities.PlayerBody;
 import com.fr.funrungame.model.GameModel;
 import com.fr.funrungame.model.entities.PlayerModel;
+import com.fr.funrungame.model.entities.RocketPowerUpModel;
+import com.fr.funrungame.model.entities.ShieldPowerUpModel;
+import com.fr.funrungame.model.entities.SpeedPowerUpModel;
 import com.fr.funrungame.view.Screens.Hud;
-import com.fr.funrungame.view.entities.EntityView;
-import com.fr.funrungame.view.entities.PlayerView;
+import com.fr.funrungame.view.entities.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -78,6 +81,8 @@ public class GameView extends ScreenAdapter {
 
     EntityView view; //because of PlayerView draw
 
+    PowerUpView powerUpView;
+
     private Hud hud;
 
     /**
@@ -91,6 +96,8 @@ public class GameView extends ScreenAdapter {
         loadAssets();
 
         view = new PlayerView(game);
+
+        powerUpView = new PowerUpView(game);
 
         camera = createCamera();
 
@@ -154,17 +161,18 @@ public class GameView extends ScreenAdapter {
         float width = camera.viewportWidth * camera.zoom * 2;
         float height = camera.viewportHeight * camera.zoom * 2;
 
-        mapRenderer.setView(camera.combined, x, y, width, height);
-        mapRenderer.render();
-
         if (DEBUG_PHYSICS) {
             debugCamera = camera.combined.cpy();
             debugCamera.scl(1 / PIXEL_TO_METER);
             debugRenderer.render(GameController.getInstance().getWorld(), debugCamera);
         }
 
+        mapRenderer.setView(camera.combined, x, y, width, height);
+        mapRenderer.render();
+
         game.getBatch().begin();
         drawEntities();
+        drawPowerUp();
         game.getBatch().end();
 
         game.getBatch().setProjectionMatrix(hud.stage.getCamera().combined);
@@ -191,6 +199,9 @@ public class GameView extends ScreenAdapter {
         game.getAssetManager().load("player_jumping.png", Texture.class);
         game.getAssetManager().load("player_falling.png", Texture.class);
         game.getAssetManager().load("player_shielded.png", Texture.class);
+        game.getAssetManager().load("rocket.png", Texture.class);
+        game.getAssetManager().load("arrow.png", Texture.class);
+        game.getAssetManager().load("shield.png", Texture.class);
         loadMaps();
         game.getAssetManager().finishLoading();
 
@@ -208,26 +219,29 @@ public class GameView extends ScreenAdapter {
      * Draws the entities to the screen.
      */
     protected void drawEntities() {
-//        List<AsteroidModel> asteroids = GameModel.getInstance().getAsteroids();
-//        for (AsteroidModel asteroid : asteroids) {
-//            EntityView view = ViewFactory.makeView(game, asteroid);
-//            view.update(asteroid);
-//            view.draw(game.getBatch());
-//        }
-//
-//        List<BulletModel> bullets = GameModel.getInstance().getBullets();
-//        for (BulletModel bullet : bullets) {
-//            EntityView view = ViewFactory.makeView(game, bullet);
-//            view.update(bullet);
-//            view.draw(game.getBatch());
-//        }
-//
         List<PlayerModel> players = GameModel.getInstance().getPlayers();
         for (PlayerModel player : players){
-            //EntityView view = new PlayerView(game);   - fiz como uma variável global
             view.update(player);
             view.draw(game.getBatch());
         }
+    }
+
+    private void drawPowerUp(){
+        PlayerBody playerBody =  GameController.getInstance().getPlayerBody();
+        if(((PlayerModel) playerBody.getUserData()).getPowerup() instanceof SpeedPowerUpModel){
+            powerUpView = new SpeedPowerUpView(game);
+        }
+        else if(((PlayerModel) playerBody.getUserData()).getPowerup() instanceof ShieldPowerUpModel){
+            powerUpView = new ShieldPowerUpView(game);
+        }
+        else if(((PlayerModel) playerBody.getUserData()).getPowerup() instanceof RocketPowerUpModel){
+            powerUpView = new RocketPowerUpView(game);
+        }
+        else{
+            powerUpView = new EmptyPowerUpView(game);
+        }
+        powerUpView.setPosition((camera.position.x - camera.viewportWidth / 2) + 50, (camera.position.y - camera.viewportHeight /2) + 30);
+        powerUpView.draw(game.getBatch());
     }
 
     /**

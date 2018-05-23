@@ -110,12 +110,9 @@ public class GameController implements ContactListener{
 
         playerVerifications(delta);
 
-
-
         Array<Body> bodies = new Array<Body>();
         world.getBodies(bodies);
         for (Body body : bodies) {
-            //verifyBounds(body);
             ((EntityModel) body.getUserData()).setPosition(body.getPosition().x, body.getPosition().y);
         }
     }
@@ -149,30 +146,9 @@ public class GameController implements ContactListener{
             if (((PlayerModel) playerBody.getUserData()).getPowerup() != null) {
                 if (((PlayerModel) playerBody.getUserData()).getPowerup().update(delta, playerBody) == 1) {
                     ((PlayerModel) playerBody.getUserData()).removePowerup();
-                    System.out.println("remove");
                 }
             }
         }
-    }
-
-    /**
-     * Verifies if the body is inside the arena bounds and if not
-     * wraps it around to the other side.
-     *
-     * @param body The body to be verified.
-     */
-    private void verifyBounds(Body body) {
-        if (body.getPosition().x < 1)
-            body.setTransform(1, body.getPosition().y, body.getAngle());
-
-        if (body.getPosition().y < 0)
-            body.setTransform(body.getPosition().x, 0, body.getAngle());
-
-        if (body.getPosition().x > GAME_WIDTH)
-            body.setTransform(0, body.getPosition().y, body.getAngle());
-
-        if (body.getPosition().y > GAME_HEIGHT)
-            body.setTransform(body.getPosition().x, 0, body.getAngle());
     }
 
     public void jump(){
@@ -191,6 +167,9 @@ public class GameController implements ContactListener{
         playerBody.moveDown();
     }
 
+    public PlayerBody getPlayerBody() {
+        return playerBody;
+    }
 
     /**
      * A contact between two objects was detected

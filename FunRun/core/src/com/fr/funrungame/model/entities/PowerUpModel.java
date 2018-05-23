@@ -17,13 +17,13 @@ public class PowerUpModel extends EntityModel{
     public void givePowerUp(PlayerModel playerModel){
         double option = Math.floor(Math.random() * Math.floor(3));
         if(option == 0){
-            playerModel.givePowerup(new SpeedPowerUp(getX(),getY(),object));
+            playerModel.givePowerup(new SpeedPowerUpModel(getX(),getY(),object));
         }
         else if(option == 1){
-            playerModel.givePowerup(new ShieldPowerUp(getX(),getY(),object));
+            playerModel.givePowerup(new ShieldPowerUpModel(getX(),getY(),object));
         }
         else if(option == 2){
-            playerModel.givePowerup(new RocketPowerUp(getX(),getY(),object));
+            playerModel.givePowerup(new RocketPowerUpModel(getX(),getY(),object));
         }
     }
 
