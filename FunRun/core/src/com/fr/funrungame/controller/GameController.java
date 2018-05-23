@@ -145,10 +145,12 @@ public class GameController implements ContactListener{
         }
 
         //power up handler
-        if(((PlayerModel) playerBody.getUserData()).getPowerup() != null){
-            if(((PlayerModel) playerBody.getUserData()).getPowerup().update(delta, playerBody) == 1){
-                ((PlayerModel) playerBody.getUserData()).removePowerup();
-                System.out.println("remove");
+        if(!playerBody.isFINISHED()) {
+            if (((PlayerModel) playerBody.getUserData()).getPowerup() != null) {
+                if (((PlayerModel) playerBody.getUserData()).getPowerup().update(delta, playerBody) == 1) {
+                    ((PlayerModel) playerBody.getUserData()).removePowerup();
+                    System.out.println("remove");
+                }
             }
         }
     }

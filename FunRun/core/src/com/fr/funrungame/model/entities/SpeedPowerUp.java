@@ -5,7 +5,7 @@ import com.fr.funrungame.controller.entities.PlayerBody;
 
 public class SpeedPowerUp extends PowerUpModel {
 
-    private static final int TIME = 2;
+    private static final int TIME = 1;
 
     public SpeedPowerUp(float x, float y, RectangleMapObject object){
         super(x,y,object);
@@ -18,14 +18,13 @@ public class SpeedPowerUp extends PowerUpModel {
     }
 
     public int update(float delta, PlayerBody playerBody){
-        System.out.println(timecount);
         if(timecount < 0){
             timecount = 0;
             return 1;
         }
         if(timecount > 0) {
             timecount -= delta;
-            playerBody.applyLinearImpulse(5, 0);
+            playerBody.speedPowerUp();
             System.out.println("speed_action");
         }
         return 0;

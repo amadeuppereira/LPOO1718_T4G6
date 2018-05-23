@@ -84,7 +84,7 @@ public class PlayerBody extends EntityBody {
 
     public void run() {
         if(DEAD) return;
-        else if(FINISHED) body.applyForceToCenter(0,-50, true);
+        else if(FINISHED) body.applyForceToCenter(-(RUN_FORCE-2),-1000, true);
         else body.applyForceToCenter(RUN_FORCE,0, true);
     }
 
@@ -125,5 +125,19 @@ public class PlayerBody extends EntityBody {
 
     public void finish() {
         FINISHED = true;
+    }
+
+    public void speedPowerUp(){
+        if(FINISHED){
+            stop();
+            return;
+        }
+        if(body.getLinearVelocity().x <= 10)
+            body.applyLinearImpulse(new Vector2(1,0), body.getWorldCenter(),true);
+
+    }
+
+    public boolean isFINISHED() {
+        return FINISHED;
     }
 }
