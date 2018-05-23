@@ -24,7 +24,7 @@ public class RocketPowerUp extends PowerUpModel {
         }
         if(timecount > 0) {
             timecount -= delta;
-            playerBody.speedPowerUp();
+            playerBody.rocketPowerUp();
             System.out.println("rocket_action");
         }
         return 0;

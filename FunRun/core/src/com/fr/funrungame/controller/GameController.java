@@ -124,7 +124,7 @@ public class GameController implements ContactListener{
         playerBody.update(delta);
 
         //to keep the player always moving forward
-        if(playerBody.getBody().getLinearVelocity().x <= 5 && !playerBody.isFINISHED())
+        if(playerBody.getBody().getLinearVelocity().x <= 5 && !playerBody.isFINISHED() && !playerBody.isDEAD())
             playerBody.run();
 
         //jumping and fallind handlers
@@ -154,6 +154,7 @@ public class GameController implements ContactListener{
             }
         }
     }
+
     /**
      * Verifies if the body is inside the arena bounds and if not
      * wraps it around to the other side.
@@ -215,7 +216,7 @@ public class GameController implements ContactListener{
         }
 
         if (bodyA.getUserData() instanceof PlayerModel && bodyB.getUserData() instanceof EndLineModel){
-            playerBody.finish();
+            playerBody.setFinish();
         }
     }
 

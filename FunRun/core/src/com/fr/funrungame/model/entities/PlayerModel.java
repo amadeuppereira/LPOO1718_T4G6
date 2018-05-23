@@ -14,6 +14,8 @@ public class PlayerModel extends EntityModel {
 
     private boolean dead = false;
 
+    private boolean shield = false;
+
     public PlayerModel(float x, float y){
         super(x,y);
     }
@@ -51,6 +53,14 @@ public class PlayerModel extends EntityModel {
     public boolean isDead() { return dead; }
 
     public void setDead(boolean dead) { this.dead = dead; }
+
+    public boolean isShield() {
+        return shield;
+    }
+
+    public void setShield(boolean shield) {
+        this.shield = shield;
+    }
 
     public void givePowerup(PowerUpModel pu) {
         if(powerup == null)

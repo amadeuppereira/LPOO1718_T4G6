@@ -21,6 +21,7 @@ public class PlayerBody extends EntityBody {
     private boolean DEAD = false;
     private boolean INVULNERABLE = false;
     private boolean FINISHED = false;
+    private boolean SHIELD = false;
 
     private int DEAD_TIME = 1;
     private int INVULNERABLE_TIME = 2;
@@ -50,8 +51,15 @@ public class PlayerBody extends EntityBody {
     }
 
     public void update(float delta) {
-        if(FINISHED) return;
         history.add(0);
+
+        if(FINISHED){
+            if(body.getLinearVelocity().x  < 0.1)
+                body.setLinearVelocity(new Vector2(0,0));
+            else
+                body.setLinearVelocity(new Vector2(body.getLinearVelocity().x * 0.9f,0));
+        }
+
         if(DEAD) {
             death_timer -= delta;
             if(death_timer <= 0) setDead(false);
@@ -116,15 +124,14 @@ public class PlayerBody extends EntityBody {
     }
 
     public void die() {
-        if(INVULNERABLE || DEAD || FINISHED) return;
+        if(INVULNERABLE || DEAD || FINISHED || SHIELD) return;
         stop();
         setDead(true);
         setInvulnerable(true);
     }
 
-    public void finish() {
+    public void setFinish() {
         FINISHED = true;
-        body.applyForceToCenter(-RUN_FORCE,-1000, true);
     }
 
     public void speedPowerUp(){
@@ -137,15 +144,26 @@ public class PlayerBody extends EntityBody {
 
     }
 
-    public void shieldPowerUp(){
+    public void rocketPowerUp(){
         if(FINISHED){
             stop();
             return;
         }
-        setInvulnerable(true);
+        if(body.getLinearVelocity().x <= 8 && body.getLinearVelocity().y <= 10)
+            body.applyLinearImpulse(new Vector2(1,2), body.getWorldCenter(),true);
     }
+
+    public void shieldPowerUp(boolean shield){
+        SHIELD = shield;
+        ((PlayerModel)getUserData()).setShield(shield);
+    }
+
 
     public boolean isFINISHED() {
         return FINISHED;
+    }
+
+    public boolean isDEAD() {
+        return DEAD;
     }
 }

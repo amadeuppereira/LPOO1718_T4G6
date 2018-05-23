@@ -40,6 +40,11 @@ public class PlayerView extends EntityView {
     private TextureRegion fallingRegion;
 
     /**
+     * The texture used when the player is shielded
+     */
+    private TextureRegion shieldRegion;
+
+    /**
      * Time since the player started the game. Used
      * to calculate the frame to show in animations.
      */
@@ -70,6 +75,11 @@ public class PlayerView extends EntityView {
      */
     private boolean dead;
 
+    /**
+     * Is the player shielded
+     */
+    private boolean shield;
+
     private float alpha = .0f;
 
     public PlayerView(FunRunGame game){
@@ -82,6 +92,7 @@ public class PlayerView extends EntityView {
         notRunningRegion = createNotRunningRegion(game);
         jumpingRegion = createJumpingRegion(game);
         fallingRegion = createFallingRegion(game);
+        shieldRegion = createShieldRegion(game);
 
         return new Sprite(notRunningRegion);
     }
@@ -98,6 +109,11 @@ public class PlayerView extends EntityView {
 
     private TextureRegion createFallingRegion(FunRunGame game){
         Texture texture = game.getAssetManager().get("player_falling.png");
+        return new TextureRegion(texture, texture.getWidth(), texture.getHeight());
+    }
+
+    private TextureRegion createShieldRegion(FunRunGame game){
+        Texture texture = game.getAssetManager().get("player_shielded.png");
         return new TextureRegion(texture, texture.getWidth(), texture.getHeight());
     }
 
@@ -120,13 +136,16 @@ public class PlayerView extends EntityView {
         falling = ((PlayerModel)model).isFalling();
         invulnerable = ((PlayerModel)model).isInvulnerable();
         dead = ((PlayerModel)model).isDead();
+        shield = ((PlayerModel)model).isShield();
     }
 
     @Override
     public void draw(SpriteBatch batch) {
         stateTime += Gdx.graphics.getDeltaTime();
 
-        if(jumping)
+        if(shield)
+            sprite.setRegion(shieldRegion);
+        else if(jumping)
             sprite.setRegion(jumpingRegion);
         else if(falling)
             sprite.setRegion(fallingRegion);
