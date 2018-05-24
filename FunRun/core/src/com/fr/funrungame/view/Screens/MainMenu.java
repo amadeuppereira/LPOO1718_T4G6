@@ -12,7 +12,6 @@ public class MainMenu extends MenuScreen {
 
     protected static final float BUTTON_WIDTH = VIEWPORT_WIDTH / 2;
     protected static final float BUTTON_EDGE = VIEWPORT_WIDTH / 75;
-    protected static final float BOTTOM_EDGE = VIEWPORT_WIDTH / 75;
     protected static final float DEFAULT_BUTTON_SIZE = VIEWPORT_WIDTH / 15;
 
     Image playButton;
