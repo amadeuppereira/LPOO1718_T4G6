@@ -45,6 +45,21 @@ public class PlayerView extends EntityView {
     private TextureRegion shieldRegion;
 
     /**
+     * The animation used when the player is running with a shield
+     */
+    private Animation<TextureRegion> runningShieldedAnimation;
+
+    /**
+     * The texture used when the player is jumping with a shield
+     */
+    private TextureRegion jumpingShieldedRegion;
+
+    /**
+     * The texture used when the player is falling with a shield
+     */
+    private TextureRegion fallingShieldedRegion;
+
+    /**
      * Time since the player started the game. Used
      * to calculate the frame to show in animations.
      */
@@ -93,6 +108,10 @@ public class PlayerView extends EntityView {
         jumpingRegion = createJumpingRegion(game);
         fallingRegion = createFallingRegion(game);
         shieldRegion = createShieldRegion(game);
+        runningShieldedAnimation = createRunningShieldedAnimation(game);
+        jumpingShieldedRegion = createJumpingShieldedRegion(game);
+        fallingShieldedRegion = createFallingShieldedRegion(game);
+
 
         return new Sprite(notRunningRegion);
     }
@@ -127,6 +146,26 @@ public class PlayerView extends EntityView {
         return new Animation<TextureRegion>(FRAME_TIME, frames);
     }
 
+    private TextureRegion createFallingShieldedRegion(FunRunGame game) {
+        Texture texture = game.getAssetManager().get("player_falling_shielded.png");
+        return new TextureRegion(texture, texture.getWidth(), texture.getHeight());
+    }
+
+    private TextureRegion createJumpingShieldedRegion(FunRunGame game) {
+        Texture texture = game.getAssetManager().get("player_jumping_shielded.png");
+        return new TextureRegion(texture, texture.getWidth(), texture.getHeight());
+    }
+
+    private Animation<TextureRegion> createRunningShieldedAnimation(FunRunGame game) {
+        Texture thrustTexture = game.getAssetManager().get("player_running_shielded.png");
+        TextureRegion[][] thrustRegion = TextureRegion.split(thrustTexture, thrustTexture.getWidth() / 6, thrustTexture.getHeight());
+
+        TextureRegion[] frames = new TextureRegion[6];
+        System.arraycopy(thrustRegion[0], 0, frames, 0, 6);
+
+        return new Animation<TextureRegion>(FRAME_TIME, frames);
+    }
+
     @Override
     public void update(EntityModel model) {
         super.update(model);
@@ -143,16 +182,26 @@ public class PlayerView extends EntityView {
     public void draw(SpriteBatch batch) {
         stateTime += Gdx.graphics.getDeltaTime();
 
-        if(shield)
-            sprite.setRegion(shieldRegion);
-        else if(jumping)
-            sprite.setRegion(jumpingRegion);
-        else if(falling)
-            sprite.setRegion(fallingRegion);
-        else if (running)
-            sprite.setRegion(runningAnimation.getKeyFrame(stateTime, true));
-        else
-            sprite.setRegion(notRunningRegion);
+        if(shield){
+            if(jumping)
+                sprite.setRegion(jumpingShieldedRegion);
+            else if(falling)
+                sprite.setRegion(fallingShieldedRegion);
+            else if (running)
+                sprite.setRegion(runningShieldedAnimation.getKeyFrame(stateTime, true));
+            else
+                sprite.setRegion(shieldRegion);
+        }
+        else{
+            if(jumping)
+                sprite.setRegion(jumpingRegion);
+            else if(falling)
+                sprite.setRegion(fallingRegion);
+            else if (running)
+                sprite.setRegion(runningAnimation.getKeyFrame(stateTime, true));
+            else
+                sprite.setRegion(notRunningRegion);
+        }
 
         if(dead) {
             sprite.draw(batch, 0.1f);

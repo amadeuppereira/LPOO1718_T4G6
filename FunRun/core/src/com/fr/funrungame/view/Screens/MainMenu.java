@@ -15,21 +15,33 @@ public class MainMenu extends MenuScreen {
     protected static final float BOTTOM_EDGE = VIEWPORT_WIDTH / 75;
     protected static final float DEFAULT_BUTTON_SIZE = VIEWPORT_WIDTH / 15;
 
+    Image playButton;
+    Image exitButton;
+    Image customizeButton;
+
     public MainMenu(FunRunGame game) {
         super(game);
     }
 
     private void createButtons(Table table) {
         addPlayButton(table);
+        addCustomizeButton(table);
         addExitButton(table);
-        
     }
 
-    private void addPlayButton(Table table) {
-        Image playButton = new Image(game.getAssetManager().get("play_button.png", Texture.class));
+    private void addPlayButton(final Table table) {
+        playButton = new Image(game.getAssetManager().get("play_button.png", Texture.class));
         playButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                playButton = new Image(game.getAssetManager().get("play_button_pressed.png", Texture.class));
+                table.reset();
+                table.add(playButton).size(BUTTON_WIDTH, DEFAULT_BUTTON_SIZE).pad(BUTTON_EDGE).row();
+                addCustomizeButton(table);
+                addExitButton(table);
+                return true;
+            }
+
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 dispose();
                 game.setScreen(new CountdownScreen(game));
             }
@@ -37,11 +49,39 @@ public class MainMenu extends MenuScreen {
         table.add(playButton).size(BUTTON_WIDTH, DEFAULT_BUTTON_SIZE).pad(BUTTON_EDGE).row();
     }
 
-    private void addExitButton(Table table) {
-       Image exitButton = new Image(game.getAssetManager().get("exit_button.jpg", Texture.class));
+    private void addCustomizeButton(final Table table) {
+        customizeButton = new Image(game.getAssetManager().get("customize_button.png", Texture.class));
+        customizeButton.addListener(new ClickListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                customizeButton = new Image(game.getAssetManager().get("customize_button_pressed.png", Texture.class));
+                table.reset();
+                addPlayButton(table);
+                table.add(customizeButton).size(BUTTON_WIDTH, DEFAULT_BUTTON_SIZE).pad(BUTTON_EDGE).row();
+                addExitButton(table);
+                return true;
+            }
+
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                dispose();
+                //do something here
+            }
+        });
+        table.add(customizeButton).size(BUTTON_WIDTH, DEFAULT_BUTTON_SIZE).pad(BUTTON_EDGE).row();
+    }
+
+    private void addExitButton(final Table table) {
+       exitButton = new Image(game.getAssetManager().get("exit_button.png", Texture.class));
         exitButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                exitButton = new Image(game.getAssetManager().get("exit_button_pressed.png", Texture.class));
+                table.reset();
+                addPlayButton(table);
+                addCustomizeButton(table);
+                table.add(exitButton).size(BUTTON_WIDTH, DEFAULT_BUTTON_SIZE).pad(BUTTON_EDGE).row();
+                return true;
+            }
+
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 dispose();
                 Gdx.app.exit();
             }
@@ -57,5 +97,9 @@ public class MainMenu extends MenuScreen {
         table.setFillParent(true);
         createButtons(table);
         stage.addActor(table);
+    }
+
+    public void update(){
+
     }
 }

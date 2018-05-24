@@ -27,10 +27,13 @@ public class FunRunGame extends Game {
 	 	assetManager.load("background_menu.png", Texture.class);
 		assetManager.load("title.png", Texture.class);
 		assetManager.load("play_button.png", Texture.class);
-		assetManager.load("exit_button.jpg", Texture.class);
-		assetManager.load("exit_button.jpg", Texture.class);
-		assetManager.load("1.jpg", Texture.class);
-		assetManager.load("2.jpg", Texture.class);
+		assetManager.load("play_button_pressed.png", Texture.class);
+		assetManager.load("exit_button.png", Texture.class);
+		assetManager.load("exit_button_pressed.png", Texture.class);
+		assetManager.load("customize_button.png", Texture.class);
+		assetManager.load("customize_button_pressed.png", Texture.class);
+		assetManager.load("1.png", Texture.class);
+		assetManager.load("2.png", Texture.class);
 		assetManager.load("3.png", Texture.class);
 
 

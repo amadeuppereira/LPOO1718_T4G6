@@ -13,7 +13,7 @@ public class EmptyPowerUpView extends PowerUpView {
     }
 
     public Sprite createSprite(FunRunGame game){
-        Texture texture = game.getAssetManager().get("title.png");
+        Texture texture = game.getAssetManager().get("noPowerUp.png");
 
         return new Sprite(texture, texture.getWidth(), texture.getHeight());
     }

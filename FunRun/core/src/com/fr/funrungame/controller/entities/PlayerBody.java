@@ -14,7 +14,7 @@ import static com.fr.funrungame.view.Screens.GameView.PIXEL_TO_METER;
 
 public class PlayerBody extends EntityBody {
 
-    private float RUN_FORCE = 12f;
+    private float RUN_FORCE = 10f;
     private float JUMP_FORCE = 5f;
     private float CLIMB_FORCE = 1.5f;
     private float DOWN_FORCE = -100f;
@@ -149,8 +149,8 @@ public class PlayerBody extends EntityBody {
             stop();
             return;
         }
-        if(body.getLinearVelocity().x <= 8 && body.getLinearVelocity().y <= 10)
-            body.applyLinearImpulse(new Vector2(1,2), body.getWorldCenter(),true);
+        if(body.getLinearVelocity().x <= 8 && body.getLinearVelocity().y <= 8)
+            body.applyLinearImpulse(new Vector2(1,1.5f), body.getWorldCenter(),true);
     }
 
     public void shieldPowerUp(boolean shield){

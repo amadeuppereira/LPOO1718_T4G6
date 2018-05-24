@@ -12,8 +12,8 @@ import com.fr.funrungame.model.GameModel;
 public class CountdownScreen extends GameView {
 
     private final int TIME_BETWEEN_CHANGES = 50;
-    private final float NUMBER_WIDTH = 50;
-    private final float NUMBER_HEIGHT = 50;
+    private final float NUMBER_WIDTH = 80;
+    private final float NUMBER_HEIGHT = 80;
 
     private Texture number;
     private int n;
@@ -29,7 +29,7 @@ public class CountdownScreen extends GameView {
         n = 3;
         number = game.getAssetManager().get("3.png", Texture.class);
         xi = Gdx.graphics.getWidth() / 2 - (NUMBER_WIDTH / 2);
-        yi = Gdx.graphics.getHeight() * 0.999999f- (NUMBER_HEIGHT / 2);
+        yi = Gdx.graphics.getHeight() * 0.999999f- (NUMBER_HEIGHT / 2) + 50;
     }
 
     @Override
@@ -62,12 +62,12 @@ public class CountdownScreen extends GameView {
         if(timer <= 0) {
             if(n == 3) {
                 timer = TIME_BETWEEN_CHANGES;
-                number = game.getAssetManager().get("2.jpg", Texture.class);
+                number = game.getAssetManager().get("2.png", Texture.class);
                 n = 2;
             }
             else if(n == 2) {
                 timer = TIME_BETWEEN_CHANGES;
-                number = game.getAssetManager().get("1.jpg", Texture.class);
+                number = game.getAssetManager().get("1.png", Texture.class);
                 n = 1;
             }
             else {

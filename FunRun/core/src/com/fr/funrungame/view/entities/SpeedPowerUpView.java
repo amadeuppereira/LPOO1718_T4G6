@@ -14,7 +14,7 @@ public class SpeedPowerUpView extends PowerUpView {
     }
 
     public Sprite createSprite(FunRunGame game){
-        Texture texture = game.getAssetManager().get("arrow.png");
+        Texture texture = game.getAssetManager().get("speed.png");
         return new Sprite(texture, texture.getWidth(), texture.getHeight());
     }
 }

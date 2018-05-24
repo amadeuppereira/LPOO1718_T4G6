@@ -26,9 +26,9 @@ public class MenuScreen extends ScreenAdapter {
      */
     private static final float VIEWPORT_HEIGHT = VIEWPORT_WIDTH * ((float) Gdx.graphics.getHeight() / (float) Gdx.graphics.getWidth());
 
-    private static final float TITLE_HEIGHT = 5;
+    private static final float TITLE_HEIGHT = 25;
 
-    private static final float TITLE_LENGTH = 5;
+    private static final float TITLE_LENGTH = 7.4f;
 
     private Viewport viewport;
 

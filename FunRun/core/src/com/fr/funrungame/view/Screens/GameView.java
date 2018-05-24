@@ -199,9 +199,13 @@ public class GameView extends ScreenAdapter {
         game.getAssetManager().load("player_jumping.png", Texture.class);
         game.getAssetManager().load("player_falling.png", Texture.class);
         game.getAssetManager().load("player_shielded.png", Texture.class);
+        game.getAssetManager().load("player_running_shielded.png", Texture.class);
+        game.getAssetManager().load("player_jumping_shielded.png", Texture.class);
+        game.getAssetManager().load("player_falling_shielded.png", Texture.class);
         game.getAssetManager().load("rocket.png", Texture.class);
-        game.getAssetManager().load("arrow.png", Texture.class);
+        game.getAssetManager().load("speed.png", Texture.class);
         game.getAssetManager().load("shield.png", Texture.class);
+        game.getAssetManager().load("noPowerUp.png", Texture.class);
         loadMaps();
         game.getAssetManager().finishLoading();
 
