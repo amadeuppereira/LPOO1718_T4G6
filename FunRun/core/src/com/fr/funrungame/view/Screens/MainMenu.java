@@ -19,7 +19,7 @@ public class MainMenu extends MenuScreen {
     Image customizeButton;
 
     public MainMenu(FunRunGame game) {
-        super(game);
+        super(game, new Image(game.getAssetManager().get("title.png", Texture.class)));
     }
 
     private void createButtons(Table table) {
@@ -63,6 +63,7 @@ public class MainMenu extends MenuScreen {
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 dispose();
                 //do something here
+                game.setScreen(new MapSelect(game));
             }
         });
         table.add(customizeButton).size(BUTTON_WIDTH, DEFAULT_BUTTON_SIZE).pad(BUTTON_EDGE).row();

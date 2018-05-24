@@ -24,7 +24,7 @@ public class MenuScreen extends ScreenAdapter {
      * The height of the viewport in meters. The height is
      * automatically calculated using the screen ratio.
      */
-    private static final float VIEWPORT_HEIGHT = VIEWPORT_WIDTH * ((float) Gdx.graphics.getHeight() / (float) Gdx.graphics.getWidth());
+    protected static final float VIEWPORT_HEIGHT = VIEWPORT_WIDTH * ((float) Gdx.graphics.getHeight() / (float) Gdx.graphics.getWidth());
 
     private static final float TITLE_HEIGHT = 25;
 
@@ -38,7 +38,7 @@ public class MenuScreen extends ScreenAdapter {
 
     private Image titleImg;
 
-    public MenuScreen(FunRunGame game) {
+    public MenuScreen(FunRunGame game, Image title) {
         this.game = game;
         viewport = new FitViewport(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
         viewport.apply();
@@ -48,7 +48,7 @@ public class MenuScreen extends ScreenAdapter {
         backgroundImg = new Image(game.getAssetManager().get("background_menu.png", Texture.class));
         backgroundImg.setScale(VIEWPORT_WIDTH / backgroundImg.getWidth(), VIEWPORT_HEIGHT / backgroundImg.getHeight());
 
-        titleImg = new Image(game.getAssetManager().get("title.png", Texture.class));
+        titleImg = title;
         titleImg.setSize(TITLE_HEIGHT, TITLE_LENGTH);
         titleImg.setPosition(VIEWPORT_WIDTH / 2 - titleImg.getWidth() / 2, VIEWPORT_HEIGHT * 0.98f - titleImg.getHeight());
     }
