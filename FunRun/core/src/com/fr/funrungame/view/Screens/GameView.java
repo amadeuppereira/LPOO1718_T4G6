@@ -176,6 +176,7 @@ public class GameView extends ScreenAdapter {
         game.getBatch().end();
 
         game.getBatch().setProjectionMatrix(hud.stage.getCamera().combined);
+        hud.update(delta, GameController.getInstance().getPlayerBody().isFINISHED());
         hud.stage.draw();
     }
 

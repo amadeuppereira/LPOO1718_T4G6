@@ -16,7 +16,7 @@ public class Hud {
     public Stage stage;
     private Viewport viewport;
 
-    private Integer worldTimer;
+    private float worldTimer;
     private Integer position;
 
     Label timeLabel;
@@ -25,18 +25,23 @@ public class Hud {
     Label nothingLabel;
     Label timeNumberLabel;
 
+    Table table;
+
     public Hud(SpriteBatch sb){
-        worldTimer = 000;
+        worldTimer = 0;
         position = 1;
 
         viewport = new FitViewport(GameController.GAME_WIDTH,GameController.GAME_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, sb);
+        createTable();
+    }
 
-        Table table = new Table();
+    public void createTable(){
+        table = new Table();
         table.top();
         table.setFillParent(true);
 
-        timeNumberLabel = new Label(String.format("%03d", worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        timeNumberLabel = new Label(String.format("%.2f", worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         positionNumberLabel = new Label(String.format("%01d", position), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         positionLabel = new Label("POSITION", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         nothingLabel = new Label("", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
@@ -54,5 +59,16 @@ public class Hud {
         table.add(positionNumberLabel).expandX();
 
         stage.addActor(table);
+    }
+
+    public void update(float delta, boolean finish){
+        if(!finish) {
+            worldTimer += delta;
+            if (stage != null && table != null) {
+                stage.clear();
+                table.reset();
+                createTable();
+            }
+        }
     }
 }
