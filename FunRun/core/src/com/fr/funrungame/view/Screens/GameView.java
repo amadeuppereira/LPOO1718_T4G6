@@ -249,7 +249,9 @@ public class GameView extends ScreenAdapter {
         else{
             powerUpView = new EmptyPowerUpView(game);
         }
-        powerUpView.setPosition((camera.position.x - camera.viewportWidth / 2) + 50, (camera.position.y - camera.viewportHeight /2) + 30);
+        //powerUpView.setPosition((camera.position.x - camera.viewportWidth / 2) + 50, (camera.position.y - camera.viewportHeight /2) + 30);
+        powerUpView.setPosition((camera.position.x - Gdx.graphics.getWidth() / 2) + 50, (camera.position.y - Gdx.graphics.getHeight() /2) + 30);
+
         powerUpView.draw(game.getBatch());
     }
 

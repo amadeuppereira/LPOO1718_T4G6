@@ -1,13 +1,9 @@
 package com.fr.funrungame.view.entities;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.fr.funrungame.FunRunGame;
 import com.fr.funrungame.model.entities.EntityModel;
-import com.fr.funrungame.model.entities.PlayerModel;
 
 public class PowerUpView extends EntityView {
 

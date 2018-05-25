@@ -5,6 +5,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.fr.funrungame.controller.GameController;
 import com.fr.funrungame.model.entities.EntityModel;
 import com.fr.funrungame.model.entities.PlayerModel;
 
@@ -51,8 +52,6 @@ public class PlayerBody extends EntityBody {
     }
 
     public void update(float delta) {
-        history.add(0);
-
         if(FINISHED){
             if(body.getLinearVelocity().x  < 0.1)
                 body.setLinearVelocity(new Vector2(0,0));
@@ -72,6 +71,7 @@ public class PlayerBody extends EntityBody {
     }
 
     public void jump(int f) {
+        history.add(GameController.getInstance().getTime());
         history.add(1);
         if(DEAD || FINISHED) return;
         if(f == 0) {//jump
@@ -84,6 +84,7 @@ public class PlayerBody extends EntityBody {
     }
 
     public void moveDown(){
+        history.add(GameController.getInstance().getTime());
         history.add(2);
         if(DEAD || FINISHED) return;
         if(((PlayerModel) getUserData()).isJumping() || ((PlayerModel) getUserData()).isFalling())
@@ -135,6 +136,8 @@ public class PlayerBody extends EntityBody {
     }
 
     public void speedPowerUp(){
+        history.add(GameController.getInstance().getTime());
+        history.add(3);
         if(FINISHED){
             stop();
             return;
@@ -145,6 +148,8 @@ public class PlayerBody extends EntityBody {
     }
 
     public void rocketPowerUp(){
+        history.add(GameController.getInstance().getTime());
+        history.add(4);
         if(FINISHED){
             stop();
             return;
@@ -154,6 +159,8 @@ public class PlayerBody extends EntityBody {
     }
 
     public void shieldPowerUp(boolean shield){
+        history.add(GameController.getInstance().getTime());
+        history.add(5);
         SHIELD = shield;
         ((PlayerModel)getUserData()).setShield(shield);
     }
@@ -165,5 +172,9 @@ public class PlayerBody extends EntityBody {
 
     public boolean isDEAD() {
         return DEAD;
+    }
+
+    public ArrayList getHistory() {
+        return history;
     }
 }

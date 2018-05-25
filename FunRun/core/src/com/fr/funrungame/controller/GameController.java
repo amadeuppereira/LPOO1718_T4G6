@@ -47,10 +47,12 @@ public class GameController implements ContactListener{
 
     private EndLineBody endline;
 
+    private float time;
 
 
     private GameController() {
         world = new World(new Vector2(0, -9.8f), true);
+        time = 0;
 
         playerBody = new PlayerBody(world, GameModel.getInstance().getPlayers().get(0));
 
@@ -99,6 +101,7 @@ public class GameController implements ContactListener{
      * @param delta The size of this physics step in seconds.
      */
     public void update(float delta) {
+        time += delta;
         GameModel.getInstance().update(delta);
 
         float frameTime = Math.min(delta, 0.25f);
@@ -196,7 +199,13 @@ public class GameController implements ContactListener{
 
         if (bodyA.getUserData() instanceof PlayerModel && bodyB.getUserData() instanceof EndLineModel){
             playerBody.setFinish();
+            sendToServer(playerBody.getHistory());
+
         }
+    }
+
+    public float getTime() {
+        return time;
     }
 
     @Override
@@ -211,6 +220,13 @@ public class GameController implements ContactListener{
 
     @Override
     public void postSolve(Contact contact, ContactImpulse impulse) {
+
+    }
+
+    private void sendToServer(ArrayList history) {
+        
+
+
 
     }
 }
