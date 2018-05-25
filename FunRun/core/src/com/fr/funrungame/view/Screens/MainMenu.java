@@ -13,13 +13,14 @@ public class MainMenu extends MenuScreen {
     protected static final float BUTTON_WIDTH = VIEWPORT_WIDTH / 2;
     protected static final float BUTTON_EDGE = VIEWPORT_WIDTH / 75;
     protected static final float DEFAULT_BUTTON_SIZE = VIEWPORT_WIDTH / 15;
+    private static final float TOP_EDGE = VIEWPORT_WIDTH / 7;
 
     Image playButton;
     Image exitButton;
     Image customizeButton;
 
     public MainMenu(FunRunGame game) {
-        super(game, new Image(game.getAssetManager().get("title.png", Texture.class)));
+        super(game, new Image(game.getAssetManager().get("title.png", Texture.class)), 25, 7.4f);
     }
 
     private void createButtons(Table table) {
@@ -34,7 +35,7 @@ public class MainMenu extends MenuScreen {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 playButton = new Image(game.getAssetManager().get("play_button_pressed.png", Texture.class));
                 table.reset();
-                table.add(playButton).size(BUTTON_WIDTH, DEFAULT_BUTTON_SIZE).pad(BUTTON_EDGE).row();
+                table.add(playButton).size(BUTTON_WIDTH, DEFAULT_BUTTON_SIZE).pad(BUTTON_EDGE).padTop(TOP_EDGE).row();
                 addCustomizeButton(table);
                 addExitButton(table);
                 return true;
@@ -45,7 +46,7 @@ public class MainMenu extends MenuScreen {
                 game.setScreen(new CountdownScreen(game));
             }
         });
-        table.add(playButton).size(BUTTON_WIDTH, DEFAULT_BUTTON_SIZE).pad(BUTTON_EDGE).row();
+        table.add(playButton).size(BUTTON_WIDTH, DEFAULT_BUTTON_SIZE).pad(BUTTON_EDGE).padTop(TOP_EDGE).row();
     }
 
     private void addCustomizeButton(final Table table) {
@@ -77,7 +78,7 @@ public class MainMenu extends MenuScreen {
                 table.reset();
                 addPlayButton(table);
                 addCustomizeButton(table);
-                table.add(exitButton).size(BUTTON_WIDTH, DEFAULT_BUTTON_SIZE).pad(BUTTON_EDGE).row();
+                table.add(exitButton).size(BUTTON_WIDTH, DEFAULT_BUTTON_SIZE).pad(BUTTON_EDGE * 2).row();
                 return true;
             }
 
@@ -86,7 +87,7 @@ public class MainMenu extends MenuScreen {
                 Gdx.app.exit();
             }
         });
-        table.add(exitButton).size(BUTTON_WIDTH, DEFAULT_BUTTON_SIZE).pad(BUTTON_EDGE).row();
+        table.add(exitButton).size(BUTTON_WIDTH, DEFAULT_BUTTON_SIZE).pad(BUTTON_EDGE * 2).row();
     }
 
     @Override

@@ -14,6 +14,8 @@ public class CountdownScreen extends GameView {
     private final int TIME_BETWEEN_CHANGES = 50;
     private final float NUMBER_WIDTH = 80;
     private final float NUMBER_HEIGHT = 80;
+    //private final float NUMBER_WIDTH = VIEWPORT_WIDTH / 10;
+    //private final float NUMBER_HEIGHT = VIEWPORT_WIDTH / 10;
 
     private Texture number;
     private int n;
@@ -28,8 +30,12 @@ public class CountdownScreen extends GameView {
         GameModel.getInstance().getPlayers().get(0).setRunning(false);
         n = 3;
         number = game.getAssetManager().get("3.png", Texture.class);
+        System.out.println(Gdx.graphics.getWidth());
+        System.out.println(Gdx.graphics.getHeight());
         xi = Gdx.graphics.getWidth() / 2 - (NUMBER_WIDTH / 2);
         yi = Gdx.graphics.getHeight() * 0.999999f- (NUMBER_HEIGHT / 2) + 50;
+        //xi = VIEWPORT_WIDTH / 2;
+        //yi = VIEWPORT_WIDTH /2;
     }
 
     @Override

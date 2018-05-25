@@ -38,7 +38,7 @@ public class MenuScreen extends ScreenAdapter {
 
     private Image titleImg;
 
-    public MenuScreen(FunRunGame game, Image title) {
+    public MenuScreen(FunRunGame game, Image title, float title_height, float title_length) {
         this.game = game;
         viewport = new FitViewport(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
         viewport.apply();
@@ -49,7 +49,7 @@ public class MenuScreen extends ScreenAdapter {
         backgroundImg.setScale(VIEWPORT_WIDTH / backgroundImg.getWidth(), VIEWPORT_HEIGHT / backgroundImg.getHeight());
 
         titleImg = title;
-        titleImg.setSize(TITLE_HEIGHT, TITLE_LENGTH);
+        titleImg.setSize(title_height, title_length);
         titleImg.setPosition(VIEWPORT_WIDTH / 2 - titleImg.getWidth() / 2, VIEWPORT_HEIGHT * 0.98f - titleImg.getHeight());
     }
 
