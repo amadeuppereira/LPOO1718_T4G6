@@ -36,7 +36,9 @@ public class MapSelect extends MenuScreen {
     /**
      * Constant representing the extra space around the edges of all Images.
      */
-    private static final float IMAGE_EDGE = VIEWPORT_WIDTH / 40;
+    //private static final float IMAGE_EDGE = VIEWPORT_WIDTH / 40;
+    private static final float IMAGE_EDGE = VIEWPORT_WIDTH / 30;
+
     /**
      * Constant representing the distance between the first line of Level Buttons and the screen Top.
      */
@@ -49,8 +51,6 @@ public class MapSelect extends MenuScreen {
     private static final float MAP_LABEL_WIDTH = VIEWPORT_WIDTH / 10;
 
     private static final float MAP_LABEL_HEIGHT = VIEWPORT_WIDTH / 30;
-
-    private static final float MAP_TITLE_EDGE = VIEWPORT_WIDTH / 80;
 
     MapSelect(final FunRunGame game){
         super(game, new Image(game.getAssetManager().get("mapselector.png", Texture.class)), 30, 4.47f);
@@ -67,8 +67,8 @@ public class MapSelect extends MenuScreen {
             }
         });
         objects.add(map1).size(MAP_WIDTH, MAP_HEIGHT).pad(IMAGE_EDGE).row();
-        Image map1_title = new Image(game.getAssetManager().get("title.png", Texture.class));
-        objects.add(map1_title).size(MAP_LABEL_WIDTH, MAP_LABEL_HEIGHT).pad(MAP_TITLE_EDGE).row();
+        //Image map1_title = new Image(game.getAssetManager().get("title.png", Texture.class));
+        //objects.add(map1_title).size(MAP_LABEL_WIDTH, MAP_LABEL_HEIGHT).row();
 
         Image map2 = new Image(game.getAssetManager().get("play_button.png", Texture.class));
         map2.addListener(new ClickListener() {
@@ -79,8 +79,8 @@ public class MapSelect extends MenuScreen {
             }
         });
         objects.add(map2).size(MAP_WIDTH, MAP_HEIGHT).pad(IMAGE_EDGE).row();
-        Image map2_title = new Image(game.getAssetManager().get("title.png", Texture.class));
-        objects.add(map2_title).size(MAP_LABEL_WIDTH, MAP_LABEL_HEIGHT).pad(MAP_TITLE_EDGE).row();
+        //Image map2_title = new Image(game.getAssetManager().get("title.png", Texture.class));
+        //objects.add(map2_title).size(MAP_LABEL_WIDTH, MAP_LABEL_HEIGHT).row();
 
         Image map3 = new Image(game.getAssetManager().get("play_button.png", Texture.class));
         map3.addListener(new ClickListener() {
@@ -91,8 +91,8 @@ public class MapSelect extends MenuScreen {
             }
         });
         objects.add(map3).size(MAP_WIDTH, MAP_HEIGHT).pad(IMAGE_EDGE).row();
-        Image map3_title = new Image(game.getAssetManager().get("title.png", Texture.class));
-        objects.add(map3_title).size(MAP_LABEL_WIDTH, MAP_LABEL_HEIGHT).pad(MAP_TITLE_EDGE).row();
+        //Image map3_title = new Image(game.getAssetManager().get("title.png", Texture.class));
+        //objects.add(map3_title).size(MAP_LABEL_WIDTH, MAP_LABEL_HEIGHT).row();
 
         Image map4 = new Image(game.getAssetManager().get("play_button.png", Texture.class));
         map4.addListener(new ClickListener() {
@@ -103,8 +103,8 @@ public class MapSelect extends MenuScreen {
             }
         });
         objects.add(map4).size(MAP_WIDTH, MAP_HEIGHT).pad(IMAGE_EDGE).row();
-        Image map4_title = new Image(game.getAssetManager().get("title.png", Texture.class));
-        objects.add(map4_title).size(MAP_LABEL_WIDTH, MAP_LABEL_HEIGHT).pad(MAP_TITLE_EDGE).row();
+        //Image map4_title = new Image(game.getAssetManager().get("title.png", Texture.class));
+        //objects.add(map4_title).size(MAP_LABEL_WIDTH, MAP_LABEL_HEIGHT).row();
     }
 
     private void createStaticObjects(Table staticObjects,Table objects) {

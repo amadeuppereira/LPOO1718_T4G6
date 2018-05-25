@@ -8,6 +8,8 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.fr.funrungame.FunRunGame;
@@ -101,7 +103,9 @@ public class GameView extends ScreenAdapter {
 
         camera = createCamera();
 
-        gamePort = new FitViewport(GAME_WIDTH , GAME_HEIGHT, camera);
+        //gamePort = new FitViewport(GAME_WIDTH , GAME_HEIGHT, camera);
+        //gamePort = new ExtendViewport(GAME_WIDTH,GAME_HEIGHT,camera);
+        gamePort = new FillViewport(GAME_WIDTH,GAME_HEIGHT,camera);
 
         hud = new Hud(game.getBatch());
 
@@ -263,6 +267,14 @@ public class GameView extends ScreenAdapter {
         }
         if(Gdx.input.isKeyPressed(Input.Keys.SPACE)){
             GameController.getInstance().usePowerUp();
+        }
+        if(Gdx.input.isTouched()){
+            if(Gdx.input.getDeltaY()<0){
+                GameController.getInstance().jump();
+            }
+            if(Gdx.input.getDeltaY()>0){
+                GameController.getInstance().moveDown();
+            }
         }
     }
 

@@ -1,5 +1,6 @@
 package com.fr.funrungame.view.Screens;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -30,12 +31,16 @@ public class CountdownScreen extends GameView {
         GameModel.getInstance().getPlayers().get(0).setRunning(false);
         n = 3;
         number = game.getAssetManager().get("3.png", Texture.class);
-        System.out.println(Gdx.graphics.getWidth());
-        System.out.println(Gdx.graphics.getHeight());
-        xi = Gdx.graphics.getWidth() / 2 - (NUMBER_WIDTH / 2);
-        yi = Gdx.graphics.getHeight() * 0.999999f- (NUMBER_HEIGHT / 2) + 50;
-        //xi = VIEWPORT_WIDTH / 2;
-        //yi = VIEWPORT_WIDTH /2;
+        //xi = Gdx.graphics.getWidth() / 2 - (NUMBER_WIDTH / 2);
+        //yi = Gdx.graphics.getHeight() * 0.999999f- (NUMBER_HEIGHT / 2) + 50;
+        if(Gdx.app.getType() == Application.ApplicationType.Android){
+            xi = Gdx.graphics.getWidth() / 2 - 400;
+            yi = Gdx.graphics.getHeight() /2 + 200;
+        }
+        else{
+            xi = Gdx.graphics.getWidth() / 2 - (NUMBER_WIDTH / 2);
+            yi = Gdx.graphics.getHeight() * 0.999999f- (NUMBER_HEIGHT / 2) + 50;
+        }
     }
 
     @Override

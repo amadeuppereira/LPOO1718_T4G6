@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.fr.funrungame.FunRunGame;
@@ -26,13 +27,9 @@ public class MenuScreen extends ScreenAdapter {
      */
     protected static final float VIEWPORT_HEIGHT = VIEWPORT_WIDTH * ((float) Gdx.graphics.getHeight() / (float) Gdx.graphics.getWidth());
 
-    private static final float TITLE_HEIGHT = 25;
-
-    private static final float TITLE_LENGTH = 7.4f;
-
     private Viewport viewport;
 
-    protected Stage stage;
+    protected Stage  stage;
 
     private Image backgroundImg;
 

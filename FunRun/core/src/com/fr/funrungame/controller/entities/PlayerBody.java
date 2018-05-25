@@ -14,7 +14,7 @@ import static com.fr.funrungame.view.Screens.GameView.PIXEL_TO_METER;
 
 public class PlayerBody extends EntityBody {
 
-    private float RUN_FORCE = 10f;
+    private float RUN_FORCE = 15f;
     private float JUMP_FORCE = 5f;
     private float CLIMB_FORCE = 1.5f;
     private float DOWN_FORCE = -100f;

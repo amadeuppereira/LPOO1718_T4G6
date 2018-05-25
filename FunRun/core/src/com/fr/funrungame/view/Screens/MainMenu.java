@@ -13,7 +13,10 @@ public class MainMenu extends MenuScreen {
     protected static final float BUTTON_WIDTH = VIEWPORT_WIDTH / 2;
     protected static final float BUTTON_EDGE = VIEWPORT_WIDTH / 75;
     protected static final float DEFAULT_BUTTON_SIZE = VIEWPORT_WIDTH / 15;
-    private static final float TOP_EDGE = VIEWPORT_WIDTH / 7;
+    /**
+     * Constant representing the extra space around the bottom edge of the bottom Button.
+     */
+    protected static final float BOTTOM_EDGE = VIEWPORT_WIDTH / 75;
 
     Image playButton;
     Image exitButton;
@@ -24,9 +27,13 @@ public class MainMenu extends MenuScreen {
     }
 
     private void createButtons(Table table) {
+        table.bottom();
+
         addPlayButton(table);
         addCustomizeButton(table);
         addExitButton(table);
+
+        table.padBottom(BOTTOM_EDGE);
     }
 
     private void addPlayButton(final Table table) {
@@ -35,9 +42,11 @@ public class MainMenu extends MenuScreen {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 playButton = new Image(game.getAssetManager().get("play_button_pressed.png", Texture.class));
                 table.reset();
-                table.add(playButton).size(BUTTON_WIDTH, DEFAULT_BUTTON_SIZE).pad(BUTTON_EDGE).padTop(TOP_EDGE).row();
+                table.bottom();
+                table.add(playButton).size(BUTTON_WIDTH, DEFAULT_BUTTON_SIZE).pad(BUTTON_EDGE).row();
                 addCustomizeButton(table);
                 addExitButton(table);
+                table.padBottom(BOTTOM_EDGE);
                 return true;
             }
 
@@ -46,7 +55,7 @@ public class MainMenu extends MenuScreen {
                 game.setScreen(new CountdownScreen(game));
             }
         });
-        table.add(playButton).size(BUTTON_WIDTH, DEFAULT_BUTTON_SIZE).pad(BUTTON_EDGE).padTop(TOP_EDGE).row();
+        table.add(playButton).size(BUTTON_WIDTH, DEFAULT_BUTTON_SIZE).pad(BUTTON_EDGE).row();
     }
 
     private void addCustomizeButton(final Table table) {
@@ -55,9 +64,11 @@ public class MainMenu extends MenuScreen {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 customizeButton = new Image(game.getAssetManager().get("customize_button_pressed.png", Texture.class));
                 table.reset();
+                table.bottom();
                 addPlayButton(table);
                 table.add(customizeButton).size(BUTTON_WIDTH, DEFAULT_BUTTON_SIZE).pad(BUTTON_EDGE).row();
                 addExitButton(table);
+                table.padBottom(BOTTOM_EDGE);
                 return true;
             }
 
@@ -76,9 +87,11 @@ public class MainMenu extends MenuScreen {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 exitButton = new Image(game.getAssetManager().get("exit_button_pressed.png", Texture.class));
                 table.reset();
+                table.bottom();
                 addPlayButton(table);
                 addCustomizeButton(table);
-                table.add(exitButton).size(BUTTON_WIDTH, DEFAULT_BUTTON_SIZE).pad(BUTTON_EDGE * 2).row();
+                table.add(exitButton).size(BUTTON_WIDTH, DEFAULT_BUTTON_SIZE).pad(BUTTON_EDGE).row();
+                table.padBottom(BOTTOM_EDGE);
                 return true;
             }
 
@@ -87,7 +100,7 @@ public class MainMenu extends MenuScreen {
                 Gdx.app.exit();
             }
         });
-        table.add(exitButton).size(BUTTON_WIDTH, DEFAULT_BUTTON_SIZE).pad(BUTTON_EDGE * 2).row();
+        table.add(exitButton).size(BUTTON_WIDTH, DEFAULT_BUTTON_SIZE).pad(BUTTON_EDGE).row();
     }
 
     @Override
@@ -96,11 +109,10 @@ public class MainMenu extends MenuScreen {
 
         Table table = new Table();
         table.setFillParent(true);
+
         createButtons(table);
+
+        stage.setDebugAll(true);
         stage.addActor(table);
-    }
-
-    public void update(){
-
     }
 }
