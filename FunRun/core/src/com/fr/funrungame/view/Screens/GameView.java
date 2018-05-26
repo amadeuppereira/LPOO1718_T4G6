@@ -8,6 +8,11 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -27,6 +32,7 @@ import com.fr.funrungame.model.entities.SpeedPowerUpModel;
 import com.fr.funrungame.view.Screens.Hud;
 import com.fr.funrungame.view.entities.*;
 
+import java.awt.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -87,6 +93,8 @@ public class GameView extends ScreenAdapter {
 
     private Hud hud;
 
+    Controller controller;
+
     /**
      * Creates this screen.
      *
@@ -118,6 +126,8 @@ public class GameView extends ScreenAdapter {
         mapRenderer = new OrthogonalTiledMapRenderer(GameModel.getInstance().getMap(), game.getBatch());
 
         debugRenderer = new Box2DDebugRenderer();
+
+        controller = new Controller(game);
     }
 
 
@@ -177,11 +187,14 @@ public class GameView extends ScreenAdapter {
         game.getBatch().begin();
         drawEntities();
         drawPowerUp();
+        //drawButtons();
         game.getBatch().end();
 
         game.getBatch().setProjectionMatrix(hud.stage.getCamera().combined);
         hud.update(delta, GameController.getInstance().getPlayerBody().isFINISHED());
         hud.stage.draw();
+
+        controller.draw();
     }
 
     protected void cameraHandler(){
@@ -253,6 +266,40 @@ public class GameView extends ScreenAdapter {
         powerUpView.draw(game.getBatch());
     }
 
+    private void drawButtons(){
+//        Stage stage = new Stage(gamePort, game.getBatch());
+//
+//        Image arrow_up_button = new Image(game.getAssetManager().get("arrow_up.png", Texture.class));
+//        arrow_up_button.addListener(new ClickListener() {
+//            @Override
+//            public void clicked(InputEvent event, float x, float y) {
+//                System.out.println("arrow_up");
+//                dispose();
+//            }
+//        });
+//        arrow_up_button.setSize(100,100);
+//        arrow_up_button.setPosition(Gdx.graphics.getWidth()/30 + (camera.position.x - camera.viewportWidth / 2f) + 50, Gdx.graphics.getHeight()/10 + (camera.position.y - camera.viewportHeight / 2f));
+//
+//        Image arrow_down_button = new Image(game.getAssetManager().get("arrow_down.png", Texture.class));
+//        arrow_down_button.addListener(new ClickListener() {
+//            @Override
+//            public void clicked(InputEvent event, float x, float y) {
+//                System.out.println("arrow_down");
+//                dispose();
+//            }
+//        });
+//        arrow_down_button.setSize(100,100);
+//        arrow_up_button.setPosition(Gdx.graphics.getWidth()/30 + (camera.position.x - camera.viewportWidth / 2f) + 150, Gdx.graphics.getHeight()/10 + (camera.position.y - camera.viewportHeight / 2f));
+//
+//        stage.addActor(arrow_up_button);
+//        stage.addActor(arrow_down_button);
+//
+//        stage.act(Gdx.graphics.getDeltaTime());
+//        stage.draw();
+//
+//        Gdx.input.setInputProcessor(stage);
+    }
+
     /**
      * Handles any inputs and passes them to the controller.
      *
@@ -276,11 +323,19 @@ public class GameView extends ScreenAdapter {
                 GameController.getInstance().moveDown();
             }
         }
+
+        if(controller.isUpPressed()){
+            GameController.getInstance().jump();
+        }
+        if(controller.isDownPressed()){
+            GameController.getInstance().moveDown();
+        }
     }
 
     @Override
     public void resize(int width, int height){
         gamePort.update(width, height);
+        controller.resize(width,height);
     }
 
     protected GameView getThis() {

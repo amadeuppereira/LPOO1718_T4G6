@@ -67,6 +67,8 @@ public class FunRunGame extends Game {
 		assetManager.load("1.png", Texture.class);
 		assetManager.load("2.png", Texture.class);
 		assetManager.load("3.png", Texture.class);
+		assetManager.load("arrow_up.png", Texture.class);
+		assetManager.load("arrow_down.png", Texture.class);
 
 
 		assetManager.finishLoading();
