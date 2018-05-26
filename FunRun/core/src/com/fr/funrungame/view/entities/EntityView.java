@@ -1,5 +1,6 @@
 package com.fr.funrungame.view.entities;
 
+import com.badlogic.gdx.Gdx;
 import com.fr.funrungame.FunRunGame;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;

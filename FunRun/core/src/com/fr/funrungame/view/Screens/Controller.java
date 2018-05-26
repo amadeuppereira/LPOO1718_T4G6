@@ -14,6 +14,13 @@ import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.fr.funrungame.FunRunGame;
+import com.fr.funrungame.controller.GameController;
+import com.fr.funrungame.controller.entities.PlayerBody;
+import com.fr.funrungame.model.entities.PlayerModel;
+import com.fr.funrungame.model.entities.RocketPowerUpModel;
+import com.fr.funrungame.model.entities.ShieldPowerUpModel;
+import com.fr.funrungame.model.entities.SpeedPowerUpModel;
+import com.fr.funrungame.view.entities.*;
 
 import static com.fr.funrungame.controller.GameController.GAME_HEIGHT;
 import static com.fr.funrungame.controller.GameController.GAME_WIDTH;
@@ -26,7 +33,6 @@ public class Controller {
 
     public Controller(FunRunGame game){
         camera = new OrthographicCamera();
-        //viewport = new FitViewport(GAME_WIDTH, GAME_HEIGHT, camera);
         viewport = new FillViewport(GAME_WIDTH, GAME_HEIGHT, camera);
         stage = new Stage(viewport, game.getBatch());
         Gdx.input.setInputProcessor(stage);

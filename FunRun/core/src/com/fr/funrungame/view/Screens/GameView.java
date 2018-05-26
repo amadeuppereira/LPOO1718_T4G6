@@ -1,6 +1,6 @@
 package com.fr.funrungame.view.Screens;
 
-import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -8,14 +8,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FillViewport;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.fr.funrungame.FunRunGame;
 import com.badlogic.gdx.graphics.GL20;
@@ -29,10 +22,8 @@ import com.fr.funrungame.model.entities.PlayerModel;
 import com.fr.funrungame.model.entities.RocketPowerUpModel;
 import com.fr.funrungame.model.entities.ShieldPowerUpModel;
 import com.fr.funrungame.model.entities.SpeedPowerUpModel;
-import com.fr.funrungame.view.Screens.Hud;
 import com.fr.funrungame.view.entities.*;
 
-import java.awt.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -87,7 +78,7 @@ public class GameView extends ScreenAdapter {
 
     private Map<Integer,String> gameMaps = new HashMap<Integer, String>();
 
-    EntityView view; //because of PlayerView draw
+    PlayerView playerView;
 
     PowerUpView powerUpView;
 
@@ -105,7 +96,7 @@ public class GameView extends ScreenAdapter {
 
         loadAssets();
 
-        view = new PlayerView(game);
+        playerView = new PlayerView(game);
 
         powerUpView = new PowerUpView(game);
 
@@ -242,8 +233,8 @@ public class GameView extends ScreenAdapter {
     protected void drawEntities() {
         List<PlayerModel> players = GameModel.getInstance().getPlayers();
         for (PlayerModel player : players){
-            view.update(player);
-            view.draw(game.getBatch());
+            playerView.update(player);
+            playerView.draw(game.getBatch());
         }
     }
 
@@ -261,7 +252,13 @@ public class GameView extends ScreenAdapter {
         else{
             powerUpView = new EmptyPowerUpView(game);
         }
-        powerUpView.setPosition(Gdx.graphics.getWidth()/30 + (camera.position.x - camera.viewportWidth / 2f), Gdx.graphics.getHeight()/10 + (camera.position.y - camera.viewportHeight / 2f));
+        if(Gdx.app.getType() == Application.ApplicationType.Android)
+            powerUpView.setPosition(Gdx.graphics.getWidth()/30 + (camera.position.x - camera.viewportWidth / 2f), Gdx.graphics.getHeight()/10 + (camera.position.y - camera.viewportHeight / 2f));
+        else{
+            powerUpView.setPosition(Gdx.graphics.getWidth()/30 + (camera.position.x - camera.viewportWidth / 2f), Gdx.graphics.getHeight()/10 + (camera.position.y - camera.viewportHeight / 2f));
+        }
+        //powerUpView.setPosition(GAME_WIDTH/30 + (camera.position.x - camera.viewportWidth / 2f), GAME_HEIGHT/10 + (camera.position.y - camera.viewportHeight / 2f));
+        //System.out.println("y p: " + (camera.position.x - camera.viewportWidth / 2f));
         powerUpView.draw(game.getBatch());
     }
 
@@ -277,6 +274,24 @@ public class GameView extends ScreenAdapter {
         }
         if(controller.isPowerupPressed()){
             GameController.getInstance().usePowerUp();
+        }
+
+        if(Gdx.input.isTouched()){
+            //System.out.println("maior que : " + (Gdx.graphics.getHeight() - Gdx.graphics.getHeight()/10 - 100));
+            //System.out.println("menor que : " + (Gdx.graphics.getHeight() - Gdx.graphics.getHeight()/10));
+            //System.out.println(Gdx.input.getY());
+//            if((Gdx.input.getX() > Gdx.graphics.getWidth()/30)
+//                    && (Gdx.input.getX() < ((Gdx.graphics.getWidth()/30) + 100))
+//                    && (Gdx.input.getY() > (Gdx.graphics.getHeight() - Gdx.graphics.getHeight()/10 - 100))
+//                    && (Gdx.input.getY() < (Gdx.graphics.getHeight() - Gdx.graphics.getHeight()/10))){
+//                System.out.println("power up");
+//                GameController.getInstance().usePowerUp();
+//            }
+            if((Gdx.input.getX() > Gdx.graphics.getWidth()/30 + 50)
+                    && (Gdx.input.getX() < ((Gdx.graphics.getWidth()/30) + 150))){
+                System.out.println("power up");
+                GameController.getInstance().usePowerUp();
+            }
         }
     }
 
