@@ -10,6 +10,9 @@ import com.fr.funrungame.FunRunGame;
 import com.fr.funrungame.controller.GameController;
 import com.fr.funrungame.model.GameModel;
 
+import static com.fr.funrungame.controller.GameController.GAME_HEIGHT;
+import static com.fr.funrungame.controller.GameController.GAME_WIDTH;
+
 public class CountdownScreen extends GameView {
 
     private final int TIME_BETWEEN_CHANGES = 50;
@@ -31,11 +34,9 @@ public class CountdownScreen extends GameView {
         GameModel.getInstance().getPlayers().get(0).setRunning(false);
         n = 3;
         number = game.getAssetManager().get("3.png", Texture.class);
-        //xi = Gdx.graphics.getWidth() / 2 - (NUMBER_WIDTH / 2);
-        //yi = Gdx.graphics.getHeight() * 0.999999f- (NUMBER_HEIGHT / 2) + 50;
         if(Gdx.app.getType() == Application.ApplicationType.Android){
-            xi = Gdx.graphics.getWidth() / 2 - 400;
-            yi = Gdx.graphics.getHeight() /2 + 200;
+            xi = GAME_WIDTH / 2 - NUMBER_WIDTH / 2;
+            yi = GAME_HEIGHT /2 + 4* NUMBER_HEIGHT;
         }
         else{
             xi = Gdx.graphics.getWidth() / 2 - (NUMBER_WIDTH / 2);

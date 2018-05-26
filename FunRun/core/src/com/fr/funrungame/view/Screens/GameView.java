@@ -187,7 +187,6 @@ public class GameView extends ScreenAdapter {
         game.getBatch().begin();
         drawEntities();
         drawPowerUp();
-        //drawButtons();
         game.getBatch().end();
 
         game.getBatch().setProjectionMatrix(hud.stage.getCamera().combined);
@@ -266,40 +265,6 @@ public class GameView extends ScreenAdapter {
         powerUpView.draw(game.getBatch());
     }
 
-    private void drawButtons(){
-//        Stage stage = new Stage(gamePort, game.getBatch());
-//
-//        Image arrow_up_button = new Image(game.getAssetManager().get("arrow_up.png", Texture.class));
-//        arrow_up_button.addListener(new ClickListener() {
-//            @Override
-//            public void clicked(InputEvent event, float x, float y) {
-//                System.out.println("arrow_up");
-//                dispose();
-//            }
-//        });
-//        arrow_up_button.setSize(100,100);
-//        arrow_up_button.setPosition(Gdx.graphics.getWidth()/30 + (camera.position.x - camera.viewportWidth / 2f) + 50, Gdx.graphics.getHeight()/10 + (camera.position.y - camera.viewportHeight / 2f));
-//
-//        Image arrow_down_button = new Image(game.getAssetManager().get("arrow_down.png", Texture.class));
-//        arrow_down_button.addListener(new ClickListener() {
-//            @Override
-//            public void clicked(InputEvent event, float x, float y) {
-//                System.out.println("arrow_down");
-//                dispose();
-//            }
-//        });
-//        arrow_down_button.setSize(100,100);
-//        arrow_up_button.setPosition(Gdx.graphics.getWidth()/30 + (camera.position.x - camera.viewportWidth / 2f) + 150, Gdx.graphics.getHeight()/10 + (camera.position.y - camera.viewportHeight / 2f));
-//
-//        stage.addActor(arrow_up_button);
-//        stage.addActor(arrow_down_button);
-//
-//        stage.act(Gdx.graphics.getDeltaTime());
-//        stage.draw();
-//
-//        Gdx.input.setInputProcessor(stage);
-    }
-
     /**
      * Handles any inputs and passes them to the controller.
      *
@@ -314,14 +279,6 @@ public class GameView extends ScreenAdapter {
         }
         if(Gdx.input.isKeyPressed(Input.Keys.SPACE)){
             GameController.getInstance().usePowerUp();
-        }
-        if(Gdx.input.isTouched()){
-            if(Gdx.input.getDeltaY()<0){
-                GameController.getInstance().jump();
-            }
-            if(Gdx.input.getDeltaY()>0){
-                GameController.getInstance().moveDown();
-            }
         }
 
         if(controller.isUpPressed()){

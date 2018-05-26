@@ -69,7 +69,7 @@ public class Controller {
                 downPressed = false;
             }
         });
-        
+
         table.add(arrow_down_button).size(arrow_down_button.getWidth(), arrow_down_button.getHeight());
         table.add(arrow_up_button).size(arrow_up_button.getWidth(), arrow_up_button.getHeight());
 
@@ -77,7 +77,6 @@ public class Controller {
     }
 
     public void draw(){
-        stage.setDebugAll(true);
         stage.draw();
     }
 
