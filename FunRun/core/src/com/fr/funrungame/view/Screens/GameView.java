@@ -159,7 +159,7 @@ public class GameView extends ScreenAdapter {
     public void render(float delta) {
         super.render(delta);
 
-        handleInputs(delta);
+        handleInputs();
 
         GameController.getInstance().update(delta);
 
@@ -267,25 +267,16 @@ public class GameView extends ScreenAdapter {
 
     /**
      * Handles any inputs and passes them to the controller.
-     *
-     * @param delta time since last time inputs where handled in seconds
      */
-    private void handleInputs(float delta) {
-        if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            GameController.getInstance().jump();
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            GameController.getInstance().moveDown();
-        }
-        if(Gdx.input.isKeyPressed(Input.Keys.SPACE)){
-            GameController.getInstance().usePowerUp();
-        }
-
+    private void handleInputs() {
         if(controller.isUpPressed()){
             GameController.getInstance().jump();
         }
         if(controller.isDownPressed()){
             GameController.getInstance().moveDown();
+        }
+        if(controller.isPowerupPressed()){
+            GameController.getInstance().usePowerUp();
         }
     }
 

@@ -1,6 +1,7 @@
 package com.fr.funrungame.view.Screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -20,7 +21,7 @@ import static com.fr.funrungame.controller.GameController.GAME_WIDTH;
 public class Controller {
     Viewport viewport;
     Stage stage;
-    boolean upPressed, downPressed;
+    boolean upPressed, downPressed, powerupPressed;
     OrthographicCamera camera;
 
     public Controller(FunRunGame game){
@@ -30,7 +31,45 @@ public class Controller {
         stage = new Stage(viewport, game.getBatch());
         Gdx.input.setInputProcessor(stage);
 
+        addKeysListener();
         createTable(game);
+    }
+
+    private void addKeysListener(){
+        stage.addListener(new InputListener(){
+
+            @Override
+            public boolean keyDown(InputEvent event, int keycode){
+                switch (keycode){
+                    case Input.Keys.UP:
+                        upPressed = true;
+                        break;
+                    case Input.Keys.DOWN:
+                        downPressed = true;
+                        break;
+                    case Input.Keys.SPACE:
+                        powerupPressed = true;
+                        break;
+                }
+                return true;
+            }
+
+            @Override
+            public boolean keyUp(InputEvent event, int keycode){
+                switch (keycode){
+                    case Input.Keys.UP:
+                        upPressed = false;
+                        break;
+                    case Input.Keys.DOWN:
+                        downPressed = false;
+                        break;
+                    case Input.Keys.SPACE:
+                        powerupPressed = false;
+                        break;
+                }
+                return true;
+            }
+        });
     }
 
     private void createTable(FunRunGame game){
@@ -70,7 +109,7 @@ public class Controller {
             }
         });
 
-        table.add(arrow_down_button).size(arrow_down_button.getWidth(), arrow_down_button.getHeight());
+        table.add(arrow_down_button).size(arrow_down_button.getWidth(), arrow_down_button.getHeight()).pad(10);
         table.add(arrow_up_button).size(arrow_up_button.getWidth(), arrow_up_button.getHeight());
 
         stage.addActor(table);
@@ -86,6 +125,10 @@ public class Controller {
 
     public boolean isDownPressed() {
         return downPressed;
+    }
+
+    public boolean isPowerupPressed() {
+        return powerupPressed;
     }
 
     public void resize(int width, int height){
