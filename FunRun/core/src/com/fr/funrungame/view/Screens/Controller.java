@@ -1,5 +1,6 @@
 package com.fr.funrungame.view.Screens;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -30,6 +31,7 @@ public class Controller {
     Stage stage;
     boolean upPressed, downPressed, powerupPressed;
     OrthographicCamera camera;
+    Image powerUpImage;
 
     public Controller(FunRunGame game){
         camera = new OrthographicCamera();
@@ -39,6 +41,7 @@ public class Controller {
 
         addKeysListener();
         createTable(game);
+        createPowerUp(game);
     }
 
     private void addKeysListener(){
@@ -119,6 +122,49 @@ public class Controller {
         table.add(arrow_up_button).size(arrow_up_button.getWidth(), arrow_up_button.getHeight());
 
         stage.addActor(table);
+    }
+
+    private void createPowerUp(FunRunGame game){
+        powerUpImage = new Image(game.getAssetManager().get("noPowerUp.png", Texture.class));
+        powerUpImage.setSize(100,100);
+        powerUpImage.setPosition(Gdx.graphics.getWidth()/30 + (camera.position.x - camera.viewportWidth / 2f), Gdx.graphics.getHeight()/10 + (camera.position.y - camera.viewportHeight / 2f));
+        stage.addActor(powerUpImage);
+    }
+
+    public void update(FunRunGame game){
+        powerUpImage.remove();
+        PlayerBody playerBody =  GameController.getInstance().getPlayerBody();
+        if(((PlayerModel) playerBody.getUserData()).getPowerup() instanceof SpeedPowerUpModel){
+            powerUpImage = new Image(game.getAssetManager().get("speed.png", Texture.class));
+        }
+        else if(((PlayerModel) playerBody.getUserData()).getPowerup() instanceof ShieldPowerUpModel){
+            powerUpImage = new Image(game.getAssetManager().get("shield.png", Texture.class));
+        }
+        else if(((PlayerModel) playerBody.getUserData()).getPowerup() instanceof RocketPowerUpModel){
+            powerUpImage = new Image(game.getAssetManager().get("rocket.png", Texture.class));
+        }
+        else{
+            powerUpImage = new Image(game.getAssetManager().get("noPowerUp.png", Texture.class));
+        }
+        powerUpImage.setSize(100,100);
+        powerUpImage.setPosition(Gdx.graphics.getWidth()/30 + (camera.position.x - camera.viewportWidth / 2f), Gdx.graphics.getHeight()/10 + (camera.position.y - camera.viewportHeight / 2f));
+
+        powerUpImage.addListener(new InputListener() {
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                powerupPressed = true;
+                System.out.println("power up");
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                powerupPressed = false;
+            }
+        });
+
+        stage.addActor(powerUpImage);
     }
 
     public void draw(){

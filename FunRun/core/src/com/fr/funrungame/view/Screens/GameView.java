@@ -80,7 +80,7 @@ public class GameView extends ScreenAdapter {
 
     PlayerView playerView;
 
-    PowerUpView powerUpView;
+    //PowerUpView powerUpView;
 
     private Hud hud;
 
@@ -98,7 +98,7 @@ public class GameView extends ScreenAdapter {
 
         playerView = new PlayerView(game);
 
-        powerUpView = new PowerUpView(game);
+        //powerUpView = new PowerUpView(game);
 
         camera = createCamera();
 
@@ -177,13 +177,13 @@ public class GameView extends ScreenAdapter {
 
         game.getBatch().begin();
         drawEntities();
-        drawPowerUp();
         game.getBatch().end();
 
         game.getBatch().setProjectionMatrix(hud.stage.getCamera().combined);
         hud.update(delta, GameController.getInstance().getPlayerBody().isFINISHED());
         hud.stage.draw();
 
+        controller.update(game);
         controller.draw();
     }
 
@@ -238,30 +238,6 @@ public class GameView extends ScreenAdapter {
         }
     }
 
-    private void drawPowerUp(){
-        PlayerBody playerBody =  GameController.getInstance().getPlayerBody();
-        if(((PlayerModel) playerBody.getUserData()).getPowerup() instanceof SpeedPowerUpModel){
-            powerUpView = new SpeedPowerUpView(game);
-        }
-        else if(((PlayerModel) playerBody.getUserData()).getPowerup() instanceof ShieldPowerUpModel){
-            powerUpView = new ShieldPowerUpView(game);
-        }
-        else if(((PlayerModel) playerBody.getUserData()).getPowerup() instanceof RocketPowerUpModel){
-            powerUpView = new RocketPowerUpView(game);
-        }
-        else{
-            powerUpView = new EmptyPowerUpView(game);
-        }
-        if(Gdx.app.getType() == Application.ApplicationType.Android)
-            powerUpView.setPosition(Gdx.graphics.getWidth()/30 + (camera.position.x - camera.viewportWidth / 2f), Gdx.graphics.getHeight()/10 + (camera.position.y - camera.viewportHeight / 2f));
-        else{
-            powerUpView.setPosition(Gdx.graphics.getWidth()/30 + (camera.position.x - camera.viewportWidth / 2f), Gdx.graphics.getHeight()/10 + (camera.position.y - camera.viewportHeight / 2f));
-        }
-        //powerUpView.setPosition(GAME_WIDTH/30 + (camera.position.x - camera.viewportWidth / 2f), GAME_HEIGHT/10 + (camera.position.y - camera.viewportHeight / 2f));
-        //System.out.println("y p: " + (camera.position.x - camera.viewportWidth / 2f));
-        powerUpView.draw(game.getBatch());
-    }
-
     /**
      * Handles any inputs and passes them to the controller.
      */
@@ -274,24 +250,6 @@ public class GameView extends ScreenAdapter {
         }
         if(controller.isPowerupPressed()){
             GameController.getInstance().usePowerUp();
-        }
-
-        if(Gdx.input.isTouched()){
-            //System.out.println("maior que : " + (Gdx.graphics.getHeight() - Gdx.graphics.getHeight()/10 - 100));
-            //System.out.println("menor que : " + (Gdx.graphics.getHeight() - Gdx.graphics.getHeight()/10));
-            //System.out.println(Gdx.input.getY());
-//            if((Gdx.input.getX() > Gdx.graphics.getWidth()/30)
-//                    && (Gdx.input.getX() < ((Gdx.graphics.getWidth()/30) + 100))
-//                    && (Gdx.input.getY() > (Gdx.graphics.getHeight() - Gdx.graphics.getHeight()/10 - 100))
-//                    && (Gdx.input.getY() < (Gdx.graphics.getHeight() - Gdx.graphics.getHeight()/10))){
-//                System.out.println("power up");
-//                GameController.getInstance().usePowerUp();
-//            }
-            if((Gdx.input.getX() > Gdx.graphics.getWidth()/30 + 50)
-                    && (Gdx.input.getX() < ((Gdx.graphics.getWidth()/30) + 150))){
-                System.out.println("power up");
-                GameController.getInstance().usePowerUp();
-            }
         }
     }
 
