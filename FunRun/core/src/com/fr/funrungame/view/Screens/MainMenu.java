@@ -27,8 +27,8 @@ public class MainMenu extends MenuScreen {
     }
 
     private void createButtons(Table table) {
-        table.bottom();
-
+        //table.bottom();
+        table.padTop(10);
         addPlayButton(table);
         addCustomizeButton(table);
         addExitButton(table);
@@ -43,7 +43,8 @@ public class MainMenu extends MenuScreen {
                 playButton = new Image(game.getAssetManager().get("play_button_pressed.png", Texture.class));
                 table.reset();
                 table.bottom();
-                table.add(playButton).size(BUTTON_WIDTH, DEFAULT_BUTTON_SIZE).pad(BUTTON_EDGE).row();
+                //table.add(playButton).size(BUTTON_WIDTH, DEFAULT_BUTTON_SIZE).pad(BUTTON_EDGE).row();
+                table.add(playButton).size(BUTTON_WIDTH, DEFAULT_BUTTON_SIZE).expandY().row();
                 addCustomizeButton(table);
                 addExitButton(table);
                 table.padBottom(BOTTOM_EDGE);
@@ -56,6 +57,7 @@ public class MainMenu extends MenuScreen {
             }
         });
         table.add(playButton).size(BUTTON_WIDTH, DEFAULT_BUTTON_SIZE).pad(BUTTON_EDGE).row();
+        //table.add(playButton).size(BUTTON_WIDTH, DEFAULT_BUTTON_SIZE).expandY().row();
     }
 
     private void addCustomizeButton(final Table table) {
@@ -66,7 +68,8 @@ public class MainMenu extends MenuScreen {
                 table.reset();
                 table.bottom();
                 addPlayButton(table);
-                table.add(customizeButton).size(BUTTON_WIDTH, DEFAULT_BUTTON_SIZE).pad(BUTTON_EDGE).row();
+                //table.add(customizeButton).size(BUTTON_WIDTH, DEFAULT_BUTTON_SIZE).pad(BUTTON_EDGE).row();
+                table.add(customizeButton).size(BUTTON_WIDTH, DEFAULT_BUTTON_SIZE).expandY().row();
                 addExitButton(table);
                 table.padBottom(BOTTOM_EDGE);
                 return true;
@@ -79,6 +82,7 @@ public class MainMenu extends MenuScreen {
             }
         });
         table.add(customizeButton).size(BUTTON_WIDTH, DEFAULT_BUTTON_SIZE).pad(BUTTON_EDGE).row();
+        //table.add(customizeButton).size(BUTTON_WIDTH, DEFAULT_BUTTON_SIZE).expandY().row();
     }
 
     private void addExitButton(final Table table) {
@@ -90,7 +94,8 @@ public class MainMenu extends MenuScreen {
                 table.bottom();
                 addPlayButton(table);
                 addCustomizeButton(table);
-                table.add(exitButton).size(BUTTON_WIDTH, DEFAULT_BUTTON_SIZE).pad(BUTTON_EDGE).row();
+                //table.add(exitButton).size(BUTTON_WIDTH, DEFAULT_BUTTON_SIZE).pad(BUTTON_EDGE).row();
+                table.add(exitButton).size(BUTTON_WIDTH, DEFAULT_BUTTON_SIZE).expandY().row();
                 table.padBottom(BOTTOM_EDGE);
                 return true;
             }
@@ -101,6 +106,7 @@ public class MainMenu extends MenuScreen {
             }
         });
         table.add(exitButton).size(BUTTON_WIDTH, DEFAULT_BUTTON_SIZE).pad(BUTTON_EDGE).row();
+        //table.add(exitButton).size(BUTTON_WIDTH, DEFAULT_BUTTON_SIZE).expandY().row();
     }
 
     @Override
