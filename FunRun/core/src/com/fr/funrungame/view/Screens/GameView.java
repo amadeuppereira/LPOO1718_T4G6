@@ -80,8 +80,6 @@ public class GameView extends ScreenAdapter {
 
     PlayerView playerView;
 
-    //PowerUpView powerUpView;
-
     private Hud hud;
 
     Controller controller;
@@ -98,12 +96,8 @@ public class GameView extends ScreenAdapter {
 
         playerView = new PlayerView(game);
 
-        //powerUpView = new PowerUpView(game);
-
         camera = createCamera();
 
-        //gamePort = new FitViewport(GAME_WIDTH , GAME_HEIGHT, camera);
-        //gamePort = new ExtendViewport(GAME_WIDTH,GAME_HEIGHT,camera);
         gamePort = new FillViewport(GAME_WIDTH,GAME_HEIGHT,camera);
 
         hud = new Hud(game.getBatch());

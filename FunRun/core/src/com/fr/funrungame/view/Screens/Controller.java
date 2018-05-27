@@ -127,7 +127,7 @@ public class Controller {
     private void createPowerUp(FunRunGame game){
         powerUpImage = new Image(game.getAssetManager().get("noPowerUp.png", Texture.class));
         powerUpImage.setSize(100,100);
-        powerUpImage.setPosition(Gdx.graphics.getWidth()/30 + (camera.position.x - camera.viewportWidth / 2f), Gdx.graphics.getHeight()/10 + (camera.position.y - camera.viewportHeight / 2f));
+        powerUpImage.setPosition(Gdx.graphics.getWidth()/30, Gdx.graphics.getHeight()/12);
         stage.addActor(powerUpImage);
     }
 
@@ -147,17 +147,14 @@ public class Controller {
             powerUpImage = new Image(game.getAssetManager().get("noPowerUp.png", Texture.class));
         }
         powerUpImage.setSize(100,100);
-        powerUpImage.setPosition(Gdx.graphics.getWidth()/30 + (camera.position.x - camera.viewportWidth / 2f), Gdx.graphics.getHeight()/10 + (camera.position.y - camera.viewportHeight / 2f));
+        powerUpImage.setPosition(Gdx.graphics.getWidth()/30, Gdx.graphics.getHeight()/12);
 
         powerUpImage.addListener(new InputListener() {
-
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 powerupPressed = true;
-                System.out.println("power up");
                 return true;
             }
-
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 powerupPressed = false;
