@@ -1,6 +1,5 @@
 package com.fr.funrungame.view.Screens;
 
-import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -16,12 +15,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.fr.funrungame.controller.GameController;
-import com.fr.funrungame.controller.entities.PlayerBody;
 import com.fr.funrungame.model.GameModel;
 import com.fr.funrungame.model.entities.PlayerModel;
-import com.fr.funrungame.model.entities.RocketPowerUpModel;
-import com.fr.funrungame.model.entities.ShieldPowerUpModel;
-import com.fr.funrungame.model.entities.SpeedPowerUpModel;
 import com.fr.funrungame.view.entities.*;
 
 import java.util.HashMap;
@@ -82,7 +77,7 @@ public class GameView extends ScreenAdapter {
 
     private Hud hud;
 
-    Controller controller;
+    Controllers controllers;
 
     /**
      * Creates this screen.
@@ -112,7 +107,7 @@ public class GameView extends ScreenAdapter {
 
         debugRenderer = new Box2DDebugRenderer();
 
-        controller = new Controller(game);
+        controllers = new Controllers(game);
     }
 
 
@@ -177,8 +172,8 @@ public class GameView extends ScreenAdapter {
         hud.update(delta, GameController.getInstance().getPlayerBody().isFINISHED());
         hud.stage.draw();
 
-        controller.update(game);
-        controller.draw();
+        controllers.update(game);
+        controllers.draw();
     }
 
     protected void cameraHandler(){
@@ -208,6 +203,7 @@ public class GameView extends ScreenAdapter {
         game.getAssetManager().load("speed.png", Texture.class);
         game.getAssetManager().load("shield.png", Texture.class);
         game.getAssetManager().load("noPowerUp.png", Texture.class);
+        game.getAssetManager().load("pause.png", Texture.class);
         loadMaps();
         game.getAssetManager().finishLoading();
 
@@ -233,24 +229,28 @@ public class GameView extends ScreenAdapter {
     }
 
     /**
-     * Handles any inputs and passes them to the controller.
+     * Handles any inputs and passes them to the controllers.
      */
     private void handleInputs() {
-        if(controller.isUpPressed()){
+        if(controllers.isUpPressed()){
             GameController.getInstance().jump();
         }
-        if(controller.isDownPressed()){
+        if(controllers.isDownPressed()){
             GameController.getInstance().moveDown();
         }
-        if(controller.isPowerupPressed()){
+        if(controllers.isPowerupPressed()){
             GameController.getInstance().usePowerUp();
+        }
+        if(controllers.isPausePressed()){
+            System.out.println("pause pressed");
         }
     }
 
     @Override
     public void resize(int width, int height){
         gamePort.update(width, height);
-        controller.resize(width,height);
+        controllers.resize(width,height);
+        hud.resize(width,height);
     }
 
     protected GameView getThis() {

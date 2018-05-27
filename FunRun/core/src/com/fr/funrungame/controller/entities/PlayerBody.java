@@ -150,7 +150,7 @@ public class PlayerBody extends EntityBody {
     public void rocketPowerUp(){
         history.add(GameController.getInstance().getTime());
         history.add(4);
-        if(FINISHED){
+        if(FINISHED || DEAD){
             stop();
             return;
         }

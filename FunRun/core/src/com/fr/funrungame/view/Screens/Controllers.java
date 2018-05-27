@@ -1,6 +1,5 @@
 package com.fr.funrungame.view.Screens;
 
-import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -10,9 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FillViewport;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.fr.funrungame.FunRunGame;
 import com.fr.funrungame.controller.GameController;
@@ -21,27 +18,25 @@ import com.fr.funrungame.model.entities.PlayerModel;
 import com.fr.funrungame.model.entities.RocketPowerUpModel;
 import com.fr.funrungame.model.entities.ShieldPowerUpModel;
 import com.fr.funrungame.model.entities.SpeedPowerUpModel;
-import com.fr.funrungame.view.entities.*;
 
 import static com.fr.funrungame.controller.GameController.GAME_HEIGHT;
 import static com.fr.funrungame.controller.GameController.GAME_WIDTH;
 
-public class Controller {
+public class Controllers {
     Viewport viewport;
     Stage stage;
-    boolean upPressed, downPressed, powerupPressed;
-    OrthographicCamera camera;
+    boolean upPressed, downPressed, powerupPressed, pausePressed;
     Image powerUpImage;
 
-    public Controller(FunRunGame game){
-        camera = new OrthographicCamera();
-        viewport = new FillViewport(GAME_WIDTH, GAME_HEIGHT, camera);
+    public Controllers(FunRunGame game){
+        viewport = new FillViewport(GAME_WIDTH, GAME_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, game.getBatch());
         Gdx.input.setInputProcessor(stage);
 
         addKeysListener();
         createTable(game);
         createPowerUp(game);
+        createPauseButton(game);
     }
 
     private void addKeysListener(){
@@ -124,6 +119,33 @@ public class Controller {
         stage.addActor(table);
     }
 
+    private void createPauseButton(FunRunGame game) {
+        Table table = new Table();
+        Image pause_button = new Image(game.getAssetManager().get("pause.png", Texture.class));
+        pause_button.setSize(50,50);
+        //pause_button.setPosition(Gdx.graphics.getWidth()/30, Gdx.graphics.getHeight() - (Gdx.graphics.getHeight() / (10 / ((float) Gdx.graphics.getWidth()/ Gdx.graphics.getHeight()))));
+
+        pause_button.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                pausePressed = true;
+                return true;
+            }
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                pausePressed = false;
+            }
+        });
+
+        table.top().padTop(Gdx.graphics.getHeight() / (25 / ((float) Gdx.graphics.getWidth()/ Gdx.graphics.getHeight())));
+        table.setFillParent(true);
+        table.add(pause_button).expandX();
+        for(int i = 0; i < 8; i++){
+            table.add().expandX();
+        }
+        stage.addActor(table);
+    }
+
     private void createPowerUp(FunRunGame game){
         powerUpImage = new Image(game.getAssetManager().get("noPowerUp.png", Texture.class));
         powerUpImage.setSize(100,100);
@@ -178,6 +200,10 @@ public class Controller {
 
     public boolean isPowerupPressed() {
         return powerupPressed;
+    }
+
+    public boolean isPausePressed() {
+        return pausePressed;
     }
 
     public void resize(int width, int height){
