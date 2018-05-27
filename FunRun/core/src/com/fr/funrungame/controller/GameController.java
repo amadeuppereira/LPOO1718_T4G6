@@ -1,14 +1,20 @@
 package com.fr.funrungame.controller;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Net;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.net.HttpParametersUtils;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Timer;
 import com.fr.funrungame.controller.entities.*;
 import com.fr.funrungame.model.GameModel;
 import com.fr.funrungame.model.entities.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GameController implements ContactListener{
 
@@ -37,7 +43,9 @@ public class GameController implements ContactListener{
      */
     private final World world;
 
-    private final PlayerBody playerBody;
+//    private final PlayerBody playerBody;
+//    private final PlayerBody ghostBody;
+    private final PlayerBody players[];
 
     private List<PlatformBody> platformsBody;
 
@@ -49,12 +57,29 @@ public class GameController implements ContactListener{
 
     private float time;
 
+    private static float best_time;
+
+    private static ArrayList<Float> actions;
+    private int index;
+
+    private ArrayList<Float> history;
+
+    private static boolean serverResponse = false;
+
 
     private GameController() {
+        while(!serverResponse) {}
+        index = 0;
+        history = new ArrayList<Float>();
         world = new World(new Vector2(0, -9.8f), true);
         time = 0;
 
-        playerBody = new PlayerBody(world, GameModel.getInstance().getPlayers().get(0));
+        players = new PlayerBody[2];
+        players[0] = new PlayerBody(world, GameModel.getInstance().getPlayers().get(0));
+        players[1] = new PlayerBody(world, GameModel.getInstance().getPlayers().get(1));
+
+//        playerBody = new PlayerBody(world, GameModel.getInstance().getPlayers().get(0));
+//        ghostBody = new PlayerBody(world, GameModel.getInstance().getPlayers().get(1), actions);
 
         platformsBody = new ArrayList<PlatformBody>();
         for(int i = 0; i < GameModel.getInstance().getPlatformsModel().size(); i++){
@@ -111,6 +136,7 @@ public class GameController implements ContactListener{
             accumulator -= 1/60f;
         }
 
+        ghostHandler(time);
         playerVerifications(delta);
 
         Array<Body> bodies = new Array<Body>();
@@ -118,60 +144,135 @@ public class GameController implements ContactListener{
         for (Body body : bodies) {
             ((EntityModel) body.getUserData()).setPosition(body.getPosition().x, body.getPosition().y);
         }
+
+        isRunFinished();
     }
 
+    private void isRunFinished() {
+        for(PlayerBody p : players) {
+            if(!((PlayerModel)p.getUserData()).isFinished()) return;
+        }
+        sendToServer(GameModel.getInstance().getCurrentMap(), history, players[0].getTime());
+        GameModel.getInstance().setFinished(true);
+
+    }
     private void playerVerifications(float delta){
-        playerBody.update(delta);
 
-        //to keep the player always moving forward
-        if(playerBody.getBody().getLinearVelocity().x <= 5 && !playerBody.isFINISHED() && !playerBody.isDEAD())
-            playerBody.run();
+        for(PlayerBody p : players) {
 
-        //jumping and fallind handlers
-        if(playerBody.getBody().getLinearVelocity().x == 0){
-            ((PlayerModel) playerBody.getUserData()).setRunning(false);
-        }
-        else{
-            ((PlayerModel) playerBody.getUserData()).setRunning(true);
-        }
+            p.update(delta);
 
-        if(playerBody.getBody().getLinearVelocity().y > 0){
-            ((PlayerModel) playerBody.getUserData()).setJumping(true);
-            ((PlayerModel) playerBody.getUserData()).setFalling(false);
-        }
-        else if(playerBody.getBody().getLinearVelocity().y < 0){
-            ((PlayerModel) playerBody.getUserData()).setJumping(false);
-            ((PlayerModel) playerBody.getUserData()).setFalling(true);
-        }
+            //to keep the player always moving forward
+            if (p.getBody().getLinearVelocity().x <= 5 && !p.isFinished() && !p.isDEAD())
+                p.run();
 
-        //power up handler
-        if(!playerBody.isFINISHED()) {
-            if (((PlayerModel) playerBody.getUserData()).getPowerup() != null) {
-                if (((PlayerModel) playerBody.getUserData()).getPowerup().update(delta, playerBody) == 1) {
-                    ((PlayerModel) playerBody.getUserData()).removePowerup();
+            //jumping and falling handlers
+            if (p.getBody().getLinearVelocity().x == 0) {
+                ((PlayerModel) p.getUserData()).setRunning(false);
+            } else {
+                ((PlayerModel) p.getUserData()).setRunning(true);
+            }
+
+            if (p.getBody().getLinearVelocity().y > 0) {
+                ((PlayerModel) p.getUserData()).setJumping(true);
+                ((PlayerModel) p.getUserData()).setFalling(false);
+            } else if (p.getBody().getLinearVelocity().y < 0) {
+                ((PlayerModel) p.getUserData()).setJumping(false);
+                ((PlayerModel) p.getUserData()).setFalling(true);
+            }
+
+            //power up handler
+            if (!p.isFinished()) {
+                if (((PlayerModel) p.getUserData()).getPowerup() != null) {
+                    if (((PlayerModel) p.getUserData()).getPowerup().update(delta, p) == 1) {
+                        ((PlayerModel) p.getUserData()).removePowerup();
+                    }
                 }
             }
         }
     }
 
-    public void jump(){
-        if(playerBody.getBody().getLinearVelocity().x == 0 && playerBody.getBody().getLinearVelocity().y < 4)
-            playerBody.jump(1);
-        else if(playerBody.getBody().getLinearVelocity().y == 0)
-            playerBody.jump(0);
-    }
+    private void ghostHandler(float time) {
+        if(index == actions.size()) {
+            double a = Math.random();
+            if(a < 0.5) jump(players[1]);
+            return;
+        }
 
-    public void usePowerUp(){
-        if(((PlayerModel) playerBody.getUserData()).getPowerup() != null){
-            ((PlayerModel) playerBody.getUserData()).getPowerup().action();
+        if(actions.get(index) <= time) {
+            index++;
+            switch (Math.round(actions.get(index))) {
+                case 1:
+                    jump(players[1]);
+                    break;
+                case 2:
+                    moveDown(players[1]);
+                    break;
+                case 3:
+                    ((PlayerModel)players[1].getUserData()).givePowerup(new SpeedPowerUpModel());
+                    break;
+                case 4:
+                    ((PlayerModel)players[1].getUserData()).givePowerup(new RocketPowerUpModel());
+                    break;
+                case 5:
+                    ((PlayerModel)players[1].getUserData()).givePowerup(new ShieldPowerUpModel());
+                case 6:
+                    usePowerUp(players[1]);
+                default:
+                    break;
+            }
+            index++;
         }
     }
-    public void moveDown() {
-        playerBody.moveDown();
+
+
+    public void jump(PlayerBody p){
+        if(p == players[0]) {
+            history.add(getTime());
+            history.add((float) 1);
+        }
+        p.jump();
+    }
+
+    public void moveDown(PlayerBody p) {
+        if(p == players[0]) {
+            history.add(getTime());
+            history.add((float) 2);
+        }
+        p.moveDown();
+    }
+
+    public void usePowerUp(PlayerBody p){
+        if(p == players[0]) {
+            history.add(getTime());
+            history.add((float) 6);
+        }
+        p.usePowerUp();
+    }
+
+    private void givePowerUp(PlayerBody p, double option) {
+
+        if(option == -1) option = Math.floor(Math.random() * Math.floor(3));
+        switch ((int)option) {
+            case 0:
+                ((PlayerModel) p.getUserData()).givePowerup(new SpeedPowerUpModel());
+                break;
+            case 1:
+                ((PlayerModel) p.getUserData()).givePowerup(new RocketPowerUpModel());
+                break;
+            case 2:
+                ((PlayerModel) p.getUserData()).givePowerup(new ShieldPowerUpModel());
+                break;
+        }
+
+        if(p == players[0]) {
+            history.add(getTime());
+            history.add((float) option + 3);
+        }
     }
 
     public PlayerBody getPlayerBody() {
-        return playerBody;
+        return players[0];
     }
 
     /**
@@ -185,23 +286,32 @@ public class GameController implements ContactListener{
         Body bodyB = contact.getFixtureB().getBody();
 
         if (bodyA.getUserData() instanceof PlayerModel && bodyB.getUserData() instanceof PlatformModel){
-            ((PlayerModel) playerBody.getUserData()).setJumping(false);
-            ((PlayerModel) playerBody.getUserData()).setFalling(false);
+            ((PlayerModel) bodyA.getUserData()).setJumping(false);
+            ((PlayerModel) bodyA.getUserData()).setFalling(false);
         }
 
-        if (bodyA.getUserData() instanceof PlayerModel && bodyB.getUserData() instanceof PowerUpModel){
-            ((PowerUpModel) bodyB.getUserData()).givePowerUp((PlayerModel) playerBody.getUserData());
-        }
-
-        if (bodyA.getUserData() instanceof PlayerModel && bodyB.getUserData() instanceof EnemyModel){
-            playerBody.die();
-        }
-
-        if (bodyA.getUserData() instanceof PlayerModel && bodyB.getUserData() instanceof EndLineModel){
-            playerBody.setFinish();
-            sendToServer(playerBody.getHistory());
+        else if (bodyA.getUserData() instanceof PlayerModel && bodyB.getUserData() instanceof PowerUpModel){
+            if(players[0].getBody() == bodyA) {
+                givePowerUp(players[0], -1);
+            }
 
         }
+
+        else if (bodyA.getUserData() instanceof PlayerModel && bodyB.getUserData() instanceof EnemyModel){
+            if(players[0].getBody() == bodyA) players[0].die();
+            else players[1].die();
+        }
+
+        else if (bodyA.getUserData() instanceof PlayerModel && bodyB.getUserData() instanceof EndLineModel){
+            if(players[0].getBody() == bodyA) {
+                players[0].setFinish();
+            }
+            else {
+                players[1].setFinish();
+            }
+
+        }
+
     }
 
     public float getTime() {
@@ -223,10 +333,88 @@ public class GameController implements ContactListener{
 
     }
 
-    private void sendToServer(ArrayList history) {
-        
+    public static void getFromServer() {
 
+        Map parameters = new HashMap();
+        parameters.put("map", String.valueOf(GameModel.getInstance().getCurrentMap()));
 
+        Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
+        httpGet.setUrl("https://paginas.fe.up.pt/~up201605646/lpoo/get.php");
+        httpGet.setContent(HttpParametersUtils.convertHttpParameters(parameters));
 
+        Gdx.net.sendHttpRequest(httpGet, new Net.HttpResponseListener() {
+            @Override
+            public void handleHttpResponse(Net.HttpResponse httpResponse) {
+                actions = new ArrayList<Float>();
+
+                String r = httpResponse.getResultAsString();
+                String[] param = r.split(" ");
+                best_time = Float.parseFloat(param[1]);
+                String[] temp = param[0].split("/");
+
+                for(String i : temp) {
+                    String[] action = i.split("-");
+                    actions.add(Float.parseFloat(action[0]));
+                    actions.add(Float.parseFloat(action[1]));
+                }
+
+                serverResponse = true;
+            }
+
+            @Override
+            public void failed(Throwable t) {
+                System.out.println("Failed to access server");
+                serverResponse = true;
+            }
+
+            @Override
+            public void cancelled() {
+                System.out.println("Cancelled server access");
+                serverResponse = true;
+            }
+        });
+    }
+
+    private void sendToServer(int map, ArrayList<Float> history, float time) {
+        if (this.best_time < players[0].getTime()) return;
+        StringBuilder sb = new StringBuilder();
+
+        for(int i = 0; i < history.size();) {
+            sb.append(history.get(i++));
+            sb.append("-");
+            sb.append(history.get(i++));
+            sb.append("/");
+        }
+
+        Map parameters = new HashMap();
+        parameters.put("map", String.valueOf(map));
+        parameters.put("movement", sb.toString());
+        parameters.put("time", String.valueOf(time));
+
+        Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
+        httpGet.setUrl("https://paginas.fe.up.pt/~up201605646/lpoo/insert.php");
+        httpGet.setContent(HttpParametersUtils.convertHttpParameters(parameters));
+
+        Gdx.net.sendHttpRequest(httpGet, new Net.HttpResponseListener() {
+            @Override
+            public void handleHttpResponse(Net.HttpResponse httpResponse) {
+                System.out.println("Sent new best game");
+            }
+
+            @Override
+            public void failed(Throwable t) {
+                System.out.println("Failed");
+            }
+
+            @Override
+            public void cancelled() {
+                System.out.println("Cancelled");
+            }
+        });
+
+    }
+
+    public static void reset() {
+        instance = null;
     }
 }

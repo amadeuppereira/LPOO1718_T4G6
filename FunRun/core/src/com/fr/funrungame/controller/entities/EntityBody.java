@@ -5,11 +5,9 @@ import com.badlogic.gdx.physics.box2d.*;
 
 public abstract class EntityBody {
 
-    final static short PLAYER_BODY = 0x0001;
+    final static short PLAYER_BODY = 0x0002;
 
-    final static short ENEMY_BODY = 0x0002;
-
-    final static short POWER_UP_BODY = 0x0003;
+    final static short TERRAIN_BODY = 0x0004;
 
     /**
      * The Box2D body that supports this body.

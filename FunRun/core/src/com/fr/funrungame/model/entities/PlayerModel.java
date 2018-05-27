@@ -16,6 +16,8 @@ public class PlayerModel extends EntityModel {
 
     private boolean shield = false;
 
+    private boolean finished = false;
+
     public PlayerModel(float x, float y){
         super(x,y);
     }
@@ -73,6 +75,14 @@ public class PlayerModel extends EntityModel {
 
     public PowerUpModel getPowerup() {
         return this.powerup;
+    }
+
+    public boolean isFinished() {
+        return finished;
+    }
+
+    public void setFinished(boolean finished) {
+        this.finished = finished;
     }
 
     @Override

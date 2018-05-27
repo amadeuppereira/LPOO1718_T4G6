@@ -12,6 +12,11 @@ public class RocketPowerUpModel extends PowerUpModel {
         timecount = 0;
     }
 
+    public RocketPowerUpModel() {
+        super();
+        timecount = 0;
+    }
+
     public void action(){
         timecount = TIME;
     }

@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.fr.funrungame.FunRunGame;
 import com.fr.funrungame.controller.GameController;
 import com.fr.funrungame.model.GameModel;
+import com.fr.funrungame.model.entities.PlayerModel;
 
 import static com.fr.funrungame.controller.GameController.GAME_HEIGHT;
 import static com.fr.funrungame.controller.GameController.GAME_WIDTH;
@@ -30,8 +31,10 @@ public class CountdownScreen extends GameView {
 
     public CountdownScreen(FunRunGame game) {
         super(game);
+        GameController.getFromServer();
 
-        GameModel.getInstance().getPlayers().get(0).setRunning(false);
+        for(PlayerModel p: GameModel.getInstance().getPlayers())
+            p.setRunning(false);
         n = 3;
         number = game.getAssetManager().get("3.png", Texture.class);
         if(Gdx.app.getType() == Application.ApplicationType.Android){
@@ -84,7 +87,9 @@ public class CountdownScreen extends GameView {
             }
             else {
                 dispose();
-                GameModel.getInstance().getPlayers().get(0).setRunning(true);
+                for(PlayerModel p: GameModel.getInstance().getPlayers()) {
+                    p.setRunning(true);
+                }
                 game.setScreen(new GameView(game));
             }
         }

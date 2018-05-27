@@ -12,6 +12,11 @@ public class SpeedPowerUpModel extends PowerUpModel {
         timecount = 0;
     }
 
+    public SpeedPowerUpModel() {
+        super();
+        timecount = 0;
+    }
+
     public void action(){
         timecount = TIME;
     }

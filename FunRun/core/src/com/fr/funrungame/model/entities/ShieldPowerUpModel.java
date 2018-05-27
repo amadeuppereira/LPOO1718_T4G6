@@ -12,6 +12,11 @@ public class ShieldPowerUpModel extends PowerUpModel {
         timecount = 0;
     }
 
+    public ShieldPowerUpModel() {
+        super();
+        timecount = 0;
+    }
+
     public void action(){
         timecount = TIME;
     }

@@ -14,6 +14,10 @@ public class PowerUpModel extends EntityModel{
         this.object = object;
     }
 
+    public PowerUpModel() {
+        super(-50, -50);
+    }
+
     public void givePowerUp(PlayerModel playerModel){
         double option = Math.floor(Math.random() * Math.floor(3));
         if(option == 0){

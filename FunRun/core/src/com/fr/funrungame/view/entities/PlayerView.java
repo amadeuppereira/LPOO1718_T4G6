@@ -95,11 +95,17 @@ public class PlayerView extends EntityView {
      */
     private boolean shield;
 
-    private float alpha = .0f;
+    private float alpha = 1f;
+    private float dead_alpha = .0f;
 
     public PlayerView(FunRunGame game){
         super(game);
         stateTime = 0;
+    }
+
+    public PlayerView(FunRunGame game, float alpha) {
+        this(game);
+        this.alpha = alpha;
     }
 
     public Sprite createSprite(FunRunGame game) {
@@ -203,14 +209,39 @@ public class PlayerView extends EntityView {
                 sprite.setRegion(notRunningRegion);
         }
 
+//        if(jumping) {
+//            if(shield) {
+//                sprite.setRegion(jumpingShieldedRegion);
+//            }
+//            sprite.setRegion(jumpingRegion);
+//        }
+//        else if(falling) {
+//            if(shield) {
+//                sprite.setRegion(fallingShieldedRegion);
+//            }
+//            sprite.setRegion(fallingRegion);
+//        }
+//        else if (running) {
+//            if (shield) {
+//                sprite.setRegion(runningShieldedAnimation.getKeyFrame(stateTime, true));
+//            }
+//            sprite.setRegion(runningAnimation.getKeyFrame(stateTime, true));
+//        }
+//        else {
+//            if(shield) {
+//                sprite.setRegion(shieldRegion);
+//            }
+//            sprite.setRegion(notRunningRegion);
+//        }
+
         if(dead) {
-            sprite.draw(batch, 0.1f);
+            sprite.draw(batch, 0.1f * alpha);
         } else if (invulnerable) {
-            sprite.draw(batch, alpha);
-            alpha += 0.05;
-            if (alpha > 1) alpha = 0;
+            sprite.draw(batch, dead_alpha * alpha);
+            dead_alpha += 0.05;
+            if (dead_alpha > 1) dead_alpha = 0;
         } else {
-            sprite.draw(batch);
+            sprite.draw(batch, alpha);
         }
     }
 

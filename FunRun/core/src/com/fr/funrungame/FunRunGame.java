@@ -26,30 +26,6 @@ public class FunRunGame extends Game {
 		assetManager = new AssetManager();
 		loadAssets();
 
-//		 Map parameters = new HashMap();
-//		 parameters.put("map", "1");
-//
-//		 Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
-//		 httpGet.setUrl("https://paginas.fe.up.pt/~up201605646/lpoo/get.php");
-//		 httpGet.setContent(HttpParametersUtils.convertHttpParameters(parameters));
-//
-//		 Gdx.net.sendHttpRequest(httpGet, new Net.HttpResponseListener() {
-//			 @Override
-//			 public void handleHttpResponse(Net.HttpResponse httpResponse) {
-//				 System.out.println(httpResponse.getResultAsString());
-//			 }
-//
-//			 @Override
-//			 public void failed(Throwable t) {
-//				 System.out.println("Failed");
-//			 }
-//
-//			 @Override
-//			 public void cancelled() {
-//				 System.out.println("Cancelled");
-//			 }
-//		 });
-
 		startGame();
 	}
 

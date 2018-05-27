@@ -61,7 +61,6 @@
   <object id="45" x="3270.73" y="837.413" width="105.225" height="58.4582"/>
  </objectgroup>
  <objectgroup name="finish">
-  <object id="78" x="4563.61" y="753.609" width="109.097" height="109.097"/>
-  <object id="81" x="4556.9" y="144.344" width="77.2071" height="720.04"/>
+  <object id="78" x="4563.61" y="-1.391" width="109.097" height="864.097"/>
  </objectgroup>
 </map>

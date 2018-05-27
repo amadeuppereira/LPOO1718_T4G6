@@ -25,6 +25,7 @@ public class PlatformBody extends EntityBody {
 
         shape.setAsBox((rect.getWidth() / 2) * PIXEL_TO_METER, (rect.getHeight() / 2) * PIXEL_TO_METER);
         fixturedef.shape = shape;
+        fixturedef.filter.categoryBits = TERRAIN_BODY;
         body.createFixture(fixturedef);
         body.setUserData(model);
     }

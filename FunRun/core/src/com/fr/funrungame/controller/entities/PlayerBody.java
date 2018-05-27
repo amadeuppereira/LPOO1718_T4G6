@@ -1,13 +1,11 @@
 package com.fr.funrungame.controller.entities;
 
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.*;
 import com.fr.funrungame.controller.GameController;
 import com.fr.funrungame.model.entities.EntityModel;
 import com.fr.funrungame.model.entities.PlayerModel;
+import com.fr.funrungame.model.entities.ShieldPowerUpModel;
 
 import java.util.ArrayList;
 
@@ -30,11 +28,10 @@ public class PlayerBody extends EntityBody {
     private float death_timer = 0;
     private float invulnerable_timer = 0;
 
-    private ArrayList history;
+    private float time;
 
     public PlayerBody(World world, EntityModel model) {
         super();
-        history = new ArrayList();
 
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
@@ -48,10 +45,17 @@ public class PlayerBody extends EntityBody {
         shape.setAsBox(55/2 * PIXEL_TO_METER, 84/2 * PIXEL_TO_METER);
         FixtureDef fixturedef = new FixtureDef();
         fixturedef.shape = shape;
+        fixturedef.filter.categoryBits = PLAYER_BODY;
+        fixturedef.filter.maskBits = TERRAIN_BODY;
         body.createFixture(fixturedef);
+
+        time = 0;
+
     }
 
     public void update(float delta) {
+        time += delta;
+
         if(FINISHED){
             if(body.getLinearVelocity().x  < 0.1)
                 body.setLinearVelocity(new Vector2(0,0));
@@ -68,24 +72,20 @@ public class PlayerBody extends EntityBody {
             invulnerable_timer -= delta;
             if(invulnerable_timer <= 0) setInvulnerable(false);
         }
+
     }
 
-    public void jump(int f) {
-        history.add(GameController.getInstance().getTime());
-        history.add(1);
+    public void jump() {
         if(DEAD || FINISHED) return;
-        if(f == 0) {//jump
+        if(body.getLinearVelocity().y == 0) {//jump
             body.applyLinearImpulse(new Vector2(0, JUMP_FORCE), body.getWorldCenter(), true);
-            ((PlayerModel) getUserData()).setJumping(true);
         }
-        else {
+        else if (body.getLinearVelocity().x == 0 && body.getLinearVelocity().y < 4) {
             body.applyLinearImpulse(new Vector2(0, CLIMB_FORCE), body.getWorldCenter(), true);
         }
     }
 
     public void moveDown(){
-        history.add(GameController.getInstance().getTime());
-        history.add(2);
         if(DEAD || FINISHED) return;
         if(((PlayerModel) getUserData()).isJumping() || ((PlayerModel) getUserData()).isFalling())
             body.applyForceToCenter(0, DOWN_FORCE, true);
@@ -132,12 +132,12 @@ public class PlayerBody extends EntityBody {
     }
 
     public void setFinish() {
+        time = GameController.getInstance().getTime();
         FINISHED = true;
+        ((PlayerModel)getUserData()).setFinished(true);
     }
 
     public void speedPowerUp(){
-        history.add(GameController.getInstance().getTime());
-        history.add(3);
         if(FINISHED){
             stop();
             return;
@@ -148,8 +148,6 @@ public class PlayerBody extends EntityBody {
     }
 
     public void rocketPowerUp(){
-        history.add(GameController.getInstance().getTime());
-        history.add(4);
         if(FINISHED || DEAD){
             stop();
             return;
@@ -159,14 +157,18 @@ public class PlayerBody extends EntityBody {
     }
 
     public void shieldPowerUp(boolean shield){
-        history.add(GameController.getInstance().getTime());
-        history.add(5);
         SHIELD = shield;
         ((PlayerModel)getUserData()).setShield(shield);
     }
 
+    public void usePowerUp() {
+        if(((PlayerModel) body.getUserData()).getPowerup() != null){
+            ((PlayerModel) body.getUserData()).getPowerup().action();
+        }
+    }
 
-    public boolean isFINISHED() {
+
+    public boolean isFinished() {
         return FINISHED;
     }
 
@@ -174,7 +176,7 @@ public class PlayerBody extends EntityBody {
         return DEAD;
     }
 
-    public ArrayList getHistory() {
-        return history;
+    public float getTime() {
+        return time;
     }
 }

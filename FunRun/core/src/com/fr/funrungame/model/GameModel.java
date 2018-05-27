@@ -1,13 +1,18 @@
 package com.fr.funrungame.model;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Net;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.net.HttpParametersUtils;
 import com.fr.funrungame.model.entities.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.fr.funrungame.view.Screens.GameView.PIXEL_TO_METER;
 
@@ -34,6 +39,8 @@ public class GameModel {
 
     private boolean flag = false;
 
+    private boolean finished = false;
+
 
     /**
      * Returns a singleton instance of the game model
@@ -55,30 +62,31 @@ public class GameModel {
         currentMap = 1;
     }
 
-    public void addEntities(){
-        if(flag) return;
+    public void addEntities() {
+        if (flag) return;
         flag = true;
-        players.add(new PlayerModel(2,8.1f));
+        players.add(new PlayerModel(2, 8.1f));
+        players.add(new PlayerModel(2, 8.1f));
 
-        for(MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)){
+        for (MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            platformsModel.add(new PlatformModel(PIXEL_TO_METER*(rect.getX()+rect.getWidth()/2),PIXEL_TO_METER*(rect.getY() + rect.getHeight()/2), (RectangleMapObject) object));
+            platformsModel.add(new PlatformModel(PIXEL_TO_METER * (rect.getX() + rect.getWidth() / 2), PIXEL_TO_METER * (rect.getY() + rect.getHeight() / 2), (RectangleMapObject) object));
         }
 
-        for(MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)){
+        for (MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            powerUps.add(new PowerUpModel(PIXEL_TO_METER*(rect.getX()+rect.getWidth()/2),PIXEL_TO_METER*(rect.getY() + rect.getHeight()/2), (RectangleMapObject) object));
+            powerUps.add(new PowerUpModel(PIXEL_TO_METER * (rect.getX() + rect.getWidth() / 2), PIXEL_TO_METER * (rect.getY() + rect.getHeight() / 2), (RectangleMapObject) object));
         }
 
-        for(MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)){
+        for (MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            enemies.add(new EnemyModel(PIXEL_TO_METER*(rect.getX()+rect.getWidth()/2),PIXEL_TO_METER*(rect.getY() + rect.getHeight()/2), (RectangleMapObject) object));
+            enemies.add(new EnemyModel(PIXEL_TO_METER * (rect.getX() + rect.getWidth() / 2), PIXEL_TO_METER * (rect.getY() + rect.getHeight() / 2), (RectangleMapObject) object));
         }
 
-        MapObject object = map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class).get(0);
-        Rectangle rect = ((RectangleMapObject) object).getRectangle();
-        endline = new EndLineModel(PIXEL_TO_METER*(rect.getX()+rect.getWidth()/2),PIXEL_TO_METER*(rect.getY() + rect.getHeight()/2), (RectangleMapObject) object);
-
+        for (MapObject object : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            endline = new EndLineModel(PIXEL_TO_METER * (rect.getX() + rect.getWidth() / 2), PIXEL_TO_METER * (rect.getY() + rect.getHeight() / 2), (RectangleMapObject) object);
+        }
     }
     /**
      * Removes a model from this game.
@@ -134,5 +142,17 @@ public class GameModel {
 
     public EndLineModel getEndline() {
         return endline;
+    }
+
+    public boolean isFinished() {
+        return finished;
+    }
+
+    public void setFinished(boolean finished) {
+        this.finished = finished;
+    }
+
+    public static void reset() {
+        instance = null;
     }
 }

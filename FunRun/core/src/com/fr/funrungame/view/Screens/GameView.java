@@ -74,6 +74,7 @@ public class GameView extends ScreenAdapter {
     private Map<Integer,String> gameMaps = new HashMap<Integer, String>();
 
     PlayerView playerView;
+    PlayerView ghostView;
 
     private Hud hud;
 
@@ -90,6 +91,7 @@ public class GameView extends ScreenAdapter {
         loadAssets();
 
         playerView = new PlayerView(game);
+        ghostView = new PlayerView(game, 0.5f);
 
         camera = createCamera();
 
@@ -169,11 +171,14 @@ public class GameView extends ScreenAdapter {
         game.getBatch().end();
 
         game.getBatch().setProjectionMatrix(hud.stage.getCamera().combined);
-        hud.update(delta, GameController.getInstance().getPlayerBody().isFINISHED());
+        hud.update(delta, GameController.getInstance().getPlayerBody().isFinished());
         hud.stage.draw();
 
         controllers.update(game);
         controllers.draw();
+
+        if(GameModel.getInstance().isFinished()) end();
+
     }
 
     protected void cameraHandler(){
@@ -187,6 +192,13 @@ public class GameView extends ScreenAdapter {
 
         camera.update();
         game.getBatch().setProjectionMatrix(camera.combined);
+    }
+
+    private void end() {
+        dispose();
+        GameController.reset();
+        GameModel.reset();
+        game.setScreen(new MainMenu(game));
     }
 
     private void loadAssets(){
@@ -222,10 +234,17 @@ public class GameView extends ScreenAdapter {
      */
     protected void drawEntities() {
         List<PlayerModel> players = GameModel.getInstance().getPlayers();
-        for (PlayerModel player : players){
-            playerView.update(player);
-            playerView.draw(game.getBatch());
-        }
+
+        playerView.update(players.get(0));
+        playerView.draw(game.getBatch());
+
+        ghostView.update(players.get(1));
+        ghostView.draw(game.getBatch());
+
+//        for (PlayerModel player : players){
+//            playerView.update(player);
+//            playerView.draw(game.getBatch());
+//        }
     }
 
     /**
@@ -233,13 +252,13 @@ public class GameView extends ScreenAdapter {
      */
     private void handleInputs() {
         if(controllers.isUpPressed()){
-            GameController.getInstance().jump();
+            GameController.getInstance().jump(GameController.getInstance().getPlayerBody());
         }
         if(controllers.isDownPressed()){
-            GameController.getInstance().moveDown();
+            GameController.getInstance().moveDown(GameController.getInstance().getPlayerBody());
         }
         if(controllers.isPowerupPressed()){
-            GameController.getInstance().usePowerUp();
+            GameController.getInstance().usePowerUp(GameController.getInstance().getPlayerBody());
         }
         if(controllers.isPausePressed()){
             System.out.println("pause pressed");
