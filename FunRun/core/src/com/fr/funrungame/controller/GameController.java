@@ -193,13 +193,13 @@ public class GameController implements ContactListener{
     }
 
     private void ghostHandler(float time) {
-        if(index == actions.size()) {
+        if(actions == null || index == actions.size()) {
             double a = Math.random();
             if(a < 0.5) jump(players[1]);
             return;
         }
 
-        if(actions.get(index) <= time) {
+        if(actions.get(index) <= time)  {
             index++;
             switch (Math.round(actions.get(index))) {
                 case 1:
@@ -209,13 +209,16 @@ public class GameController implements ContactListener{
                     moveDown(players[1]);
                     break;
                 case 3:
-                    ((PlayerModel)players[1].getUserData()).givePowerup(new SpeedPowerUpModel());
+                    givePowerUp(players[1], 0);
+                    //((PlayerModel)players[1].getUserData()).givePowerup(new SpeedPowerUpModel());
                     break;
                 case 4:
-                    ((PlayerModel)players[1].getUserData()).givePowerup(new RocketPowerUpModel());
+                    givePowerUp(players[1], 1);
+                    //((PlayerModel)players[1].getUserData()).givePowerup(new RocketPowerUpModel());
                     break;
                 case 5:
-                    ((PlayerModel)players[1].getUserData()).givePowerup(new ShieldPowerUpModel());
+                    givePowerUp(players[1], 2);
+                    //((PlayerModel)players[1].getUserData()).givePowerup(new ShieldPowerUpModel());
                 case 6:
                     usePowerUp(players[1]);
                 default:
