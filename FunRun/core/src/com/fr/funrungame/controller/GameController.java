@@ -377,6 +377,7 @@ public class GameController implements ContactListener{
 
     private void sendToServer(int map, ArrayList<Float> history, float time) {
         if (this.best_time < players[0].getTime()) return;
+        //if(players[1].getTime() < players[0].getTime()) return;
         StringBuilder sb = new StringBuilder();
 
         for(int i = 0; i < history.size();) {
