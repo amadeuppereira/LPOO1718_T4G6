@@ -6,7 +6,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.net.HttpParametersUtils;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.Timer;
 import com.fr.funrungame.controller.entities.*;
 import com.fr.funrungame.model.GameModel;
 import com.fr.funrungame.model.entities.*;
@@ -98,6 +97,9 @@ public class GameController implements ContactListener{
         endline = new EndLineBody(world, GameModel.getInstance().getEndline(), GameModel.getInstance().getEndline().getObject());
 
         world.setContactListener(this);
+
+        DBConnect connect = new DBConnect();
+        connect.getData();
     }
 
     /**
@@ -342,7 +344,7 @@ public class GameController implements ContactListener{
         parameters.put("map", String.valueOf(GameModel.getInstance().getCurrentMap()));
 
         Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
-        httpGet.setUrl("https://paginas.fe.up.pt/~up201605646/lpoo/get.php");
+        httpGet.setUrl("http://lpooproject.gearhostpreview.com/get.php");
         httpGet.setContent(HttpParametersUtils.convertHttpParameters(parameters));
 
         Gdx.net.sendHttpRequest(httpGet, new Net.HttpResponseListener() {
@@ -396,7 +398,7 @@ public class GameController implements ContactListener{
         parameters.put("time", String.valueOf(time));
 
         Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
-        httpGet.setUrl("https://paginas.fe.up.pt/~up201605646/lpoo/insert.php");
+        httpGet.setUrl("http://lpooproject.gearhostpreview.com/insert.php");
         httpGet.setContent(HttpParametersUtils.convertHttpParameters(parameters));
 
         Gdx.net.sendHttpRequest(httpGet, new Net.HttpResponseListener() {
