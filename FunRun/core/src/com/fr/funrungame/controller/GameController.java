@@ -41,7 +41,7 @@ public class GameController implements ContactListener{
     /**
      * The physics world controlled by this controller.
      */
-    private final World world;
+    private World world;
 
 //    private final PlayerBody playerBody;
 //    private final PlayerBody ghostBody;
@@ -414,6 +414,9 @@ public class GameController implements ContactListener{
     }
 
     public static void reset() {
+        actions.clear();
+        serverResponse = false;
+
         instance = null;
     }
 }
