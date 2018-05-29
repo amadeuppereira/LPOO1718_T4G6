@@ -19,8 +19,6 @@ public class CountdownScreen extends GameView {
     private final int TIME_BETWEEN_CHANGES = 50;
     private final float NUMBER_WIDTH = 80;
     private final float NUMBER_HEIGHT = 80;
-    //private final float NUMBER_WIDTH = VIEWPORT_WIDTH / 10;
-    //private final float NUMBER_HEIGHT = VIEWPORT_WIDTH / 10;
 
     private Texture number;
     private int n;

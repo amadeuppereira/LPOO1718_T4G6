@@ -16,7 +16,7 @@ import com.fr.funrungame.FunRunGame;
 import static com.fr.funrungame.controller.GameController.GAME_HEIGHT;
 import static com.fr.funrungame.controller.GameController.GAME_WIDTH;
 
-public class Hud {
+public class HudMenu {
     public Stage stage;
     private Viewport viewport;
 
@@ -27,7 +27,7 @@ public class Hud {
 
     Table table;
 
-    public Hud(SpriteBatch sb){
+    public HudMenu(SpriteBatch sb){
         worldTimer = 0;
 
         viewport = new FillViewport(GAME_WIDTH, GAME_HEIGHT, new OrthographicCamera());
@@ -60,9 +60,9 @@ public class Hud {
         stage.addActor(table);
     }
 
-    public void update(float delta, boolean finish){
+    public void update(float time, boolean finish){
         if(!finish) {
-            worldTimer += delta;
+            worldTimer = time;
             if (stage != null && table != null) {
                 stage.clear();
                 table.reset();

@@ -43,8 +43,6 @@ public class GameController implements ContactListener{
      */
     private final World world;
 
-//    private final PlayerBody playerBody;
-//    private final PlayerBody ghostBody;
     private final PlayerBody players[];
 
     private List<PlatformBody> platformsBody;

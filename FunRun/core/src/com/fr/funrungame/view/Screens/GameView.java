@@ -76,7 +76,7 @@ public class GameView extends ScreenAdapter {
     PlayerView playerView;
     PlayerView ghostView;
 
-    private Hud hud;
+    private HudMenu hudMenu;
 
     Controllers controllers;
 
@@ -97,7 +97,7 @@ public class GameView extends ScreenAdapter {
 
         gamePort = new FillViewport(GAME_WIDTH,GAME_HEIGHT,camera);
 
-        hud = new Hud(game.getBatch());
+        hudMenu = new HudMenu(game.getBatch());
 
         TiledMap map = game.getAssetManager().get(gameMaps.get(GameModel.getInstance().getCurrentMap()), TiledMap.class);
         GameModel.getInstance().setMap(map);
@@ -170,9 +170,9 @@ public class GameView extends ScreenAdapter {
         drawEntities();
         game.getBatch().end();
 
-        game.getBatch().setProjectionMatrix(hud.stage.getCamera().combined);
-        hud.update(delta, GameController.getInstance().getPlayerBody().isFinished());
-        hud.stage.draw();
+        game.getBatch().setProjectionMatrix(hudMenu.stage.getCamera().combined);
+        hudMenu.update(GameController.getInstance().getTime(), GameController.getInstance().getPlayerBody().isFinished());
+        hudMenu.stage.draw();
 
         controllers.update(game);
         controllers.draw();
@@ -269,7 +269,7 @@ public class GameView extends ScreenAdapter {
     public void resize(int width, int height){
         gamePort.update(width, height);
         controllers.resize(width,height);
-        hud.resize(width,height);
+        hudMenu.resize(width,height);
     }
 
     protected GameView getThis() {

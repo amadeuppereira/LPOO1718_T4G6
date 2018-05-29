@@ -1,4 +1,11 @@
 package com.fr.funrungame.view.Screens;
 
-public class PauseMenu extends GameScreen {
+import com.badlogic.gdx.utils.viewport.Viewport;
+import com.fr.funrungame.FunRunGame;
+
+public class PauseMenu extends OptionsMenu {
+
+    public PauseMenu(Viewport viewport, FunRunGame game, HudMenu hud){
+        super(viewport,game,hud);
+    }
 }
