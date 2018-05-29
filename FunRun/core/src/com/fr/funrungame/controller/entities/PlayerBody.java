@@ -54,7 +54,8 @@ public class PlayerBody extends EntityBody {
     }
 
     public void update(float delta) {
-        time += delta;
+        if(!FINISHED)
+            time += delta;
 
         if(FINISHED){
             if(body.getLinearVelocity().x  < 0.1)
@@ -133,6 +134,7 @@ public class PlayerBody extends EntityBody {
 
     public void setFinish() {
         time = GameController.getInstance().getTime();
+        System.out.println(time);
         FINISHED = true;
         ((PlayerModel)getUserData()).setFinished(true);
     }

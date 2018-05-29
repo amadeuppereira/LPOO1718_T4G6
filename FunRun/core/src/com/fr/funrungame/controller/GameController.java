@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 public class GameController implements ContactListener{
 
     /**
@@ -98,8 +99,8 @@ public class GameController implements ContactListener{
 
         world.setContactListener(this);
 
-        DBConnect connect = new DBConnect();
-        connect.getData();
+        //DBConnect connect = new DBConnect();
+        //connect.getData();
     }
 
     /**
@@ -344,7 +345,7 @@ public class GameController implements ContactListener{
         parameters.put("map", String.valueOf(GameModel.getInstance().getCurrentMap()));
 
         Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
-        httpGet.setUrl("http://lpooproject.gearhostpreview.com/get.php");
+        httpGet.setUrl("https://paginas.fe.up.pt/~up201605646/lpoo/get.php");
         httpGet.setContent(HttpParametersUtils.convertHttpParameters(parameters));
 
         Gdx.net.sendHttpRequest(httpGet, new Net.HttpResponseListener() {
@@ -381,8 +382,10 @@ public class GameController implements ContactListener{
     }
 
     private void sendToServer(int map, ArrayList<Float> history, float time) {
-        if (this.best_time < players[0].getTime()) return;
-        //if(players[1].getTime() < players[0].getTime()) return;
+        //if (this.best_time < players[0].getTime()) return;
+        System.out.println(players[1].getTime());
+        System.out.println(players[0].getTime());
+        if(players[1].getTime() < players[0].getTime()) return;
         StringBuilder sb = new StringBuilder();
 
         for(int i = 0; i < history.size();) {
@@ -398,7 +401,7 @@ public class GameController implements ContactListener{
         parameters.put("time", String.valueOf(time));
 
         Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
-        httpGet.setUrl("http://lpooproject.gearhostpreview.com/insert.php");
+        httpGet.setUrl("https://paginas.fe.up.pt/~up201605646/lpoo/insert.php");
         httpGet.setContent(HttpParametersUtils.convertHttpParameters(parameters));
 
         Gdx.net.sendHttpRequest(httpGet, new Net.HttpResponseListener() {

@@ -36,7 +36,7 @@ public class DBConnect {
 
                 System.out.println("Map: " +map+", movement: " + movement + ", time: " + time);
             }
-            st.executeUpdate("INSERT INTO highscores (map, movement, time) VALUES (10069, 'teste', 2)");
+            st.executeUpdate("INSERT INTO highscores (map, movement, time) VALUES (169, 'teste_android', 20)");
 
         }catch(Exception ex){
             System.out.println("Erro: " + ex);
