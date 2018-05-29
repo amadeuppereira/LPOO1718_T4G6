@@ -78,9 +78,6 @@ public class GameController implements ContactListener{
         players[0] = new PlayerBody(world, GameModel.getInstance().getPlayers().get(0));
         players[1] = new PlayerBody(world, GameModel.getInstance().getPlayers().get(1));
 
-//        playerBody = new PlayerBody(world, GameModel.getInstance().getPlayers().get(0));
-//        ghostBody = new PlayerBody(world, GameModel.getInstance().getPlayers().get(1), actions);
-
         platformsBody = new ArrayList<PlatformBody>();
         for(int i = 0; i < GameModel.getInstance().getPlatformsModel().size(); i++){
             platformsBody.add(new PlatformBody(world,GameModel.getInstance().getPlatformsModel().get(i), GameModel.getInstance().getPlatformsModel().get(i).getObject()));
@@ -98,9 +95,6 @@ public class GameController implements ContactListener{
         endline = new EndLineBody(world, GameModel.getInstance().getEndline(), GameModel.getInstance().getEndline().getObject());
 
         world.setContactListener(this);
-
-        //DBConnect connect = new DBConnect();
-        //connect.getData();
     }
 
     /**
@@ -213,15 +207,12 @@ public class GameController implements ContactListener{
                     break;
                 case 3:
                     givePowerUp(players[1], 0);
-                    //((PlayerModel)players[1].getUserData()).givePowerup(new SpeedPowerUpModel());
                     break;
                 case 4:
                     givePowerUp(players[1], 1);
-                    //((PlayerModel)players[1].getUserData()).givePowerup(new RocketPowerUpModel());
                     break;
                 case 5:
                     givePowerUp(players[1], 2);
-                    //((PlayerModel)players[1].getUserData()).givePowerup(new ShieldPowerUpModel());
                 case 6:
                     usePowerUp(players[1]);
                 default:
@@ -382,9 +373,6 @@ public class GameController implements ContactListener{
     }
 
     private void sendToServer(int map, ArrayList<Float> history, float time) {
-        //if (this.best_time < players[0].getTime()) return;
-        System.out.println(players[1].getTime());
-        System.out.println(players[0].getTime());
         if(players[1].getTime() < players[0].getTime()) return;
         StringBuilder sb = new StringBuilder();
 
@@ -407,7 +395,9 @@ public class GameController implements ContactListener{
         Gdx.net.sendHttpRequest(httpGet, new Net.HttpResponseListener() {
             @Override
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
+
                 System.out.println("Sent new best game");
+                System.out.println(httpResponse.getResultAsString());
             }
 
             @Override

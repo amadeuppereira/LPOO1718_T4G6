@@ -134,7 +134,6 @@ public class PlayerBody extends EntityBody {
 
     public void setFinish() {
         time = GameController.getInstance().getTime();
-        System.out.println(time);
         FINISHED = true;
         ((PlayerModel)getUserData()).setFinished(true);
     }
