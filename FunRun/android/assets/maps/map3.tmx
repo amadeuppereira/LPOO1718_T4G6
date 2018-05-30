@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="500" height="130" tilewidth="16" tileheight="16" infinite="0" nextobjectid="117">
+<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="500" height="130" tilewidth="16" tileheight="16" infinite="0" nextobjectid="119">
  <tileset firstgid="1" source="background_1.tsx"/>
  <tileset firstgid="6361" source="Tiles_64x64.tsx"/>
  <tileset firstgid="6425" source="spritesheet_complete.tsx"/>
@@ -44,7 +44,6 @@
   <object id="72" x="4013.64" y="1888.78" width="67.1053" height="50.1111"/>
   <object id="73" x="3696.08" y="1200.05" width="255.597" height="65.1973"/>
   <object id="76" x="4209.64" y="1889.5" width="30.6994" height="48.0513"/>
-  <object id="82" x="0.941797" y="1585.67" width="175.174" height="165.756"/>
   <object id="86" x="4240.22" y="1473.48" width="126.629" height="441.341"/>
   <object id="88" x="4366.85" y="1536.8" width="449.721" height="81.0056"/>
   <object id="89" x="4816.57" y="1473.48" width="222.533" height="154.562"/>
@@ -60,6 +59,7 @@
   <object id="99" x="6640.6" y="1424.13" width="68.9013" height="74.4879"/>
   <object id="100" x="6704.84" y="1376.65" width="1294.23" height="132.216"/>
   <object id="101" x="6816.57" y="1169.01" width="318.436" height="62.3836"/>
+  <object id="117" x="-0.414783" y="1583.64" width="176.283" height="108.258"/>
  </objectgroup>
  <objectgroup name="powerups">
   <object id="38" x="1088.03" y="1407.42" width="33.282" height="38.7462"/>
@@ -82,7 +82,7 @@
   <object id="108" x="5044.63" y="1510.05" width="109.29" height="56.4663"/>
   <object id="109" x="5311.84" y="1060.25" width="115.495" height="56.3615"/>
   <object id="110" x="4928.39" y="1174.82" width="113.647" height="53.5896"/>
-  <object id="112" x="4366.89" y="1470.33" width="449.187" height="64.8432"/>
+  <object id="118" x="4367.28" y="1478.11" width="449.277" height="56.5188"/>
  </objectgroup>
  <objectgroup name="finish">
   <object id="115" x="7304.19" y="0" width="78.9314" height="1357.01"/>
