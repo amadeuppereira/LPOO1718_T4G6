@@ -2,6 +2,7 @@ package com.fr.funrungame;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Net;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.assets.AssetManager;
@@ -45,6 +46,7 @@ public class FunRunGame extends Game {
 		assetManager.load("3.png", Texture.class);
 		assetManager.load("arrow_up.png", Texture.class);
 		assetManager.load("arrow_down.png", Texture.class);
+		assetManager.load("sounds/Electronic Super Joy - 04 - Darkas.mp3", Music.class);
 
 
 		assetManager.finishLoading();
