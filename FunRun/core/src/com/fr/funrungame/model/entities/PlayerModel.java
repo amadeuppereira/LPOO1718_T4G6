@@ -2,7 +2,6 @@ package com.fr.funrungame.model.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
 
 public class PlayerModel extends EntityModel {
 
@@ -22,8 +21,12 @@ public class PlayerModel extends EntityModel {
 
     private boolean finished = false;
 
+    private Music music;
+
     public PlayerModel(float x, float y){
         super(x,y);
+        music = Gdx.audio.newMusic(Gdx.files.internal("sounds/pickup.wav"));
+        music.setVolume(0.1f);
     }
 
     public boolean isRunning() {
@@ -69,11 +72,9 @@ public class PlayerModel extends EntityModel {
     }
 
     public void givePowerup(PowerUpModel pu, boolean sound_on) {
-        Music music = Gdx.audio.newMusic(Gdx.files.internal("sounds/pickup.wav"));
         if(powerup == null) {
             this.powerup = pu;
             if(sound_on){
-                music.setVolume(0.1f);
                 music.play();
             }
         }

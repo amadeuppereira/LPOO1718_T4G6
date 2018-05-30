@@ -2,15 +2,11 @@ package com.fr.funrungame.controller.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.fr.funrungame.controller.GameController;
 import com.fr.funrungame.model.entities.EntityModel;
 import com.fr.funrungame.model.entities.PlayerModel;
-import com.fr.funrungame.model.entities.ShieldPowerUpModel;
-
-import java.util.ArrayList;
 
 import static com.fr.funrungame.view.Screens.GameView.PIXEL_TO_METER;
 
@@ -33,6 +29,8 @@ public class PlayerBody extends EntityBody {
 
     private float time;
 
+    private Music music;
+
     public PlayerBody(World world, EntityModel model) {
         super();
 
@@ -53,6 +51,9 @@ public class PlayerBody extends EntityBody {
         body.createFixture(fixturedef);
 
         time = 0;
+
+        music = Gdx.audio.newMusic(Gdx.files.internal("sounds/jump.wav"));
+        music.setVolume(0.1f);
 
     }
 
@@ -81,8 +82,6 @@ public class PlayerBody extends EntityBody {
 
     public void jump(boolean sound_on) {
         if(DEAD || FINISHED) return;
-        Music music = Gdx.audio.newMusic(Gdx.files.internal("sounds/jump.wav"));
-        music.setVolume(0.1f);
         if(body.getLinearVelocity().y == 0) {//jump
             body.applyLinearImpulse(new Vector2(0, JUMP_FORCE), body.getWorldCenter(), true);
             if(sound_on){

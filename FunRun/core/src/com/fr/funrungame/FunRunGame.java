@@ -1,21 +1,17 @@
 package com.fr.funrungame;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Net;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.net.HttpParametersUtils;
 import com.fr.funrungame.view.Screens.MainMenu;
 
-import java.util.HashMap;
-import java.util.Map;
 
 public class FunRunGame extends Game {
 	private SpriteBatch batch;
 	private AssetManager assetManager;
+	private Music music;
 
 	/**
 	 * Creates the game. Initializes the sprite batch and asset manager.
@@ -26,6 +22,11 @@ public class FunRunGame extends Game {
 		batch = new SpriteBatch();
 		assetManager = new AssetManager();
 		loadAssets();
+
+		music = assetManager.get("sounds/Electronic Super Joy - 04 - Darkas.mp3");
+        music.setVolume(0.5f);
+        music.setLooping(true);
+        music.play();
 
 		startGame();
 	}
@@ -66,6 +67,7 @@ public class FunRunGame extends Game {
 	public void dispose () {
 		batch.dispose();
 		assetManager.dispose();
+		music.dispose();
 	}
 
 	/**

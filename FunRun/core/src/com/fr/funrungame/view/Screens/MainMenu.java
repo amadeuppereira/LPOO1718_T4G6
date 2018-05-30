@@ -1,7 +1,6 @@
 package com.fr.funrungame.view.Screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -25,11 +24,6 @@ public class MainMenu extends MenuScreen {
 
     public MainMenu(FunRunGame game) {
         super(game, new Image(game.getAssetManager().get("title.png", Texture.class)), 25, 7.4f);
-
-        Music music = game.getAssetManager().get("sounds/Electronic Super Joy - 04 - Darkas.mp3");
-        music.setVolume(0.5f);
-        music.setLooping(true);
-        music.play();
     }
 
     private void createButtons(Table table) {
