@@ -4,18 +4,18 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.utils.BufferUtils;
+import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.fr.funrungame.FunRunGame;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.fr.funrungame.controller.GameController;
 import com.fr.funrungame.model.GameModel;
 import com.fr.funrungame.model.entities.PlayerModel;
@@ -82,6 +82,8 @@ public class GameView extends ScreenAdapter {
 
     Controllers controllers;
 
+    private boolean pause = false;
+
     /**
      * Creates this screen.
      *
@@ -141,6 +143,10 @@ public class GameView extends ScreenAdapter {
      */
     @Override
     public void render(float delta) {
+        if(pause) {
+            delta = 0;
+        }
+
         super.render(delta);
 
         handleInputs();
@@ -150,8 +156,8 @@ public class GameView extends ScreenAdapter {
         cameraHandler();
 
         // Clear the screen
-        Gdx.gl.glClearColor( 0/255f, 0/255f, 0/255f, 1 );
-        Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
+        Gdx.gl.glClearColor(0 / 255f, 0 / 255f, 0 / 255f, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
         float x = camera.position.x - camera.viewportWidth * camera.zoom;
         float y = camera.position.y - camera.viewportHeight * camera.zoom;
@@ -179,8 +185,7 @@ public class GameView extends ScreenAdapter {
         controllers.update(game);
         controllers.draw();
 
-        if(GameModel.getInstance().isFinished()) end();
-
+        if (GameModel.getInstance().isFinished()) end();
     }
 
     protected void cameraHandler(){
@@ -197,10 +202,11 @@ public class GameView extends ScreenAdapter {
     }
 
     private void end() {
+        pause = true;
         dispose();
         GameController.reset();
         GameModel.reset();
-        game.setScreen(new MainMenu(game));
+        game.setScreen(new FinishMenu(game, gamePort));
     }
 
     private void loadAssets(){
@@ -218,8 +224,6 @@ public class GameView extends ScreenAdapter {
         game.getAssetManager().load("shield.png", Texture.class);
         game.getAssetManager().load("noPowerUp.png", Texture.class);
         game.getAssetManager().load("pause.png", Texture.class);
-        //game.getAssetManager().load("sounds/jump.wav", Music.class);
-        //game.getAssetManager().load("sounds/pickup.wav", Music.class);
         loadMaps();
         game.getAssetManager().finishLoading();
 
@@ -239,11 +243,11 @@ public class GameView extends ScreenAdapter {
     protected void drawEntities() {
         List<PlayerModel> players = GameModel.getInstance().getPlayers();
 
-        playerView.update(players.get(0));
-        playerView.draw(game.getBatch());
-
         ghostView.update(players.get(1));
         ghostView.draw(game.getBatch());
+
+        playerView.update(players.get(0));
+        playerView.draw(game.getBatch());
     }
 
     /**
@@ -260,7 +264,7 @@ public class GameView extends ScreenAdapter {
             GameController.getInstance().usePowerUp(GameController.getInstance().getPlayerBody());
         }
         if(controllers.isPausePressed()){
-            System.out.println("pause pressed");
+            pause();
         }
     }
 
@@ -271,8 +275,40 @@ public class GameView extends ScreenAdapter {
         hudMenu.resize(width,height);
     }
 
+    @Override
+    public void pause () {
+        super.pause();
+        pause = true;
+        screenshot();
+        game.setScreen(new PauseMenu(game));
+    }
+
+    @Override
+    public void resume () {
+        super.resume();
+        pause = false;
+    }
+
     protected GameView getThis() {
         return this;
+    }
+
+    @Override
+    public void dispose () {
+    }
+
+    private void screenshot(){
+        byte[] pixels = ScreenUtils.getFrameBufferPixels(0, 0, Gdx.graphics.getBackBufferWidth(), Gdx.graphics.getBackBufferHeight(), true);
+
+        // this loop makes sure the whole screenshot is opaque and looks exactly like what the user is seeing
+        for(int i = 4; i < pixels.length; i += 4) {
+            pixels[i - 1] = (byte) 255;
+        }
+
+        Pixmap pixmap = new Pixmap(Gdx.graphics.getBackBufferWidth(), Gdx.graphics.getBackBufferHeight(), Pixmap.Format.RGBA8888);
+        BufferUtils.copy(pixels, 0, pixmap.getPixels(), pixels.length);
+        PixmapIO.writePNG(Gdx.files.local("pause_background.png"), pixmap);
+        pixmap.dispose();
     }
 }
 
