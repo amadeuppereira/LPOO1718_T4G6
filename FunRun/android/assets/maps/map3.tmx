@@ -1,66 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="350" height="100" tilewidth="16" tileheight="16" infinite="0" nextobjectid="82">
+<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="500" height="130" tilewidth="16" tileheight="16" infinite="0" nextobjectid="117">
  <tileset firstgid="1" source="background_1.tsx"/>
  <tileset firstgid="6361" source="Tiles_64x64.tsx"/>
  <tileset firstgid="6425" source="spritesheet_complete.tsx"/>
- <layer name="background" width="350" height="100">
+ <layer name="background" width="500" height="130">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
- <layer name="objects" width="350" height="100">
+ <layer name="objects" width="500" height="130">
   <data encoding="base64" compression="zlib">
-   eJzt3UeSHEUUgOEEYUMcAOFvgPdwA7w0cpxAXgh7C/wt8Fs8O/wWgQQ7/BYvzJvFRJSS9L6q/i/ixUx1d1W+zMp8XV1qSUoBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA6Gn7jt4ZAAAAAAAAAAAAAOM7eWnvDAAAAIB14Nq7vW1HlDpP4nyJCyQulLhI4uIjvTMDsER6nY/dXoJvpb5+J/G9xA8SP0r8JPEzdRfIZqshp7WfJyc/l1hncLYPjyr1kcTHEp9IfCrxmcTnR3tnBgDL9NIxpV6WeEXiVYnXJF6XeONY78wAtHB6BZ/rR/P0caWekXhW4jmJ5yVekHjxeO/MAIzoxCVK7Tqg1IbEbok9Ensl9knsP+DfX6/z0+3N313bS3HiEaUelXhM4nGJJySelHjqkd6ZARjRZt299aBSt0ncLnGHxJ0Sd0ncfbB3dvOwcULesyT2SOyV2CexX+LhE70zAzCiHYeUukzicokrJK6UuEriaolrDvXODsDchH6naaR7oLnfy3J97je9/ozU1r8l/pH4d7POHlbqHIlzJbYdjkodAFDY5j0JYAk25/I0AMTL/ZzQanuUPHK3R/qMmIK6iyXi/+BYhsV+B6Vx3e3RXs73lNbGd3+29Lbv+mYN1wL37FTqXon7JO6XeEDiQYmHJHbu7J1dX2upu751kHsdobdXe13xPSWM7tpdSl0ncb3EDRI3StwkcbPELbt6Z9eX6TvY05/wa11zN/E9JbSQc92/VVtCQj9G7L65x2gRptym26Z+wC237sb++1K+7ynV/PerSryvcJ9y+X7ZUOpXid8kfpf4Q+JPib8kzmz0zq4fvd5Sd9fLV4entbbHvcmaf++2x3brPy/vcc6+2C15SHwp8ZXEKYnTEl9LfLO7fT6jMNVd/blRtP7e+9y/z5FrtD/34X72/Ly5R6m3JN6WeEfiXYn3JN6X+GBP2jF99yjmwHWNO8f+oJwRrpemuJ/dR6v7uyn3Rn33d/Xt3qHnYhszhOt9PR57vLmdX/7eLWLUmN+hddW2ny0/6u46hdzTr33/sbbe93N7b/f+vNJarevumOtwVz2l7sKE8485c32u9+0X8/qQY+n5mPIz/d7S9HtY/D3fcVCH10mvG9OfudeCMdeUMe1N89Qfc72+5ByPyW+Eujs1p5rb+3Nk7nZvc7+PgTpCaqxtP99xSra9pPsMXO+2Yzr3tmsG337TbdvrW8+v3u9rvbfXtob06+Tp7zWutX21PLXutvhetyvQ3wjvxUCI2LprO0ZqnTW1bcrP9TvKq3l9E3LtuoTzu4Q+jC50/oy6nXKNG1NnY66ZbflSd9PFzguczTSvY8eQMccW13Wu7bUx8yW21lJ3YWKaF7l1LqWWuq4RQrj2GeUarMW2/tza7tXZ5oE+RiXqXGhbIc+1njOj/D8bqdux5nht1jNH23UKYOKaLzH1NuRaOOS+BNe789D6fW8uYq5nkS/k/uTI275aGHK/wHccvd3Yz3m5n/HWbKl1rrZSn/Vcxze1x/lYtpDP/qbnbPVaf8y0n+m6NbSeUnfXJ+R9P/V6IeQ6wfR+H/M50LVtytWXe87Y1IqUnKbWfn83ZDz13037mtoJ2Se17rLddntENWqJa05vPe/abtEPzI9pfoW8h/keNz3vyiG2njLf+oq5xgl5Ta0o2d9Sx55LHZ1D/XfVr9Bcc16T0+b0uNPH9PZcOdhyjBk7/XfX9kjzc418534krWp6r/rUqn++9uek9/uIq87ptTjnPcHVvq/ump6f23lektS50Etq7SzVRovaV0Pt96Ata/y79ra66nvMdhzT47bxtq1X0/6mfH3t1IzabfbqV0wOMVL26S2nv7VyyM0l5fy3tJb6a1tf0239d9txcte3no+t3ZB5ETOHXG20nH+j16WQtRmzhnu+p9R6L1p7TqVt3+F+fqvNnNxajEVo+/pjoWL6HZLfdFx9+9Ucs7nM2V7rrXQ/sGynKs6TlvM1ptb5tn05pdQr1zFC8itZd2P7VKr2jFh3Y46bmkMt1P3/G+n9MGbupf6bqqn9KrVuU/OMrYkh7cXU41J1N1Tp+lqyRpc4Rsj4p4xXjpJrXz9WznrodZ5L87UxyvyuydRO7TUX03fTGg3NNfT8mo4dehxbfqZjpeRde2xzX1tLbBut52fN82LLv4cWfW3ddm6+Jf4srfV6im3TNB9z2nS1bzq2vk9Mfr59fbn0nGOl11AOW1uxubTKO7SdUca3ttJzqde6qPn/tdjGocfa32rXlF9Kf2zH8dUbV7umXE0/Q2pG67H1jVfuPqk5xOSUc+yY48b0NaadnDxLjG2J9nJyqj13atn8d0v10J/XX7cpNH9bf3PHP+Z1pnZD8nWtAVcOIeOg/zQ9Znp9rhprovWadb0upZ81xitlX1u7Jcdu1POfe75TxmAELXJp1Vf9fNmem27HroXYc2iaP3p+oY+F5D3qeitxnJTz5Duebf+Wep/DnvWpV669x9aW95zOoW0N5vYndxxMebp+9z2Wm0/oOXGNgeu1tcezRPu+/Udgy8mWZ4s5UbI/KXMw5Tgjj0tqOyX7VGNMTHNTz9vVF9fjKeOg5xSynmz9GGF8U6Qet2UfS4xLStu1cmw1L3LnT+w+o8zpGL4cUsd3tNDzDu1DzNil5mQbV1N7Ncc/ZD6UktrGaOsnNq/c82I6Vum8c/ub2/eSfclZlzXbTTnO3JjOf2/THELWU6k1nHpuW7UTo9V8bN3P3msutS+t8i499jXW0Qg1prcR6+6UKZ+QnGvNl5j51CuHaR49+h16XlPGboSxXULU0DPvUcfEla9r27dv7T5N97Udx9RG73nde031zoEgekTLGpDbRm6urv1K9D80t6n/ABN7dhs=
+   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
   </data>
  </layer>
  <objectgroup name="floor">
-  <object id="6" x="512.454" y="976.666" width="255.489" height="62.5185"/>
-  <object id="8" x="768.436" y="912.671" width="127.006" height="126.514"/>
-  <object id="9" x="895.934" y="976.666" width="127.498" height="62.5185"/>
-  <object id="10" x="1152.41" y="1008.66" width="256.473" height="252.535"/>
-  <object id="12" x="1408.39" y="944.669" width="127.006" height="98.4543"/>
-  <object id="13" x="1535.89" y="1008.66" width="193.463" height="49.7194"/>
-  <object id="14" x="1728.36" y="944.669" width="191.001" height="93.0393"/>
-  <object id="16" x="1919.37" y="960.421" width="64.4875" height="31.5054"/>
-  <object id="20" x="2112.83" y="1024.42" width="318.5" height="81.717"/>
-  <object id="22" x="2416.01" y="736.218" width="272.156" height="63.3038"/>
-  <object id="24" x="2512.71" y="672.416" width="62.8053" height="63.3038"/>
-  <object id="26" x="2432.06" y="1072.08" width="384.037" height="73.5847"/>
-  <object id="27" x="2816.09" y="831.991" width="256.204" height="312.601"/>
-  <object id="28" x="3072.3" y="704.157" width="63.9166" height="141.798"/>
-  <object id="29" x="3136.21" y="768.611" width="63.9166" height="82.1785"/>
-  <object id="31" x="3200.13" y="832.528" width="63.3795" height="88.6239"/>
-  <object id="35" x="3520.28" y="784.5" width="255.01" height="63.1589"/>
-  <object id="36" x="3904.93" y="1408.49" width="127.742" height="50.3372"/>
-  <object id="49" x="0" y="1104.61" width="382.756" height="169.161"/>
-  <object id="56" x="382.756" y="1167.76" width="287.652" height="100.561"/>
-  <object id="57" x="671.188" y="1168.54" width="480.979" height="106.018"/>
-  <object id="62" x="2096.62" y="832.534" width="223.567" height="63.5339"/>
-  <object id="64" x="1984.71" y="992.92" width="62.8717" height="53.2427"/>
-  <object id="65" x="2048.15" y="1024.64" width="65.7038" height="75.3328"/>
-  <object id="66" x="3262.9" y="896.314" width="127.764" height="71.7445"/>
-  <object id="67" x="3390.66" y="959.214" width="63.8821" height="52.0885"/>
-  <object id="70" x="3455.01" y="960.242" width="382.469" height="455.708"/>
-  <object id="72" x="3837.64" y="1408.78" width="67.1053" height="50.1111"/>
-  <object id="73" x="3520.08" y="720.055" width="255.597" height="65.1973"/>
-  <object id="76" x="4033.64" y="1409.5" width="30.6994" height="48.0513"/>
-  <object id="77" x="4065" y="864.255" width="734.784" height="650.694"/>
-  <object id="79" x="4800.27" y="866.062" width="637.798" height="615.979"/>
-  <object id="80" x="5439.74" y="869.419" width="157.771" height="584.089"/>
+  <object id="6" x="688.454" y="1456.67" width="255.489" height="62.5185"/>
+  <object id="8" x="944.436" y="1392.67" width="127.006" height="126.514"/>
+  <object id="9" x="1071.93" y="1456.67" width="127.498" height="62.5185"/>
+  <object id="10" x="1328.41" y="1488.66" width="256.473" height="252.535"/>
+  <object id="12" x="1584.39" y="1424.67" width="127.006" height="98.4543"/>
+  <object id="13" x="1711.89" y="1488.66" width="193.463" height="49.7194"/>
+  <object id="14" x="1904.36" y="1424.67" width="191.001" height="93.0393"/>
+  <object id="16" x="2095.37" y="1440.42" width="64.4875" height="31.5054"/>
+  <object id="20" x="2288.83" y="1504.42" width="318.5" height="81.717"/>
+  <object id="22" x="2592.01" y="1216.22" width="272.156" height="63.3038"/>
+  <object id="24" x="2688.71" y="1152.42" width="62.8053" height="63.3038"/>
+  <object id="26" x="2608.06" y="1552.08" width="384.037" height="73.5847"/>
+  <object id="27" x="2992.09" y="1311.99" width="256.204" height="312.601"/>
+  <object id="28" x="3248.3" y="1184.16" width="63.9166" height="141.798"/>
+  <object id="29" x="3312.21" y="1248.61" width="63.9166" height="82.1785"/>
+  <object id="31" x="3376.13" y="1312.53" width="63.3795" height="88.6239"/>
+  <object id="35" x="3696.28" y="1264.5" width="255.01" height="63.1589"/>
+  <object id="36" x="4080.93" y="1888.49" width="127.742" height="50.3372"/>
+  <object id="49" x="176" y="1584.61" width="382.756" height="169.161"/>
+  <object id="56" x="558.756" y="1647.76" width="287.652" height="100.561"/>
+  <object id="57" x="847.188" y="1648.54" width="480.979" height="106.018"/>
+  <object id="62" x="2272.62" y="1312.53" width="223.567" height="63.5339"/>
+  <object id="64" x="2160.71" y="1472.92" width="62.8717" height="53.2427"/>
+  <object id="65" x="2224.15" y="1504.64" width="65.7038" height="75.3328"/>
+  <object id="66" x="3438.9" y="1376.31" width="127.764" height="71.7445"/>
+  <object id="67" x="3566.66" y="1439.21" width="63.8821" height="52.0885"/>
+  <object id="70" x="3631.01" y="1440.24" width="382.469" height="455.708"/>
+  <object id="72" x="4013.64" y="1888.78" width="67.1053" height="50.1111"/>
+  <object id="73" x="3696.08" y="1200.05" width="255.597" height="65.1973"/>
+  <object id="76" x="4209.64" y="1889.5" width="30.6994" height="48.0513"/>
+  <object id="82" x="0.941797" y="1585.67" width="175.174" height="165.756"/>
+  <object id="86" x="4240.22" y="1473.48" width="126.629" height="441.341"/>
+  <object id="88" x="4366.85" y="1536.8" width="449.721" height="81.0056"/>
+  <object id="89" x="4816.57" y="1473.48" width="222.533" height="154.562"/>
+  <object id="90" x="4896.65" y="1232.33" width="394.786" height="62.3836"/>
+  <object id="91" x="5280.26" y="1120.6" width="255.121" height="174.115"/>
+  <object id="92" x="5632.22" y="1024.69" width="191.806" height="62.3836"/>
+  <object id="93" x="5040.04" y="1569.39" width="734.637" height="309.125"/>
+  <object id="94" x="5774.67" y="1872.92" width="330.54" height="94.041"/>
+  <object id="95" x="6096.83" y="1680.19" width="358.473" height="207.635"/>
+  <object id="96" x="6448.79" y="1615.94" width="69.8324" height="73.5568"/>
+  <object id="97" x="6512.1" y="1552.63" width="78.2123" height="76.3501"/>
+  <object id="98" x="6576.35" y="1489.31" width="78.2123" height="73.5568"/>
+  <object id="99" x="6640.6" y="1424.13" width="68.9013" height="74.4879"/>
+  <object id="100" x="6704.84" y="1376.65" width="1294.23" height="132.216"/>
+  <object id="101" x="6816.57" y="1169.01" width="318.436" height="62.3836"/>
  </objectgroup>
  <objectgroup name="powerups">
-  <object id="38" x="912.026" y="927.425" width="33.282" height="38.7462"/>
-  <object id="39" x="2382.72" y="960.063" width="34.8691" height="37.6587"/>
-  <object id="40" x="2526.38" y="607.653" width="34.8691" height="37.6587"/>
-  <object id="41" x="3630.79" y="895.294" width="35.0237" height="39.4017"/>
-  <object id="42" x="3951" y="1327.21" width="34.031" height="38.2848"/>
+  <object id="38" x="1088.03" y="1407.42" width="33.282" height="38.7462"/>
+  <object id="39" x="2558.72" y="1440.06" width="34.8691" height="37.6587"/>
+  <object id="40" x="2702.38" y="1087.65" width="34.8691" height="37.6587"/>
+  <object id="41" x="3806.79" y="1375.29" width="35.0237" height="39.4017"/>
+  <object id="42" x="4127" y="1807.21" width="34.031" height="38.2848"/>
+  <object id="102" x="5225.23" y="1180" width="42.9907" height="44.8598"/>
+  <object id="103" x="5500" y="1502.43" width="39.2523" height="42.0561"/>
+  <object id="104" x="6524.09" y="1503.01" width="39.3762" height="39.3762"/>
  </objectgroup>
  <objectgroup name="enemy">
-  <object id="43" x="1608.65" y="945.401" width="112.984" height="61.0724"/>
-  <object id="44" x="2565.58" y="1012.79" width="116.186" height="56.9967"/>
-  <object id="45" x="3270.73" y="837.413" width="105.225" height="58.4582"/>
+  <object id="43" x="1784.65" y="1425.4" width="112.984" height="61.0724"/>
+  <object id="45" x="3446.73" y="1317.41" width="105.225" height="58.4582"/>
+  <object id="84" x="2608.25" y="1506.17" width="383.648" height="45.6281"/>
+  <object id="85" x="3119.83" y="1253.71" width="119.673" height="56.1944"/>
+  <object id="105" x="5776.87" y="1800.58" width="317.851" height="70.1275"/>
+  <object id="106" x="5599.27" y="1508.23" width="112.022" height="59.1985"/>
+  <object id="107" x="5329.69" y="1508.23" width="111.111" height="57.377"/>
+  <object id="108" x="5044.63" y="1510.05" width="109.29" height="56.4663"/>
+  <object id="109" x="5311.84" y="1060.25" width="115.495" height="56.3615"/>
+  <object id="110" x="4928.39" y="1174.82" width="113.647" height="53.5896"/>
+  <object id="112" x="4366.89" y="1470.33" width="449.187" height="64.8432"/>
  </objectgroup>
  <objectgroup name="finish">
-  <object id="78" x="4563.61" y="-1.391" width="109.097" height="864.097"/>
+  <object id="115" x="7304.19" y="0" width="78.9314" height="1357.01"/>
  </objectgroup>
 </map>
