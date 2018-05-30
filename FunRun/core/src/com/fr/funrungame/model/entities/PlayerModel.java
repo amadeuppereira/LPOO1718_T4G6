@@ -1,5 +1,8 @@
 package com.fr.funrungame.model.entities;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
+
 public class PlayerModel extends EntityModel {
 
     private PowerUpModel powerup = null;
@@ -64,9 +67,14 @@ public class PlayerModel extends EntityModel {
         this.shield = shield;
     }
 
-    public void givePowerup(PowerUpModel pu) {
-        if(powerup == null)
+    public void givePowerup(PowerUpModel pu, boolean sound_on) {
+        Sound sound = Gdx.audio.newSound(Gdx.files.internal("sounds/pickup.wav"));
+        if(powerup == null) {
             this.powerup = pu;
+            if(sound_on){
+                sound.play(1.0f);
+            }
+        }
     }
 
     public void removePowerup() {

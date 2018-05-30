@@ -18,19 +18,6 @@ public class PowerUpModel extends EntityModel{
         super(-50, -50);
     }
 
-    public void givePowerUp(PlayerModel playerModel){
-        double option = Math.floor(Math.random() * Math.floor(3));
-        if(option == 0){
-            playerModel.givePowerup(new SpeedPowerUpModel(getX(),getY(),object));
-        }
-        else if(option == 1){
-            playerModel.givePowerup(new ShieldPowerUpModel(getX(),getY(),object));
-        }
-        else if(option == 2){
-            playerModel.givePowerup(new RocketPowerUpModel(getX(),getY(),object));
-        }
-    }
-
     public void action(){}
 
     public int update(float delta, PlayerBody playerBody){return 0;}

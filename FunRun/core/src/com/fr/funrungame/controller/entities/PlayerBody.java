@@ -1,5 +1,7 @@
 package com.fr.funrungame.controller.entities;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.fr.funrungame.controller.GameController;
@@ -76,13 +78,20 @@ public class PlayerBody extends EntityBody {
 
     }
 
-    public void jump() {
+    public void jump(boolean sound_on) {
         if(DEAD || FINISHED) return;
+        Sound sound = Gdx.audio.newSound(Gdx.files.internal("sounds/jump.wav"));
         if(body.getLinearVelocity().y == 0) {//jump
             body.applyLinearImpulse(new Vector2(0, JUMP_FORCE), body.getWorldCenter(), true);
+            if(sound_on){
+                sound.play(1.0f);
+            }
         }
         else if (body.getLinearVelocity().x == 0 && body.getLinearVelocity().y < 4) {
             body.applyLinearImpulse(new Vector2(0, CLIMB_FORCE), body.getWorldCenter(), true);
+            if(sound_on){
+                sound.play(1.0f);
+            }
         }
     }
 

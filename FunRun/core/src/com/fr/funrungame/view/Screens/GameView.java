@@ -2,6 +2,8 @@ package com.fr.funrungame.view.Screens;
 
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -216,6 +218,8 @@ public class GameView extends ScreenAdapter {
         game.getAssetManager().load("shield.png", Texture.class);
         game.getAssetManager().load("noPowerUp.png", Texture.class);
         game.getAssetManager().load("pause.png", Texture.class);
+        //game.getAssetManager().load("sounds/jump.wav", Music.class);
+        //game.getAssetManager().load("sounds/pickup.wav", Music.class);
         loadMaps();
         game.getAssetManager().finishLoading();
 
@@ -240,11 +244,6 @@ public class GameView extends ScreenAdapter {
 
         ghostView.update(players.get(1));
         ghostView.draw(game.getBatch());
-
-//        for (PlayerModel player : players){
-//            playerView.update(player);
-//            playerView.draw(game.getBatch());
-//        }
     }
 
     /**

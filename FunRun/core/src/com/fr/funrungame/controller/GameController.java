@@ -2,6 +2,7 @@ package com.fr.funrungame.controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Net;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.net.HttpParametersUtils;
 import com.badlogic.gdx.physics.box2d.*;
@@ -225,8 +226,11 @@ public class GameController implements ContactListener{
         if(p == players[0]) {
             history.add(getTime());
             history.add((float) 1);
+            p.jump(true);
         }
-        p.jump();
+        else{
+            p.jump(false);
+        }
     }
 
     public void moveDown(PlayerBody p) {
@@ -250,13 +254,22 @@ public class GameController implements ContactListener{
         if(option == -1) option = Math.floor(Math.random() * Math.floor(3));
         switch ((int)option) {
             case 0:
-                ((PlayerModel) p.getUserData()).givePowerup(new SpeedPowerUpModel());
+                if(p == players[0])
+                    ((PlayerModel) p.getUserData()).givePowerup(new SpeedPowerUpModel(), true);
+                else
+                    ((PlayerModel) p.getUserData()).givePowerup(new SpeedPowerUpModel(), false);
                 break;
             case 1:
-                ((PlayerModel) p.getUserData()).givePowerup(new RocketPowerUpModel());
+                if(p == players[0])
+                    ((PlayerModel) p.getUserData()).givePowerup(new RocketPowerUpModel(), true);
+                else
+                    ((PlayerModel) p.getUserData()).givePowerup(new RocketPowerUpModel(), false);
                 break;
             case 2:
-                ((PlayerModel) p.getUserData()).givePowerup(new ShieldPowerUpModel());
+                if(p == players[0])
+                    ((PlayerModel) p.getUserData()).givePowerup(new ShieldPowerUpModel(), true);
+                else
+                    ((PlayerModel) p.getUserData()).givePowerup(new ShieldPowerUpModel(), false);
                 break;
         }
 
