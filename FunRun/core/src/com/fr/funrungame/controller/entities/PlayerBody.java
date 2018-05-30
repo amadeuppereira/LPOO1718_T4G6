@@ -11,8 +11,9 @@ import com.fr.funrungame.model.entities.PlayerModel;
 import static com.fr.funrungame.view.Screens.GameView.PIXEL_TO_METER;
 
 public class PlayerBody extends EntityBody {
+    
+    private float ACCELERATION = 15f;
 
-    private float RUN_FORCE = 15f;
     private float JUMP_FORCE = 5f;
     private float CLIMB_FORCE = 1.5f;
     private float DOWN_FORCE = -100f;
@@ -58,14 +59,22 @@ public class PlayerBody extends EntityBody {
     }
 
     public void update(float delta) {
+
+        if(body.getLinearVelocity().x <= 5 && body.getLinearVelocity().x > 0 && !FINISHED && !DEAD) {
+            body.setLinearVelocity(body.getLinearVelocity().x + ACCELERATION * delta, body.getLinearVelocity().y);
+        }
+        else if(body.getLinearVelocity().x == 0 && !DEAD && !FINISHED) {
+            body.applyLinearImpulse(new Vector2(0.001f, 0f), body.getWorldCenter(), true);
+        }
+
         if(!FINISHED)
             time += delta;
 
         if(FINISHED){
-            if(body.getLinearVelocity().x  < 0.1)
-                body.setLinearVelocity(new Vector2(0,0));
-            else
-                body.setLinearVelocity(new Vector2(body.getLinearVelocity().x * 0.9f,-5));
+            if(body.getLinearVelocity().x > 0)
+                body.setLinearVelocity(body.getLinearVelocity().x - ACCELERATION/2 * delta, body.getLinearVelocity().y);
+            if(body.getLinearVelocity().x < 0)
+                body.setLinearVelocity(0, body.getLinearVelocity().y);
         }
 
         if(DEAD) {
@@ -78,21 +87,38 @@ public class PlayerBody extends EntityBody {
             if(invulnerable_timer <= 0) setInvulnerable(false);
         }
 
+        verifications();
+
+    }
+
+    private void verifications() {
+        if (body.getLinearVelocity().x == 0) {
+            ((PlayerModel) getUserData()).setRunning(false);
+        } else {
+            ((PlayerModel) getUserData()).setRunning(true);
+        }
+
+        if (body.getLinearVelocity().y > 0) {
+            ((PlayerModel) getUserData()).setJumping(true);
+            ((PlayerModel) getUserData()).setFalling(false);
+        } else if (body.getLinearVelocity().y < 0) {
+            ((PlayerModel) getUserData()).setJumping(false);
+            ((PlayerModel) getUserData()).setFalling(true);
+        }
     }
 
     public void jump(boolean sound_on) {
         if(DEAD || FINISHED) return;
         if(body.getLinearVelocity().y == 0) {//jump
             body.applyLinearImpulse(new Vector2(0, JUMP_FORCE), body.getWorldCenter(), true);
-            if(sound_on){
-                music.play();
-            }
         }
-        else if (body.getLinearVelocity().x == 0 && body.getLinearVelocity().y < 4) {
+        else if (body.getLinearVelocity().x < 0.1f && body.getLinearVelocity().y < 4) {
             body.applyLinearImpulse(new Vector2(0, CLIMB_FORCE), body.getWorldCenter(), true);
-            if(sound_on){
-                music.play();
-            }
+
+        }
+
+        if(sound_on){
+            music.play();
         }
     }
 
@@ -102,10 +128,6 @@ public class PlayerBody extends EntityBody {
             body.applyForceToCenter(0, DOWN_FORCE, true);
     }
 
-    public void run() {
-        if(DEAD) return;
-        else body.applyForceToCenter(RUN_FORCE,0, true);
-    }
 
     public void stop() {
         body.setLinearVelocity(new Vector2(0,0));

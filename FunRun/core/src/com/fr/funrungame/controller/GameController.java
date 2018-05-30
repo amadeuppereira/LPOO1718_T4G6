@@ -158,25 +158,6 @@ public class GameController implements ContactListener{
 
             p.update(delta);
 
-            //to keep the player always moving forward
-            if (p.getBody().getLinearVelocity().x <= 5 && !p.isFinished() && !p.isDEAD())
-                p.run();
-
-            //jumping and falling handlers
-            if (p.getBody().getLinearVelocity().x == 0) {
-                ((PlayerModel) p.getUserData()).setRunning(false);
-            } else {
-                ((PlayerModel) p.getUserData()).setRunning(true);
-            }
-
-            if (p.getBody().getLinearVelocity().y > 0) {
-                ((PlayerModel) p.getUserData()).setJumping(true);
-                ((PlayerModel) p.getUserData()).setFalling(false);
-            } else if (p.getBody().getLinearVelocity().y < 0) {
-                ((PlayerModel) p.getUserData()).setJumping(false);
-                ((PlayerModel) p.getUserData()).setFalling(true);
-            }
-
             //power up handler
             if (!p.isFinished()) {
                 if (((PlayerModel) p.getUserData()).getPowerup() != null) {
