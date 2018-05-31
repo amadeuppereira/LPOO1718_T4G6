@@ -192,8 +192,8 @@ public class GameView extends ScreenAdapter {
         float x = GameModel.getInstance().getPlayers().get(0).getX();
         float y = GameModel.getInstance().getPlayers().get(0).getY();
 
-        if(x < 8)
-            camera.position.set(8 / PIXEL_TO_METER, y / PIXEL_TO_METER + 80, 0);
+        if(x < 9)
+            camera.position.set(9 / PIXEL_TO_METER, y / PIXEL_TO_METER + 80, 0);
         else
             camera.position.set(x / PIXEL_TO_METER, y / PIXEL_TO_METER + 80, 0);
 
@@ -206,7 +206,8 @@ public class GameView extends ScreenAdapter {
         dispose();
         GameController.reset();
         GameModel.reset();
-        game.setScreen(new FinishMenu(game, gamePort));
+        screenshot();
+        game.setScreen(new FinishMenu(game));
     }
 
     private void loadAssets(){
@@ -224,6 +225,9 @@ public class GameView extends ScreenAdapter {
         game.getAssetManager().load("shield.png", Texture.class);
         game.getAssetManager().load("noPowerUp.png", Texture.class);
         game.getAssetManager().load("pause.png", Texture.class);
+        game.getAssetManager().load("pause_menu.png", Texture.class);
+        game.getAssetManager().load("leave_button.png", Texture.class);
+        game.getAssetManager().load("stay_button.png", Texture.class);
         loadMaps();
         game.getAssetManager().finishLoading();
 
@@ -308,7 +312,7 @@ public class GameView extends ScreenAdapter {
 
         Pixmap pixmap = new Pixmap(Gdx.graphics.getBackBufferWidth(), Gdx.graphics.getBackBufferHeight(), Pixmap.Format.RGBA8888);
         BufferUtils.copy(pixels, 0, pixmap.getPixels(), pixels.length);
-        PixmapIO.writePNG(Gdx.files.local("pause_background.png"), pixmap);
+        PixmapIO.writePNG(Gdx.files.local("screenshot_background.png"), pixmap);
         pixmap.dispose();
     }
 }
