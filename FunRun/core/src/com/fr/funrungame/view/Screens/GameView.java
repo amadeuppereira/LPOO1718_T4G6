@@ -210,7 +210,7 @@ public class GameView extends ScreenAdapter {
 
     private void loadMaps(){
         //gameMaps.put(1, "maps/map3.tmx");
-        gameMaps.put(1, "maps/map1.tmx");
+        gameMaps.put(1, "maps/map2.tmx");
         game.getAssetManager().setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
         for(String mapPath : gameMaps.values()){
             game.getAssetManager().load(mapPath, TiledMap.class);

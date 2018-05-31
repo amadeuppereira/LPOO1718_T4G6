@@ -102,7 +102,7 @@ public class GameController implements ContactListener{
 
 
     private GameController() {
-        //while(!serverResponse) {}
+        while(!serverResponse) {}
         index = 0;
         history = new ArrayList<Float>();
         history_times = new ArrayList<Float>();
