@@ -56,7 +56,7 @@ public class Networking {
             i++;
         }
 
-        if(i == TIMEOUT) return 1;
+        if(i == TIMEOUT && !serverResponse) return 1;
         else return 0;
     }
 
