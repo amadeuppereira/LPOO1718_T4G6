@@ -8,8 +8,11 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.fr.funrungame.FunRunGame;
+
+import java.util.ArrayList;
 
 public class MapSelect extends MenuScreen {
 
@@ -48,16 +51,24 @@ public class MapSelect extends MenuScreen {
      */
     private static final float SIDE_DISTANCE = VIEWPORT_WIDTH / 82;
 
-    private static final float MAP_LABEL_WIDTH = VIEWPORT_WIDTH / 10;
+    private ArrayList<Image> buttons = new ArrayList<Image>();
 
-    private static final float MAP_LABEL_HEIGHT = VIEWPORT_WIDTH / 30;
+    private Table objects;
+    private Table staticObjects;
+    private ScrollPane scroller;
 
     MapSelect(final FunRunGame game){
         super(game, new Image(game.getAssetManager().get("mapselector.png", Texture.class)), 30, 4.47f);
+        objects = new Table();
+        createObjects();
+        staticObjects = new Table();
+        createStaticObjects();
+
+        staticObjects.setFillParent(true);
+
     }
 
-
-    private void createObjects(Table objects) {
+    private void createObjects() {
         Image map1 = new Image(game.getAssetManager().get("play_button.png", Texture.class));
         map1.addListener(new ClickListener() {
             @Override
@@ -105,9 +116,11 @@ public class MapSelect extends MenuScreen {
         objects.add(map4).size(MAP_WIDTH, MAP_HEIGHT).pad(IMAGE_EDGE).row();
         //Image map4_title = new Image(game.getAssetManager().get("title.png", Texture.class));
         //objects.add(map4_title).size(MAP_LABEL_WIDTH, MAP_LABEL_HEIGHT).row();
+
+        scroller = new ScrollPane(objects);
     }
 
-    private void createStaticObjects(Table staticObjects,Table objects) {
+    private void createStaticObjects() {
         Image backButton = new Image(game.getAssetManager().get("return.png", Texture.class));
         backButton.addListener(new ClickListener() {
             @Override
@@ -115,8 +128,6 @@ public class MapSelect extends MenuScreen {
                 game.setScreen(new MainMenu(game));
             }
         });
-
-        ScrollPane scroller = new ScrollPane(objects);
 
         staticObjects.add(backButton).size(BUTTON_WIDTH,BUTTON_HEIGHT).top().left().padLeft(SIDE_DISTANCE).padTop(TOP_EDGE/3).row();
         staticObjects.add(scroller).padTop(TOP_EDGE/2).fill().expand();
@@ -126,17 +137,9 @@ public class MapSelect extends MenuScreen {
     public void show(){
         super.show();
 
-        Table objects = new Table();
-
-        Table staticObjects = new Table();
         staticObjects.setFillParent(true);
 
-        createObjects(objects);
-        createStaticObjects(staticObjects, objects);
-
         stage.addActor(staticObjects);
-
-        stage.setDebugAll(true);
 
         Gdx.input.setInputProcessor(stage);
     }
