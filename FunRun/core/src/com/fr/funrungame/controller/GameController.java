@@ -99,13 +99,10 @@ public class GameController implements ContactListener{
     /**
      * Flag for server response
      */
-    private static boolean serverResponse = false;
-
     private static Networking network = new Networking();
 
 
     private GameController() {
-        while(!serverResponse) {}
         index = 0;
         history = new ArrayList<Float>();
         history_times = new ArrayList<Float>();
@@ -372,9 +369,10 @@ public class GameController implements ContactListener{
     }
 
     public static void reset() {
-        //actions.clear();
-        //serverResponse = false;
-
+        if(actions_times != null)
+            actions_times.clear();
+        if(actions != null)
+            actions.clear();
         instance = null;
     }
 

@@ -144,7 +144,7 @@ public class PlayerBody extends EntityBody {
             body.setLinearVelocity(getVelX() + ACCELERATION * delta, getVelY());
         }
         else if(getVelX() == 0 && !DEAD && !FINISHED) {
-            body.applyLinearImpulse(new Vector2(0.05f, 0f), body.getWorldCenter(), true);
+            body.applyForce(new Vector2(1f, 0f), body.getWorldCenter(), true);
         }
     }
 

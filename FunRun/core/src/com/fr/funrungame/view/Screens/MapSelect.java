@@ -45,8 +45,6 @@ public class MapSelect extends MenuScreen {
 
     MapSelect(final FunRunGame game){
         super(game, new Image(game.getAssetManager().get("mapselector.png", Texture.class)), TITLE_HEIGHT, TITLE_WIDTH);
-        System.out.println(TITLE_WIDTH);
-
     }
 
     private void createButtons(Table table) {
@@ -125,14 +123,6 @@ public class MapSelect extends MenuScreen {
 
     @Override
     public void show(){
-//        super.show();
-//
-//        staticObjects.setFillParent(true);
-//
-//        stage.addActor(staticObjects);
-//
-//        Gdx.input.setInputProcessor(stage);
-
         super.show();
         Table table = new Table();
         table.setFillParent(true);
