@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 
 public class GameController implements ContactListener{
@@ -100,14 +101,18 @@ public class GameController implements ContactListener{
      */
     private static boolean serverResponse = false;
 
+    private static Networking network = new Networking();
+
 
     private GameController() {
+
         //while(!serverResponse) {}
         index = 0;
         history = new ArrayList<Float>();
         history_times = new ArrayList<Float>();
         world = new World(new Vector2(0, -9.8f), true);
         time = 0;
+
 
         players = new PlayerBody[2];
         players[0] = new PlayerBody(world, GameModel.getInstance().getPlayers().get(0));
@@ -182,7 +187,7 @@ public class GameController implements ContactListener{
 
     private void isRunFinished() {
         if(!((PlayerModel)players[0].getUserData()).isFinished()) return;
-        sendToServer(GameModel.getInstance().getCurrentMap(), history, players[0].getTime());
+        sendToServer(GameModel.getInstance().getCurrentMap(), history_times, history, players[0].getTime());
         GameModel.getInstance().setFinished(true);
 
     }
@@ -194,14 +199,13 @@ public class GameController implements ContactListener{
     }
 
     private void ghostHandler(float time) {
-        if(actions == null || index == actions.size()) {
+        if(actions == null || actions_times == null || index == actions.size() || index == actions_times.size()) {
             double a = Math.random();
             if(a < 0.5) jump(players[1]);
             return;
         }
 
-        if(actions.get(index) <= time)  {
-            index++;
+        if(actions_times.get(index) <= time)  {
             switch (Math.round(actions.get(index))) {
                 case 1:
                     jump(players[1]);
@@ -226,12 +230,9 @@ public class GameController implements ContactListener{
         }
     }
 
-
     public void jump(PlayerBody p){
         if(p == players[0]) {
-            history.add(getTime());
-            //history_times.add(getTime());
-            history.add((float) 1);
+            updateHistory(1);
             p.jump(true);
         }
         else{
@@ -241,9 +242,7 @@ public class GameController implements ContactListener{
 
     public void moveDown(PlayerBody p) {
         if(p == players[0]) {
-            history.add(getTime());
-            //history_times.add(getTime());
-            history.add((float) 2);
+            updateHistory(2);
         }
         p.moveDown();
     }
@@ -251,9 +250,7 @@ public class GameController implements ContactListener{
     public void usePowerUp(PlayerBody p){
 
         if(p == players[0]) {
-            history.add(getTime());
-            //history_times.add(getTime());
-            history.add((float) 6);
+            updateHistory(6);
         }
         p.usePowerUp();
     }
@@ -283,9 +280,7 @@ public class GameController implements ContactListener{
         }
 
         if(p == players[0]) {
-            history.add(getTime());
-            //history_times.add(getTime());
-            history.add((float) option + 3);
+            updateHistory((int)option + 3);
         }
     }
 
@@ -332,6 +327,12 @@ public class GameController implements ContactListener{
 
     }
 
+    private void updateHistory(int action) {
+        //history.add(getTime());
+        history_times.add(getTime());
+        history.add((float) action);
+    }
+
     public float getTime() {
         return time;
     }
@@ -352,91 +353,28 @@ public class GameController implements ContactListener{
     }
 
     public static void getFromServer() {
+        network.get(GameModel.getInstance().getCurrentMap());
 
-        Map parameters = new HashMap();
-        parameters.put("map", String.valueOf(GameModel.getInstance().getCurrentMap()));
-
-        Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
-        httpGet.setUrl("https://paginas.fe.up.pt/~up201605646/lpoo/get.php");
-        httpGet.setContent(HttpParametersUtils.convertHttpParameters(parameters));
-
-        Gdx.net.sendHttpRequest(httpGet, new Net.HttpResponseListener() {
-            @Override
-            public void handleHttpResponse(Net.HttpResponse httpResponse) {
-                actions = new ArrayList<Float>();
-
-                String r = httpResponse.getResultAsString();
-                String[] param = r.split(" ");
-                best_time = Float.parseFloat(param[1]);
-                String[] temp = param[0].split("/");
-
-                for(String i : temp) {
-                    String[] action = i.split("-");
-                    actions.add(Float.parseFloat(action[0]));
-                    actions.add(Float.parseFloat(action[1]));
-                }
-
-                serverResponse = true;
-            }
-
-            @Override
-            public void failed(Throwable t) {
-                System.out.println("Failed to access server");
-                serverResponse = true;
-            }
-
-            @Override
-            public void cancelled() {
-                System.out.println("Cancelled server access");
-                serverResponse = true;
-            }
-        });
-    }
-
-    private void sendToServer(int map, ArrayList<Float> history, float time) {
-        if(players[1].getTime() < players[0].getTime() ) return;
-        StringBuilder sb = new StringBuilder();
-
-        for(int i = 0; i < history.size();) {
-            sb.append(history.get(i++));
-            sb.append("-");
-            sb.append(history.get(i++));
-            sb.append("/");
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
 
-        Map parameters = new HashMap();
-        parameters.put("map", String.valueOf(map));
-        parameters.put("movement", sb.toString());
-        parameters.put("time", String.valueOf(time));
+        best_time = network.getTime();
+        actions = network.getActions();
+        actions_times = network.getTimes();
+    }
 
-        Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
-        httpGet.setUrl("https://paginas.fe.up.pt/~up201605646/lpoo/insert.php");
-        httpGet.setContent(HttpParametersUtils.convertHttpParameters(parameters));
+    private void sendToServer(int map, ArrayList<Float> history_times, ArrayList<Float> history, float time) {
+        if(players[1].getTime() < players[0].getTime() ) return;
 
-        Gdx.net.sendHttpRequest(httpGet, new Net.HttpResponseListener() {
-            @Override
-            public void handleHttpResponse(Net.HttpResponse httpResponse) {
-
-                System.out.println("Sent new best game");
-                System.out.println(httpResponse.getResultAsString());
-            }
-
-            @Override
-            public void failed(Throwable t) {
-                System.out.println("Failed");
-            }
-
-            @Override
-            public void cancelled() {
-                System.out.println("Cancelled");
-            }
-        });
-
+        network.send(map, history_times, history, time);
     }
 
     public static void reset() {
-        actions.clear();
-        serverResponse = false;
+        //actions.clear();
+        //serverResponse = false;
 
         instance = null;
     }

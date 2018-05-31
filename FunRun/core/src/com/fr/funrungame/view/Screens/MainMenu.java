@@ -13,6 +13,9 @@ public class MainMenu extends MenuScreen {
     protected static final float BUTTON_WIDTH = VIEWPORT_WIDTH / 2;
     protected static final float BUTTON_EDGE = VIEWPORT_WIDTH / 75;
     protected static final float DEFAULT_BUTTON_SIZE = VIEWPORT_WIDTH / 15;
+
+    protected static final float TITLE_HEIGHT = VIEWPORT_HEIGHT/3;
+    protected static final float TITLE_WIDTH = VIEWPORT_WIDTH/1.5f;
     /**
      * Constant representing the extra space around the bottom edge of the bottom Button.
      */
@@ -23,7 +26,7 @@ public class MainMenu extends MenuScreen {
     Image customizeButton;
 
     public MainMenu(FunRunGame game) {
-        super(game, new Image(game.getAssetManager().get("title.png", Texture.class)), 25, 7.4f);
+        super(game, new Image(game.getAssetManager().get("title.png", Texture.class)), TITLE_HEIGHT, TITLE_WIDTH);
     }
 
     private void createButtons(Table table) {

@@ -16,8 +16,7 @@ public class MenuScreen extends ScreenAdapter {
     protected final FunRunGame game;
 
     /**
-     * The width of the viewport in meters. The height is
-     * automatically calculated using the screen ratio.
+     * The width of the viewport in meters.
      */
     protected static final float VIEWPORT_WIDTH = 40;
 
@@ -46,7 +45,7 @@ public class MenuScreen extends ScreenAdapter {
         backgroundImg.setScale(VIEWPORT_WIDTH / backgroundImg.getWidth(), VIEWPORT_HEIGHT / backgroundImg.getHeight());
 
         titleImg = title;
-        titleImg.setSize(title_height, title_length);
+        titleImg.setSize(title_length, title_height);
         titleImg.setPosition(VIEWPORT_WIDTH / 2 - titleImg.getWidth() / 2, VIEWPORT_HEIGHT * 0.98f - titleImg.getHeight());
     }
 
