@@ -1,15 +1,9 @@
 package com.fr.funrungame.view.Screens;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
-import com.badlogic.gdx.utils.Align;
 import com.fr.funrungame.FunRunGame;
 
 import java.util.ArrayList;
@@ -24,23 +18,17 @@ public class MapSelect extends MenuScreen {
     /**
      * Constant representing the size of the Buttons
      */
-    private static final float BUTTON_HEIGHT = VIEWPORT_WIDTH / 30;
+    private static final float BUTTON_HEIGHT = VIEWPORT_WIDTH / 20;
 
     /**
      * Constant representing the size of the Maps
      */
-    private static final float MAP_WIDTH = VIEWPORT_WIDTH / 2;
+    private static final float MAP_BUTTON_WIDTH = VIEWPORT_WIDTH / 3;
 
     /**
      * Constant representing the size of the Maps
      */
-    private static final float MAP_HEIGHT = VIEWPORT_HEIGHT / 3;
-
-    /**
-     * Constant representing the extra space around the edges of all Images.
-     */
-    //private static final float IMAGE_EDGE = VIEWPORT_WIDTH / 40;
-    private static final float IMAGE_EDGE = VIEWPORT_WIDTH / 30;
+    private static final float MAP_BUTTON_HEIGHT = VIEWPORT_HEIGHT / 3;
 
     /**
      * Constant representing the distance between the first line of Level Buttons and the screen Top.
@@ -51,96 +39,106 @@ public class MapSelect extends MenuScreen {
      */
     private static final float SIDE_DISTANCE = VIEWPORT_WIDTH / 82;
 
-    private ArrayList<Image> buttons = new ArrayList<Image>();
+    private static final float TITLE_HEIGHT = VIEWPORT_HEIGHT / 8.94f;
 
-    private Table objects;
-    private Table staticObjects;
-    private ScrollPane scroller;
+    private static final float TITLE_WIDTH =  VIEWPORT_WIDTH / 1.5f;
 
     MapSelect(final FunRunGame game){
-        super(game, new Image(game.getAssetManager().get("mapselector.png", Texture.class)), 30, 4.47f);
-        objects = new Table();
-        createObjects();
-        staticObjects = new Table();
-        createStaticObjects();
-
-        staticObjects.setFillParent(true);
+        super(game, new Image(game.getAssetManager().get("mapselector.png", Texture.class)), TITLE_HEIGHT, TITLE_WIDTH);
+        System.out.println(TITLE_WIDTH);
 
     }
 
-    private void createObjects() {
-        Image map1 = new Image(game.getAssetManager().get("play_button.png", Texture.class));
-        map1.addListener(new ClickListener() {
+    private void createButtons(Table table) {
+        addReturnButton(table);
+
+        addMap1(table);
+        addMap2(table);
+        table.row();
+        addMap3(table);
+        addMap4(table);
+
+    }
+
+    private void addMap1(Table table) {
+        Image button = new Image(game.getAssetManager().get("play_button.png", Texture.class));
+        button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("map1");
                 dispose();
             }
         });
-        objects.add(map1).size(MAP_WIDTH, MAP_HEIGHT).pad(IMAGE_EDGE).row();
-        //Image map1_title = new Image(game.getAssetManager().get("title.png", Texture.class));
-        //objects.add(map1_title).size(MAP_LABEL_WIDTH, MAP_LABEL_HEIGHT).row();
 
-        Image map2 = new Image(game.getAssetManager().get("play_button.png", Texture.class));
-        map2.addListener(new ClickListener() {
+        table.add(button).size(MAP_BUTTON_WIDTH, MAP_BUTTON_HEIGHT).fill().expand();
+    }
+
+    private void addMap2(Table table) {
+        Image button = new Image(game.getAssetManager().get("play_button.png", Texture.class));
+        button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("map2");
                 dispose();
             }
         });
-        objects.add(map2).size(MAP_WIDTH, MAP_HEIGHT).pad(IMAGE_EDGE).row();
-        //Image map2_title = new Image(game.getAssetManager().get("title.png", Texture.class));
-        //objects.add(map2_title).size(MAP_LABEL_WIDTH, MAP_LABEL_HEIGHT).row();
 
-        Image map3 = new Image(game.getAssetManager().get("play_button.png", Texture.class));
-        map3.addListener(new ClickListener() {
+        table.add(button).size(MAP_BUTTON_WIDTH, MAP_BUTTON_HEIGHT).fill().expand();
+    }
+
+    private void addMap3(Table table) {
+        Image button = new Image(game.getAssetManager().get("play_button.png", Texture.class));
+        button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("map3");
                 dispose();
             }
         });
-        objects.add(map3).size(MAP_WIDTH, MAP_HEIGHT).pad(IMAGE_EDGE).row();
-        //Image map3_title = new Image(game.getAssetManager().get("title.png", Texture.class));
-        //objects.add(map3_title).size(MAP_LABEL_WIDTH, MAP_LABEL_HEIGHT).row();
+        table.add(button).size(MAP_BUTTON_WIDTH, MAP_BUTTON_HEIGHT).fill().expand();
+    }
 
-        Image map4 = new Image(game.getAssetManager().get("play_button.png", Texture.class));
-        map4.addListener(new ClickListener() {
+    private void addMap4(Table table) {
+        Image button = new Image(game.getAssetManager().get("play_button.png", Texture.class));
+        button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("map4");
                 dispose();
             }
         });
-        objects.add(map4).size(MAP_WIDTH, MAP_HEIGHT).pad(IMAGE_EDGE).row();
-        //Image map4_title = new Image(game.getAssetManager().get("title.png", Texture.class));
-        //objects.add(map4_title).size(MAP_LABEL_WIDTH, MAP_LABEL_HEIGHT).row();
-
-        scroller = new ScrollPane(objects);
+        table.add(button).size(MAP_BUTTON_WIDTH, MAP_BUTTON_HEIGHT).fill().expand();
     }
 
-    private void createStaticObjects() {
+    private void addReturnButton(Table table) {
         Image backButton = new Image(game.getAssetManager().get("return.png", Texture.class));
         backButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                dispose();
                 game.setScreen(new MainMenu(game));
             }
         });
 
-        staticObjects.add(backButton).size(BUTTON_WIDTH,BUTTON_HEIGHT).top().left().padLeft(SIDE_DISTANCE).padTop(TOP_EDGE/3).row();
-        staticObjects.add(scroller).padTop(TOP_EDGE/2).fill().expand();
+        table.add(backButton).size(BUTTON_WIDTH, BUTTON_HEIGHT).top().left().padTop(TOP_EDGE/3).padLeft(SIDE_DISTANCE).row();
     }
 
     @Override
     public void show(){
+//        super.show();
+//
+//        staticObjects.setFillParent(true);
+//
+//        stage.addActor(staticObjects);
+//
+//        Gdx.input.setInputProcessor(stage);
+
         super.show();
+        Table table = new Table();
+        table.setFillParent(true);
 
-        staticObjects.setFillParent(true);
-
-        stage.addActor(staticObjects);
-
-        Gdx.input.setInputProcessor(stage);
+        createButtons(table);
+        table.debug();
+        stage.addActor(table);
     }
 }
