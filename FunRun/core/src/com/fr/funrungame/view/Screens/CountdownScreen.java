@@ -40,7 +40,7 @@ public class CountdownScreen extends GameView {
             yi = GAME_HEIGHT /2 + 4* NUMBER_HEIGHT;
         }
         else{
-            xi = Gdx.graphics.getWidth() / 2 - (NUMBER_WIDTH / 2);
+            xi = Gdx.graphics.getWidth() / 2 - (NUMBER_WIDTH / 2) + 60;
             yi = Gdx.graphics.getHeight() * 0.999999f- (NUMBER_HEIGHT / 2) + 50;
         }
     }

@@ -92,7 +92,7 @@ public class GameView extends ScreenAdapter {
     public GameView(FunRunGame game) {
         this.game = game;
 
-        loadAssets();
+        loadMaps();
 
         playerView = new PlayerView(game);
         ghostView = new PlayerView(game, 0.5f);
@@ -204,33 +204,8 @@ public class GameView extends ScreenAdapter {
     private void end() {
         pause = true;
         dispose();
-        GameController.reset();
-        GameModel.reset();
         screenshot();
         game.setScreen(new FinishMenu(game));
-    }
-
-    private void loadAssets(){
-        game.getAssetManager().load("background_menu.png", Texture.class);
-        game.getAssetManager().load("player.png", Texture.class);
-        game.getAssetManager().load("player_running.png", Texture.class);
-        game.getAssetManager().load("player_jumping.png", Texture.class);
-        game.getAssetManager().load("player_falling.png", Texture.class);
-        game.getAssetManager().load("player_shielded.png", Texture.class);
-        game.getAssetManager().load("player_running_shielded.png", Texture.class);
-        game.getAssetManager().load("player_jumping_shielded.png", Texture.class);
-        game.getAssetManager().load("player_falling_shielded.png", Texture.class);
-        game.getAssetManager().load("rocket.png", Texture.class);
-        game.getAssetManager().load("speed.png", Texture.class);
-        game.getAssetManager().load("shield.png", Texture.class);
-        game.getAssetManager().load("noPowerUp.png", Texture.class);
-        game.getAssetManager().load("pause.png", Texture.class);
-        game.getAssetManager().load("pause_menu.png", Texture.class);
-        game.getAssetManager().load("leave_button.png", Texture.class);
-        game.getAssetManager().load("stay_button.png", Texture.class);
-        loadMaps();
-        game.getAssetManager().finishLoading();
-
     }
 
     private void loadMaps(){
@@ -240,6 +215,7 @@ public class GameView extends ScreenAdapter {
         for(String mapPath : gameMaps.values()){
             game.getAssetManager().load(mapPath, TiledMap.class);
         }
+        game.getAssetManager().finishLoading();
     }
 
     /**

@@ -48,7 +48,25 @@ public class FunRunGame extends Game {
 		assetManager.load("arrow_up.png", Texture.class);
 		assetManager.load("arrow_down.png", Texture.class);
 		assetManager.load("sounds/Electronic Super Joy - 04 - Darkas.mp3", Music.class);
-
+		assetManager.load("background_menu.png", Texture.class);
+		assetManager.load("player.png", Texture.class);
+		assetManager.load("player_running.png", Texture.class);
+		assetManager.load("player_jumping.png", Texture.class);
+		assetManager.load("player_falling.png", Texture.class);
+		assetManager.load("player_shielded.png", Texture.class);
+		assetManager.load("player_running_shielded.png", Texture.class);
+		assetManager.load("player_jumping_shielded.png", Texture.class);
+		assetManager.load("player_falling_shielded.png", Texture.class);
+		assetManager.load("rocket.png", Texture.class);
+		assetManager.load("speed.png", Texture.class);
+		assetManager.load("shield.png", Texture.class);
+		assetManager.load("noPowerUp.png", Texture.class);
+		assetManager.load("pause.png", Texture.class);
+		assetManager.load("pause_menu.png", Texture.class);
+		assetManager.load("leave_button.png", Texture.class);
+		assetManager.load("stay_button.png", Texture.class);
+        assetManager.load("game_over.png", Texture.class);
+        assetManager.load("mainmenu_button.png", Texture.class);
 
 		assetManager.finishLoading();
 	}

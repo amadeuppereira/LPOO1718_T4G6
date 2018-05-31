@@ -110,7 +110,7 @@ public class PauseMenu extends ScreenAdapter {
         stage.addActor(backgroundImg);
         stage.addActor(container_table);
         stage.addActor(buttons_table);
-        
+
         Gdx.input.setInputProcessor(stage);
     }
 

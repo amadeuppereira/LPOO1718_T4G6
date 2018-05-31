@@ -62,7 +62,7 @@ public class HudMenu {
 
     public void update(float time, boolean finish){
         if(!finish) {
-            worldTimer = time;
+            worldTimer = time + 0.01f;
             if (stage != null && table != null) {
                 stage.clear();
                 table.reset();

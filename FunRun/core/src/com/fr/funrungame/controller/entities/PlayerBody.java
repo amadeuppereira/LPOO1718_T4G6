@@ -246,15 +246,14 @@ public class PlayerBody extends EntityBody {
         if(DEAD || FINISHED) return;
         if(getVelY() == 0) {//jump
             body.applyLinearImpulse(new Vector2(0, JUMP_FORCE), body.getWorldCenter(), true);
+            if(sound)
+                music.play();
         }
         else if (getVelX() < 0.1f && getVelY() < 4) {
             body.applyLinearImpulse(new Vector2(0, CLIMB_FORCE), body.getWorldCenter(), true);
-
+            if(sound)
+                music.play();
         }
-
-        if(sound)
-            music.play();
-
     }
 
     /**

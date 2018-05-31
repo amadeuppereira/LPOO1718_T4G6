@@ -181,9 +181,7 @@ public class GameController implements ContactListener{
     }
 
     private void isRunFinished() {
-        for(PlayerBody p : players) {
-            if(!((PlayerModel)p.getUserData()).isFinished()) return;
-        }
+        if(!((PlayerModel)players[0].getUserData()).isFinished()) return;
         sendToServer(GameModel.getInstance().getCurrentMap(), history, players[0].getTime());
         GameModel.getInstance().setFinished(true);
 
@@ -441,5 +439,9 @@ public class GameController implements ContactListener{
         serverResponse = false;
 
         instance = null;
+    }
+
+    public PlayerBody[] getPlayers() {
+        return players;
     }
 }
