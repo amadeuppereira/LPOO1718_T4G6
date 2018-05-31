@@ -1,12 +1,21 @@
 package com.fr.funrungame.controller.entities;
 
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.fr.funrungame.model.entities.EntityModel;
+
+import static com.fr.funrungame.view.Screens.GameView.PIXEL_TO_METER;
 
 public abstract class EntityBody {
-
+    /**
+     * The constant that represents a player body
+     */
     final static short PLAYER_BODY = 0x0002;
 
+    /**
+     * The constant that represents a terrain body
+     */
     final static short TERRAIN_BODY = 0x0004;
 
     /**
@@ -17,8 +26,7 @@ public abstract class EntityBody {
     /**
      * Constructs a body representing a model in a certain world.
      */
-    EntityBody() {
-    }
+    EntityBody() {}
 
     /**
      * Wraps the getX method from the Box2D body class.
@@ -39,23 +47,37 @@ public abstract class EntityBody {
     }
 
     /**
-     * Wraps the setTransform method from the Box2D body class.
+     * Wraps the getLinearVelocity().x from Box2D body class.
      *
-     * @param x the new x-coordinate for this body
-     * @param y the new y-coordinate for this body
+     * @return the x axis velocity of this body
      */
-    public void setTransform(float x, float y) {
-        body.setTransform(x, y,0);
+    public float getVelX() {
+        return body.getLinearVelocity().x;
     }
 
-    public void applyForce(float x, float y) {
-        body.applyForceToCenter(x, y, true);
+    /**
+     * Wraps the getLinearVelocity().y from Box2D body class.
+     *
+     * @return the y axis velocity of this body
+     */
+    public float getVelY() {
+        return body.getLinearVelocity().y;
     }
 
-    public void applyLinearImpulse(float x, float y){
-        body.applyLinearImpulse(new Vector2(5,0), body.getWorldCenter(), true);
+    /**
+     * Applies a linear impulse in the center of the body
+     * @param x impulse x force
+     * @param y impulse y force
+     */
+    public void applyLinearImpulse(float x, float y) {
+        body.applyLinearImpulse(new Vector2(x,y), body.getWorldCenter(), true);
     }
 
+    /**
+     * Get the Box2D body.
+     *
+     * @return Box2D body
+     */
     public Body getBody() {
         return body;
     }
@@ -67,5 +89,43 @@ public abstract class EntityBody {
      */
     public Object getUserData() {
         return body.getUserData();
+    }
+
+    /**
+     * Creates a default fixture for the body.
+     *
+     * @return the default fixture
+     */
+    protected FixtureDef getFixtureDef(EntityModel model) {
+        PolygonShape shape = new PolygonShape();
+        FixtureDef fixturedef = new FixtureDef();
+        Rectangle rect = model.getObject().getRectangle();
+
+        shape.setAsBox((rect.getWidth() / 2) * PIXEL_TO_METER, (rect.getHeight() / 2) * PIXEL_TO_METER);
+        fixturedef.shape = shape;
+
+        return fixturedef;
+    }
+
+    /**
+     * Create a fixture with a given definition in the body
+     * @param model entity model
+     */
+    protected abstract void createFixture(EntityModel model);
+
+    /**
+     * Creates a body in the world
+     * @param world world
+     * @param model entity model
+     * @param bodyType body time
+     */
+    protected void createBody(World world, EntityModel model, BodyDef.BodyType bodyType) {
+        BodyDef bodydef = new BodyDef();
+        Rectangle rect = model.getObject().getRectangle();
+        bodydef.type = bodyType;
+        bodydef.position.set((rect.getX() + rect.getWidth() / 2) * PIXEL_TO_METER, (rect.getY() + rect.getHeight() / 2) * PIXEL_TO_METER);
+        this.body = world.createBody(bodydef);
+
+        body.setUserData(model);
     }
 }

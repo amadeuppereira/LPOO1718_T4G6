@@ -2,7 +2,6 @@ package com.fr.funrungame.controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Net;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.net.HttpParametersUtils;
 import com.badlogic.gdx.physics.box2d.*;
@@ -44,25 +43,61 @@ public class GameController implements ContactListener{
      */
     private World world;
 
+    /**
+     * The players in this controller.
+     */
     private final PlayerBody players[];
 
+    /**
+     * The platforms in this controller.
+     */
     private List<PlatformBody> platformsBody;
 
+    /**
+     * The powerups in this controller.
+     */
     private List<PowerUpBody> powerUps;
 
+    /**
+     * The enemies in this controller.
+     */
     private List<EnemyBody> enemies;
 
+    /**
+     * The endline in this controller.
+     */
     private EndLineBody endline;
 
+    /**
+     * The updated run time.
+     */
     private float time;
 
+    /**
+     * The current map best time.
+     */
     private static float best_time;
 
+    /**
+     * The set of actions for the ghost to follow
+     */
     private static ArrayList<Float> actions;
+    private static ArrayList<Float> actions_times;
+
+    /**
+     * The actions array index
+     */
     private int index;
 
+    /**
+     * The player moves history
+     */
     private ArrayList<Float> history;
+    private ArrayList<Float> history_times;
 
+    /**
+     * Flag for server response
+     */
     private static boolean serverResponse = false;
 
 
@@ -70,6 +105,7 @@ public class GameController implements ContactListener{
         while(!serverResponse) {}
         index = 0;
         history = new ArrayList<Float>();
+        history_times = new ArrayList<Float>();
         world = new World(new Vector2(0, -9.8f), true);
         time = 0;
 
@@ -79,19 +115,19 @@ public class GameController implements ContactListener{
 
         platformsBody = new ArrayList<PlatformBody>();
         for(int i = 0; i < GameModel.getInstance().getPlatformsModel().size(); i++){
-            platformsBody.add(new PlatformBody(world,GameModel.getInstance().getPlatformsModel().get(i), GameModel.getInstance().getPlatformsModel().get(i).getObject()));
+            platformsBody.add(new PlatformBody(world,GameModel.getInstance().getPlatformsModel().get(i)));
         }
 
         powerUps = new ArrayList<PowerUpBody>();
         for(int i = 0; i < GameModel.getInstance().getPowerUps().size(); i++){
-            powerUps.add(new PowerUpBody(world,GameModel.getInstance().getPowerUps().get(i), GameModel.getInstance().getPowerUps().get(i).getObject()));
+            powerUps.add(new PowerUpBody(world,GameModel.getInstance().getPowerUps().get(i)));
         }
         enemies = new ArrayList<EnemyBody>();
         for(int i = 0; i < GameModel.getInstance().getEnemies().size(); i++){
-            enemies.add(new EnemyBody(world,GameModel.getInstance().getEnemies().get(i), GameModel.getInstance().getEnemies().get(i).getObject()));
+            enemies.add(new EnemyBody(world,GameModel.getInstance().getEnemies().get(i)));
         }
 
-        endline = new EndLineBody(world, GameModel.getInstance().getEndline(), GameModel.getInstance().getEndline().getObject());
+        endline = new EndLineBody(world, GameModel.getInstance().getEndline());
 
         world.setContactListener(this);
     }
@@ -155,17 +191,7 @@ public class GameController implements ContactListener{
     private void playerVerifications(float delta){
 
         for(PlayerBody p : players) {
-
             p.update(delta);
-
-            //power up handler
-            if (!p.isFinished()) {
-                if (((PlayerModel) p.getUserData()).getPowerup() != null) {
-                    if (((PlayerModel) p.getUserData()).getPowerup().update(delta, p) == 1) {
-                        ((PlayerModel) p.getUserData()).removePowerup();
-                    }
-                }
-            }
         }
     }
 
@@ -206,6 +232,7 @@ public class GameController implements ContactListener{
     public void jump(PlayerBody p){
         if(p == players[0]) {
             history.add(getTime());
+            //history_times.add(getTime());
             history.add((float) 1);
             p.jump(true);
         }
@@ -217,14 +244,17 @@ public class GameController implements ContactListener{
     public void moveDown(PlayerBody p) {
         if(p == players[0]) {
             history.add(getTime());
+            //history_times.add(getTime());
             history.add((float) 2);
         }
         p.moveDown();
     }
 
     public void usePowerUp(PlayerBody p){
+
         if(p == players[0]) {
             history.add(getTime());
+            //history_times.add(getTime());
             history.add((float) 6);
         }
         p.usePowerUp();
@@ -256,6 +286,7 @@ public class GameController implements ContactListener{
 
         if(p == players[0]) {
             history.add(getTime());
+            //history_times.add(getTime());
             history.add((float) option + 3);
         }
     }
@@ -365,7 +396,7 @@ public class GameController implements ContactListener{
     }
 
     private void sendToServer(int map, ArrayList<Float> history, float time) {
-        if(players[1].getTime() < players[0].getTime()) return;
+        if(players[1].getTime() < players[0].getTime() ) return;
         StringBuilder sb = new StringBuilder();
 
         for(int i = 0; i < history.size();) {

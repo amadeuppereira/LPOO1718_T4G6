@@ -7,30 +7,42 @@ public class ShieldPowerUpModel extends PowerUpModel {
 
     private static final int TIME = 3;
 
-    public ShieldPowerUpModel(float x, float y, RectangleMapObject object){
-        super(x,y,object);
-        timecount = 0;
-    }
-
     public ShieldPowerUpModel() {
         super();
         timecount = 0;
     }
 
-    public void action(){
-        timecount = TIME;
+    @Override
+    public void activate(PlayerBody playerBody) {
+        if(!playerBody.isShielded()) {
+            timecount = TIME;
+            action(playerBody);
+        }
     }
 
-    public int update(float delta, PlayerBody playerBody){
-        if(timecount < 0){
+
+    @Override
+    public int update(float delta, PlayerBody playerBody) {
+        if (timecount < 0) {
             timecount = 0;
-            playerBody.shieldPowerUp(false);
+            action(playerBody);
             return 1;
         }
-        if(timecount > 0) {
+
+        else if (timecount > 0) {
             timecount -= delta;
-            playerBody.shieldPowerUp(true);
         }
+
         return 0;
+    }
+
+    @Override
+    protected void action(PlayerBody playerBody) {
+        if(!playerBody.isShielded()) {
+            playerBody.shielded(true);
+        }
+        else
+            playerBody.shielded(false);
+
     }
 }

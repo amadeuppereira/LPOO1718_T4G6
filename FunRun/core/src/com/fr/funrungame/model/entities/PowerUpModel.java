@@ -5,26 +5,21 @@ import com.fr.funrungame.controller.entities.PlayerBody;
 
 public class PowerUpModel extends EntityModel{
 
-    RectangleMapObject object;
-
     double timecount;
 
     public PowerUpModel(float x, float y, RectangleMapObject object){
-        super(x,y);
-        this.object = object;
+        super(x,y, object);
     }
 
     public PowerUpModel() {
         super(-50, -50);
     }
 
-    public void action(){}
+    public void activate(PlayerBody playerBody) {}
 
-    public int update(float delta, PlayerBody playerBody){return 0;}
+    public int update(float delta, PlayerBody playerBody) {return 0;}
 
-    public RectangleMapObject getObject() {
-        return object;
-    }
+    protected void action(PlayerBody playerBody) {}
 
     @Override
     public ModelType getType() {

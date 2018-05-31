@@ -1,5 +1,7 @@
 package com.fr.funrungame.model.entities;
 
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
+
 public abstract class EntityModel {
 
     public enum ModelType {PLAYER, ENEMY, POWERUP, PLATFORM, ENDLINE};
@@ -14,6 +16,8 @@ public abstract class EntityModel {
      */
     private float y;
 
+    private RectangleMapObject object;
+
     /**
      * Constructs a model with a position and a rotation.
      *
@@ -23,6 +27,12 @@ public abstract class EntityModel {
     EntityModel(float x, float y) {
         this.x = x;
         this.y = y;
+    }
+
+    EntityModel(float x, float y, RectangleMapObject object) {
+        this.x = x;
+        this.y = y;
+        this.object = object;
     }
 
     /**
@@ -55,4 +65,10 @@ public abstract class EntityModel {
     }
 
     public abstract ModelType getType();
+
+    public RectangleMapObject getObject() {
+        if(object != null)
+            return object;
+        return null;
+    }
 }
