@@ -27,7 +27,6 @@ public class RocketPowerUpModel extends PowerUpModel {
      */
     public RocketPowerUpModel() {
         super();
-        timecount = 0;
     }
 
     /**

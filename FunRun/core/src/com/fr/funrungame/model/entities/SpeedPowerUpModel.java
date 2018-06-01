@@ -27,7 +27,6 @@ public class SpeedPowerUpModel extends PowerUpModel {
      */
     public SpeedPowerUpModel() {
         super();
-        timecount = 0;
     }
 
     /**

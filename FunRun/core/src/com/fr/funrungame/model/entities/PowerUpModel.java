@@ -26,6 +26,7 @@ public class PowerUpModel extends EntityModel{
     */
     public PowerUpModel() {
         super(-50, -50);
+        timecount = 0;
     }
 
     /**

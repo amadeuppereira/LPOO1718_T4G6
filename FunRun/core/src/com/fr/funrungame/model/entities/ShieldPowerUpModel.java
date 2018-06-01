@@ -17,7 +17,6 @@ public class ShieldPowerUpModel extends PowerUpModel {
      */
     public ShieldPowerUpModel() {
         super();
-        timecount = 0;
     }
 
     /**
