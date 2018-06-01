@@ -1,9 +1,6 @@
 package com.fr.funrungame.controller;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Net;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.net.HttpParametersUtils;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import com.fr.funrungame.controller.entities.*;
@@ -11,12 +8,12 @@ import com.fr.funrungame.model.GameModel;
 import com.fr.funrungame.model.entities.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-
+/**
+ * Controls the physics aspect of the game.
+ */
 public class GameController implements ContactListener{
 
     /**
@@ -101,7 +98,9 @@ public class GameController implements ContactListener{
      */
     private static Networking network = new Networking();
 
-
+    /**
+     * Creates a new GameController that controls the physics of a certain GameModel.
+     */
     private GameController() {
         index = 0;
         history = new ArrayList<Float>();
@@ -109,14 +108,13 @@ public class GameController implements ContactListener{
         world = new World(new Vector2(0, -9.8f), true);
         time = 0;
 
-
         players = new PlayerBody[2];
         players[0] = new PlayerBody(world, GameModel.getInstance().getPlayers().get(0));
         players[1] = new PlayerBody(world, GameModel.getInstance().getPlayers().get(1));
 
         platformsBody = new ArrayList<PlatformBody>();
-        for(int i = 0; i < GameModel.getInstance().getPlatformsModel().size(); i++){
-            platformsBody.add(new PlatformBody(world,GameModel.getInstance().getPlatformsModel().get(i)));
+        for(int i = 0; i < GameModel.getInstance().getPlatforms().size(); i++){
+            platformsBody.add(new PlatformBody(world,GameModel.getInstance().getPlatforms().get(i)));
         }
 
         powerUps = new ArrayList<PowerUpBody>();
@@ -160,7 +158,6 @@ public class GameController implements ContactListener{
      */
     public void update(float delta) {
         time += delta;
-        GameModel.getInstance().update(delta);
 
         float frameTime = Math.min(delta, 0.25f);
         accumulator += frameTime;
@@ -181,14 +178,22 @@ public class GameController implements ContactListener{
         isRunFinished();
     }
 
+    /**
+     * Checks if the run is finished.
+     */
     private void isRunFinished() {
         if(!((PlayerModel)players[0].getUserData()).isFinished()) return;
         sendToServer(GameModel.getInstance().getCurrentMap(), history_times, history, players[0].getTime());
         GameModel.getInstance().setFinished(true);
 
     }
-    private void playerVerifications(float delta){
 
+    /**
+     * Update the player with a given delta time
+     *
+     * @param delta time since last rendered in seconds
+     */
+    private void playerVerifications(float delta){
         for(PlayerBody p : players) {
             p.update(delta);
         }
@@ -365,7 +370,6 @@ public class GameController implements ContactListener{
 
     private void sendToServer(int map, ArrayList<Float> history_times, ArrayList<Float> history, float time) {
         if(players[1].getTime() < players[0].getTime() ) return;
-
         network.send(map, history_times, history, time);
     }
 

@@ -121,16 +121,15 @@ public class PlayerBody extends EntityBody {
 
     /**
      * Update the player body with a given delta time
+     *
      * @param delta time since last rendered in seconds
      */
     public void update(float delta) {
-
         accelerateX(delta);
         checkFinishState(delta);
         updateDeadState(delta);
         updateInvulnerableState(delta);
         updatePowerup(delta);
-
         updateModel();
     }
 

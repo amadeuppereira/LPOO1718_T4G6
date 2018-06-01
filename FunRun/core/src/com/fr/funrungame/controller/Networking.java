@@ -10,6 +10,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Controls the networking of the game. It is responsible to read/write from/to the server.
+ */
 public class Networking {
 
     private static final String DEFAULT_URL = "https://paginas.fe.up.pt/~up201605646";
@@ -24,7 +27,6 @@ public class Networking {
 
     private static final int TIMEOUT = 5;
 
-    private boolean serverResponse = false;
     private boolean serverResponse1 = false;
     private boolean serverResponse2 = false;
 
@@ -33,30 +35,6 @@ public class Networking {
     private float best_time;
 
     public Networking() {}
-
-    public int checkNetworkConnection() {
-
-        Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
-        httpGet.setUrl(DEFAULT_URL);
-        Gdx.net.sendHttpRequest(httpGet, new Net.HttpResponseListener() {
-            @Override
-            public void handleHttpResponse(Net.HttpResponse httpResponse) {
-                serverResponse = true;
-            }
-
-            @Override
-            public void failed(Throwable t) {
-                serverResponse = true;
-            }
-
-            @Override
-            public void cancelled() {
-                serverResponse = true;
-            }
-        });
-
-        return waitServerResponse(serverResponse);
-    }
 
     private String getTimesString(ArrayList<Float> times) {
         StringBuilder sb = new StringBuilder();

@@ -96,19 +96,44 @@ public class PlayerView extends EntityView {
      */
     private boolean shield;
 
+    /**
+     * Sprite alpha modulation
+     */
     private float alpha = 1f;
+
+    /**
+     * Sprite alpha modulation when player is dead
+     */
     private float dead_alpha = .0f;
 
+    /**
+     * PLayer View Constructor.
+     * It initializes all the needed elements.
+     *
+     * @param game The current game session.
+     */
     public PlayerView(FunRunGame game){
         super(game);
         stateTime = 0;
     }
 
+    /**
+     * Ghost View Constructor.
+     * It initializes all the needed elements.
+     *
+     * @param game The current game session.
+     * @param alpha alpha modulation
+     */
     public PlayerView(FunRunGame game, float alpha) {
         this(game);
         this.alpha = alpha;
     }
 
+    /**
+     * Creates all the sprites of the player.
+     *
+     * @param game The current game session.
+     */
     public Sprite createSprite(FunRunGame game) {
         runningAnimation = createRunningAnimation(game);
         notRunningRegion = createNotRunningRegion(game);
@@ -119,30 +144,54 @@ public class PlayerView extends EntityView {
         jumpingShieldedRegion = createJumpingShieldedRegion(game);
         fallingShieldedRegion = createFallingShieldedRegion(game);
 
-
         return new Sprite(notRunningRegion);
     }
 
+    /**
+     * Creates the sprite of the player when he is not running.
+     *
+     * @param game The current game session.
+     */
     private TextureRegion createNotRunningRegion(FunRunGame game){
         Texture texture = game.getAssetManager().get("player.png");
         return new TextureRegion(texture, texture.getWidth(), texture.getHeight());
     }
 
+    /**
+     * Creates the sprite of the player when he is jumping.
+     *
+     * @param game The current game session.
+     */
     private TextureRegion createJumpingRegion(FunRunGame game){
         Texture texture = game.getAssetManager().get("player_jumping.png");
         return new TextureRegion(texture, texture.getWidth(), texture.getHeight());
     }
 
+    /**
+     * Creates the sprite of the player when he is falling.
+     *
+     * @param game The current game session.
+     */
     private TextureRegion createFallingRegion(FunRunGame game){
         Texture texture = game.getAssetManager().get("player_falling.png");
         return new TextureRegion(texture, texture.getWidth(), texture.getHeight());
     }
 
+    /**
+     * Creates the sprite of the player when he has a shield.
+     *
+     * @param game The current game session.
+     */
     private TextureRegion createShieldRegion(FunRunGame game){
         Texture texture = game.getAssetManager().get("player_shielded.png");
         return new TextureRegion(texture, texture.getWidth(), texture.getHeight());
     }
 
+    /**
+     * Creates the sprite of the player when he is running.
+     *
+     * @param game The current game session.
+     */
     private Animation<TextureRegion> createRunningAnimation(FunRunGame game) {
         Texture thrustTexture = game.getAssetManager().get("player_running.png");
         TextureRegion[][] thrustRegion = TextureRegion.split(thrustTexture, thrustTexture.getWidth() / 6, thrustTexture.getHeight());
@@ -153,16 +202,31 @@ public class PlayerView extends EntityView {
         return new Animation<TextureRegion>(FRAME_TIME, frames);
     }
 
+    /**
+     * Creates the sprite of the player when he is falling with a shield.
+     *
+     * @param game The current game session.
+     */
     private TextureRegion createFallingShieldedRegion(FunRunGame game) {
         Texture texture = game.getAssetManager().get("player_falling_shielded.png");
         return new TextureRegion(texture, texture.getWidth(), texture.getHeight());
     }
 
+    /**
+     * Creates the sprite of the player when he is jumping with a shield.
+     *
+     * @param game The current game session.
+     */
     private TextureRegion createJumpingShieldedRegion(FunRunGame game) {
         Texture texture = game.getAssetManager().get("player_jumping_shielded.png");
         return new TextureRegion(texture, texture.getWidth(), texture.getHeight());
     }
 
+    /**
+     * Creates the sprite of the player when he is running with a shield.
+     *
+     * @param game The current game session.
+     */
     private Animation<TextureRegion> createRunningShieldedAnimation(FunRunGame game) {
         Texture thrustTexture = game.getAssetManager().get("player_running_shielded.png");
         TextureRegion[][] thrustRegion = TextureRegion.split(thrustTexture, thrustTexture.getWidth() / 6, thrustTexture.getHeight());
@@ -173,6 +237,11 @@ public class PlayerView extends EntityView {
         return new Animation<TextureRegion>(FRAME_TIME, frames);
     }
 
+    /**
+     * Updates the player current states.
+     *
+     * @param model player model.
+     */
     @Override
     public void update(EntityModel model) {
         super.update(model);
@@ -185,6 +254,11 @@ public class PlayerView extends EntityView {
         shield = ((PlayerModel)model).isShield();
     }
 
+    /**
+     * Draws the player view.
+     *
+     * @param batch game batch.
+     */
     @Override
     public void draw(SpriteBatch batch) {
         stateTime += Gdx.graphics.getDeltaTime();
