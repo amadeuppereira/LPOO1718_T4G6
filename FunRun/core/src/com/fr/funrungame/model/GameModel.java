@@ -54,7 +54,7 @@ public class GameModel {
     /**
      * Current game map number
      */
-    private int currentMap;
+    private static int currentMap = 1;
 
     /**
      * Flag that prevents the models to be load more than once
@@ -86,7 +86,6 @@ public class GameModel {
         enemies = new ArrayList<EnemyModel>();
         powerUps = new ArrayList<PowerUpModel>();
         platforms = new ArrayList<PlatformModel>();
-        currentMap = 1;
     }
 
     /**
@@ -187,17 +186,17 @@ public class GameModel {
      *
      * @return currentMap
      */
-    public int getCurrentMap() {
+    public static int getCurrentMap() {
         return currentMap;
     }
 
     /**
      * Sets a new current map number
      *
-     * @param currentMap nem current map
+     * @param map nem current map
      */
-    public void setCurrentMap(int currentMap) {
-        this.currentMap = currentMap;
+    public static void setCurrentMap(int map) {
+        currentMap = map;
     }
 
     /**

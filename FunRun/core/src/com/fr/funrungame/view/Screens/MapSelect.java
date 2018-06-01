@@ -100,7 +100,7 @@ public class MapSelect extends MenuScreen {
         button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                GameModel.getInstance().setCurrentMap(1);
+                GameModel.setCurrentMap(1);
                 createTable(1);
                 stage.addActor(table);
             }
@@ -124,7 +124,7 @@ public class MapSelect extends MenuScreen {
         button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                GameModel.getInstance().setCurrentMap(2);
+                GameModel.setCurrentMap(2);
                 createTable(2);
                 stage.addActor(table);
             }
@@ -148,7 +148,7 @@ public class MapSelect extends MenuScreen {
         button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                GameModel.getInstance().setCurrentMap(3);
+                GameModel.setCurrentMap(3);
                 createTable(3);
                 stage.addActor(table);
             }
@@ -171,7 +171,7 @@ public class MapSelect extends MenuScreen {
         button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                GameModel.getInstance().setCurrentMap(4);
+                GameModel.setCurrentMap(4);
                 createTable(4);
                 stage.addActor(table);
             }
@@ -202,7 +202,7 @@ public class MapSelect extends MenuScreen {
     public void show(){
         super.show();
 
-        createTable(GameModel.getInstance().getCurrentMap());
+        createTable(GameModel.getCurrentMap());
         stage.addActor(table);
     }
 }
