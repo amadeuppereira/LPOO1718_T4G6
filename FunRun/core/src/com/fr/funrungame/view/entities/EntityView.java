@@ -1,6 +1,5 @@
 package com.fr.funrungame.view.entities;
 
-import com.badlogic.gdx.Gdx;
 import com.fr.funrungame.FunRunGame;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -8,6 +7,12 @@ import com.fr.funrungame.model.entities.EntityModel;
 
 import static com.fr.funrungame.view.Screens.GameView.PIXEL_TO_METER;
 
+/**
+ * A abstract view capable of holding a sprite with a certain
+ * position.
+ *
+ * This view is able to update its data based on a entity model.
+ */
 public abstract class EntityView {
 
     /**

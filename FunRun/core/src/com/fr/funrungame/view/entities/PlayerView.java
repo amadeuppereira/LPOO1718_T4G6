@@ -10,9 +10,10 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.fr.funrungame.model.entities.EntityModel;
 import com.fr.funrungame.model.entities.PlayerModel;
 
+/**
+ * A view representing a player
+ */
 public class PlayerView extends EntityView {
-
-    private static int currentSkinID  = 0;
 
     /**
      * The time between the animation frames
@@ -209,31 +210,6 @@ public class PlayerView extends EntityView {
                 sprite.setRegion(notRunningRegion);
         }
 
-//        if(jumping) {
-//            if(shield) {
-//                sprite.setRegion(jumpingShieldedRegion);
-//            }
-//            sprite.setRegion(jumpingRegion);
-//        }
-//        else if(falling) {
-//            if(shield) {
-//                sprite.setRegion(fallingShieldedRegion);
-//            }
-//            sprite.setRegion(fallingRegion);
-//        }
-//        else if (running) {
-//            if (shield) {
-//                sprite.setRegion(runningShieldedAnimation.getKeyFrame(stateTime, true));
-//            }
-//            sprite.setRegion(runningAnimation.getKeyFrame(stateTime, true));
-//        }
-//        else {
-//            if(shield) {
-//                sprite.setRegion(shieldRegion);
-//            }
-//            sprite.setRegion(notRunningRegion);
-//        }
-
         if(dead) {
             sprite.draw(batch, 0.1f * alpha);
         } else if (invulnerable) {
@@ -243,9 +219,5 @@ public class PlayerView extends EntityView {
         } else {
             sprite.draw(batch, alpha);
         }
-    }
-
-    public static void setCurrentSkin(int id){
-        currentSkinID = id;
     }
 }
