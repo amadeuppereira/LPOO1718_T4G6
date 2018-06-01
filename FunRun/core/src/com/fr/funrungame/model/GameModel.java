@@ -136,6 +136,10 @@ public class GameModel {
         return currentMap;
     }
 
+    public void setCurrentMap(int currentMap) {
+        this.currentMap = currentMap;
+    }
+
     public List<PlatformModel> getPlatformsModel() {
         return platformsModel;
     }

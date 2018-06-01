@@ -29,7 +29,7 @@ public class CountdownScreen extends GameView {
 
     public CountdownScreen(FunRunGame game) {
         super(game);
-        GameController.getFromServer();
+        //GameController.getFromServer();
 
         for(PlayerModel p: GameModel.getInstance().getPlayers())
             p.setRunning(false);

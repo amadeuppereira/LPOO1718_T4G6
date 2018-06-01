@@ -53,7 +53,7 @@ public class MainMenu extends MenuScreen {
 
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 dispose();
-                game.setScreen(new CountdownScreen(game));
+                game.setScreen(new LoadingScreen(game));
             }
         });
         table.add(playButton).size(BUTTON_WIDTH, DEFAULT_BUTTON_SIZE).pad(BUTTON_EDGE).row();

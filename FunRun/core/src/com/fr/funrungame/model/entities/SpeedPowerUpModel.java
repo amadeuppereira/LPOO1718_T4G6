@@ -8,7 +8,8 @@ public class SpeedPowerUpModel extends PowerUpModel {
 
     private static final int TIME = 1;
 
-    private static final float X_FORCE = 1f;
+    //private static final float X_FORCE = 1f;
+    private static final float X_FORCE = 50f;
 
     private static final float MAX_VELOCITY = 8f;
 
@@ -43,6 +44,7 @@ public class SpeedPowerUpModel extends PowerUpModel {
     @Override
     protected void action(PlayerBody playerBody) {
         if(!playerBody.isFinished() && !playerBody.isDead())
-            playerBody.applyLinearImpulse(X_FORCE, 0);
+            //playerBody.applyLinearImpulse(X_FORCE, 0);
+            playerBody.applyForce(X_FORCE,0);
     }
 }

@@ -68,7 +68,6 @@ public class FunRunGame extends Game {
 		assetManager.load("stay_button.png", Texture.class);
         assetManager.load("game_over.png", Texture.class);
         assetManager.load("mainmenu_button.png", Texture.class);
-		assetManager.load("loading_screen.jpg", Texture.class);
 
 		assetManager.finishLoading();
 	}
@@ -77,7 +76,7 @@ public class FunRunGame extends Game {
 	 * Starts the game.
 	 */
 	private void startGame() {
-		setScreen(new LoadingScreen(this));
+		setScreen(new MainMenu(this));
 	}
 
 	/**

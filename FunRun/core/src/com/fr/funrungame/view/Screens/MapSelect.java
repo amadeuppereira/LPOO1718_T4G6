@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.fr.funrungame.FunRunGame;
+import com.fr.funrungame.model.GameModel;
 
 import java.util.ArrayList;
 
@@ -18,7 +19,7 @@ public class MapSelect extends MenuScreen {
     /**
      * Constant representing the size of the Buttons
      */
-    private static final float BUTTON_HEIGHT = VIEWPORT_WIDTH / 20;
+    private static final float BUTTON_HEIGHT = VIEWPORT_WIDTH / 30;
 
     /**
      * Constant representing the size of the Maps
@@ -39,7 +40,7 @@ public class MapSelect extends MenuScreen {
      */
     private static final float SIDE_DISTANCE = VIEWPORT_WIDTH / 82;
 
-    private static final float TITLE_HEIGHT = VIEWPORT_HEIGHT / 8.94f;
+    private static final float TITLE_HEIGHT = VIEWPORT_HEIGHT / 7f;
 
     private static final float TITLE_WIDTH =  VIEWPORT_WIDTH / 1.5f;
 
@@ -64,6 +65,7 @@ public class MapSelect extends MenuScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("map1");
+                GameModel.getInstance().setCurrentMap(1);
                 dispose();
             }
         });
@@ -77,6 +79,7 @@ public class MapSelect extends MenuScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("map2");
+                GameModel.getInstance().setCurrentMap(2);
                 dispose();
             }
         });
@@ -90,6 +93,7 @@ public class MapSelect extends MenuScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("map3");
+                GameModel.getInstance().setCurrentMap(3);
                 dispose();
             }
         });
@@ -102,6 +106,7 @@ public class MapSelect extends MenuScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("map4");
+                GameModel.getInstance().setCurrentMap(4);
                 dispose();
             }
         });
@@ -128,7 +133,6 @@ public class MapSelect extends MenuScreen {
         table.setFillParent(true);
 
         createButtons(table);
-        table.debug();
         stage.addActor(table);
     }
 }

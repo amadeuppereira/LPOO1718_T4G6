@@ -73,6 +73,10 @@ public abstract class EntityBody {
         body.applyLinearImpulse(new Vector2(x,y), body.getWorldCenter(), true);
     }
 
+    public void applyForce(float x, float y){
+        body.applyForce(new Vector2(x,y), body.getWorldCenter(), true);
+    }
+
     /**
      * Get the Box2D body.
      *
