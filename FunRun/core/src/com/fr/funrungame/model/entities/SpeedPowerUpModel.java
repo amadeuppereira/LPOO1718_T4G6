@@ -36,6 +36,7 @@ public class SpeedPowerUpModel extends PowerUpModel {
      */
     @Override
     public void activate(PlayerBody playerBody) {
+        if(timecount > 0) return;
         timecount = TIME;
         action(playerBody);
     }

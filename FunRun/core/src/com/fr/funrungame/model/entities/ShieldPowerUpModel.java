@@ -26,6 +26,7 @@ public class ShieldPowerUpModel extends PowerUpModel {
      */
     @Override
     public void activate(PlayerBody playerBody) {
+        if(timecount > 0) return;
         if(!playerBody.isShielded()) {
             timecount = TIME;
             action(playerBody);

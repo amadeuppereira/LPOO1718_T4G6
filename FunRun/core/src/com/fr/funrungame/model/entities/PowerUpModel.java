@@ -35,7 +35,7 @@ public class PowerUpModel extends EntityModel{
      *
      * @param playerBody where the power up will be activated
      */
-    public void activate(PlayerBody playerBody) {}
+    public void activate(PlayerBody playerBody) { }
 
     /**
      * Updates the power up in the playerBody
