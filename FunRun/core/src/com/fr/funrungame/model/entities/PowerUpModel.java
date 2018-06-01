@@ -8,7 +8,7 @@ import com.fr.funrungame.controller.entities.PlayerBody;
  */
 public class PowerUpModel extends EntityModel{
 
-    double timecount;
+    protected double timecount;
 
     /**
      * Creates a new power up model in a certain position.
@@ -19,6 +19,7 @@ public class PowerUpModel extends EntityModel{
      */
     public PowerUpModel(float x, float y, RectangleMapObject object){
         super(x,y, object);
+        timecount = 0;
     }
 
     /**

@@ -1,11 +1,18 @@
+package com.fr.funrungame.test;
+
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.headless.HeadlessApplication;
 import com.badlogic.gdx.graphics.GL20;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.mockito.Mockito;
+
+/**
+ * Created by Edgar on 30/05/2017.
+ */
 
 public class GameTest {
     // This is our "test" application
