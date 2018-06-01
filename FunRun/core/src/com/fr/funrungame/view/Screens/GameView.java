@@ -2,8 +2,6 @@ package com.fr.funrungame.view.Screens;
 
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -41,11 +39,14 @@ public class GameView extends ScreenAdapter {
     public final static float PIXEL_TO_METER = 0.015f;
 
     /**
-     * The width of the viewport in meters. The height is
-     * automatically calculated using the screen ratio.
+     * The width of the viewport in meters.
      */
     protected static final float VIEWPORT_WIDTH = 40;
 
+    /**
+     * The height of the viewport in meters. The height is
+     * automatically calculated using the screen ratio.
+     */
     protected static final float VIEWPORT_HEIGHT = VIEWPORT_WIDTH * ((float) Gdx.graphics.getHeight() / (float)Gdx.graphics.getWidth());
 
     /**
@@ -54,10 +55,13 @@ public class GameView extends ScreenAdapter {
     protected final FunRunGame game;
 
     /**
-     * The camera.
+     * The camera used to show the viewport.
      */
     protected final OrthographicCamera camera;
 
+    /**
+     * Viewport of the game.
+     */
     private Viewport gamePort;
 
     /**
@@ -71,17 +75,39 @@ public class GameView extends ScreenAdapter {
      */
     private Matrix4 debugCamera;
 
+    /**
+     * Map's Renderer of the current level's map.
+     */
     protected OrthogonalTiledMapRenderer mapRenderer;
 
+    /**
+     * HashMap containing the Game Maps.
+     */
     private Map<Integer,String> gameMaps = new HashMap<Integer, String>();
 
+    /**
+     * The Player View.
+     */
     PlayerView playerView;
+
+    /**
+     * The Ghost View.
+     */
     PlayerView ghostView;
 
+    /**
+     * The Game Screen Associated HUD.
+     */
     private HudMenu hudMenu;
 
+    /**
+     * The Game input handler.
+     */
     Controllers controllers;
 
+    /**
+     * Is the Game paused.
+     */
     private boolean pause = false;
 
     /**
@@ -137,7 +163,7 @@ public class GameView extends ScreenAdapter {
     }
 
     /**
-     * Renders the screen
+     * Renders the screen.
      *
      * @param delta time since last rendered in seconds
      */
@@ -188,6 +214,9 @@ public class GameView extends ScreenAdapter {
         if (GameModel.getInstance().isFinished()) end();
     }
 
+    /**
+     * Handles the camera position.
+     */
     protected void cameraHandler(){
         float x = GameModel.getInstance().getPlayers().get(0).getX();
         float y = GameModel.getInstance().getPlayers().get(0).getY();
@@ -201,6 +230,9 @@ public class GameView extends ScreenAdapter {
         game.getBatch().setProjectionMatrix(camera.combined);
     }
 
+    /**
+     * Player gets to the finish line.
+     */
     private void end() {
         pause = true;
         dispose();
@@ -208,6 +240,9 @@ public class GameView extends ScreenAdapter {
         game.setScreen(new FinishMenu(game));
     }
 
+    /**
+     * Loads all the Tiled maps.
+     */
     private void loadMaps(){
         gameMaps.put(1, "maps/map1.tmx");
         gameMaps.put(2, "maps/map2.tmx");
@@ -234,7 +269,7 @@ public class GameView extends ScreenAdapter {
     }
 
     /**
-     * Handles any inputs and passes them to the controllers.
+     * Passes the inputs to the Game controllers.
      */
     private void handleInputs() {
         if(controllers.isUpPressed()){
@@ -251,6 +286,12 @@ public class GameView extends ScreenAdapter {
         }
     }
 
+    /**
+     * Resizes the screen.
+     *
+     * @param width of the screen
+     * @param height of the screen
+     */
     @Override
     public void resize(int width, int height){
         gamePort.update(width, height);
@@ -258,6 +299,9 @@ public class GameView extends ScreenAdapter {
         hudMenu.resize(width,height);
     }
 
+    /**
+     * Game is paused.
+     */
     @Override
     public void pause () {
         super.pause();
@@ -266,20 +310,18 @@ public class GameView extends ScreenAdapter {
         game.setScreen(new PauseMenu(game));
     }
 
+    /**
+     * Game is resumed.
+     */
     @Override
     public void resume () {
         super.resume();
         pause = false;
     }
 
-    protected GameView getThis() {
-        return this;
-    }
-
-    @Override
-    public void dispose () {
-    }
-
+    /**
+     * Takes a screenshot of the current game screen and saves to a PNG file.
+     */
     private void screenshot(){
         byte[] pixels = ScreenUtils.getFrameBufferPixels(0, 0, Gdx.graphics.getBackBufferWidth(), Gdx.graphics.getBackBufferHeight(), true);
 
