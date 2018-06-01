@@ -79,16 +79,23 @@ public class LoadingScreen extends ScreenAdapter {
     private float time;
 
     /**
-     * The table containing the elements, that will be added to the stage.
+     * Table containing a label, that will be added to the stage.
      */
-    private Table table;
+    private Table label_table;
 
     /**
      * Flag that tells if the server was already accessed
      */
     private boolean flag;
 
+    /**
+     * Table containing buttons, that will be added to the stage.
+     */
     private Table buttons_table;
+
+    /**
+     * Table that has a container, that will be added to the stage.
+     */
     private Table container_table;
 
     /**
@@ -119,10 +126,10 @@ public class LoadingScreen extends ScreenAdapter {
     }
 
     /**
-     * Creates the table.
+     * Creates the label_table with a Label.
      */
     private void createTable() {
-        table = new Table();
+        label_table = new Table();
 
         Group group = new Group();
 
@@ -132,9 +139,12 @@ public class LoadingScreen extends ScreenAdapter {
         group.addActor(text);
         group.setScale(0.07f);
 
-        table.add(group).padLeft(5).padBottom(5);
+        label_table.add(group).padLeft(5).padBottom(5);
     }
 
+    /**
+     * Creates the label_table with the container.
+     */
     private void createContainer() {
         container_table = new Table();
 
@@ -144,6 +154,9 @@ public class LoadingScreen extends ScreenAdapter {
         container_table.setFillParent(true);
     }
 
+    /**
+     * Creates the label_table with the buttons.
+     */
     private void createButtons() {
         buttons_table = new Table();
         buttons_table.padTop(2);
@@ -171,13 +184,13 @@ public class LoadingScreen extends ScreenAdapter {
     }
 
     /**
-     * Adds the background and table to the stage.
+     * Adds the background and label_table to the stage.
      */
     @Override
     public void show() {
         super.show();
         stage.addActor(backgroundImg);
-        stage.addActor(table);
+        stage.addActor(label_table);
 
         Gdx.input.setInputProcessor(stage);
     }
@@ -194,7 +207,7 @@ public class LoadingScreen extends ScreenAdapter {
         if(time != 0 && !flag) {
             if(GameController.getFromServer() == 1){
                 flag = true;
-                table.remove();
+                label_table.remove();
                 createContainer();
                 createButtons();
                 stage.addActor(container_table);
