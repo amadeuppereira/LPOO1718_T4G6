@@ -1,15 +1,31 @@
 # Fun Run
 A simple Fun Run copycat game with a few changes made using libGDX for the LPOO classes.
 
-## Installation Procedure
-* Setup - Project:
-    - Java Development Kit 7+ (JDK);
-    - [Android Studio] (https://developer.android.com/sdk/index.html) 
-       Android Studio already comes packaged with the Android SDK so contrary to Eclipse or Intellij IDEA you do not need to install this component.
+|Table of Contents|
+|:---------------:|
+|[Setup/Installation Procedure](#setupinstallation-procedure)|
+|[Package and class diagram (UML)](#package-and-class-diagram-uml)|
+|[Design Decision](#design-decisions)|
+|[Design Patterns Used](#design-patterns-used)|
+|[Major Dificulties](#major-dificulties)|
+|[Lessons Learned](#lessons-learned)|
+|[Overal Time Spent Developing](#overal-time-spent-developing)|
+|[User Manual](#user-manual)|
 
-* Setup - App:
-    - Run apk;
-    - Accept permissions.
+## Setup/Installation Procedure
+
+* ### To install the Android app:
+    1. Download the apk [here]()
+    2. Accept permissions.
+
+* ### To install the desktop app (for Windows, Linux and MacOS)
+   1. Download the jar [here]().
+   2. Run the file from the terminal or by double-clicking it.
+    
+* ### Setup the Project on your computer:
+    1. Java Development Kit 7+ (JDK);
+    2. [Android Studio] (https://developer.android.com/sdk/index.html) 
+       Android Studio already comes packaged with the Android SDK so contrary to Eclipse or Intellij IDEA you do not need to install this component.
     
 
 ## Package and class diagram (UML)
@@ -18,7 +34,7 @@ A simple Fun Run copycat game with a few changes made using libGDX for the LPOO 
 
 ## Design Decisions
 
-  ### Model-View-Controller (MVC)
+  * ### Model-View-Controller (MVC)
   <img src=https://upload.wikimedia.org/wikipedia/commons/f/fd/MVC-Process.png>
   
  Main packages:
@@ -45,71 +61,55 @@ A simple Fun Run copycat game with a few changes made using libGDX for the LPOO 
 
   
 ## Major Dificulties
+* Mostly trying to integrate the Networking part. We pretty much had to learn by ourselves to create a simple server with a database and connect with it during our game. The result we got it's not perfect but for what we know it's a good start.
+* Some problems with making the game equally when played on computer or on Android phone. The big difference is on the pause menu when used on the smartphone it takes a really long time to show.
 
 ## Lessons Learned
+With this project, we learned that creating a game is very complex and time consuming. We learned many things regarding networking and physics.
 
 ## Overal Time Spent Developing
-
-## Work Distribuition
+We estimate a total of 160 hours (evenly distributed between the two developers).
   
 ## User Manual
-## GUI design
 
   * ### Main Menu
-    ![MainMenu](https://user-images.githubusercontent.com/25926554/39405917-6099cd20-4ba6-11e8-9b35-85d3aad5e144.png)
+    <img width="1075" alt="Main Menu" src="https://user-images.githubusercontent.com/25926554/40864982-04a4e2f4-65ee-11e8-8453-3b65e9484e09.png">
 
     **Functionalities:**
     * Choose to Play a game.
-    * Choose to Customize the game (the player's avatar).
+    * Choose to Select game map.
     * Choose to Exit the game.
     
-  * ### Finish Menu
-    ![CustomizeMenu](https://user-images.githubusercontent.com/25926554/39405962-08d009fa-4ba7-11e8-9ebe-8ea3207e9192.png)
-    
-    **Functionalities:**
-    * By swiping left and right the User can choose which avatar his player will have.
-    * Button to return to the main menu.
-    
   * ### Map Select Menu
-     ![MapSelectMenu](https://user-images.githubusercontent.com/25926554/39405755-a2a00684-4ba2-11e8-9073-a6f2c98d1dc1.png)
+     <img width="1076" alt="Map Select Menu" src="https://user-images.githubusercontent.com/25926554/40865026-42f8575c-65ee-11e8-8b62-3f07ab3b2d63.png">
      
     **Functionalities:**
     * Select map to play.
-    * Swipe down to navigate between maps.
     * Button to return to the main menu.
     
    * ### Play Screen
-      ![PlayScreen](https://user-images.githubusercontent.com/25926554/39405767-19895534-4ba3-11e8-9c72-420c4c17e06e.png)
+      <img width="1073" alt="Play Screen" src="https://user-images.githubusercontent.com/25926554/40865052-5d737530-65ee-11e8-91de-5590f8ced358.png">
       
      **Functionalities:**
-      * Play the game using the arrows on the right side to jump or get down.
-      * The circle on the left side is where the power ups will appear and can be activated.
+     * Play the game using the arrows on the right side to jump or get down.
+     * The circle on the left side is where the power ups will appear and can be activated.
 
    * ### Pause Menu
-      ![PauseMenu](https://user-images.githubusercontent.com/25926554/39405796-170c8fb4-4ba4-11e8-9400-0985af63ddde.png)
+      <img width="1075" alt="Pause Menu" src="https://user-images.githubusercontent.com/25926554/40865060-6d2bc752-65ee-11e8-912f-29eb0dfdc584.png">
       
      **Functionalities:**
-     * This screen appears when the cross from the Play Screen is pressed.
+     * This screen appears when the pause button from the Play Screen is pressed.
      * In this screen the User is able to leave a running game or continue.
      
    * ### Finish Menu
-      ![FinishMenu](https://user-images.githubusercontent.com/25926554/39405810-5d55dc46-4ba4-11e8-8fc8-9ee9b76d6e6b.png)
+      <img width="1073" alt="Finish Menu" src="https://user-images.githubusercontent.com/25926554/40865075-7d35a168-65ee-11e8-8f8d-e4e38569e0c8.png">
            
      **Functionalities:**
-     * Game standings and time accomplished.
-     * Return to main menu by pressing the arrow.
+     * Time accomplished when the player reaches the end of the game.
+     * Return to main menu by pressing the button.
 
-## Tests
+## Game Art:
 
-* Test if the character jumps acorddingly to the User's input.
-* Test if the character ducks acorddingly to the User's input.
-* Check if the time passed increases.
-* Test character changing skin.
-* Check character collision with terrain.
-* Check character collision with enemies.
-* Test if the player reached the end of the game.
-* Test getting powerups.
-* Check character invulnerability after colliding with an enemy.
-* Test if the player doesn't jump unless there is an object underneath him.
-* Test if the player doesn't jump unless there is an object immediately in front of him.
-* Test map changing option.
+* https://opengameart.org/content/animated-runner-character
+* https://opengameart.org/content/platformer-art-complete-pack-often-updated
+* https://opengameart.org/content/onscreen-controls-8-styles
