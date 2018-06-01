@@ -54,17 +54,17 @@ public class GameController implements ContactListener{
     /**
      * The powerups in this controller.
      */
-    private List<PowerUpBody> powerUps;
+    private List<TerrainActorBody> powerUps;
 
     /**
      * The enemies in this controller.
      */
-    private List<EnemyBody> enemies;
+    private List<TerrainActorBody> enemies;
 
     /**
      * The endline in this controller.
      */
-    private EndLineBody endline;
+    private TerrainActorBody endline;
 
     /**
      * The updated run time.
@@ -117,16 +117,16 @@ public class GameController implements ContactListener{
             platformsBody.add(new PlatformBody(world,GameModel.getInstance().getPlatforms().get(i)));
         }
 
-        powerUps = new ArrayList<PowerUpBody>();
+        powerUps = new ArrayList<TerrainActorBody>();
         for(int i = 0; i < GameModel.getInstance().getPowerUps().size(); i++){
-            powerUps.add(new PowerUpBody(world,GameModel.getInstance().getPowerUps().get(i)));
+            powerUps.add(new TerrainActorBody(world,GameModel.getInstance().getPowerUps().get(i)));
         }
-        enemies = new ArrayList<EnemyBody>();
+        enemies = new ArrayList<TerrainActorBody>();
         for(int i = 0; i < GameModel.getInstance().getEnemies().size(); i++){
-            enemies.add(new EnemyBody(world,GameModel.getInstance().getEnemies().get(i)));
+            enemies.add(new TerrainActorBody(world,GameModel.getInstance().getEnemies().get(i)));
         }
 
-        endline = new EndLineBody(world, GameModel.getInstance().getEndline());
+        endline = new TerrainActorBody(world, GameModel.getInstance().getEndline());
 
         world.setContactListener(this);
     }
