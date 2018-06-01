@@ -55,8 +55,18 @@ public class FunRunGame extends Game {
 		loadPlayerAssets();
 		loadPowerUpsAssets();
 		loadInGameAssets();
+		loadLoadingGameAssets();
 
 		assetManager.finishLoading();
+	}
+
+	/**
+	 * Loads the assets needed by Loading Screen.
+	 */
+	private void loadLoadingGameAssets() {
+		assetManager.load("continue.png", Texture.class);
+		assetManager.load("try_again.png", Texture.class);
+		assetManager.load("failed_connect_server.png", Texture.class);
 	}
 
 	/**

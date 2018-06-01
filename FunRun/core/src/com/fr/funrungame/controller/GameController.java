@@ -387,7 +387,7 @@ public class GameController implements ContactListener{
     /**
      * Connects to the server and tries to get the ghost movements
      */
-    public static void getFromServer() {
+    public static int getFromServer() {
         network.get(GameModel.getInstance().getCurrentMap());
 
         try {
@@ -399,6 +399,11 @@ public class GameController implements ContactListener{
         best_time = network.getTime();
         actions = network.getActions();
         actions_times = network.getTimes();
+
+        if(best_time == -1 || actions == null || actions_times == null)
+            return 1;
+        else
+            return 0;
     }
 
     /**

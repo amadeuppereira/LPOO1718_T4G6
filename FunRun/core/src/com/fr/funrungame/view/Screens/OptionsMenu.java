@@ -13,6 +13,9 @@ import com.fr.funrungame.FunRunGame;
 import com.fr.funrungame.controller.GameController;
 import com.fr.funrungame.model.GameModel;
 
+/**
+ * Class that handles the background and title for the PauseMenu and FinishMenu.
+ */
 public abstract class OptionsMenu extends ScreenAdapter {
 
     /**
