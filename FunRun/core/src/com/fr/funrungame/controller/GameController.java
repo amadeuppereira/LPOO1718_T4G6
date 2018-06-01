@@ -244,11 +244,12 @@ public class GameController implements ContactListener{
     }
 
     public void usePowerUp(PlayerBody p){
-
-        if(p == players[0]) {
-            updateHistory(6);
+        if(!p.isDead()) {
+            if (p == players[0]) {
+                updateHistory(6);
+            }
+            p.usePowerUp();
         }
-        p.usePowerUp();
     }
 
     private void givePowerUp(PlayerBody p, double option) {

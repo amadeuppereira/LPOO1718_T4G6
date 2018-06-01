@@ -132,7 +132,6 @@ public class PlayerBody extends EntityBody {
         updatePowerup(delta);
 
         updateModel();
-
     }
 
     /**
@@ -144,7 +143,7 @@ public class PlayerBody extends EntityBody {
             body.setLinearVelocity(getVelX() + ACCELERATION * delta, getVelY());
         }
         else if(getVelX() == 0 && !DEAD && !FINISHED) {
-            body.applyForce(new Vector2(1f, 0f), body.getWorldCenter(), true);
+            body.applyForce(new Vector2(10f, 0f), body.getWorldCenter(), true);
         }
     }
 

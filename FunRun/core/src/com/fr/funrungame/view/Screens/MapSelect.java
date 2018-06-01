@@ -44,76 +44,100 @@ public class MapSelect extends MenuScreen {
 
     private static final float TITLE_WIDTH =  VIEWPORT_WIDTH / 1.5f;
 
+    private Table table;
+
     MapSelect(final FunRunGame game){
         super(game, new Image(game.getAssetManager().get("mapselector.png", Texture.class)), TITLE_HEIGHT, TITLE_WIDTH);
     }
 
-    private void createButtons(Table table) {
-        addReturnButton(table);
+    private void createTable(int map) {
+        table = new Table();
+        table.setFillParent(true);
 
-        addMap1(table);
-        addMap2(table);
+        addReturnButton();
+
+        addMap1(map);
+        addMap2(map);
         table.row();
-        addMap3(table);
-        addMap4(table);
-
+        addMap3(map);
+        addMap4(map);
     }
 
-    private void addMap1(Table table) {
-        Image button = new Image(game.getAssetManager().get("play_button.png", Texture.class));
+    private void addMap1(int map) {
+        Image button;
+        if(map == 1)
+            button = new Image(game.getAssetManager().get("MapSelectButtons/map1_button_pressed.png", Texture.class));
+        else
+            button = new Image(game.getAssetManager().get("MapSelectButtons/map1_button.png", Texture.class));
+
         button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                System.out.println("map1");
                 GameModel.getInstance().setCurrentMap(1);
-                dispose();
+                createTable(1);
+                stage.addActor(table);
             }
         });
 
         table.add(button).size(MAP_BUTTON_WIDTH, MAP_BUTTON_HEIGHT).fill().expand();
     }
 
-    private void addMap2(Table table) {
-        Image button = new Image(game.getAssetManager().get("play_button.png", Texture.class));
+    private void addMap2(int map) {
+        Image button;
+        if(map == 2)
+            button = new Image(game.getAssetManager().get("MapSelectButtons/map2_button_pressed.png", Texture.class));
+        else
+            button = new Image(game.getAssetManager().get("MapSelectButtons/map2_button.png", Texture.class));
+
         button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                System.out.println("map2");
                 GameModel.getInstance().setCurrentMap(2);
-                dispose();
+                createTable(2);
+                stage.addActor(table);
             }
         });
 
         table.add(button).size(MAP_BUTTON_WIDTH, MAP_BUTTON_HEIGHT).fill().expand();
     }
 
-    private void addMap3(Table table) {
-        Image button = new Image(game.getAssetManager().get("play_button.png", Texture.class));
+    private void addMap3(int map) {
+        Image button;
+        if(map == 3)
+            button = new Image(game.getAssetManager().get("MapSelectButtons/map3_button_pressed.png", Texture.class));
+        else
+            button = new Image(game.getAssetManager().get("MapSelectButtons/map3_button.png", Texture.class));
+
         button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                System.out.println("map3");
                 GameModel.getInstance().setCurrentMap(3);
-                dispose();
+                createTable(3);
+                stage.addActor(table);
             }
         });
         table.add(button).size(MAP_BUTTON_WIDTH, MAP_BUTTON_HEIGHT).fill().expand();
     }
 
-    private void addMap4(Table table) {
-        Image button = new Image(game.getAssetManager().get("play_button.png", Texture.class));
+    private void addMap4(int map) {
+        Image button;
+        if(map == 4)
+            button = new Image(game.getAssetManager().get("MapSelectButtons/map4_button_pressed.png", Texture.class));
+        else
+            button = new Image(game.getAssetManager().get("MapSelectButtons/map4_button.png", Texture.class));
+
         button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                System.out.println("map4");
                 GameModel.getInstance().setCurrentMap(4);
-                dispose();
+                createTable(4);
+                stage.addActor(table);
             }
         });
         table.add(button).size(MAP_BUTTON_WIDTH, MAP_BUTTON_HEIGHT).fill().expand();
     }
 
-    private void addReturnButton(Table table) {
+    private void addReturnButton() {
         Image backButton = new Image(game.getAssetManager().get("return.png", Texture.class));
         backButton.addListener(new ClickListener() {
             @Override
@@ -129,10 +153,13 @@ public class MapSelect extends MenuScreen {
     @Override
     public void show(){
         super.show();
-        Table table = new Table();
-        table.setFillParent(true);
 
-        createButtons(table);
+        createTable(GameModel.getInstance().getCurrentMap());
         stage.addActor(table);
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
     }
 }

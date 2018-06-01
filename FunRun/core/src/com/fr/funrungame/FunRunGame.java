@@ -39,8 +39,8 @@ public class FunRunGame extends Game {
 		assetManager.load("play_button_pressed.png", Texture.class);
 		assetManager.load("exit_button.png", Texture.class);
 		assetManager.load("exit_button_pressed.png", Texture.class);
-		assetManager.load("customize_button.png", Texture.class);
-		assetManager.load("customize_button_pressed.png", Texture.class);
+		assetManager.load("select_map_button.png", Texture.class);
+		assetManager.load("select_map_button_pressed.png", Texture.class);
 		assetManager.load("mapselector.png", Texture.class);
 		assetManager.load("return.png", Texture.class);
 		assetManager.load("1.png", Texture.class);
@@ -68,6 +68,14 @@ public class FunRunGame extends Game {
 		assetManager.load("stay_button.png", Texture.class);
         assetManager.load("game_over.png", Texture.class);
         assetManager.load("mainmenu_button.png", Texture.class);
+		assetManager.load("MapSelectButtons/map1_button_pressed.png", Texture.class);
+		assetManager.load("MapSelectButtons/map2_button_pressed.png", Texture.class);
+		assetManager.load("MapSelectButtons/map3_button_pressed.png", Texture.class);
+		assetManager.load("MapSelectButtons/map4_button_pressed.png", Texture.class);
+		assetManager.load("MapSelectButtons/map1_button.png", Texture.class);
+		assetManager.load("MapSelectButtons/map2_button.png", Texture.class);
+		assetManager.load("MapSelectButtons/map3_button.png", Texture.class);
+		assetManager.load("MapSelectButtons/map4_button.png", Texture.class);
 
 		assetManager.finishLoading();
 	}

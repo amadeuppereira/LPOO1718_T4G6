@@ -29,14 +29,13 @@ public class CountdownScreen extends GameView {
 
     public CountdownScreen(FunRunGame game) {
         super(game);
-        //GameController.getFromServer();
 
         for(PlayerModel p: GameModel.getInstance().getPlayers())
             p.setRunning(false);
         n = 3;
         number = game.getAssetManager().get("3.png", Texture.class);
         if(Gdx.app.getType() == Application.ApplicationType.Android){
-            xi = GAME_WIDTH / 2 - NUMBER_WIDTH / 2;
+            xi = GAME_WIDTH / 2 + NUMBER_WIDTH / 2;
             yi = GAME_HEIGHT /2 + 4* NUMBER_HEIGHT;
         }
         else{

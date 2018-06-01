@@ -54,6 +54,9 @@ public class Controllers {
                     case Input.Keys.SPACE:
                         powerupPressed = true;
                         break;
+                    case Input.Keys.ESCAPE:
+                        pausePressed=true;
+                        break;
                 }
                 return true;
             }

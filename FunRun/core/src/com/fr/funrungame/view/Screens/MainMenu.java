@@ -60,10 +60,10 @@ public class MainMenu extends MenuScreen {
     }
 
     private void addCustomizeButton(final Table table) {
-        customizeButton = new Image(game.getAssetManager().get("customize_button.png", Texture.class));
+        customizeButton = new Image(game.getAssetManager().get("select_map_button.png", Texture.class));
         customizeButton.addListener(new ClickListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                customizeButton = new Image(game.getAssetManager().get("customize_button_pressed.png", Texture.class));
+                customizeButton = new Image(game.getAssetManager().get("select_map_button_pressed.png", Texture.class));
                 table.reset();
                 table.padTop(8);
                 addPlayButton(table);

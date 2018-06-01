@@ -88,7 +88,7 @@ public class PauseMenu extends ScreenAdapter {
                 game.setScreen(new MainMenu(game));
             }
         });
-        buttons_table.add(leave).size(BUTTON_WIDTH, BUTTON_HEIGHT).padRight(1);
+        buttons_table.add(leave).size(BUTTON_WIDTH, BUTTON_HEIGHT).padRight(1f);
 
         Image stay = new Image(game.getAssetManager().get("stay_button.png", Texture.class));
         stay.addListener(new ClickListener() {
@@ -98,7 +98,7 @@ public class PauseMenu extends ScreenAdapter {
                 game.setScreen(new GameView(game));
             }
         });
-        buttons_table.add(stay).size(BUTTON_WIDTH, BUTTON_HEIGHT).padLeft(1);
+        buttons_table.add(stay).size(BUTTON_WIDTH, BUTTON_HEIGHT).padLeft(0.5f);
 
         buttons_table.setFillParent(true);
     }
