@@ -26,6 +26,10 @@ import java.util.Map;
 import static com.fr.funrungame.controller.GameController.GAME_HEIGHT;
 import static com.fr.funrungame.controller.GameController.GAME_WIDTH;
 
+/**
+ * A view representing the game screen. Draws the game screen and
+ * controls the camera.
+ */
 public class GameView extends ScreenAdapter {
 
     /**
@@ -41,13 +45,13 @@ public class GameView extends ScreenAdapter {
     /**
      * The width of the viewport in meters.
      */
-    protected static final float VIEWPORT_WIDTH = 40;
+    private static final float VIEWPORT_WIDTH = 40;
 
     /**
      * The height of the viewport in meters. The height is
      * automatically calculated using the screen ratio.
      */
-    protected static final float VIEWPORT_HEIGHT = VIEWPORT_WIDTH * ((float) Gdx.graphics.getHeight() / (float)Gdx.graphics.getWidth());
+    private static final float VIEWPORT_HEIGHT = VIEWPORT_WIDTH * ((float) Gdx.graphics.getHeight() / (float)Gdx.graphics.getWidth());
 
     /**
      * The game this screen belongs to.
@@ -88,12 +92,12 @@ public class GameView extends ScreenAdapter {
     /**
      * The Player View.
      */
-    PlayerView playerView;
+    private PlayerView playerView;
 
     /**
      * The Ghost View.
      */
-    PlayerView ghostView;
+    private PlayerView ghostView;
 
     /**
      * The Game Screen Associated HUD.
@@ -103,7 +107,7 @@ public class GameView extends ScreenAdapter {
     /**
      * The Game input handler.
      */
-    Controllers controllers;
+    private Controllers controllers;
 
     /**
      * Is the Game paused.
@@ -127,7 +131,7 @@ public class GameView extends ScreenAdapter {
 
         gamePort = new FillViewport(GAME_WIDTH,GAME_HEIGHT,camera);
 
-        hudMenu = new HudMenu(game.getBatch());
+        hudMenu = new HudMenu(game);
 
         TiledMap map = game.getAssetManager().get(gameMaps.get(GameModel.getInstance().getCurrentMap()), TiledMap.class);
         GameModel.getInstance().setMap(map);
@@ -140,26 +144,6 @@ public class GameView extends ScreenAdapter {
         debugRenderer = new Box2DDebugRenderer();
 
         controllers = new Controllers(game);
-    }
-
-
-    /**
-     * Creates the camera used to show the viewport.
-     *
-     * @return the camera
-     */
-    private OrthographicCamera createCamera() {
-        OrthographicCamera camera = new OrthographicCamera(VIEWPORT_WIDTH / PIXEL_TO_METER, VIEWPORT_HEIGHT / PIXEL_TO_METER);
-        camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0);
-        camera.update();
-
-        if (DEBUG_PHYSICS) {
-            debugRenderer = new Box2DDebugRenderer();
-            debugCamera = camera.combined.cpy();
-            debugCamera.scl(1 / PIXEL_TO_METER);
-        }
-
-        return camera;
     }
 
     /**
@@ -204,14 +188,31 @@ public class GameView extends ScreenAdapter {
         drawEntities();
         game.getBatch().end();
 
-        game.getBatch().setProjectionMatrix(hudMenu.stage.getCamera().combined);
+        game.getBatch().setProjectionMatrix(hudMenu.getStage().getCamera().combined);
         hudMenu.update(GameController.getInstance().getTime(), GameController.getInstance().getPlayerBody().isFinished());
-        hudMenu.stage.draw();
+        hudMenu.getStage().draw();
 
-        controllers.update(game);
+        controllers.update();
         controllers.draw();
 
         if (GameModel.getInstance().isFinished()) end();
+    }
+
+    /**
+     * Creates the camera used to show the viewport.
+     *
+     * @return the camera
+     */
+    private OrthographicCamera createCamera() {
+        OrthographicCamera camera = new OrthographicCamera(VIEWPORT_WIDTH / PIXEL_TO_METER, VIEWPORT_HEIGHT / PIXEL_TO_METER);
+        camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0);
+        camera.update();
+        if (DEBUG_PHYSICS) {
+            debugRenderer = new Box2DDebugRenderer();
+            debugCamera = camera.combined.cpy();
+            debugCamera.scl(1 / PIXEL_TO_METER);
+        }
+        return camera;
     }
 
     /**

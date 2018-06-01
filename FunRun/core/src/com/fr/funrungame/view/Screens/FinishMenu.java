@@ -19,38 +19,83 @@ import com.fr.funrungame.FunRunGame;
 import com.fr.funrungame.controller.GameController;
 import com.fr.funrungame.model.GameModel;
 
-
+/**
+ * Class that handles the menu when the player finishes the race.
+ */
 public class FinishMenu extends ScreenAdapter {
 
     /**
-     * The width of the viewport in meters. The height is
-     * automatically calculated using the screen ratio.
+     * The width of the viewport in meters.
      */
-    protected static final float VIEWPORT_WIDTH = 40;
+    private static final float VIEWPORT_WIDTH = 40;
 
     /**
      * The height of the viewport in meters. The height is
      * automatically calculated using the screen ratio.
      */
-    protected static final float VIEWPORT_HEIGHT = VIEWPORT_WIDTH * ((float) Gdx.graphics.getHeight() / (float) Gdx.graphics.getWidth());
+    private static final float VIEWPORT_HEIGHT = VIEWPORT_WIDTH * ((float) Gdx.graphics.getHeight() / (float) Gdx.graphics.getWidth());
 
-    protected static final float CONTAINER_WIDTH = VIEWPORT_WIDTH / 2;
+    /**
+     * Constant representing the Container Width.
+     */
+    private static final float CONTAINER_WIDTH = VIEWPORT_WIDTH / 2;
 
-    protected static final float CONTAINER_HEIGHT = VIEWPORT_HEIGHT / 2;
+    /**
+     * Constant representing the Container Height.
+     */
+    private static final float CONTAINER_HEIGHT = VIEWPORT_HEIGHT / 2;
 
-    protected static final float BUTTON_WIDTH = VIEWPORT_WIDTH / 5;
+    /**
+     * Constant representing all the Buttons' Width.
+     */
+    private static final float BUTTON_WIDTH = VIEWPORT_WIDTH / 5;
 
-    protected static final float BUTTON_HEIGHT = VIEWPORT_HEIGHT / 12;
+    /**
+     * Constant representing all the Buttons' Height.
+     */
+    private static final float BUTTON_HEIGHT = VIEWPORT_HEIGHT / 12;
 
-    private Viewport viewport;
-    private Stage stage;
-    private Image backgroundImg;
-    private Table container_table;
-    private Table button_table;
-    private Table score_table;
-
+    /**
+     * The current game session.
+     */
     private FunRunGame game;
 
+    /**
+     * Finish Menu screen viewport.
+     */
+    private Viewport viewport;
+
+    /**
+     * Finish Menu screen stage.
+     */
+    private Stage stage;
+
+    /**
+     * Finish Menu screen background image.
+     */
+    private Image backgroundImg;
+
+    /**
+     * Table with the container.
+     */
+    private Table container_table;
+
+    /**
+     * Table with the buttons.
+     */
+    private Table button_table;
+
+    /**
+     * Table with the score.
+     */
+    private Table score_table;
+
+    /**
+     * Finish Menu Constructor.
+     * It initializes all the needed elements.
+     *
+     * @param game The current game session.
+     */
     public FinishMenu(FunRunGame game){
         this.game = game;
         this.viewport = new FitViewport(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
@@ -66,6 +111,9 @@ public class FinishMenu extends ScreenAdapter {
         createScore();
     }
 
+    /**
+     * Creates the container table.
+     */
     private void createContainer() {
         container_table = new Table();
 
@@ -75,6 +123,9 @@ public class FinishMenu extends ScreenAdapter {
         container_table.setFillParent(true);
     }
 
+    /**
+     * Creates the buttons table.
+     */
     private void createButton() {
         button_table = new Table();
         button_table.padTop(6);
@@ -94,7 +145,9 @@ public class FinishMenu extends ScreenAdapter {
         button_table.setFillParent(true);
     }
 
-
+    /**
+     * Creates the scores table.
+     */
     private void createScore() {
         score_table = new Table();
 
@@ -130,8 +183,9 @@ public class FinishMenu extends ScreenAdapter {
         score_table.setFillParent(true);
     }
 
-
-
+    /**
+     * Adds the background and all the tables to the stage.
+     */
     @Override
     public void show() {
         stage.addActor(backgroundImg);
@@ -142,6 +196,11 @@ public class FinishMenu extends ScreenAdapter {
         Gdx.input.setInputProcessor(stage);
     }
 
+    /**
+     * Renders the screen.
+     *
+     * @param delta time since last rendered in seconds
+     */
     @Override
     public void render(float delta) {
         // Clear the screen
@@ -152,11 +211,20 @@ public class FinishMenu extends ScreenAdapter {
         stage.draw();
     }
 
+    /**
+     * Resizes the screen.
+     *
+     * @param width of the screen.
+     * @param height of the screen.
+     */
     @Override
     public void resize(int width, int height) {
         viewport.update(width, height);
     }
 
+    /**
+     * Disposes the screen.
+     */
     @Override
     public void dispose() {
         super.dispose();

@@ -7,8 +7,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.fr.funrungame.FunRunGame;
 import com.fr.funrungame.model.GameModel;
 
-import java.util.ArrayList;
-
+/**
+ * Menu where the maps are selected.
+ */
 public class MapSelect extends MenuScreen {
 
     /**
@@ -35,21 +36,42 @@ public class MapSelect extends MenuScreen {
      * Constant representing the distance between the first line of Level Buttons and the screen Top.
      */
     private static final float TOP_EDGE = VIEWPORT_WIDTH / 7;
+
     /**
      * Constant representing the distance between the stage elements and the screen limits.
      */
     private static final float SIDE_DISTANCE = VIEWPORT_WIDTH / 82;
 
+    /**
+     * Constant representing the size of the Title
+     */
     private static final float TITLE_HEIGHT = VIEWPORT_HEIGHT / 7f;
 
+    /**
+     * Constant representing the size of the Title
+     */
     private static final float TITLE_WIDTH =  VIEWPORT_WIDTH / 1.5f;
 
+    /**
+     * The table containing the elements, that will be added to the stage.
+     */
     private Table table;
 
-    MapSelect(final FunRunGame game){
+    /**
+     * Map Select Screen Constructor.
+     * It initializes all the needed elements.
+     *
+     * @param game The current game session.
+     */
+    MapSelect(FunRunGame game){
         super(game, new Image(game.getAssetManager().get("mapselector.png", Texture.class)), TITLE_HEIGHT, TITLE_WIDTH);
     }
 
+    /**
+     * Creates the table.
+     *
+     * @param map number of the current map
+     */
     private void createTable(int map) {
         table = new Table();
         table.setFillParent(true);
@@ -63,6 +85,11 @@ public class MapSelect extends MenuScreen {
         addMap4(map);
     }
 
+    /**
+     * Adds the map number 1 button to the table.
+     *
+     * @param map number of the current map
+     */
     private void addMap1(int map) {
         Image button;
         if(map == 1)
@@ -82,6 +109,11 @@ public class MapSelect extends MenuScreen {
         table.add(button).size(MAP_BUTTON_WIDTH, MAP_BUTTON_HEIGHT).fill().expand();
     }
 
+    /**
+     * Adds the map number 2 button to the table.
+     *
+     * @param map number of the current map
+     */
     private void addMap2(int map) {
         Image button;
         if(map == 2)
@@ -101,6 +133,11 @@ public class MapSelect extends MenuScreen {
         table.add(button).size(MAP_BUTTON_WIDTH, MAP_BUTTON_HEIGHT).fill().expand();
     }
 
+    /**
+     * Adds the map number 3 button to the table.
+     *
+     * @param map number of the current map
+     */
     private void addMap3(int map) {
         Image button;
         if(map == 3)
@@ -119,6 +156,11 @@ public class MapSelect extends MenuScreen {
         table.add(button).size(MAP_BUTTON_WIDTH, MAP_BUTTON_HEIGHT).fill().expand();
     }
 
+    /**
+     * Adds the map number 4 button to the table.
+     *
+     * @param map number of the current map
+     */
     private void addMap4(int map) {
         Image button;
         if(map == 4)
@@ -137,6 +179,9 @@ public class MapSelect extends MenuScreen {
         table.add(button).size(MAP_BUTTON_WIDTH, MAP_BUTTON_HEIGHT).fill().expand();
     }
 
+    /**
+     * Adds the return button to the table.
+     */
     private void addReturnButton() {
         Image backButton = new Image(game.getAssetManager().get("return.png", Texture.class));
         backButton.addListener(new ClickListener() {
@@ -150,16 +195,14 @@ public class MapSelect extends MenuScreen {
         table.add(backButton).size(BUTTON_WIDTH, BUTTON_HEIGHT).top().left().padTop(TOP_EDGE/3).padLeft(SIDE_DISTANCE).row();
     }
 
+    /**
+     * Adds the table to the stage.
+     */
     @Override
     public void show(){
         super.show();
 
         createTable(GameModel.getInstance().getCurrentMap());
         stage.addActor(table);
-    }
-
-    @Override
-    public void dispose() {
-        super.dispose();
     }
 }

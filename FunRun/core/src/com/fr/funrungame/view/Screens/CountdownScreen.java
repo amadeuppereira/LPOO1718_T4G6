@@ -1,32 +1,63 @@
 package com.fr.funrungame.view.Screens;
 
 import com.badlogic.gdx.Application;
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.fr.funrungame.FunRunGame;
-import com.fr.funrungame.controller.GameController;
 import com.fr.funrungame.model.GameModel;
 import com.fr.funrungame.model.entities.PlayerModel;
 
 import static com.fr.funrungame.controller.GameController.GAME_HEIGHT;
 import static com.fr.funrungame.controller.GameController.GAME_WIDTH;
 
+
+/**
+ * Class that does a countdown of 3 seconds before the game run starts.
+ */
 public class CountdownScreen extends GameView {
 
+    /**
+     * Constant representing the time between the numbers transitions.
+     */
     private final int TIME_BETWEEN_CHANGES = 50;
+
+    /**
+     * Constant representing the Numbers Width.
+     */
     private final float NUMBER_WIDTH = 80;
+
+    /**
+     * Constant representing the Numbers Height.
+     */
     private final float NUMBER_HEIGHT = 80;
 
+    /**
+     * Numbers texture.
+     */
     private Texture number;
+
+    /**
+     * Current number.
+     */
     private int n;
 
+    /**
+     * Numbers starting positions.
+     */
     private float xi, yi;
 
+    /**
+     * Initializes timer.
+     */
     private int timer = TIME_BETWEEN_CHANGES;
 
+    /**
+     * Countdown Screen Constructor.
+     * It initializes all the needed elements.
+     *
+     * @param game The current game session.
+     */
     public CountdownScreen(FunRunGame game) {
         super(game);
 
@@ -44,6 +75,11 @@ public class CountdownScreen extends GameView {
         }
     }
 
+    /**
+     * Renders the screen.
+     *
+     * @param delta time since last rendered in seconds
+     */
     @Override
     public void render(float delta) {
         cameraHandler();
@@ -69,6 +105,11 @@ public class CountdownScreen extends GameView {
 
     }
 
+    /**
+     * Updates the numbers.
+     *
+     * @param delta time since last rendered in seconds
+     */
     private void update(float delta) {
         timer -= delta;
         if(timer <= 0) {
