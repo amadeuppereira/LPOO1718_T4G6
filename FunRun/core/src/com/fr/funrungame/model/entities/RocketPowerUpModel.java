@@ -61,7 +61,7 @@ public class RocketPowerUpModel extends PowerUpModel {
      * @param playerBody where the power up will act
      */
     @Override
-    protected void action(PlayerBody playerBody) {
+    public void action(PlayerBody playerBody) {
         if(!playerBody.isFinished() && !playerBody.isDead())
             playerBody.applyLinearImpulse(X_FORCE, Y_FORCE);
     }

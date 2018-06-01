@@ -3,6 +3,8 @@ package com.fr.funrungame.model.entities;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 
+import javax.xml.bind.annotation.XmlType;
+
 /**
  * A model representing a player.
  */
@@ -14,39 +16,24 @@ public class PlayerModel extends EntityModel {
     private PowerUpModel powerup = null;
 
     /**
-     * Is the player running.
+     * The player states
      */
-    private boolean running = true;
+    public enum State {DEFAULT, RUNNING, JUMPING, FALLING, DEAD, FINISH};
 
     /**
-     * Is the player jumping.
+     * The player boost effects
      */
-    private boolean jumping = false;
+    public enum Boost {NONE, SHIELD, INVULNERABLE};
 
     /**
-     * Is the player falling.
+     * The player state
      */
-    private boolean falling = false;
+    private State state;
 
     /**
-     * Is the player invulnerable.
+     * The player boost
      */
-    private boolean invulnerable = false;
-
-    /**
-     * Is the player dead.
-     */
-    private boolean dead = false;
-
-    /**
-     * Is the player shielded.
-     */
-    private boolean shield = false;
-
-    /**
-     * Has the player finished.
-     */
-    private boolean finished = false;
+    private Boost boost;
 
     /**
      * Picking a power up sound.
@@ -63,24 +50,52 @@ public class PlayerModel extends EntityModel {
         super(x,y);
         music = Gdx.audio.newMusic(Gdx.files.internal("sounds/pickup.wav"));
         music.setVolume(0.1f);
+
+        state = State.DEFAULT;
+        boost = Boost.NONE;
     }
 
     /**
-     * Is the player running in this update
+     * Gets the player state.
      *
-     * @return the running flag
+     * @return player state
      */
-    public boolean isRunning() {
-        return running;
+    public State getState() {
+        return state;
     }
 
     /**
-     * Set the running flag for this ship
+     * Gets the player boost
      *
-     * @param running the running tag
+     * @return th eplayer boost
      */
-    public void setRunning(boolean running) {
-        this.running = running;
+    public Boost getBoost() {
+        return boost;
+    }
+
+    /**
+     * Sets the player state.
+     *
+     * @param state the new state
+     */
+    public void setState(State state) {
+        this.state = state;
+    }
+
+    /**
+     * Set the player boost
+     *
+     * @param boost the new boost
+     */
+    public void setBoost(Boost boost) {
+        this.boost = boost;
+    }
+
+    /**
+     * Remove the player boost
+     */
+    public void removeBoost() {
+        this.boost = Boost.NONE;
     }
 
     /**
@@ -89,16 +104,7 @@ public class PlayerModel extends EntityModel {
      * @return the jumping flag
      */
     public boolean isJumping() {
-        return jumping;
-    }
-
-    /**
-     * Set the jumping flag for this ship
-     *
-     * @param jumping the jumping tag
-     */
-    public void setJumping(boolean jumping) {
-        this.jumping = jumping;
+        return state == State.JUMPING;
     }
 
     /**
@@ -107,64 +113,7 @@ public class PlayerModel extends EntityModel {
      * @return the falling flag
      */
     public boolean isFalling() {
-        return falling;
-    }
-
-    /**
-     * Set the falling flag for this ship
-     *
-     * @param falling the falling tag
-     */
-    public void setFalling(boolean falling) {
-        this.falling = falling;
-    }
-
-    /**
-     * Is the player invulnerable in this update
-     *
-     * @return the invulnerable flag
-     */
-    public boolean isInvulnerable() {return invulnerable;}
-
-    /**
-     * Set the invulnerable flag for this ship
-     *
-     * @param invulnerable the invulnerable tag
-     */
-    public void setInvulnerable(boolean invulnerable) {
-        this.invulnerable = invulnerable;
-    }
-
-    /**
-     * Is the player dead in this update
-     *
-     * @return the dead flag
-     */
-    public boolean isDead() { return dead; }
-
-    /**
-     * Set the dead flag for this ship
-     *
-     * @param dead the dead tag
-     */
-    public void setDead(boolean dead) { this.dead = dead; }
-
-    /**
-     * Is the player shielded in this update
-     *
-     * @return the shield flag
-     */
-    public boolean isShield() {
-        return shield;
-    }
-
-    /**
-     * Set the shield flag for this ship
-     *
-     * @param shield the shield tag
-     */
-    public void setShield(boolean shield) {
-        this.shield = shield;
+        return state == State.FALLING;
     }
 
     /**
@@ -204,15 +153,7 @@ public class PlayerModel extends EntityModel {
      * @return the running flag
      */
     public boolean isFinished() {
-        return finished;
+        return state == State.FINISH;
     }
 
-    /**
-     * Set the finished flag for this ship
-     *
-     * @param finished the finished tag
-     */
-    public void setFinished(boolean finished) {
-        this.finished = finished;
-    }
 }

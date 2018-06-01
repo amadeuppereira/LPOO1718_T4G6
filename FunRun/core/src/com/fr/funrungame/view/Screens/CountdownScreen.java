@@ -62,7 +62,7 @@ public class CountdownScreen extends GameView {
         super(game);
 
         for(PlayerModel p: GameModel.getInstance().getPlayers())
-            p.setRunning(false);
+            p.setState(PlayerModel.State.DEFAULT);
         n = 3;
         number = game.getAssetManager().get("3.png", Texture.class);
         if(Gdx.app.getType() == Application.ApplicationType.Android){
@@ -126,7 +126,7 @@ public class CountdownScreen extends GameView {
             else {
                 dispose();
                 for(PlayerModel p: GameModel.getInstance().getPlayers()) {
-                    p.setRunning(true);
+                    p.setState(PlayerModel.State.RUNNING);
                 }
                 game.setScreen(new GameView(game));
             }

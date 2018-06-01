@@ -195,7 +195,9 @@ public class GameView extends ScreenAdapter {
         controllers.update();
         controllers.draw();
 
-        if (GameModel.getInstance().isFinished()) end();
+        if (GameModel.getInstance().isFinished()) {
+            end();
+        }
     }
 
     /**

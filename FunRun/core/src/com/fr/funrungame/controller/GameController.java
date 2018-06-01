@@ -195,7 +195,8 @@ public class GameController implements ContactListener{
      */
     private void playerVerifications(float delta){
         for(PlayerBody p : players) {
-            p.update(delta);
+            if(!p.isFinished())
+                p.update(delta);
         }
     }
 
@@ -331,11 +332,7 @@ public class GameController implements ContactListener{
         Body bodyA = contact.getFixtureA().getBody();
         Body bodyB = contact.getFixtureB().getBody();
 
-        if (bodyA.getUserData() instanceof PlayerModel && bodyB.getUserData() instanceof PlatformModel){
-            ((PlayerModel) bodyA.getUserData()).setJumping(false);
-            ((PlayerModel) bodyA.getUserData()).setFalling(false);
-        }
-        else if (bodyA.getUserData() instanceof PlayerModel && bodyB.getUserData() instanceof PowerUpModel){
+        if (bodyA.getUserData() instanceof PlayerModel && bodyB.getUserData() instanceof PowerUpModel){
             if(players[0].getBody() == bodyA) {
                 givePowerUp(players[0], -1);
             }

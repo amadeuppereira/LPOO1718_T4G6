@@ -20,6 +20,9 @@ public class PlayerView extends EntityView {
      */
     private static final float FRAME_TIME = 0.09f;
 
+    private PlayerModel.State state;
+    private PlayerModel.Boost boost;
+
     /**
      * The animation used when the player is running
      */
@@ -246,12 +249,8 @@ public class PlayerView extends EntityView {
     public void update(EntityModel model) {
         super.update(model);
 
-        jumping = ((PlayerModel)model).isJumping();
-        running = ((PlayerModel)model).isRunning();
-        falling = ((PlayerModel)model).isFalling();
-        invulnerable = ((PlayerModel)model).isInvulnerable();
-        dead = ((PlayerModel)model).isDead();
-        shield = ((PlayerModel)model).isShield();
+        state = ((PlayerModel)model).getState();
+        boost = ((PlayerModel)model).getBoost();
     }
 
     /**
@@ -263,29 +262,42 @@ public class PlayerView extends EntityView {
     public void draw(SpriteBatch batch) {
         stateTime += Gdx.graphics.getDeltaTime();
 
-        if (shield) {
-            if (jumping)
-                sprite.setRegion(jumpingShieldedRegion);
-            else if (falling)
-                sprite.setRegion(fallingShieldedRegion);
-            else if (running)
-                sprite.setRegion(runningShieldedAnimation.getKeyFrame(stateTime, true));
-            else
-                sprite.setRegion(shieldRegion);
+        if (boost == PlayerModel.Boost.SHIELD) {
+            switch(state) {
+                case JUMPING:
+                    sprite.setRegion(jumpingShieldedRegion);
+                    break;
+                case FALLING:
+                    sprite.setRegion(fallingShieldedRegion);
+                    break;
+                case RUNNING:
+                    sprite.setRegion(runningShieldedAnimation.getKeyFrame(stateTime, true));
+                    break;
+                case DEFAULT:
+                    sprite.setRegion(shieldRegion);
+                    break;
+            }
+
         } else {
-            if (jumping)
-                sprite.setRegion(jumpingRegion);
-            else if (falling)
-                sprite.setRegion(fallingRegion);
-            else if (running)
-                sprite.setRegion(runningAnimation.getKeyFrame(stateTime, true));
-            else
-                sprite.setRegion(notRunningRegion);
+            switch(state) {
+                case JUMPING:
+                    sprite.setRegion(jumpingRegion);
+                    break;
+                case FALLING:
+                    sprite.setRegion(fallingRegion);
+                    break;
+                case RUNNING:
+                    sprite.setRegion(runningAnimation.getKeyFrame(stateTime, true));
+                    break;
+                case DEFAULT:
+                    sprite.setRegion(notRunningRegion);
+                    break;
+            }
         }
 
-        if (dead) {
+        if (state == PlayerModel.State.DEAD) {
             sprite.draw(batch, 0.1f * alpha);
-        } else if (invulnerable) {
+        } else if (boost == PlayerModel.Boost.INVULNERABLE) {
             sprite.draw(batch, dead_alpha * alpha);
             dead_alpha += 0.05;
             if (dead_alpha > 1) dead_alpha = 0;

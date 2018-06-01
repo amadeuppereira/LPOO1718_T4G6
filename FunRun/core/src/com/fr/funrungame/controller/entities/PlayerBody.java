@@ -44,7 +44,7 @@ public class PlayerBody extends EntityBody {
     /**
      * The player invulnerable time
      */
-    private final int INVULNERABLE_TIME = 3;
+    private final int INVULNERABLE_TIME = 2;
 
     /**
      * The player dead state
@@ -219,7 +219,9 @@ public class PlayerBody extends EntityBody {
     private void updateDeadState(float delta) {
         if(DEAD) {
             death_timer -= delta;
-            if(death_timer <= 0) setDead(false);
+            if(death_timer <= 0) {
+                setDead(false);
+            }
         }
     }
 
@@ -239,6 +241,8 @@ public class PlayerBody extends EntityBody {
      * Updates the player model
      */
     private void updateModel() {
+        if(DEAD) return;
+
         updateRunningState();
         updateJumpingState();
         updateFallingState();
@@ -249,9 +253,9 @@ public class PlayerBody extends EntityBody {
      */
     private void updateRunningState() {
         if (getVelX() == 0) {
-            ((PlayerModel) getUserData()).setRunning(false);
+            ((PlayerModel) getUserData()).setState(PlayerModel.State.DEFAULT);
         } else {
-            ((PlayerModel) getUserData()).setRunning(true);
+            ((PlayerModel) getUserData()).setState(PlayerModel.State.RUNNING);
         }
     }
 
@@ -260,8 +264,7 @@ public class PlayerBody extends EntityBody {
      */
     private void updateJumpingState() {
         if (getVelY() > 0) {
-            ((PlayerModel) getUserData()).setJumping(true);
-            ((PlayerModel) getUserData()).setFalling(false);
+            ((PlayerModel) getUserData()).setState(PlayerModel.State.JUMPING);
         }
     }
 
@@ -270,8 +273,7 @@ public class PlayerBody extends EntityBody {
      */
     private void updateFallingState() {
         if (getVelY() < 0) {
-            ((PlayerModel) getUserData()).setJumping(false);
-            ((PlayerModel) getUserData()).setFalling(true);
+            ((PlayerModel) getUserData()).setState(PlayerModel.State.FALLING);
         }
     }
 
@@ -319,11 +321,11 @@ public class PlayerBody extends EntityBody {
         if(invulnerable) {
             invulnerable_timer = INVULNERABLE_TIME;
             INVULNERABLE = true;
-            ((PlayerModel)getUserData()).setInvulnerable(true);
+            ((PlayerModel)getUserData()).setBoost(PlayerModel.Boost.INVULNERABLE);
         }
         else {
             INVULNERABLE = false;
-            ((PlayerModel)getUserData()).setInvulnerable(false);
+            ((PlayerModel)getUserData()).removeBoost();
         }
     }
 
@@ -336,11 +338,12 @@ public class PlayerBody extends EntityBody {
         if(dead) {
             death_timer = DEAD_TIME;
             DEAD = true;
-            ((PlayerModel)getUserData()).setDead(true);
+            ((PlayerModel)getUserData()).setState(PlayerModel.State.DEAD);
         }
         else {
             DEAD = false;
-            ((PlayerModel)getUserData()).setDead(false);
+            setInvulnerable(true);
+            //((PlayerModel)getUserData()).setState(PlayerModel.State.RUNNING);
         }
     }
 
@@ -351,7 +354,6 @@ public class PlayerBody extends EntityBody {
         if(INVULNERABLE || DEAD || FINISHED || SHIELD) return;
         stop();
         setDead(true);
-        setInvulnerable(true);
     }
 
     /**
@@ -360,7 +362,7 @@ public class PlayerBody extends EntityBody {
     public void setFinish() {
         time = GameController.getInstance().getTime();
         FINISHED = true;
-        ((PlayerModel)getUserData()).setFinished(true);
+        ((PlayerModel)getUserData()).setState(PlayerModel.State.FINISH);
     }
 
     /**
@@ -370,7 +372,10 @@ public class PlayerBody extends EntityBody {
      */
     public void shielded(boolean shield){
         SHIELD = shield;
-        ((PlayerModel)getUserData()).setShield(shield);
+        if(SHIELD)
+            ((PlayerModel)getUserData()).setBoost(PlayerModel.Boost.SHIELD);
+        else
+            ((PlayerModel)getUserData()).removeBoost();
     }
 
     /**
