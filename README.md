@@ -73,40 +73,46 @@ We estimate a total of 160 hours (evenly distributed between the two developers)
 ## User Manual
 
   * ### Main Menu
-    <img width="1075" alt="Main Menu" src="https://user-images.githubusercontent.com/25926554/40864982-04a4e2f4-65ee-11e8-8453-3b65e9484e09.png">
+    <img width="500" alt="Main Menu" src="https://user-images.githubusercontent.com/25926554/40864982-04a4e2f4-65ee-11e8-8453-3b65e9484e09.png">
 
     **Functionalities:**
     * Choose to Play a game.
     * Choose to Select game map.
     * Choose to Exit the game.
     
+    
   * ### Map Select Menu
-     <img width="1076" alt="Map Select Menu" src="https://user-images.githubusercontent.com/25926554/40865026-42f8575c-65ee-11e8-8b62-3f07ab3b2d63.png">
+     <img width="500" alt="Map Select Menu" src="https://user-images.githubusercontent.com/25926554/40865026-42f8575c-65ee-11e8-8b62-3f07ab3b2d63.png">
      
     **Functionalities:**
     * Select map to play.
     * Button to return to the main menu.
-    
-   * ### Play Screen
-      <img width="1073" alt="Play Screen" src="https://user-images.githubusercontent.com/25926554/40865052-5d737530-65ee-11e8-91de-5590f8ced358.png">
-      
-     **Functionalities:**
-     * Play the game using the arrows on the right side to jump or get down.
-     * The circle on the left side is where the power ups will appear and can be activated.
-
+   
+   
    * ### Pause Menu
-      <img width="1075" alt="Pause Menu" src="https://user-images.githubusercontent.com/25926554/40865060-6d2bc752-65ee-11e8-912f-29eb0dfdc584.png">
+      <img width="500" alt="Pause Menu" src="https://user-images.githubusercontent.com/25926554/40865060-6d2bc752-65ee-11e8-912f-29eb0dfdc584.png">
       
      **Functionalities:**
      * This screen appears when the pause button from the Play Screen is pressed.
      * In this screen the User is able to leave a running game or continue.
      
+     
+   * ### Play Screen
+       <img width="500" alt="Play Screen" src="https://user-images.githubusercontent.com/25926554/40865052-5d737530-65ee-11e8-91de-5590f8ced358.png">
+    
+    
+     **Functionalities:**
+     * Play the game using the arrows on the right side to jump or get down.
+     * The circle on the left side is where the power ups will appear and can be activated.
+     
+     
    * ### Finish Menu
-      <img width="1073" alt="Finish Menu" src="https://user-images.githubusercontent.com/25926554/40865075-7d35a168-65ee-11e8-8f8d-e4e38569e0c8.png">
+      <img width="500" alt="Finish Menu" src="https://user-images.githubusercontent.com/25926554/40865075-7d35a168-65ee-11e8-8f8d-e4e38569e0c8.png">
            
      **Functionalities:**
      * Time accomplished when the player reaches the end of the game.
      * Return to main menu by pressing the button.
+
 
 ## Game Art:
 
