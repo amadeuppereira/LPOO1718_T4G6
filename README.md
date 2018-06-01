@@ -1,11 +1,23 @@
-# LPOO1718_T4G6
+# Fun Run
+A simple Fun Run copycat game with a few changes made using libGDX for the LPOO classes.
 
+## Installation Procedure
+* Setup - Project:
+    - Java Development Kit 7+ (JDK);
+    - [Android Studio] (https://developer.android.com/sdk/index.html) 
+       Android Studio already comes packaged with the Android SDK so contrary to Eclipse or Intellij IDEA you do not need to install this component.
+
+* Setup - App:
+    - Run apk;
+    - Accept permissions.
+    
 
 ## Package and class diagram (UML)
 
-<img src="https://user-images.githubusercontent.com/25926554/39406005-b630065e-4ba7-11e8-914f-4b417a35916d.png" width="100%"></img> 
 
-## Design patterns
+
+## Design Decisions
+
   ### Model-View-Controller (MVC)
   <img src=https://upload.wikimedia.org/wikipedia/commons/f/fd/MVC-Process.png>
   
@@ -21,27 +33,26 @@
   * Ease of modification
   * Multiple views for a model
   
-  ### Strategy
-  Used in PowerUp to implement different types of power-ups.
   
-  ### Singleton
-  Used in GameModel.
-  The game only needs one GameModel object, that must be accessible to several other classes.
+## Design Patterns Used
+
+* [Singleton](https://en.wikipedia.org/wiki/Singleton_pattern) -  Restricts the instantiation of many classes (in GameModel and GameController)
+* [State Pattern](https://en.wikipedia.org/wiki/State_pattern) - Used in PowerUpModel
+* [Strategy Pattern](https://en.wikipedia.org/wiki/Strategy_pattern) - Controls the Menu Appeareance 
+* [Observer Pattern](https://en.wikipedia.org/wiki/Observer_pattern) - Implemented by Libgdx with controls listeners (in Controllers class)
+* [Update Method](http://gameprogrammingpatterns.com/update-method.html) - Used in EntityModel
+* [Game Loop](http://gameprogrammingpatterns.com/game-loop.html) - Used in GameController and Controllers (handles input), GameModel (updates game) and GameScreen (renders)
+
   
-  ### Update Method
-  Used in EntityModel (and subclasses).
-  Helps updating all entities in the game, rendering smoother animations.
+## Major Dificulties
+
+## Lessons Learned
+
+## Overal Time Spent Developing
+
+## Work Distribuition
   
-  ### Game Loop
-  Used in GameModel.
-  To separate game speed from processor speed.
-  
-  ### State
-  Used in EntityModel.
-  The game models state is controlled by a state machine.
-  
-  
-  
+## User Manual
 ## GUI design
 
   * ### Main Menu
