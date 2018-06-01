@@ -10,10 +10,6 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.mockito.Mockito;
 
-/**
- * Created by Edgar on 30/05/2017.
- */
-
 public class GameTest {
     // This is our "test" application
     private static Application application;
