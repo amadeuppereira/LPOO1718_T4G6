@@ -1,13 +1,20 @@
 package com.fr.funrungame.model.entities;
 
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
+
+/**
+ * A model representing an enemy.
+ */
 public class EnemyModel extends EntityModel {
 
-    public EnemyModel(float x, float y){
-        super(x,y);
-    }
-
-    @Override
-    public ModelType getType() {
-        return ModelType.ENEMY;
+    /**
+     * Creates a new enemy model in a certain position.
+     *
+     * @param x the x-coordinate in meters
+     * @param y the y-coordinate in meters
+     * @param object the object from the tiled map
+     */
+    public EnemyModel(float x, float y, RectangleMapObject object){
+        super(x,y, object);
     }
 }
