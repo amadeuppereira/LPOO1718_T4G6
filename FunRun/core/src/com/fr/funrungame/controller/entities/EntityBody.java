@@ -66,6 +66,7 @@ public abstract class EntityBody {
 
     /**
      * Applies a linear impulse in the center of the body
+     *
      * @param x impulse x force
      * @param y impulse y force
      */
@@ -73,6 +74,12 @@ public abstract class EntityBody {
         body.applyLinearImpulse(new Vector2(x,y), body.getWorldCenter(), true);
     }
 
+    /**
+     * Applies a force on the body
+     *
+     * @param x force
+     * @param y force
+     */
     public void applyForce(float x, float y){
         body.applyForce(new Vector2(x,y), body.getWorldCenter(), true);
     }
@@ -96,7 +103,7 @@ public abstract class EntityBody {
     }
 
     /**
-     * Creates a default fixture for the body.
+     * Returns the default fixture of the body.
      *
      * @return the default fixture
      */
@@ -113,12 +120,14 @@ public abstract class EntityBody {
 
     /**
      * Create a fixture with a given definition in the body
+     *
      * @param model entity model
      */
     protected abstract void createFixture(EntityModel model);
 
     /**
      * Creates a body in the world
+     *
      * @param world world
      * @param model entity model
      * @param bodyType body time

@@ -10,44 +10,57 @@ import com.fr.funrungame.model.entities.PlayerModel;
 
 import static com.fr.funrungame.view.Screens.GameView.PIXEL_TO_METER;
 
+/**
+ * A concrete representation of an EntityBody
+ * representing the player.
+ */
 public class PlayerBody extends EntityBody {
 
     /**
      * The player acceleration
      */
     private final float ACCELERATION = 15f;
+
     /**
      * The player jump force
      */
     private final float JUMP_FORCE = 5f;
+
     /**
      * The player climb force
      */
     private final float CLIMB_FORCE = 1.5f;
+
     /**
      * The player downwards force
      */
     private final float DOWN_FORCE = -100f;
+
     /**
      * The player death time
      */
     private final int DEAD_TIME = 1;
+
     /**
      * The player invulnerable time
      */
     private final int INVULNERABLE_TIME = 3;
+
     /**
      * The player dead state
      */
     private boolean DEAD = false;
+
     /**
      * The player invulnerable state
      */
     private boolean INVULNERABLE = false;
+
     /**
      * The player finish state
      */
     private boolean FINISHED = false;
+
     /**
      * The player shield state
      */
@@ -57,14 +70,17 @@ public class PlayerBody extends EntityBody {
      * The death timer
      */
     private float death_timer = 0;
+
     /**
      * The invulnerability timer
      */
     private float invulnerable_timer = 0;
+
     /**
      * The player playing time
      */
     private float time;
+
     /**
      * Sound effect for jumping/climbing
      */
@@ -72,6 +88,7 @@ public class PlayerBody extends EntityBody {
 
     /**
      * Constructs a player body representing a model in a certain world.
+     *
      * @param world world
      * @param model model
      */
@@ -84,13 +101,20 @@ public class PlayerBody extends EntityBody {
     }
 
     /**
-     * Load sound effects
+     * Load sound effects.
      */
     private void getSounds() {
         music = Gdx.audio.newMusic(Gdx.files.internal("sounds/jump.wav"));
         music.setVolume(0.1f);
     }
 
+    /**
+     * Creates the body.
+     *
+     * @param world The world this body lives on.
+     * @param model The model representing the body.
+     * @param bodyType The body type
+     */
     @Override
     protected void createBody(World world, EntityModel model, BodyDef.BodyType bodyType) {
         BodyDef bodyDef = new BodyDef();
@@ -101,6 +125,11 @@ public class PlayerBody extends EntityBody {
         body.setUserData(model);
     }
 
+    /**
+     * Returns the default fixture of the body.
+     *
+     * @return the default fixture
+     */
     @Override
     protected FixtureDef getFixtureDef(EntityModel model) {
         PolygonShape shape = new PolygonShape();
@@ -114,6 +143,11 @@ public class PlayerBody extends EntityBody {
         return fixturedef;
     }
 
+    /**
+     * Create a fixture with a given definition in the body
+     *
+     * @param model entity model
+     */
     @Override
     protected void createFixture(EntityModel model) {
         body.createFixture(getFixtureDef(model));
@@ -135,6 +169,7 @@ public class PlayerBody extends EntityBody {
 
     /**
      * Accelerates the player in the X coordinate
+     *
      * @param delta time since last rendered in seconds
      */
     private void accelerateX(float delta) {
@@ -148,6 +183,7 @@ public class PlayerBody extends EntityBody {
 
     /**
      * Updates the powerup
+     *
      * @param delta time since last rendered in seconds
      */
     private void updatePowerup(float delta) {
@@ -161,6 +197,7 @@ public class PlayerBody extends EntityBody {
 
     /**
      * Checks if the player has finished the run, updating him accordingly
+     *
      * @param delta time since last rendered in seconds
      */
     private void checkFinishState(float delta) {
@@ -176,6 +213,7 @@ public class PlayerBody extends EntityBody {
 
     /**
      * Updates the player dead state
+     *
      * @param delta time since last rendered in seconds
      */
     private void updateDeadState(float delta) {
@@ -187,6 +225,7 @@ public class PlayerBody extends EntityBody {
 
     /**
      * Updates the player invulnerable state
+     *
      * @param delta time since last rendered in seconds
      */
     private void updateInvulnerableState(float delta) {
@@ -238,6 +277,7 @@ public class PlayerBody extends EntityBody {
 
     /**
      * Applies the jumping/climbing force to the player
+     *
      * @param sound flag indicating if sound is played or not
      */
     public void jump(boolean sound) {
@@ -272,6 +312,7 @@ public class PlayerBody extends EntityBody {
 
     /**
      * Sets the player invulnerable state
+     *
      * @param invulnerable boolean value to update the state
      */
     private void setInvulnerable(boolean invulnerable) {
@@ -288,6 +329,7 @@ public class PlayerBody extends EntityBody {
 
     /**
      * Sets the player dead state
+     *
      * @param dead boolean value to update the state
      */
     private void setDead(boolean dead) {
@@ -323,6 +365,7 @@ public class PlayerBody extends EntityBody {
 
     /**
      * Updates the player shielded state
+     *
      * @param shield boolean value to update the state
      */
     public void shielded(boolean shield){
@@ -341,6 +384,7 @@ public class PlayerBody extends EntityBody {
 
     /**
      * Get the finished state
+     *
      * @return the finished state
      */
     public boolean isFinished() {
@@ -349,13 +393,15 @@ public class PlayerBody extends EntityBody {
 
     /**
      * Get the dead state
+     *
      * @return the dead state
      */
     public boolean isDead() { return DEAD;}
 
     /**
      * Get the time whilst the player is player or the finish time
-     * @return
+     *
+     * @return time
      */
     public float getTime() {
         return time;
@@ -363,6 +409,7 @@ public class PlayerBody extends EntityBody {
 
     /**
      * Get the player shielded state
+     *
      * @return the shielded state
      */
     public boolean isShielded() {

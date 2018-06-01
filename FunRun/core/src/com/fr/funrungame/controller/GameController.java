@@ -199,6 +199,11 @@ public class GameController implements ContactListener{
         }
     }
 
+    /**
+     * Updates the ghost movements
+     *
+     * @param time time since last rendered in seconds
+     */
     private void ghostHandler(float time) {
         if(actions == null || actions_times == null || index == actions.size() || index == actions_times.size()) {
             double a = Math.random();
@@ -231,6 +236,11 @@ public class GameController implements ContactListener{
         }
     }
 
+    /**
+     * Applies a jump force to the player
+     *
+     * @param p player which will be applied the jump force
+     */
     public void jump(PlayerBody p){
         if(p == players[0]) {
             updateHistory(1);
@@ -241,6 +251,11 @@ public class GameController implements ContactListener{
         }
     }
 
+    /**
+     * Applies a move down force to the player
+     *
+     * @param p player which will be applied the move down force
+     */
     public void moveDown(PlayerBody p) {
         if(p == players[0]) {
             updateHistory(2);
@@ -248,6 +263,11 @@ public class GameController implements ContactListener{
         p.moveDown();
     }
 
+    /**
+     * Applies the power up force to the player
+     *
+     * @param p player which will be applied the power up force
+     */
     public void usePowerUp(PlayerBody p){
         if(!p.isDead()) {
             if (p == players[0]) {
@@ -257,6 +277,12 @@ public class GameController implements ContactListener{
         }
     }
 
+    /**
+     * Gives a power up to the player
+     *
+     * @param p player which will be applied the jump force
+     * @param option power up option
+     */
     private void givePowerUp(PlayerBody p, double option) {
 
         if(option == -1) option = Math.floor(Math.random() * Math.floor(3));
@@ -286,6 +312,11 @@ public class GameController implements ContactListener{
         }
     }
 
+    /**
+     * Returns the player body
+     *
+     * @return player body
+     */
     public PlayerBody getPlayerBody() {
         return players[0];
     }
@@ -304,19 +335,16 @@ public class GameController implements ContactListener{
             ((PlayerModel) bodyA.getUserData()).setJumping(false);
             ((PlayerModel) bodyA.getUserData()).setFalling(false);
         }
-
         else if (bodyA.getUserData() instanceof PlayerModel && bodyB.getUserData() instanceof PowerUpModel){
             if(players[0].getBody() == bodyA) {
                 givePowerUp(players[0], -1);
             }
 
         }
-
         else if (bodyA.getUserData() instanceof PlayerModel && bodyB.getUserData() instanceof EnemyModel){
             if(players[0].getBody() == bodyA) players[0].die();
             else players[1].die();
         }
-
         else if (bodyA.getUserData() instanceof PlayerModel && bodyB.getUserData() instanceof EndLineModel){
             if(players[0].getBody() == bodyA) {
                 players[0].setFinish();
@@ -324,36 +352,41 @@ public class GameController implements ContactListener{
             else {
                 players[1].setFinish();
             }
-
         }
-
     }
 
+    /**
+     * Updated the ghost history movements
+     *
+     * @param action done by the ghost
+     */
     private void updateHistory(int action) {
-        //history.add(getTime());
         history_times.add(getTime());
         history.add((float) action);
     }
 
+    /**
+     * Returns the game current time
+     *
+     * @return game time
+     */
     public float getTime() {
         return time;
     }
 
-    @Override
-    public void endContact(Contact contact) {
-
-    }
 
     @Override
-    public void preSolve(Contact contact, Manifold oldManifold) {
-
-    }
+    public void endContact(Contact contact) {}
 
     @Override
-    public void postSolve(Contact contact, ContactImpulse impulse) {
+    public void preSolve(Contact contact, Manifold oldManifold) {}
 
-    }
+    @Override
+    public void postSolve(Contact contact, ContactImpulse impulse) {}
 
+    /**
+     * Connects to the server and tries to get the ghost movements
+     */
     public static void getFromServer() {
         network.get(GameModel.getInstance().getCurrentMap());
 
@@ -368,11 +401,22 @@ public class GameController implements ContactListener{
         actions_times = network.getTimes();
     }
 
+    /**
+     * Connects to the server and tries to send the ghost movements
+     *
+     * @param map current map
+     * @param history_times ghost times history
+     * @param history ghost movements history
+     * @param time ghost run total time
+     */
     private void sendToServer(int map, ArrayList<Float> history_times, ArrayList<Float> history, float time) {
         if(players[1].getTime() < players[0].getTime() ) return;
         network.send(map, history_times, history, time);
     }
 
+    /**
+     * Resets the Game Controller instance
+     */
     public static void reset() {
         if(actions_times != null)
             actions_times.clear();
@@ -381,6 +425,11 @@ public class GameController implements ContactListener{
         instance = null;
     }
 
+    /**
+     * Returns players
+     *
+     * @return players
+     */
     public PlayerBody[] getPlayers() {
         return players;
     }
