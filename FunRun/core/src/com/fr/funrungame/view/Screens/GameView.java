@@ -133,7 +133,7 @@ public class GameView extends ScreenAdapter {
 
         hudMenu = new HudMenu(game);
 
-        TiledMap map = game.getAssetManager().get(gameMaps.get(GameModel.getInstance().getCurrentMap()), TiledMap.class);
+        TiledMap map = game.getAssetManager().get(gameMaps.get(GameModel.getCurrentMap()), TiledMap.class);
         GameModel.getInstance().setMap(map);
         GameModel.getInstance().addEntities();
 
