@@ -443,4 +443,40 @@ public class GameController implements ContactListener{
     public PlayerBody[] getPlayers() {
         return players;
     }
+
+    /**
+     * Returns the platform bodies
+     *
+     * @return the platform bodies
+     */
+    public List<PlatformBody> getPlatformsBody() {
+        return platformsBody;
+    }
+
+    /**
+     * Returns the powerup bodies
+     *
+     * @return the powerup bodies
+     */
+    public List<TerrainActorBody> getPowerUps() {
+        return powerUps;
+    }
+
+    /**
+     * Returns the enemies bodies
+     *
+     * @return the enemies bodies
+     */
+    public List<TerrainActorBody> getEnemies() {
+        return enemies;
+    }
+
+    /**
+     * Returns the endline body
+     *
+     * @return the endline body
+     */
+    public TerrainActorBody getEndline() {
+        return endline;
+    }
 }

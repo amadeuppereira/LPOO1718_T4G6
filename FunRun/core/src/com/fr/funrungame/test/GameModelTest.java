@@ -19,6 +19,7 @@ public class GameModelTest extends GameTest{
 
     @Test
     public void mapLoaderTest() {
+        GameModel.reset();
         assertNull(GameModel.getInstance().getMap());
         TiledMap map = new TmxMapLoader().load("maps/test_map.tmx");
         GameModel.getInstance().setMap(map);
@@ -32,10 +33,7 @@ public class GameModelTest extends GameTest{
         assertNotNull(GameModel.getInstance().getEnemies());
         assertNotNull(GameModel.getInstance().getPlatforms());
         assertNotNull(GameModel.getInstance().getPowerUps());
-    }
 
-    @Test
-    public void testPlatformModel() {
         List<PlatformModel> p = GameModel.getInstance().getPlatforms();
         for(int i = 0; i < p.size(); i++) {
             PlatformModel t = p.get(i);
@@ -44,44 +42,30 @@ public class GameModelTest extends GameTest{
             assertNotNull(t.getY());
         }
 
-    }
+        EndLineModel p1 = GameModel.getInstance().getEndline();
+        assertNotNull(p1.getObject());
+        assertNotNull(p1.getX());
+        assertNotNull(p1.getY());
 
-    @Test
-    public void testEndlineModel() {
-        EndLineModel p = GameModel.getInstance().getEndline();
-        assertNotNull(p.getObject());
-        assertNotNull(p.getX());
-        assertNotNull(p.getY());
-    }
-
-    @Test
-    public void testEnemiesModel() {
-        List<EnemyModel> p = GameModel.getInstance().getEnemies();
-        for(int i = 0; i < p.size(); i++) {
-            EnemyModel t = p.get(i);
+        List<EnemyModel> p2 = GameModel.getInstance().getEnemies();
+        for(int i = 0; i < p2.size(); i++) {
+            EnemyModel t = p2.get(i);
             assertNotNull(t.getObject());
             assertNotNull(t.getX());
             assertNotNull(t.getY());
         }
 
-    }
-
-    @Test
-    public void testPowerupModel() {
-        List<PowerUpModel> p = GameModel.getInstance().getPowerUps();
-        for(int i = 0; i < p.size(); i++) {
-            PowerUpModel t = p.get(i);
+        List<PowerUpModel> p3 = GameModel.getInstance().getPowerUps();
+        for(int i = 0; i < p3.size(); i++) {
+            PowerUpModel t = p3.get(i);
             assertNotNull(t.getObject());
             assertNotNull(t.getX());
             assertNotNull(t.getY());
         }
-    }
 
-    @Test
-    public void testPlayerModel() {
-        List<PlayerModel> p = GameModel.getInstance().getPlayers();
-        for(int i = 0; i < p.size(); i++) {
-            PlayerModel t = p.get(i);
+        List<PlayerModel> p4 = GameModel.getInstance().getPlayers();
+        for(int i = 0; i < p4.size(); i++) {
+            PlayerModel t = p4.get(i);
             assertNull(t.getObject());
             assertNotNull(t.getX());
             assertNotNull(t.getY());
@@ -91,6 +75,13 @@ public class GameModelTest extends GameTest{
             assertEquals(PlayerModel.Boost.NONE, t.getBoost());
         }
     }
+
+    @Test
+    public void testPlatformModel() {
+
+
+    }
+
 
     @Test
     public void testRocketPowerupModel() {
