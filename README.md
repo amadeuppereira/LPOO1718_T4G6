@@ -17,11 +17,11 @@ A simple Fun Run copycat game with a few changes made using libGDX for the LPOO 
 ## Setup/Installation Procedure
 
 * ### To install the Android app:
-    1. Download the apk [here]()
+    1. Download the apk [here](https://drive.google.com/open?id=14Jyf5rLwRmidPRHwNyt44GMFSJorVvoL)
     2. Accept permissions.
 
 * ### To install the desktop app (for Windows, Linux and MacOS)
-   1. Download the jar [here]().
+   1. Download the jar [here](https://drive.google.com/open?id=1-qOeHG6qiQiLP2zfQKKK-ZO8OhWjVbQE).
    2. Run the file from the terminal or by double-clicking it.
     
 * ### Setup the Project on your computer:
