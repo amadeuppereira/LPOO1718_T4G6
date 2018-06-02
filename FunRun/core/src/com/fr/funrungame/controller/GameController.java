@@ -292,7 +292,7 @@ public class GameController implements ContactListener{
      * @param p player which will be applied the jump force
      * @param option power up option
      */
-    private void givePowerUp(PlayerBody p, double option) {
+    public void givePowerUp(PlayerBody p, double option) {
 
         if(option == -1) option = Math.floor(Math.random() * Math.floor(3));
         switch ((int)option) {
