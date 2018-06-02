@@ -1,3 +1,5 @@
+[![BCH compliance](https://bettercodehub.com/edge/badge/amadeuppereira/LPOO1718_T4G6?branch=master&token=da4efa03b893b97a4b563be2c6150e8028979265)](https://bettercodehub.com/)
+
 # Fun Run
 A simple Fun Run copycat game with a few changes made using libGDX for the LPOO classes.
 
