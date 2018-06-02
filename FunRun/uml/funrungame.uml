@@ -1,0 +1,1009 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.fr.funrungame</OriginalElement>
+  <nodes>
+    <node x="4045.500757355321" y="8711.5">com.fr.funrungame.test.GameTest</node>
+    <node x="2257.3072144179414" y="2183.0">com.fr.funrungame.view.Screens.MainMenu</node>
+    <node x="596.2780477512747" y="12.5">com.fr.funrungame.model.entities.PlayerModel.State</node>
+    <node x="2384.181098725305" y="3889.5">com.fr.funrungame.view.Screens.Controllers</node>
+    <node x="2736.111381084608" y="6006.0">com.fr.funrungame.controller.entities.TerrainActorBody</node>
+    <node x="2373.6217656575654" y="5375.0">com.fr.funrungame.controller.entities.EntityBody</node>
+    <node x="3053.151556776557" y="9042.5">com.fr.funrungame.test.GameModelTest</node>
+    <node x="4459.300795695002" y="8385.0">com.fr.funrungame.model.entities.PowerUpModel</node>
+    <node x="4415.500757355321" y="3210.0">com.fr.funrungame.model.entities.SpeedPowerUpModel</node>
+    <node x="1153.824581631288" y="1218.0">com.fr.funrungame.view.Screens.CountdownScreen</node>
+    <node x="2533.298156446927" y="3232.0">com.fr.funrungame.view.entities.EntityView</node>
+    <node x="66.4285714285711" y="337.0">com.fr.funrungame.model.entities.PlayerModel</node>
+    <node x="0.0" y="45.5">com.fr.funrungame.model.entities.PlayerModel.Boost</node>
+    <node x="3969.08148978026" y="3210.0">com.fr.funrungame.model.entities.RocketPowerUpModel</node>
+    <node x="4630.300795695002" y="448.5">com.fr.funrungame.model.entities.EnemyModel</node>
+    <node x="2359.5572144179414" y="1650.0">com.fr.funrungame.view.Screens.MapSelect</node>
+    <node x="1957.3072144179414" y="1573.0">com.fr.funrungame.view.Screens.LoadingScreen</node>
+    <node x="3405.5144320586382" y="4066.0">com.fr.funrungame.view.Screens.FinishMenu</node>
+    <node x="1817.1119849493425" y="5796.0">com.fr.funrungame.controller.Networking</node>
+    <node x="437.4285714285711" y="3769.0">com.fr.funrungame.view.entities.PlayerView</node>
+    <node x="2297.5257573553213" y="6491.0">com.fr.funrungame.controller.GameController</node>
+    <node x="2157.2447144179414" y="2659.0">com.fr.funrungame.FunRunGame</node>
+    <node x="3333.08148978026" y="0.0">com.fr.funrungame.model.entities.EntityModel</node>
+    <node x="1445.764158862386" y="4677.0">com.fr.funrungame.view.Screens.GameView</node>
+    <node x="2829.298156446927" y="3067.0">com.fr.funrungame.view.Screens.OptionsMenu</node>
+    <node x="4086.5144320586387" y="448.5">com.fr.funrungame.model.entities.EndLineModel</node>
+    <node x="1794.8307234432234" y="7438.0">com.fr.funrungame.controller.entities.PlayerBody</node>
+    <node x="2164.5572144179414" y="1207.0">com.fr.funrungame.view.Screens.MenuScreen</node>
+    <node x="3695.5144320586382" y="448.5">com.fr.funrungame.model.entities.PlatformModel</node>
+    <node x="2327.298156446927" y="3277.0">com.fr.funrungame.desktop.DesktopLauncher</node>
+    <node x="4124.220063270063" y="9031.0">com.fr.funrungame.test.GameControllerTest</node>
+    <node x="1760.1913706162982" y="4043.5">com.fr.funrungame.view.Screens.HudMenu</node>
+    <node x="1503.1913706162982" y="4099.5">com.fr.funrungame.view.Screens.PauseMenu</node>
+    <node x="2255.589652014652" y="8689.0">com.fr.funrungame.model.entities.ShieldPowerUpModel</node>
+    <node x="2430.111381084608" y="6006.0">com.fr.funrungame.controller.entities.PlatformBody</node>
+    <node x="4000.880923756395" y="732.0">com.fr.funrungame.model.GameModel</node>
+    <node x="1230.904532967033" y="3277.0">com.fr.funrungame.AndroidLauncher</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.fr.funrungame.model.GameModel" target="com.fr.funrungame.model.entities.PlayerModel">
+      <point x="-73.5" y="-192.5" />
+      <point x="4053.380923756395" y="662.0" />
+      <point x="393.321428571428" y="662.0" />
+      <point x="157.3928571428571" y="137.5" />
+    </edge>
+    <edge source="com.fr.funrungame.controller.entities.EntityBody" target="com.fr.funrungame.model.entities.EntityModel">
+      <point x="92.0" y="-170.5" />
+      <point x="2649.6217656575654" y="5345.0" />
+      <point x="3384.0144320586382" y="5345.0" />
+      <point x="3384.0144320586382" y="317.0" />
+      <point x="3427.052078015554" y="317.0" />
+      <point x="-83.52941176470586" y="93.5" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.OptionsMenu" target="com.fr.funrungame.view.Screens.MainMenu">
+      <point x="31.125" y="-236.0" />
+      <point x="2984.923156446927" y="3007.0" />
+      <point x="2857.110656446927" y="3007.0" />
+      <point x="2857.110656446927" y="2629.0" />
+      <point x="2469.8072144179414" y="2629.0" />
+      <point x="85.0" y="203.0" />
+    </edge>
+    <edge source="com.fr.funrungame.model.entities.PlayerModel" target="com.fr.funrungame.model.entities.EntityModel">
+      <point x="105.9375" y="-137.5" />
+      <point x="341.8660714285711" y="277.0" />
+      <point x="3343.5226662508485" y="277.0" />
+      <point x="-167.0588235294117" y="93.5" />
+    </edge>
+    <edge source="com.fr.funrungame.controller.GameController" target="com.fr.funrungame.model.entities.PlayerModel">
+      <point x="-222.391304347826" y="-423.5" />
+      <point x="2307.6344530074953" y="6471.0" />
+      <point x="565.2710102027163" y="6471.0" />
+      <point x="565.2710102027163" y="5736.0" />
+      <point x="253.3106089771295" y="5736.0" />
+      <point x="253.3106089771295" y="652.0" />
+      <point x="223.821428571428" y="652.0" />
+      <point x="-12.107142857143117" y="137.5" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.LoadingScreen" target="com.fr.funrungame.view.Screens.CountdownScreen">
+      <point x="0.0" y="-280.0" />
+      <point x="2085.8072144179414" y="1553.0" />
+      <point x="1363.824581631288" y="1553.0" />
+      <point x="70.0" y="137.0" />
+    </edge>
+    <edge source="com.fr.funrungame.controller.entities.PlayerBody" target="com.fr.funrungame.model.entities.EntityModel">
+      <point x="170.85714285714266" y="-423.5" />
+      <point x="2149.6878663003663" y="7418.0" />
+      <point x="4339.720063270063" y="7418.0" />
+      <point x="4339.720063270063" y="6471.0" />
+      <point x="5194.767287392759" y="6471.0" />
+      <point x="5194.767287392759" y="227.0" />
+      <point x="3635.8756074273188" y="227.0" />
+      <point x="125.29411764705856" y="93.5" />
+    </edge>
+    <edge source="com.fr.funrungame.test.GameModelTest" target="com.fr.funrungame.controller.entities.PlayerBody">
+      <point x="-73.42500000000018" y="-125.0" />
+      <point x="3113.2265567765567" y="8971.0" />
+      <point x="1294.1341741221306" y="8971.0" />
+      <point x="1294.1341741221306" y="8579.0" />
+      <point x="1921.8307234432234" y="8579.0" />
+      <point x="1921.8307234432234" y="8365.0" />
+      <point x="1840.8307234432234" y="8365.0" />
+      <point x="-138.0" y="423.5" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.OptionsMenu" target="com.fr.funrungame.model.GameModel">
+      <point x="93.375" y="-236.0" />
+      <point x="3047.173156446927" y="3047.0" />
+      <point x="3915.500757355321" y="3047.0" />
+      <point x="3915.500757355321" y="1157.0" />
+      <point x="4058.1536510291226" y="1157.0" />
+      <point x="-68.72727272727275" y="192.5" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.HudMenu" target="com.fr.funrungame.controller.GameController">
+      <point x="79.33333333333303" y="104.5" />
+      <point x="1958.5247039496312" y="4577.0" />
+      <point x="1791.264158862386" y="4577.0" />
+      <point x="1791.264158862386" y="6431.0" />
+      <point x="2388.5040182248863" y="6431.0" />
+      <point x="-141.52173913043498" y="-423.5" />
+    </edge>
+    <edge source="com.fr.funrungame.controller.GameController" target="com.fr.funrungame.model.entities.EntityModel">
+      <point x="121.304347826087" y="-423.5" />
+      <point x="2651.3301051814083" y="6391.0" />
+      <point x="3685.0144320586382" y="6391.0" />
+      <point x="3685.0144320586382" y="297.0" />
+      <point x="3489.6991368390836" y="297.0" />
+      <point x="-20.882352941176578" y="93.5" />
+    </edge>
+    <edge source="com.fr.funrungame.controller.entities.PlayerBody" target="com.fr.funrungame.model.entities.PlayerModel.Boost">
+      <point x="-170.85714285714266" y="-423.5" />
+      <point x="1807.9735805860807" y="7418.0" />
+      <point x="33.928571428571104" y="7418.0" />
+      <point x="33.928571428571104" y="317.0" />
+      <point x="29.57142857142844" y="317.0" />
+      <point x="-39.42857142857156" y="48.0" />
+    </edge>
+    <edge source="com.fr.funrungame.controller.entities.PlayerBody" target="com.fr.funrungame.model.entities.PlayerModel">
+      <point x="-144.57142857142844" y="-423.5" />
+      <point x="1834.259294871795" y="7408.0" />
+      <point x="225.8106089771295" y="7408.0" />
+      <point x="225.8106089771295" y="662.0" />
+      <point x="199.60714285714266" y="662.0" />
+      <point x="-36.32142857142844" y="137.5" />
+    </edge>
+    <edge source="com.fr.funrungame.model.GameModel" target="com.fr.funrungame.model.entities.EndLineModel">
+      <point x="31.5" y="-192.5" />
+      <point x="4158.380923756395" y="672.0" />
+      <point x="4196.914432058638" y="672.0" />
+      <point x="-73.59999999999991" y="26.0" />
+    </edge>
+    <edge source="com.fr.funrungame.model.entities.ShieldPowerUpModel" target="com.fr.funrungame.model.entities.PowerUpModel">
+      <point x="49.59999999999991" y="-71.0" />
+      <point x="2429.189652014652" y="8659.0" />
+      <point x="4496.800795695002" y="8659.0" />
+      <point x="-150.0" y="82.0" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.CountdownScreen" target="com.fr.funrungame.model.entities.PlayerModel.State">
+      <point x="0.0" y="-137.0" />
+      <point x="1293.824581631288" y="247.0" />
+      <point x="690.9655477512747" y="247.0" />
+      <point x="44.1875" y="81.0" />
+    </edge>
+    <edge source="com.fr.funrungame.test.GameModelTest" target="com.fr.funrungame.model.entities.PlayerModel.State">
+      <point x="-86.77500000000009" y="-125.0" />
+      <point x="3099.8765567765568" y="8981.0" />
+      <point x="314.7117458162952" y="8981.0" />
+      <point x="314.7117458162952" y="8669.0" />
+      <point x="326.25703754855795" y="8669.0" />
+      <point x="326.25703754855795" y="5766.0" />
+      <point x="415.9285714285711" y="5766.0" />
+      <point x="415.9285714285711" y="257.0" />
+      <point x="640.4655477512747" y="257.0" />
+      <point x="-6.3125" y="81.0" />
+    </edge>
+    <edge source="com.fr.funrungame.model.entities.RocketPowerUpModel" target="com.fr.funrungame.model.entities.PowerUpModel">
+      <point x="77.5" y="93.0" />
+      <point x="4170.58148978026" y="3689.0" />
+      <point x="4277.000757355321" y="3689.0" />
+      <point x="4277.000757355321" y="8315.0" />
+      <point x="4589.108488002695" y="8315.0" />
+      <point x="-57.69230769230762" y="-82.0" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.GameView" target="com.fr.funrungame.view.Screens.FinishMenu">
+      <point x="120.97222222222217" y="-324.0" />
+      <point x="1734.2363810846082" y="4637.0" />
+      <point x="3464.5144320586382" y="4637.0" />
+      <point x="-59.0" y="82.0" />
+    </edge>
+    <edge source="com.fr.funrungame.model.entities.PlayerModel" target="com.fr.funrungame.model.entities.PlayerModel.State">
+      <point x="21.1875" y="-137.5" />
+      <point x="257.1160714285711" y="237.0" />
+      <point x="615.2155477512747" y="237.0" />
+      <point x="-31.5625" y="81.0" />
+    </edge>
+    <edge source="com.fr.funrungame.model.entities.PlatformModel" target="com.fr.funrungame.model.entities.EntityModel">
+      <point x="-92.75" y="-26.0" />
+      <point x="3788.2644320586382" y="287.0" />
+      <point x="3510.58148978026" y="287.0" />
+      <point x="0.0" y="93.5" />
+    </edge>
+    <edge source="com.fr.funrungame.model.GameModel" target="com.fr.funrungame.model.entities.EnemyModel">
+      <point x="94.5" y="-192.5" />
+      <point x="4221.380923756395" y="702.0" />
+      <point x="4738.300795695002" y="702.0" />
+      <point x="-72.0" y="26.0" />
+    </edge>
+    <edge source="com.fr.funrungame.model.entities.PlayerModel" target="com.fr.funrungame.model.entities.PlayerModel.Boost">
+      <point x="-148.3125" y="-137.5" />
+      <point x="87.6160714285711" y="317.0" />
+      <point x="88.71428571428578" y="317.0" />
+      <point x="19.714285714285666" y="48.0" />
+    </edge>
+    <edge source="com.fr.funrungame.test.GameModelTest" target="com.fr.funrungame.model.entities.PlayerModel">
+      <point x="-100.125" y="-125.0" />
+      <point x="3086.526556776557" y="8991.0" />
+      <point x="159.8106089771295" y="8991.0" />
+      <point x="159.8106089771295" y="702.0" />
+      <point x="102.74999999999955" y="702.0" />
+      <point x="-133.17857142857156" y="137.5" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.CountdownScreen" target="com.fr.funrungame.model.entities.PlayerModel">
+      <point x="-93.33333333333348" y="-137.0" />
+      <point x="1200.4912482979546" y="1187.0" />
+      <point x="359.25703754855795" y="1187.0" />
+      <point x="359.25703754855795" y="692.0" />
+      <point x="320.6785714285711" y="692.0" />
+      <point x="84.75" y="137.5" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.GameView" target="com.fr.funrungame.FunRunGame">
+      <point x="-46.52777777777783" y="-324.0" />
+      <point x="1566.7363810846082" y="4597.0" />
+      <point x="1136.654532967033" y="4597.0" />
+      <point x="1136.654532967033" y="3007.0" />
+      <point x="2187.4754836487105" y="3007.0" />
+      <point x="-100.76923076923094" y="159.0" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.GameView" target="com.fr.funrungame.controller.GameController">
+      <point x="0.0" y="324.0" />
+      <point x="1613.264158862386" y="6441.0" />
+      <point x="2368.286626920539" y="6441.0" />
+      <point x="-161.73913043478206" y="-423.5" />
+    </edge>
+    <edge source="com.fr.funrungame.test.GameControllerTest" target="com.fr.funrungame.model.entities.SpeedPowerUpModel">
+      <point x="82.8125" y="-136.5" />
+      <point x="4339.532563270063" y="8981.0" />
+      <point x="4844.800795695002" y="8981.0" />
+      <point x="4844.800795695002" y="3729.0" />
+      <point x="4648.000757355321" y="3729.0" />
+      <point x="108.5" y="93.0" />
+    </edge>
+    <edge source="com.fr.funrungame.controller.entities.PlatformBody" target="com.fr.funrungame.controller.entities.EntityBody">
+      <point x="-95.33333333333303" y="-37.5" />
+      <point x="2477.778047751275" y="5776.0" />
+      <point x="2526.9550989908985" y="5776.0" />
+      <point x="-30.66666666666697" y="170.5" />
+    </edge>
+    <edge source="com.fr.funrungame.controller.GameController" target="com.fr.funrungame.controller.Networking">
+      <point x="-101.08695652173901" y="-423.5" />
+      <point x="2428.9388008335823" y="6411.0" />
+      <point x="2124.6119849493425" y="6411.0" />
+      <point x="102.5" y="247.5" />
+    </edge>
+    <edge source="com.fr.funrungame.test.GameControllerTest" target="com.fr.funrungame.controller.GameController">
+      <point x="-49.6875" y="-136.5" />
+      <point x="4207.032563270063" y="8861.0" />
+      <point x="3420.1686144981786" y="8861.0" />
+      <point x="3420.1686144981786" y="8579.0" />
+      <point x="2734.6686144981786" y="8579.0" />
+      <point x="2734.6686144981786" y="7378.0" />
+      <point x="2662.8829002124644" y="7378.0" />
+      <point x="132.85714285714312" y="423.5" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.FinishMenu" target="com.fr.funrungame.controller.GameController">
+      <point x="59.0" y="82.0" />
+      <point x="3582.5144320586382" y="6371.0" />
+      <point x="2610.8953225727123" y="6371.0" />
+      <point x="80.86956521739103" y="-423.5" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.PauseMenu" target="com.fr.funrungame.view.Screens.OptionsMenu">
+      <point x="0.0" y="-48.5" />
+      <point x="1621.6913706162982" y="3669.0" />
+      <point x="2854.198156446927" y="3669.0" />
+      <point x="-99.59999999999991" y="236.0" />
+    </edge>
+    <edge source="com.fr.funrungame.test.GameModelTest" target="com.fr.funrungame.model.entities.PlayerModel.Boost">
+      <point x="-126.82499999999982" y="-125.0" />
+      <point x="3059.826556776557" y="9011.0" />
+      <point x="22.928571428571104" y="9011.0" />
+      <point x="22.928571428571104" y="317.0" />
+      <point x="9.857142857142662" y="317.0" />
+      <point x="-59.14285714285734" y="48.0" />
+    </edge>
+    <edge source="com.fr.funrungame.controller.entities.TerrainActorBody" target="com.fr.funrungame.controller.entities.EntityBody">
+      <point x="0.0" y="-37.5" />
+      <point x="2891.611381084608" y="5746.0" />
+      <point x="2710.9550989908985" y="5746.0" />
+      <point x="153.33333333333303" y="170.5" />
+    </edge>
+    <edge source="com.fr.funrungame.controller.GameController" target="com.fr.funrungame.model.entities.EndLineModel">
+      <point x="202.17391304347802" y="-423.5" />
+      <point x="2732.1996703987993" y="6451.0" />
+      <point x="4974.847335997336" y="6451.0" />
+      <point x="4974.847335997336" y="682.0" />
+      <point x="4344.114432058638" y="682.0" />
+      <point x="73.59999999999991" y="26.0" />
+    </edge>
+    <edge source="com.fr.funrungame.model.entities.PlayerModel.State" target="com.fr.funrungame.model.entities.PlayerModel">
+      <point x="-18.9375" y="81.0" />
+      <point x="627.8405477512747" y="247.0" />
+      <point x="299.4910714285711" y="247.0" />
+      <point x="63.5625" y="-137.5" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.PauseMenu" target="com.fr.funrungame.view.Screens.GameView">
+      <point x="59.25" y="48.5" />
+      <point x="1680.9413706162982" y="4547.0" />
+      <point x="1622.5697144179417" y="4547.0" />
+      <point x="9.305555555555657" y="-324.0" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.MainMenu" target="com.fr.funrungame.view.Screens.LoadingScreen">
+      <point x="-102.0" y="-203.0" />
+      <point x="2282.8072144179414" y="2158.0" />
+      <point x="2182.1822144179414" y="2158.0" />
+      <point x="96.375" y="280.0" />
+    </edge>
+    <edge source="com.fr.funrungame.model.entities.SpeedPowerUpModel" target="com.fr.funrungame.controller.entities.PlayerBody">
+      <point x="-46.5" y="93.0" />
+      <point x="4493.000757355321" y="3729.0" />
+      <point x="4383.800795695002" y="3729.0" />
+      <point x="4383.800795695002" y="6441.0" />
+      <point x="4112.000757355321" y="6441.0" />
+      <point x="4112.000757355321" y="7408.0" />
+      <point x="2123.4021520146516" y="7408.0" />
+      <point x="144.57142857142844" y="-423.5" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.Controllers" target="com.fr.funrungame.controller.entities.PlayerBody">
+      <point x="0.0" y="258.5" />
+      <point x="2515.181098725305" y="4607.0" />
+      <point x="2295.427481727409" y="4607.0" />
+      <point x="2295.427481727409" y="5756.0" />
+      <point x="1002.382037548558" y="5756.0" />
+      <point x="1002.382037548558" y="7378.0" />
+      <point x="1913.1164377289376" y="7378.0" />
+      <point x="-65.71428571428578" y="-423.5" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.HudMenu" target="com.fr.funrungame.FunRunGame">
+      <point x="0.0" y="-104.5" />
+      <point x="1879.1913706162982" y="3629.0" />
+      <point x="1533.8820375485582" y="3629.0" />
+      <point x="1533.8820375485582" y="3047.0" />
+      <point x="2268.090868264095" y="3047.0" />
+      <point x="-20.15384615384619" y="159.0" />
+    </edge>
+    <edge source="com.fr.funrungame.controller.GameController" target="com.fr.funrungame.model.entities.PowerUpModel">
+      <point x="199.28571428571468" y="423.5" />
+      <point x="2729.311471641036" y="7368.0" />
+      <point x="2745.6686144981786" y="7368.0" />
+      <point x="2745.6686144981786" y="8325.0" />
+      <point x="4560.26233415654" y="8325.0" />
+      <point x="-86.53846153846143" y="-82.0" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.LoadingScreen" target="com.fr.funrungame.FunRunGame">
+      <point x="32.125" y="280.0" />
+      <point x="2117.9322144179414" y="2158.0" />
+      <point x="2091.3072144179414" y="2158.0" />
+      <point x="2091.3072144179414" y="2629.0" />
+      <point x="2206.3697144179414" y="2629.0" />
+      <point x="-81.875" y="-159.0" />
+    </edge>
+    <edge source="com.fr.funrungame.view.entities.PlayerView" target="com.fr.funrungame.model.entities.PlayerModel.Boost">
+      <point x="-238.22222222222217" y="-379.0" />
+      <point x="467.20634920634893" y="3749.0" />
+      <point x="44.928571428571104" y="3749.0" />
+      <point x="44.928571428571104" y="317.0" />
+      <point x="49.28571428571422" y="317.0" />
+      <point x="-19.71428571428578" y="48.0" />
+    </edge>
+    <edge source="com.fr.funrungame.test.GameModelTest" target="com.fr.funrungame.test.GameTest">
+      <point x="60.07499999999982" y="-125.0" />
+      <point x="3246.7265567765567" y="8931.0" />
+      <point x="4098.000757355321" y="8931.0" />
+      <point x="-52.5" y="48.5" />
+    </edge>
+    <edge source="com.fr.funrungame.view.entities.PlayerView" target="com.fr.funrungame.view.entities.EntityView">
+      <point x="119.11111111111109" y="-379.0" />
+      <point x="824.5396825396822" y="3649.0" />
+      <point x="2579.298156446927" y="3649.0" />
+      <point x="-92.0" y="71.0" />
+    </edge>
+    <edge source="com.fr.funrungame.controller.entities.PlayerBody" target="com.fr.funrungame.view.Screens.GameView">
+      <point x="-92.0" y="-423.5" />
+      <point x="1886.8307234432234" y="7388.0" />
+      <point x="554.2710102027163" y="7388.0" />
+      <point x="554.2710102027163" y="5746.0" />
+      <point x="1524.264158862386" y="5746.0" />
+      <point x="1524.264158862386" y="5355.0" />
+      <point x="1501.5974921957195" y="5355.0" />
+      <point x="-111.66666666666652" y="324.0" />
+    </edge>
+    <edge source="com.fr.funrungame.view.entities.EntityView" target="com.fr.funrungame.model.entities.EntityModel">
+      <point x="69.0" y="-71.0" />
+      <point x="2740.298156446927" y="3047.0" />
+      <point x="2868.110656446927" y="3047.0" />
+      <point x="2868.110656446927" y="297.0" />
+      <point x="3385.287372133201" y="297.0" />
+      <point x="-125.29411764705878" y="93.5" />
+    </edge>
+    <edge source="com.fr.funrungame.test.GameControllerTest" target="com.fr.funrungame.model.entities.PowerUpModel">
+      <point x="49.6875" y="-136.5" />
+      <point x="4306.407563270063" y="8971.0" />
+      <point x="4679.720063270063" y="8971.0" />
+      <point x="4679.720063270063" y="8669.0" />
+      <point x="4796.800795695002" y="8669.0" />
+      <point x="149.99999999999977" y="82.0" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.MainMenu" target="com.fr.funrungame.view.Screens.MenuScreen">
+      <point x="0.0" y="-203.0" />
+      <point x="2384.8072144179414" y="2158.0" />
+      <point x="2349.0572144179414" y="2158.0" />
+      <point x="2349.0572144179414" y="1553.0" />
+      <point x="2373.390547751275" y="1553.0" />
+      <point x="29.833333333333314" y="148.0" />
+    </edge>
+    <edge source="com.fr.funrungame.model.GameModel" target="com.fr.funrungame.view.Screens.GameView">
+      <point x="-45.818181818181756" y="192.5" />
+      <point x="4081.0627419382135" y="1167.0" />
+      <point x="3926.500757355321" y="1167.0" />
+      <point x="3926.500757355321" y="4647.0" />
+      <point x="1752.8474921957195" y="4647.0" />
+      <point x="139.58333333333348" y="-324.0" />
+    </edge>
+    <edge source="com.fr.funrungame.test.GameModelTest" target="com.fr.funrungame.model.GameModel">
+      <point x="33.375" y="-125.0" />
+      <point x="3220.026556776557" y="8911.0" />
+      <point x="3398.1686144981786" y="8911.0" />
+      <point x="3398.1686144981786" y="8639.0" />
+      <point x="4134.000757355321" y="8639.0" />
+      <point x="4134.000757355321" y="6421.0" />
+      <point x="4316.58148978026" y="6421.0" />
+      <point x="4316.58148978026" y="1187.0" />
+      <point x="4149.7900146654865" y="1187.0" />
+      <point x="22.90909090909099" y="192.5" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.CountdownScreen" target="com.fr.funrungame.view.Screens.GameView">
+      <point x="23.333333333333485" y="137.0" />
+      <point x="1317.1579149646216" y="1553.0" />
+      <point x="1027.9285714285716" y="1553.0" />
+      <point x="1027.9285714285716" y="4607.0" />
+      <point x="1548.1252699734969" y="4607.0" />
+      <point x="-65.13888888888914" y="-324.0" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.Controllers" target="com.fr.funrungame.model.entities.PlayerModel">
+      <point x="-104.80000000000018" y="-258.5" />
+      <point x="2410.381098725305" y="3619.0" />
+      <point x="348.25703754855795" y="3619.0" />
+      <point x="348.25703754855795" y="702.0" />
+      <point x="296.4642857142853" y="702.0" />
+      <point x="60.53571428571422" y="137.5" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.MenuScreen" target="com.fr.funrungame.FunRunGame">
+      <point x="-149.16666666666663" y="148.0" />
+      <point x="2194.390547751275" y="1533.0" />
+      <point x="2235.8072144179414" y="1533.0" />
+      <point x="2235.8072144179414" y="2629.0" />
+      <point x="2271.8697144179414" y="2629.0" />
+      <point x="-16.375" y="-159.0" />
+    </edge>
+    <edge source="com.fr.funrungame.controller.GameController" target="com.fr.funrungame.controller.entities.PlayerBody">
+      <point x="0.0" y="423.5" />
+      <point x="2530.0257573553213" y="7388.0" />
+      <point x="2070.830723443223" y="7388.0" />
+      <point x="92.0" y="-423.5" />
+    </edge>
+    <edge source="com.fr.funrungame.controller.GameController" target="com.fr.funrungame.model.GameModel">
+      <point x="141.52173913043498" y="-423.5" />
+      <point x="2671.5474964857563" y="6401.0" />
+      <point x="3958.58148978026" y="6401.0" />
+      <point x="3958.58148978026" y="1187.0" />
+      <point x="4126.880923756395" y="1187.0" />
+      <point x="0.0" y="192.5" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.OptionsMenu" target="com.fr.funrungame.controller.GameController">
+      <point x="99.59999999999991" y="236.0" />
+      <point x="3053.398156446927" y="3559.0" />
+      <point x="3652.0144320586382" y="3559.0" />
+      <point x="3652.0144320586382" y="6381.0" />
+      <point x="2631.1127138770603" y="6381.0" />
+      <point x="101.08695652173901" y="-423.5" />
+    </edge>
+    <edge source="com.fr.funrungame.test.GameControllerTest" target="com.fr.funrungame.model.GameModel">
+      <point x="115.9375" y="-136.5" />
+      <point x="4372.657563270063" y="8991.0" />
+      <point x="4888.800795695002" y="8991.0" />
+      <point x="4888.800795695002" y="1147.0" />
+      <point x="4241.42637830185" y="1147.0" />
+      <point x="114.5454545454545" y="192.5" />
+    </edge>
+    <edge source="com.fr.funrungame.model.entities.EndLineModel" target="com.fr.funrungame.model.entities.EntityModel">
+      <point x="-92.0" y="-26.0" />
+      <point x="4178.514432058639" y="267.0" />
+      <point x="3552.3461956626124" y="267.0" />
+      <point x="41.7647058823527" y="93.5" />
+    </edge>
+    <edge source="com.fr.funrungame.test.GameModelTest" target="com.fr.funrungame.model.entities.PlatformModel">
+      <point x="-46.72499999999991" y="-125.0" />
+      <point x="3139.926556776557" y="8951.0" />
+      <point x="1316.1341741221306" y="8951.0" />
+      <point x="1316.1341741221306" y="8599.0" />
+      <point x="3795.4836996336994" y="8599.0" />
+      <point x="3795.4836996336994" y="712.0" />
+      <point x="3732.614432058638" y="712.0" />
+      <point x="-148.4000000000001" y="26.0" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.MapSelect" target="com.fr.funrungame.view.Screens.MenuScreen">
+      <point x="0.0" y="-203.0" />
+      <point x="2482.5572144179414" y="1553.0" />
+      <point x="2492.723881084608" y="1553.0" />
+      <point x="149.16666666666652" y="148.0" />
+    </edge>
+    <edge source="com.fr.funrungame.AndroidLauncher" target="com.fr.funrungame.FunRunGame">
+      <point x="0.0" y="-26.0" />
+      <point x="1335.404532967033" y="3027.0" />
+      <point x="2227.783175956403" y="3027.0" />
+      <point x="-60.46153846153857" y="159.0" />
+    </edge>
+    <edge source="com.fr.funrungame.controller.GameController" target="com.fr.funrungame.controller.entities.TerrainActorBody">
+      <point x="60.65217391304395" y="-423.5" />
+      <point x="2590.6779312683652" y="6361.0" />
+      <point x="3008.236381084608" y="6361.0" />
+      <point x="116.625" y="37.5" />
+    </edge>
+    <edge source="com.fr.funrungame.test.GameModelTest" target="com.fr.funrungame.model.entities.SpeedPowerUpModel">
+      <point x="73.42500000000018" y="-125.0" />
+      <point x="3260.076556776557" y="8941.0" />
+      <point x="4448.800795695002" y="8941.0" />
+      <point x="4448.800795695002" y="3749.0" />
+      <point x="4555.000757355321" y="3749.0" />
+      <point x="15.5" y="93.0" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.CountdownScreen" target="com.fr.funrungame.FunRunGame">
+      <point x="116.66666666666652" y="137.0" />
+      <point x="1410.4912482979546" y="1543.0" />
+      <point x="2224.8072144179414" y="1543.0" />
+      <point x="2224.8072144179414" y="2639.0" />
+      <point x="2239.1197144179414" y="2639.0" />
+      <point x="-49.125" y="-159.0" />
+    </edge>
+    <edge source="com.fr.funrungame.test.GameModelTest" target="com.fr.funrungame.model.entities.PowerUpModel">
+      <point x="86.77500000000009" y="-125.0" />
+      <point x="3273.426556776557" y="8951.0" />
+      <point x="4657.720063270063" y="8951.0" />
+      <point x="4657.720063270063" y="8669.0" />
+      <point x="4646.800795695002" y="8669.0" />
+      <point x="0.0" y="82.0" />
+    </edge>
+    <edge source="com.fr.funrungame.controller.entities.PlayerBody" target="com.fr.funrungame.model.entities.PlayerModel.State">
+      <point x="-118.28571428571422" y="-423.5" />
+      <point x="1860.5450091575092" y="7398.0" />
+      <point x="340.8035714285711" y="7398.0" />
+      <point x="340.8035714285711" y="5776.0" />
+      <point x="426.9285714285711" y="5776.0" />
+      <point x="426.9285714285711" y="267.0" />
+      <point x="653.0905477512747" y="267.0" />
+      <point x="6.3125" y="81.0" />
+    </edge>
+    <edge source="com.fr.funrungame.view.entities.PlayerView" target="com.fr.funrungame.FunRunGame">
+      <point x="59.55555555555566" y="-379.0" />
+      <point x="764.9841269841268" y="3639.0" />
+      <point x="1125.654532967033" y="3639.0" />
+      <point x="1125.654532967033" y="2997.0" />
+      <point x="2167.3216374948643" y="2997.0" />
+      <point x="-120.92307692307713" y="159.0" />
+    </edge>
+    <edge source="com.fr.funrungame.test.GameControllerTest" target="com.fr.funrungame.model.entities.PlayerModel">
+      <point x="-115.9375" y="-136.5" />
+      <point x="4140.782563270063" y="8881.0" />
+      <point x="1420.5779241221305" y="8881.0" />
+      <point x="1420.5779241221305" y="8569.0" />
+      <point x="192.8106089771295" y="8569.0" />
+      <point x="192.8106089771295" y="692.0" />
+      <point x="126.96428571428532" y="692.0" />
+      <point x="-108.96428571428578" y="137.5" />
+    </edge>
+    <edge source="com.fr.funrungame.view.entities.EntityView" target="com.fr.funrungame.view.Screens.GameView">
+      <point x="92.0" y="71.0" />
+      <point x="2763.298156446927" y="3659.0" />
+      <point x="3395.0144320586382" y="3659.0" />
+      <point x="3395.0144320586382" y="4627.0" />
+      <point x="1715.6252699734973" y="4627.0" />
+      <point x="102.36111111111131" y="-324.0" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.MapSelect" target="com.fr.funrungame.model.GameModel">
+      <point x="82.0" y="-203.0" />
+      <point x="2564.5572144179414" y="1147.0" />
+      <point x="4035.2445601200316" y="1147.0" />
+      <point x="-91.63636363636374" y="192.5" />
+    </edge>
+    <edge source="com.fr.funrungame.controller.entities.PlayerBody" target="com.fr.funrungame.controller.GameController">
+      <point x="13.142857142857338" y="-423.5" />
+      <point x="1991.9735805860807" y="7358.0" />
+      <point x="2330.7400430696066" y="7358.0" />
+      <point x="-199.28571428571468" y="423.5" />
+    </edge>
+    <edge source="com.fr.funrungame.model.entities.SpeedPowerUpModel" target="com.fr.funrungame.model.entities.PowerUpModel">
+      <point x="77.5" y="93.0" />
+      <point x="4617.000757355321" y="3739.0" />
+      <point x="4692.720063270063" y="3739.0" />
+      <point x="4692.720063270063" y="8365.0" />
+      <point x="4675.646949541156" y="8365.0" />
+      <point x="28.84615384615381" y="-82.0" />
+    </edge>
+    <edge source="com.fr.funrungame.controller.entities.PlatformBody" target="com.fr.funrungame.model.entities.EntityModel">
+      <point x="95.33333333333303" y="-37.5" />
+      <point x="2668.444714417941" y="5766.0" />
+      <point x="3384.0144320586382" y="5766.0" />
+      <point x="3384.0144320586382" y="5355.0" />
+      <point x="3663.0144320586382" y="5355.0" />
+      <point x="3663.0144320586382" y="317.0" />
+      <point x="3447.9344309567305" y="317.0" />
+      <point x="-62.647058823529505" y="93.5" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.GameView" target="com.fr.funrungame.model.GameModel">
+      <point x="158.19444444444434" y="-324.0" />
+      <point x="1771.4586033068304" y="4657.0" />
+      <point x="3937.500757355321" y="4657.0" />
+      <point x="3937.500757355321" y="1177.0" />
+      <point x="4103.9718328473045" y="1177.0" />
+      <point x="-22.90909090909099" y="192.5" />
+    </edge>
+    <edge source="com.fr.funrungame.model.entities.PowerUpModel" target="com.fr.funrungame.controller.entities.PlayerBody">
+      <point x="-115.38461538461524" y="-82.0" />
+      <point x="4531.416180310387" y="8335.0" />
+      <point x="2116.830723443223" y="8335.0" />
+      <point x="138.0" y="423.5" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.GameView" target="com.fr.funrungame.view.Screens.PauseMenu">
+      <point x="-9.305555555555657" y="-324.0" />
+      <point x="1603.9586033068304" y="4577.0" />
+      <point x="1562.4413706162982" y="4577.0" />
+      <point x="-59.25" y="48.5" />
+    </edge>
+    <edge source="com.fr.funrungame.controller.GameController" target="com.fr.funrungame.model.entities.SpeedPowerUpModel">
+      <point x="181.95652173913004" y="-423.5" />
+      <point x="2711.9822790944513" y="6431.0" />
+      <point x="4372.800795695002" y="6431.0" />
+      <point x="4372.800795695002" y="3719.0" />
+      <point x="4462.000757355321" y="3719.0" />
+      <point x="-77.5" y="93.0" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.Controllers" target="com.fr.funrungame.model.entities.SpeedPowerUpModel">
+      <point x="104.80000000000018" y="-258.5" />
+      <point x="2619.9810987253054" y="3709.0" />
+      <point x="4431.000757355321" y="3709.0" />
+      <point x="-108.5" y="93.0" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.PauseMenu" target="com.fr.funrungame.FunRunGame">
+      <point x="-79.0" y="-48.5" />
+      <point x="1542.6913706162982" y="3639.0" />
+      <point x="1450.404532967033" y="3639.0" />
+      <point x="1450.404532967033" y="3037.0" />
+      <point x="2247.937022110249" y="3037.0" />
+      <point x="-40.30769230769238" y="159.0" />
+    </edge>
+    <edge source="com.fr.funrungame.test.GameControllerTest" target="com.fr.funrungame.test.GameTest">
+      <point x="-16.5625" y="-136.5" />
+      <point x="4240.157563270063" y="8851.0" />
+      <point x="4203.000757355321" y="8851.0" />
+      <point x="52.5" y="48.5" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.GameView" target="com.fr.funrungame.view.Screens.HudMenu">
+      <point x="27.916666666666515" y="-324.0" />
+      <point x="1641.1808255290525" y="4557.0" />
+      <point x="1799.8580372829651" y="4557.0" />
+      <point x="-79.33333333333303" y="104.5" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.MapSelect" target="com.fr.funrungame.view.Screens.MainMenu">
+      <point x="0.0" y="203.0" />
+      <point x="2482.5572144179414" y="2158.0" />
+      <point x="2486.8072144179414" y="2158.0" />
+      <point x="102.0" y="-203.0" />
+    </edge>
+    <edge source="com.fr.funrungame.model.entities.PowerUpModel" target="com.fr.funrungame.model.entities.EntityModel">
+      <point x="144.23076923076928" y="-82.0" />
+      <point x="4791.031564925772" y="8355.0" />
+      <point x="5205.767287392759" y="8355.0" />
+      <point x="5205.767287392759" y="217.0" />
+      <point x="3656.7579603684953" y="217.0" />
+      <point x="146.17647058823513" y="93.5" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.Controllers" target="com.fr.funrungame.FunRunGame">
+      <point x="-52.40000000000009" y="-258.5" />
+      <point x="2462.781098725305" y="3609.0" />
+      <point x="2288.2447144179414" y="3609.0" />
+      <point x="0.0" y="159.0" />
+    </edge>
+    <edge source="com.fr.funrungame.view.entities.PlayerView" target="com.fr.funrungame.model.entities.PlayerModel">
+      <point x="-119.11111111111131" y="-379.0" />
+      <point x="586.3174603174598" y="3729.0" />
+      <point x="337.25703754855795" y="3729.0" />
+      <point x="337.25703754855795" y="712.0" />
+      <point x="272.24999999999955" y="712.0" />
+      <point x="36.32142857142844" y="137.5" />
+    </edge>
+    <edge source="com.fr.funrungame.model.entities.PlayerModel.Boost" target="com.fr.funrungame.model.entities.PlayerModel">
+      <point x="59.14285714285734" y="48.0" />
+      <point x="128.14285714285734" y="307.0" />
+      <point x="172.3660714285711" y="307.0" />
+      <point x="-63.5625" y="-137.5" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.MainMenu" target="com.fr.funrungame.FunRunGame">
+      <point x="0.0" y="203.0" />
+      <point x="2384.8072144179414" y="2639.0" />
+      <point x="2370.1197144179414" y="2639.0" />
+      <point x="81.875" y="-159.0" />
+    </edge>
+    <edge source="com.fr.funrungame.view.entities.PlayerView" target="com.fr.funrungame.model.entities.EntityModel">
+      <point x="238.22222222222217" y="-379.0" />
+      <point x="943.6507936507933" y="3689.0" />
+      <point x="3088.798156446927" y="3689.0" />
+      <point x="3088.798156446927" y="307.0" />
+      <point x="3406.1697250743773" y="307.0" />
+      <point x="-104.41176470588243" y="93.5" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.Controllers" target="com.fr.funrungame.model.entities.ShieldPowerUpModel">
+      <point x="104.80000000000018" y="258.5" />
+      <point x="2619.9810987253054" y="4617.0" />
+      <point x="3095.33148978026" y="4617.0" />
+      <point x="3095.33148978026" y="8589.0" />
+      <point x="2379.589652014652" y="8589.0" />
+      <point x="0.0" y="-71.0" />
+    </edge>
+    <edge source="com.fr.funrungame.test.GameModelTest" target="com.fr.funrungame.model.entities.ShieldPowerUpModel">
+      <point x="-33.375" y="-125.0" />
+      <point x="3153.276556776557" y="8941.0" />
+      <point x="2296.9229853479856" y="8941.0" />
+      <point x="-82.66666666666652" y="71.0" />
+    </edge>
+    <edge source="com.fr.funrungame.model.entities.RocketPowerUpModel" target="com.fr.funrungame.controller.entities.PlayerBody">
+      <point x="-46.5" y="93.0" />
+      <point x="4046.58148978026" y="3689.0" />
+      <point x="4090.000757355321" y="3689.0" />
+      <point x="4090.000757355321" y="6421.0" />
+      <point x="3615.6836996336992" y="6421.0" />
+      <point x="3615.6836996336992" y="7398.0" />
+      <point x="2097.116437728938" y="7398.0" />
+      <point x="118.28571428571422" y="-423.5" />
+    </edge>
+    <edge source="com.fr.funrungame.test.GameModelTest" target="com.fr.funrungame.model.entities.EnemyModel">
+      <point x="126.82499999999982" y="-125.0" />
+      <point x="3313.4765567765567" y="9011.0" />
+      <point x="5135.517287392759" y="9011.0" />
+      <point x="5135.517287392759" y="652.0" />
+      <point x="4954.300795695002" y="652.0" />
+      <point x="144.0" y="26.0" />
+    </edge>
+    <edge source="com.fr.funrungame.controller.GameController" target="com.fr.funrungame.controller.entities.PlatformBody">
+      <point x="-20.217391304347984" y="-423.5" />
+      <point x="2509.8083660509733" y="6321.0" />
+      <point x="2668.444714417941" y="6321.0" />
+      <point x="95.33333333333303" y="37.5" />
+    </edge>
+    <edge source="com.fr.funrungame.test.GameModelTest" target="com.fr.funrungame.model.entities.RocketPowerUpModel">
+      <point x="20.02500000000009" y="-125.0" />
+      <point x="3206.676556776557" y="8901.0" />
+      <point x="3387.1686144981786" y="8901.0" />
+      <point x="3387.1686144981786" y="8629.0" />
+      <point x="4123.000757355321" y="8629.0" />
+      <point x="4123.000757355321" y="3699.0" />
+      <point x="4108.58148978026" y="3699.0" />
+      <point x="15.5" y="93.0" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.GameView" target="com.fr.funrungame.view.Screens.Controllers">
+      <point x="83.75" y="-324.0" />
+      <point x="1697.014158862386" y="4597.0" />
+      <point x="2462.781098725305" y="4597.0" />
+      <point x="-52.40000000000009" y="258.5" />
+    </edge>
+    <edge source="com.fr.funrungame.view.entities.EntityView" target="com.fr.funrungame.FunRunGame">
+      <point x="-69.0" y="-71.0" />
+      <point x="2602.298156446927" y="3037.0" />
+      <point x="2368.860099033326" y="3037.0" />
+      <point x="80.61538461538476" y="159.0" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.LoadingScreen" target="com.fr.funrungame.controller.GameController">
+      <point x="-96.375" y="280.0" />
+      <point x="1989.4322144179414" y="2158.0" />
+      <point x="1016.9285714285716" y="2158.0" />
+      <point x="1016.9285714285716" y="6451.0" />
+      <point x="2348.0692356161912" y="6451.0" />
+      <point x="-181.95652173913004" y="-423.5" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.FinishMenu" target="com.fr.funrungame.FunRunGame">
+      <point x="-78.66666666666606" y="-82.0" />
+      <point x="3444.847765391972" y="3589.0" />
+      <point x="2316.798156446927" y="3589.0" />
+      <point x="2316.798156446927" y="3047.0" />
+      <point x="2328.552406725634" y="3047.0" />
+      <point x="40.30769230769238" y="159.0" />
+    </edge>
+    <edge source="com.fr.funrungame.view.entities.PlayerView" target="com.fr.funrungame.model.entities.PlayerModel.State">
+      <point x="0.0" y="-379.0" />
+      <point x="705.4285714285713" y="257.0" />
+      <point x="678.3405477512747" y="257.0" />
+      <point x="31.5625" y="81.0" />
+    </edge>
+    <edge source="com.fr.funrungame.model.GameModel" target="com.fr.funrungame.model.entities.PlatformModel">
+      <point x="-52.5" y="-192.5" />
+      <point x="4074.380923756395" y="652.0" />
+      <point x="3881.0144320586382" y="652.0" />
+      <point x="0.0" y="26.0" />
+    </edge>
+    <edge source="com.fr.funrungame.controller.entities.TerrainActorBody" target="com.fr.funrungame.model.entities.EntityModel">
+      <point x="103.66666666666697" y="-37.5" />
+      <point x="2995.278047751275" y="5776.0" />
+      <point x="3674.0144320586382" y="5776.0" />
+      <point x="3674.0144320586382" y="307.0" />
+      <point x="3468.816783897907" y="307.0" />
+      <point x="-41.76470588235293" y="93.5" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.CountdownScreen" target="com.fr.funrungame.model.GameModel">
+      <point x="93.33333333333348" y="-137.0" />
+      <point x="1387.1579149646216" y="1137.0" />
+      <point x="4012.3354692109406" y="1137.0" />
+      <point x="-114.5454545454545" y="192.5" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.FinishMenu" target="com.fr.funrungame.view.Screens.OptionsMenu">
+      <point x="4.547473508864641E-13" y="-82.0" />
+      <point x="3523.5144320586387" y="3579.0" />
+      <point x="2953.798156446927" y="3579.0" />
+      <point x="0.0" y="236.0" />
+    </edge>
+    <edge source="com.fr.funrungame.controller.entities.EntityBody" target="com.fr.funrungame.view.Screens.GameView">
+      <point x="-92.0" y="-170.5" />
+      <point x="2465.6217656575654" y="5355.0" />
+      <point x="1724.9308255290525" y="5355.0" />
+      <point x="111.66666666666652" y="324.0" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.MapSelect" target="com.fr.funrungame.FunRunGame">
+      <point x="82.0" y="203.0" />
+      <point x="2564.5572144179414" y="2158.0" />
+      <point x="2522.8072144179414" y="2158.0" />
+      <point x="2522.8072144179414" y="2639.0" />
+      <point x="2402.8697144179414" y="2639.0" />
+      <point x="114.625" y="-159.0" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.Controllers" target="com.fr.funrungame.model.entities.RocketPowerUpModel">
+      <point x="52.40000000000009" y="-258.5" />
+      <point x="2567.5810987253053" y="3699.0" />
+      <point x="3984.58148978026" y="3699.0" />
+      <point x="-108.5" y="93.0" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.Controllers" target="com.fr.funrungame.controller.GameController">
+      <point x="52.40000000000009" y="258.5" />
+      <point x="2567.5810987253053" y="4617.0" />
+      <point x="2330.944714417941" y="4617.0" />
+      <point x="2330.944714417941" y="6401.0" />
+      <point x="2449.1561921379302" y="6401.0" />
+      <point x="-80.86956521739103" y="-423.5" />
+    </edge>
+    <edge source="com.fr.funrungame.test.GameControllerTest" target="com.fr.funrungame.model.entities.ShieldPowerUpModel">
+      <point x="-82.8125" y="-136.5" />
+      <point x="4173.907563270063" y="8871.0" />
+      <point x="2462.2563186813186" y="8871.0" />
+      <point x="82.66666666666652" y="71.0" />
+    </edge>
+    <edge source="com.fr.funrungame.controller.GameController" target="com.fr.funrungame.model.entities.RocketPowerUpModel">
+      <point x="161.73913043478296" y="-423.5" />
+      <point x="2691.7648877901042" y="6411.0" />
+      <point x="4079.000757355321" y="6411.0" />
+      <point x="4079.000757355321" y="3699.0" />
+      <point x="4015.58148978026" y="3699.0" />
+      <point x="-77.5" y="93.0" />
+    </edge>
+    <edge source="com.fr.funrungame.test.GameModelTest" target="com.fr.funrungame.model.entities.EndLineModel">
+      <point x="113.47499999999991" y="-125.0" />
+      <point x="3300.1265567765568" y="9001.0" />
+      <point x="4985.847335997336" y="9001.0" />
+      <point x="4985.847335997336" y="672.0" />
+      <point x="4417.7144320586385" y="672.0" />
+      <point x="147.20000000000005" y="26.0" />
+    </edge>
+    <edge source="com.fr.funrungame.model.entities.EnemyModel" target="com.fr.funrungame.model.entities.EntityModel">
+      <point x="90.0" y="-26.0" />
+      <point x="4900.300795695002" y="237.0" />
+      <point x="3614.993254486142" y="237.0" />
+      <point x="104.41176470588243" y="93.5" />
+    </edge>
+    <edge source="com.fr.funrungame.controller.GameController" target="com.fr.funrungame.model.entities.ShieldPowerUpModel">
+      <point x="66.42857142857156" y="423.5" />
+      <point x="2596.454328783893" y="7388.0" />
+      <point x="2723.6686144981786" y="7388.0" />
+      <point x="2723.6686144981786" y="8579.0" />
+      <point x="2329.989652014652" y="8579.0" />
+      <point x="-49.59999999999991" y="-71.0" />
+    </edge>
+    <edge source="com.fr.funrungame.controller.GameController" target="com.fr.funrungame.model.entities.EnemyModel">
+      <point x="222.391304347826" y="-423.5" />
+      <point x="2752.4170617031473" y="6461.0" />
+      <point x="5124.517287392759" y="6461.0" />
+      <point x="5124.517287392759" y="662.0" />
+      <point x="4882.300795695002" y="662.0" />
+      <point x="72.0" y="26.0" />
+    </edge>
+    <edge source="com.fr.funrungame.model.entities.ShieldPowerUpModel" target="com.fr.funrungame.controller.entities.PlayerBody">
+      <point x="-99.19999999999982" y="-71.0" />
+      <point x="2280.3896520146523" y="8589.0" />
+      <point x="1943.8307234432234" y="8589.0" />
+      <point x="1943.8307234432234" y="8365.0" />
+      <point x="2024.8307234432234" y="8365.0" />
+      <point x="46.0" y="423.5" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.GameView" target="com.fr.funrungame.view.entities.PlayerView">
+      <point x="-139.58333333333348" y="-324.0" />
+      <point x="1473.6808255290525" y="4647.0" />
+      <point x="571.4285714285711" y="4647.0" />
+      <point x="-134.0" y="379.0" />
+    </edge>
+    <edge source="com.fr.funrungame.controller.entities.PlayerBody" target="com.fr.funrungame.controller.entities.EntityBody">
+      <point x="-39.42857142857156" y="-423.5" />
+      <point x="1939.4021520146518" y="7368.0" />
+      <point x="1702.264158862386" y="7368.0" />
+      <point x="1702.264158862386" y="5766.0" />
+      <point x="2404.2884323242324" y="5766.0" />
+      <point x="-153.33333333333303" y="170.5" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.CountdownScreen" target="com.fr.funrungame.controller.GameController">
+      <point x="-116.66666666666652" y="137.0" />
+      <point x="1177.1579149646216" y="1523.0" />
+      <point x="983.9285714285716" y="1523.0" />
+      <point x="983.9285714285716" y="6461.0" />
+      <point x="2327.8518443118433" y="6461.0" />
+      <point x="-202.17391304347802" y="-423.5" />
+    </edge>
+    <edge source="com.fr.funrungame.test.GameControllerTest" target="com.fr.funrungame.model.entities.RocketPowerUpModel">
+      <point x="16.5625" y="-136.5" />
+      <point x="4273.282563270063" y="8931.0" />
+      <point x="4266.000757355321" y="8931.0" />
+      <point x="4266.000757355321" y="3699.0" />
+      <point x="4139.58148978026" y="3699.0" />
+      <point x="46.5" y="93.0" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.OptionsMenu" target="com.fr.funrungame.FunRunGame">
+      <point x="-31.125" y="-236.0" />
+      <point x="2922.673156446927" y="3017.0" />
+      <point x="2409.1677913410185" y="3017.0" />
+      <point x="120.92307692307713" y="159.0" />
+    </edge>
+    <edge source="com.fr.funrungame.model.entities.PlayerModel" target="com.fr.funrungame.model.entities.PowerUpModel">
+      <point x="-84.75" y="137.5" />
+      <point x="151.1785714285711" y="682.0" />
+      <point x="203.8106089771295" y="682.0" />
+      <point x="203.8106089771295" y="8355.0" />
+      <point x="4473.7238726180785" y="8355.0" />
+      <point x="-173.07692307692332" y="-82.0" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.GameView" target="com.fr.funrungame.model.entities.PlayerModel">
+      <point x="-158.19444444444434" y="-324.0" />
+      <point x="1455.0697144179417" y="4657.0" />
+      <point x="264.3106089771295" y="4657.0" />
+      <point x="264.3106089771295" y="642.0" />
+      <point x="248.03571428571422" y="642.0" />
+      <point x="12.107142857143117" y="137.5" />
+    </edge>
+    <edge source="com.fr.funrungame.model.GameModel" target="com.fr.funrungame.model.entities.PowerUpModel">
+      <point x="68.72727272727275" y="192.5" />
+      <point x="4195.608196483668" y="1167.0" />
+      <point x="4866.800795695002" y="1167.0" />
+      <point x="4866.800795695002" y="8335.0" />
+      <point x="4733.339257233463" y="8335.0" />
+      <point x="86.53846153846143" y="-82.0" />
+    </edge>
+    <edge source="com.fr.funrungame.view.Screens.MainMenu" target="com.fr.funrungame.view.Screens.MapSelect">
+      <point x="51.0" y="-203.0" />
+      <point x="2435.8072144179414" y="2158.0" />
+      <point x="2400.5572144179414" y="2158.0" />
+      <point x="-82.0" y="203.0" />
+    </edge>
+    <edge source="com.fr.funrungame.desktop.DesktopLauncher" target="com.fr.funrungame.FunRunGame">
+      <point x="0.0" y="-26.0" />
+      <point x="2420.298156446927" y="3047.0" />
+      <point x="2348.70625287948" y="3047.0" />
+      <point x="60.46153846153857" y="159.0" />
+    </edge>
+    <edge source="com.fr.funrungame.FunRunGame" target="com.fr.funrungame.view.Screens.MainMenu">
+      <point x="49.125" y="-159.0" />
+      <point x="2337.3697144179414" y="2609.0" />
+      <point x="2299.8072144179414" y="2609.0" />
+      <point x="-85.0" y="203.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.529530408825219" x="978.4033995182701" y="1658.9336111800417" />
+  <SelectedNodes>
+    <node>com.fr.funrungame.view.Screens.CountdownScreen</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
