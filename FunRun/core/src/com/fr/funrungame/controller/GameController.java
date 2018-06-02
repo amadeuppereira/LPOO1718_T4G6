@@ -80,6 +80,10 @@ public class GameController implements ContactListener{
      * The set of actions for the ghost to follow
      */
     private static ArrayList<Float> actions;
+
+    /**
+     * The time when the ghost make an action
+     */
     private static ArrayList<Float> actions_times;
 
     /**
@@ -91,6 +95,10 @@ public class GameController implements ContactListener{
      * The player moves history
      */
     private ArrayList<Float> history;
+
+    /**
+     * The player moves' times
+     */
     private ArrayList<Float> history_times;
 
     /**

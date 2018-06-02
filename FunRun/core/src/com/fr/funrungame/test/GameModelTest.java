@@ -162,8 +162,7 @@ public class GameModelTest extends GameTest{
         assertEquals(PlayerModel.State.DEFAULT, p.getState());
 
         boolean f1=false, f2=false, f3=false, f4=false, f5=false, f6=false;
-        while (true) {
-            if(f1 && f2 && f3 && f4 && f5 && f6) break;
+        while (!f1 && !f2 && !f3 && !f4 && !f5 && !f6) {
             int n = random(1, 6);
             switch(n) {
                 case 1:
@@ -206,8 +205,7 @@ public class GameModelTest extends GameTest{
         assertEquals(PlayerModel.Boost.NONE, p.getBoost());
 
         boolean f1 = false, f2 = false, f3 = false;
-        while (true) {
-            if (f1 && f2 && f3) break;
+        while (!f1 && !f2 && !f3) {
             int n = random(1, 3);
             switch (n) {
                 case 1:
@@ -260,13 +258,9 @@ public class GameModelTest extends GameTest{
         powerup.activate(p);
         assertEquals(0, powerup.update(1f, p));
         powerup.action(p);
-        
+
         world.dispose();
-
     }
-
-
-
 
 
 }
