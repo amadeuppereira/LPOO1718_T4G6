@@ -19,7 +19,7 @@ public class PlayerBody extends EntityBody {
     /**
      * The player acceleration
      */
-    private final float ACCELERATION = 15f;
+    private float ACCELERATION = 15f;
 
     /**
      * The player jump force

@@ -50,5 +50,5 @@ public class PowerUpModel extends EntityModel{
      *
      * @param playerBody where the power up will act
      */
-    protected void action(PlayerBody playerBody) {}
+    public void action(PlayerBody playerBody) {}
 }

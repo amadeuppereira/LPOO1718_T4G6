@@ -3,8 +3,6 @@ package com.fr.funrungame.model.entities;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 
-import javax.xml.bind.annotation.XmlType;
-
 /**
  * A model representing a player.
  */

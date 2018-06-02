@@ -69,6 +69,6 @@ public class SpeedPowerUpModel extends PowerUpModel {
     @Override
     public void action(PlayerBody playerBody) {
         if(!playerBody.isFinished() && !playerBody.isDead())
-            playerBody.applyForce(X_FORCE,0);
+           playerBody.applyForce(X_FORCE,0);
     }
 }
