@@ -31,7 +31,7 @@ A simple Fun Run copycat game with a few changes made using libGDX for the LPOO 
     
 
 ## Package and class diagram (UML)
-
+Javadoc documentation can be accessed [here](https://amadeuppereira.github.io/LPOO1718_T4G6/)
 
 
 ## Design Decisions
