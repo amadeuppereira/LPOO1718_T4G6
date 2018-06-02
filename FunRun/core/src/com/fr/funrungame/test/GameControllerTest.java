@@ -109,7 +109,7 @@ public class GameControllerTest extends GameTest {
         }
         float dx1 = GameController.getInstance().getPlayerBody().getX() - pos1[0];
 
-        assertTrue(dx1 < dx);
+        assertTrue(dx1 > dx);
     }
 
     @Test (timeout = 1000)
@@ -132,6 +132,35 @@ public class GameControllerTest extends GameTest {
             ((PlayerModel)GameController.getInstance().getPlayerBody().getUserData()).removePowerup();
         }
 
+    }
+
+    @Test
+    public void testPlayerDead(){
+        createController();
+
+        assertEquals(false, GameController.getInstance().getPlayerBody().isDead());
+        GameController.getInstance().getPlayerBody().die();
+        assertEquals(false, GameController.getInstance().getPlayerBody().isDead());
+    }
+
+    @Test
+    public void testPlayerFinish(){
+        createController();
+
+        assertEquals(false, GameController.getInstance().getPlayerBody().isFinished());
+        GameController.getInstance().getPlayerBody().setFinish();
+        assertEquals(true, GameController.getInstance().getPlayerBody().isFinished());
+    }
+
+    @Test
+    public void testPlayerUsedPowerUp(){
+        createController();
+
+        GameController.getInstance().givePowerUp(GameController.getInstance().getPlayerBody(), -1);
+        GameController.getInstance().getPlayerBody().usePowerUp();
+        assertNotNull(((PlayerModel)GameController.getInstance().getPlayerBody().getUserData()).getPowerup());
+        stepGame(3.1f);
+        assertNull(((PlayerModel)GameController.getInstance().getPlayerBody().getUserData()).getPowerup());
     }
 
 }

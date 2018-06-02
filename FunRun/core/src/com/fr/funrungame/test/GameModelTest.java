@@ -1,5 +1,6 @@
 package com.fr.funrungame.test;
 
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Vector2;
@@ -78,7 +79,14 @@ public class GameModelTest extends GameTest{
 
     @Test
     public void testPlatformModel() {
-
+        World world = new World(new Vector2(0,0), true);
+        PlayerBody p = new PlayerBody(world, new PlayerModel(0, 0));
+        PlatformModel platform = new PlatformModel(10,10, new RectangleMapObject());
+        assertEquals(10, platform.getX(), 0.1);
+        assertEquals(10, platform.getY(), 0.1);
+        platform.setPosition(11, 11);
+        assertNotEquals(10, platform.getX(), 0.1);
+        assertNotEquals(10, platform.getY(), 0.1);
 
     }
 
