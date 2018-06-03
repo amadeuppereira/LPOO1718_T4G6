@@ -3,9 +3,12 @@ package com.fr.funrungame.test;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.fr.funrungame.controller.GameController;
+import com.fr.funrungame.controller.Networking;
 import com.fr.funrungame.model.GameModel;
 import com.fr.funrungame.model.entities.*;
 import org.junit.Test;
+
+import java.util.ArrayList;
 
 import static com.badlogic.gdx.math.MathUtils.random;
 import static junit.framework.TestCase.assertNull;
@@ -161,6 +164,33 @@ public class GameControllerTest extends GameTest {
         assertNotNull(((PlayerModel)GameController.getInstance().getPlayerBody().getUserData()).getPowerup());
         stepGame(3.1f);
         assertNull(((PlayerModel)GameController.getInstance().getPlayerBody().getUserData()).getPowerup());
+    }
+
+    @Test
+    public void networkTestParseActions() {
+        Networking network = new Networking();
+        String s = "1.1/2.2/3.3 4.4";
+        network.parseResponse_Actions(s);
+
+        ArrayList<Float> actions = network.getActions();
+        assertEquals(1.1, actions.get(0), 0.1);
+        assertEquals(2.2, actions.get(1), 0.1);
+        assertEquals(3.3, actions.get(2), 0.1);
+
+        assertEquals(4.4, network.getTime(), 0.1);
+    }
+
+    @Test
+    public void networkTestParseTimes() {
+        Networking network = new Networking();
+        String s = "1.1/2.2/3.3/4.4";
+        network.parseResponse_Times(s);
+
+        ArrayList<Float> times = network.getTimes();
+        assertEquals(1.1, times.get(0), 0.1);
+        assertEquals(2.2, times.get(1), 0.1);
+        assertEquals(3.3, times.get(2), 0.1);
+        assertEquals(4.4, times.get(3), 0.1);
     }
 
 }

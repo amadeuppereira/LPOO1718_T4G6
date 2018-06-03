@@ -170,7 +170,7 @@ public class Networking {
      *
      * @param r string to parse
      */
-    private void parseResponse_Actions(String r) {
+    public void parseResponse_Actions(String r) {
         actions = new ArrayList<Float>();
 
         String[] param = r.split(" ");
@@ -187,7 +187,7 @@ public class Networking {
      *
      * @param r string to parse
      */
-    private void parseResponse_Times(String r) {
+    public void parseResponse_Times(String r) {
         times = new ArrayList<Float>();
 
         String[] temp = r.split("/");
